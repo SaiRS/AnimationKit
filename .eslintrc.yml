@@ -1,1 +1,6 @@
-extends: google
+extends:
+- google
+- plugin:flowtype/recommended
+parser: babel-eslint
+plugins:
+- flowtype
