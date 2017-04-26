@@ -5,8 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "flow": "flow",
-    "babel": "babel flow.js -d lib/"
   },
   "repository": {
     "type": "git",
@@ -27,6 +25,8 @@
     "eslint": "^3.19.0",
     "eslint-config-google": "^0.7.1",
     "eslint-plugin-flowtype": "^2.31.0",
-    "flow-bin": "^0.44.2"
+    "flow-bin": "^0.44.2",
+    "tslint": "^5.1.0",
+    "typescript": "^2.2.2"
   }
 }
