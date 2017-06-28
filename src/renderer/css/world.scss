@@ -1,0 +1,8 @@
+@import './hello.css';
+
+$world: 1;
+
+html {
+  // background-image: url('../img/mountain-top.jpg');
+  opacity: $world;
+}
