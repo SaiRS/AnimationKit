@@ -1,6 +1,22 @@
 extends:
-- google
-- plugin:flowtype/recommended
-parser: babel-eslint
+  - eslint:recommended
+  - google
+  - plugin:flowtype/recommended
+parser: "babel-eslint"
+# 增加了babel-eslint之后，下面的这些设置可以注释掉了
+# parserOptions:
+#  "ecmaVersion": 6
+#  "sourceType": "module"
 plugins:
-- flowtype
+  - "flowtype"
+  - "html"
+env:
+  "browser": true
+  "node": true
+  "es6": true
+rules:
+  indent:
+    - "error"
+    - 2
+    -
+      SwitchCase: 1

@@ -1,7 +1,16 @@
 {
   "presets": [
-    "es2015",
-    "flow"
+    ["env", {
+      "targets": {
+        "browsers": ["last 2 versions"]
+      },
+      "useBuiltIns": true,
+    }],
+    "flow",
   ],
-  "plugins": []
+
+  "plugins": [
+    "syntax-flow",
+    "transform-runtime"
+  ]
 }
