@@ -1,7 +1,8 @@
 // @flow
 'use strict';
 // require('es6-promise').polyfill();
-process.env.NODE_ENV = 'production';
+//
+// process.env.NODE_ENV = 'production';
 
 let Log = require('yalm');
 
