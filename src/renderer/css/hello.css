@@ -7,3 +7,11 @@ html {
 .test{
   background-image: url('../img/mountain-top.jpg');
 }
+
+.animation-test-object1-css{
+  width: 20px;
+  height: 20px;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+
+}
