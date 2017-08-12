@@ -1,7 +1,7 @@
 // @flow
 
 import XXActionDriver from './XXActionDriver.js';
-
+// import xxvLog from '../Tool/LogTool.js';
 /**
  * 用js实现的的驱动器
  */
@@ -38,17 +38,25 @@ class XXActionJSDriver extends XXActionDriver {
 
   /**
    * 驱动器循环调用的方法
-   * @param  {float} timestamp 当前时间距离开始触发 requestAnimationFrame 的回调的时间
+   * @param  {float} timestamp 当前时间距离开始触发 requestAnimationFrame 的回调的时间,这个时间一直增加的
    */
   play(timestamp: float) {
     // 计算deltaTIme
     let deltaTIme = this.calculateDeltaTime();
 
+    // xxvLog.info(`timestamp = ${timestamp}, deltaTIme = ${deltaTIme}`);
     let length = this._activeActions.length;
     for (let i=0; i<length; i++) {
       let action = this._activeActions[i];
-      action.step(deltaTIme);
+
+      if (action.isDone()) {
+        //
+      } else {
+        action.step(deltaTIme);
+      }
     }
+
+    // 清除
 
     // 循环调用
     this.mainLoop();
@@ -58,7 +66,9 @@ class XXActionJSDriver extends XXActionDriver {
    * @inheritdoc
    */
   mainLoop() {
-    this._animationFrameId = window.requestAnimationFrame(this.play);
+    this._animationFrameId = window.requestAnimationFrame((timestamp) => {
+      this.play(timestamp);
+    });
   }
 
   /**
@@ -78,4 +88,9 @@ class XXActionJSDriver extends XXActionDriver {
   }
 }
 
-export default XXActionJSDriver;
+
+//
+let xxvJSDriver = new XXActionJSDriver();
+xxvJSDriver.startMainLoop();
+
+export default xxvJSDriver;

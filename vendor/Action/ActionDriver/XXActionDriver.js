@@ -2,7 +2,6 @@
 //
 
 import XXObject from '../Foundation/XXObject.js';
-
 /**
  * Action的驱动器，将Action加入到ActionDriver中后，Action便开始执行
  * 同时ActionDriver也可以控制所有动画的执行，暂停和继续，移除执行完成的Action的任务。
@@ -13,16 +12,16 @@ class XXActionDriver extends XXObject {
    * 正在执行的Action集合
    * @type {[null, Map]}
    */
-  _activeActions: null;
+  _activeActions: null | Map;
 
   /**
    * 暂停的Action集合
    * @type {[null, Map]}
    */
-  _stoppedActions: null;
+  _stoppedActions: null | Map;
 
   /**
-   * [constructor description]
+   * 构造函数
    */
   constructor() {
     super();

@@ -2,11 +2,11 @@
 //
 import XXObject from '../Foundation/XXObject.js';
 
-import XXActionJSDriver from '../ActionDriver/XXActionJSDriver.js';
+import xxvJSDriver from '../ActionDriver/XXActionJSDriver.js';
 
-import XXAction from '../Action/JSAction.js';
+import XXAction from '../Action/XXAction.js';
 
-import XXActionTarget from '../ActionTarget/XXActionTarget.js';
+import XXActor from '../Actor/XXActor.js';
 
 /**
  * 动作的管理类
@@ -32,16 +32,15 @@ class XXActionManager extends XXObject {
   constructor() {
     super();
 
-    this._jsDriver = new XXActionJSDriver();
-    this._jsDriver.startMainLoop();
+    this._jsDriver = xxvJSDriver;
   }
 
   /**
    * 添加新的动作并执行
    * @param {[XXAction]} action 动作对象
-   * @param {[XXActionTarget]} target 执行动作的对象
+   * @param {[XXActor]} target 执行动作的对象
    */
-  addAction(action: XXAction, target: XXActionTarget) {
+  addAction(action: XXAction, target: XXActor) {
 
   }
 
@@ -51,7 +50,7 @@ class XXActionManager extends XXObject {
    * @return {[type]}        [description]
    */
   stopAction(action: XXAction) {
-
+    return true;
   }
 
   /**
@@ -60,7 +59,7 @@ class XXActionManager extends XXObject {
    * @return {[type]}        [description]
    */
   removeAction(action: XXAction) {
-
+    return true;
   }
 
   /**
@@ -69,7 +68,7 @@ class XXActionManager extends XXObject {
    * @return {[type]}        [description]
    */
   startAction(action: XXAction) {
-
+    return true;
   }
 
   /**
@@ -78,20 +77,31 @@ class XXActionManager extends XXObject {
    * @return {[type]}        [description]
    */
   restartAction(action: XXAction) {
-
+    return true;
   }
 
+  /**
+   * [stopAllActions description]
+   * @return {[type]} [description]
+   */
   stopAllActions() {
-
+    return true;
   }
 
-
+  /**
+   * [pause description]
+   * @return {[type]} [description]
+   */
   pause() {
-
+    return true;
   }
 
+  /**
+   * [stop description]
+   * @return {[type]} [description]
+   */
   stop() {
-
+    return true;
   }
 
 
