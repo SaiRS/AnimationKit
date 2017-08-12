@@ -175,6 +175,12 @@ let rendererConfig = {
     alias: {
       '@': path.join(__dirname, '../src/renderer'),
       'vue$': 'vue/dist/vue.esm.js',
+
+      // 插件路径
+      'XXTool': path.resolve(__dirname, '..', 'vendor', 'Action', 'Tool'),
+      'XXFundation':
+        path.resolve(__dirname, '..', 'vendor', 'Action', 'Foundation'),
+      'XXAction': path.resolve(__dirname, '..', 'vendor', 'Action'),
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node'],
   },

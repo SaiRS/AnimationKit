@@ -87,6 +87,8 @@ let webpackPlugins = [
     title: 'Storybord',
     filename: 'index.html',
     template: path.resolve(__dirname, '../src/index.html'),
+
+    // inject: 'bottom',
   }),
 
   // css
@@ -277,7 +279,16 @@ module.exports = {
     alias: {
       // vue/dist/vue.common.js for webpack 1
       'vue$': 'vue/dist/vue.esm.js',
+
+      // 插件路径
+      'XXTool': path.resolve(__dirname, '..', 'vendor', 'Action', 'Tool'),
+      'XXFundation':
+        path.resolve(__dirname, '..', 'vendor', 'Action', 'Foundation'),
+      'XXAction': path.resolve(__dirname, '..', 'vendor', 'Action'),
     },
+  },
+  externals: {
+    jquery: 'jQuery',
   },
   plugins: webpackPlugins,
 };

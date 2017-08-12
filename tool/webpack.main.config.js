@@ -63,6 +63,15 @@ let mainConfig = {
   ],
   resolve: {
     extensions: ['.js', '.json', '.node'],
+
+    alias: {
+
+      // 插件路径
+      'XXTool': path.resolve(__dirname, '..', 'vendor', 'Action', 'Tool'),
+      'XXFundation':
+        path.resolve(__dirname, '..', 'vendor', 'Action', 'Foundation'),
+      'XXAction': path.resolve(__dirname, '..', 'vendor', 'Action'),
+    },
   },
   target: 'electron-main',
 };
