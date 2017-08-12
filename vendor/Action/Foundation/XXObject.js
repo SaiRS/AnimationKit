@@ -1,6 +1,6 @@
 // @flow
 
-import {fGeneratorUUID} from '../Tool/GeneratorTool.js';
+import {xxfGeneratorUUID} from '../Tool/GeneratorTool.js';
 /**
  * 用于表示动画库中所有对象的基类，
  * 其他一切对象都是直接或者间接继承自XXObject
@@ -27,15 +27,28 @@ class XXObject {
    * @param  {String} uuid 唯一标识符
    */
   constructor(uuid: string) {
-    if (new.target === XXObject) {
-      if (uuid && typeof uuid === 'string') {
-        this._uuid = uuid;
-      } else {
-        this._uuid = fGeneratorUUID();
-      }
+    // 不再使用new.tartget === XXObject这种写法
+    // 那样子子类实例话就会报错
+    // NOTE:babel暂时不支持new.target的继承，所以先取消这种写法
+    // if (new.target) {
+    if (uuid && typeof uuid === 'string') {
+      this._uuid = uuid;
     } else {
-      throw new Error('请使用new XXObject生成实例对象');
+      this._uuid = xxfGeneratorUUID();
     }
+
+    this.initObject();
+
+    // } else {
+    //   throw new Error('请使用new XXObject生成实例对象');
+    // }
+  }
+
+  /**
+   * 对象的初始化，在生成新对象时调用
+   */
+  initObject() {
+    this.name = '';
   }
 
   /**
@@ -55,16 +68,45 @@ class XXObject {
     output.log(`Object name: ${this.name}`);
     output.log(`Object uuid: ${this.UUID}`);
     this.showInfo(output);
-    output.log(`Object version: ${Object.getStringVersion()}`);
+    output.log(`Object version: ${XXObject.getStringVersion()}`);
     output.log('=====================================');
   }
 
   /**
    * [输出对象的信息]
+   * @override
    * @param  {[Object]} [output=console] [类console对象，实现了console输出的有关接口的对象]
    */
   showInfo(output = console) {
     // 由子类重载
+    output.info(this);
+  }
+
+  /**
+   * 对象复制
+   * @override
+   */
+  copy(): XXObject {
+    return null;
+  }
+
+  /**
+   * 对象克隆，
+   * @override
+   */
+  clone(): XXObject {
+    return null;
+  }
+
+  /**
+   * @override
+   * 设置或修改对象的属性值
+   * 从文件中读取信息时，使用这个方法正确设置属性值
+   * @param {string} property 对象属性的名字
+   * @param {mixed} newValue  属性对应的名字
+   */
+  setValueTo(property: string, newValue: mixed) {
+    // implemented by subclass
   }
 
   /**
