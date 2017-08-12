@@ -18,7 +18,8 @@
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config tool/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config tool/webpack.renderer.config.js",
-    "webpack-dev-server": "webpack-dev-server --inline --hot --config ./tool/webpack.web.config.js"
+    "webpack-dev-server": "webpack-dev-server --inline --hot --config ./tool/webpack.web.config.js",
+    "mocha:test": "mocha --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",

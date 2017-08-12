@@ -1,11 +1,6 @@
 {
   "presets": [
-    ["env", {
-      "targets": {
-        "browsers": ["last 2 versions"]
-      },
-      "useBuiltIns": true,
-    }],
+    "es2015",
     "flow",
   ],
 
@@ -14,3 +9,12 @@
     "transform-runtime"
   ]
 }
+
+/**
+ *     ["env", {
+       "targets": {
+         "browsers": ["last 2 versions"]
+       },
+       "useBuiltIns": true,
+     }],
+ */
