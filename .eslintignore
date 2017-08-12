@@ -4,3 +4,4 @@
 # build/*
 # !build/index.js
 dist/*
+test/*
