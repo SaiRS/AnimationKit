@@ -68,7 +68,7 @@ let mainConfig = {
 
       // 插件路径
       'XXTool': path.resolve(__dirname, '..', 'vendor', 'Action', 'Tool'),
-      'XXFundation':
+      'XXFoundation':
         path.resolve(__dirname, '..', 'vendor', 'Action', 'Foundation'),
       'XXAction': path.resolve(__dirname, '..', 'vendor', 'Action'),
     },

@@ -4,7 +4,7 @@ import XXNodeActor from './XXNodeActor.js';
 
 import $ from 'jquery';
 
-import {XXPosition} from 'XXFundation/Type/XXPosition.js';
+import {XXPosition} from 'XXFoundation/Type/XXPosition.js';
 import xxvTypeVerify from 'XXTool/TypeVerify.js';
 import xxvLog from 'XXTool/LogTool.js';
 

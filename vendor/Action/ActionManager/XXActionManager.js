@@ -1,6 +1,6 @@
 // @flow
 //
-import XXObject from '../Foundation/XXObject.js';
+import XXDriveTarget from 'XXAction/ActionDriver/XXDriveTarget.js';
 
 import xxvJSDriver from '../ActionDriver/XXActionJSDriver.js';
 
@@ -17,7 +17,7 @@ import XXAction from '../Action/XXAction.js';
  * @class
  * @type {XXActionManager}
  */
-class XXActionManager extends XXObject {
+class XXActionManager extends XXDriveTarget {
 
   /** ********动作队列****************/
   _activeActions: null;  // 活动队列

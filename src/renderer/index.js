@@ -13,7 +13,7 @@ import 'babel-polyfill';
 //
 
 import XXNodeDomActor from 'XXAction/Actor/XXNodeDomActor.js';
-import {XXPosition} from 'XXFundation/Type/XXPosition.js';
+import {XXPosition} from 'XXFoundation/Type/XXPosition.js';
 // import xxvLog from 'XXTool/LogTool.js';
 
 import Vue from 'vue';

@@ -1,6 +1,6 @@
 // @flow
 
-import XXObject from 'XXFundation/XXObject.js';
+import XXObject from 'XXFoundation/XXObject.js';
 
 /**
  * 缓动动画基类
