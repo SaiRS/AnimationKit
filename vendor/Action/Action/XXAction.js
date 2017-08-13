@@ -22,8 +22,9 @@ class XXAction extends XXObject {
   }
 
   /**
-   * 设置执行动作的对象，一般来说表明准备开始执行动作了
-   * 注：不要直接调用action的这个方法，而是使用XXActionTarget的runAction方法
+   * 设置执行动作的对象，一般来说表明准备开始执行动作了,初始化动画开始的状态
+   * 子类一般需要重写这个方法
+   * 注：不要直接调用action的这个方法，而是使用XXActor的runAction方法
    * @param  {[type]} actionTarget [description]
    */
   startWithTarget(actionTarget) {
@@ -36,7 +37,7 @@ class XXAction extends XXObject {
    * @param  {[float]} process [表示动画进行的进度，0表示尚未开始，1表示已经完成]
    */
   update(process: float) {
-    throw new Error('Implement the function update of your Action class');
+    throw new Error('Implement the function [update] of your Action class');
   }
 
   /**
@@ -45,7 +46,7 @@ class XXAction extends XXObject {
    * @param  {[float]} deltaTime [这次调用距离上次调用过去的时间，单位ms]
    */
   step(deltaTime: float) {
-    throw new Error('Implement the function step of your Action class');
+    throw new Error('Implement the function [step] of your Action class');
   }
 
   /**
@@ -53,12 +54,19 @@ class XXAction extends XXObject {
    * @abstract
    * @return {Boolean} [true表明动作已经完成]
    */
-  isDone() {
+  isDone(): boolean {
     // 子类继承
     return true;
   }
 
-
+  /**
+   * 获得跟当前相反的一个动作
+   * @abstract
+   * @return {[type]} [description]
+   */
+  reverse(): XXAction {
+    throw new Error('Implement the function [reverse] of your Action class');
+  }
 }
 
 export default XXAction;

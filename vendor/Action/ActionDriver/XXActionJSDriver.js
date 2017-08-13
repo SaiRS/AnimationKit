@@ -42,18 +42,12 @@ class XXActionJSDriver extends XXActionDriver {
    */
   play(timestamp: float) {
     // 计算deltaTIme
-    let deltaTIme = this.calculateDeltaTime();
+    let deltaTime = this.calculateDeltaTime();
 
-    // xxvLog.info(`timestamp = ${timestamp}, deltaTIme = ${deltaTIme}`);
-    let length = this._activeActions.length;
-    for (let i=0; i<length; i++) {
-      let action = this._activeActions[i];
-
-      if (action.isDone()) {
-        //
-      } else {
-        action.step(deltaTIme);
-      }
+    // xxvLog.info(`_activeTargets.length = ${this._activeTargets.length}`);
+    for (let target of this._activeTargets.values()) {
+      // target 需要支持step方法
+      target.step(deltaTime);
     }
 
     // 清除

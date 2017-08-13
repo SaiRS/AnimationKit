@@ -27,8 +27,7 @@ class XXActor extends XXObject {
   runAction(actionObject: XXAction) {
     if (actionObject && xxvTypeVerify.isType(actionObject, XXAction)) {
       actionObject.startWithTarget(this);
-
-      XXActionManager.addAction(actionObject, this);
+      XXActionManager.addAction(actionObject);
     } else {
       throw new Error('runAction with an non-action object');
     }

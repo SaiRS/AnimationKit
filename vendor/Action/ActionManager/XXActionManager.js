@@ -6,7 +6,9 @@ import xxvJSDriver from '../ActionDriver/XXActionJSDriver.js';
 
 import XXAction from '../Action/XXAction.js';
 
-import XXActor from '../Actor/XXActor.js';
+// import XXActor from '../Actor/XXActor.js';
+
+// import xxvLog from 'XXTool/LogTool.js';
 
 /**
  * 动作的管理类
@@ -36,12 +38,21 @@ class XXActionManager extends XXObject {
   }
 
   /**
+   * @inheritdoc
+   */
+  reset() {
+    this._activeActions = new Map();
+  }
+
+  /**
    * 添加新的动作并执行
    * @param {[XXAction]} action 动作对象
    * @param {[XXActor]} target 执行动作的对象
    */
-  addAction(action: XXAction, target: XXActor) {
-
+  addAction(action: XXAction) {
+    if (action) {
+      this._activeActions.set(action.UUID, action);
+    }
   }
 
   /**
@@ -104,8 +115,18 @@ class XXActionManager extends XXObject {
     return true;
   }
 
-
+  /**
+   * 实现驱动对象的方法，在驱动器循环中会调用这个方法
+   * @param  {[type]} deltaTime [description]
+   */
+  step(deltaTime: float) {
+    for (let action of this._activeActions.values()) {
+      // target 需要支持step方法
+      action.step(deltaTime);
+    }
+  }
 }
 
 let xxvActionManager = new XXActionManager();
+xxvJSDriver.addTarget(xxvActionManager);
 export default xxvActionManager;

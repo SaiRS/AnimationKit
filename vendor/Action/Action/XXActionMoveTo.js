@@ -1,7 +1,7 @@
 // @flow
 //
 import XXActionInterval from './XXActionInterval.js';
-import XXPosition from '../Foundation/Type/XXPosition.js';
+import {XXPosition} from '../Foundation/Type/XXPosition.js';
 
 /**
  * 表示移动位置的动画
@@ -21,9 +21,10 @@ class XXActionMoveTo extends XXActionInterval {
   /**
    * 构造函数
    * @param  {[type]} position [description]
+   * @param  {[type]} duration [description]
    */
-  constructor(position: XXPosition) {
-    super();
+  constructor(position: XXPosition, duration = 1000) {
+    super(duration);
 
     this._destinationPos = position;
   }
@@ -32,7 +33,7 @@ class XXActionMoveTo extends XXActionInterval {
    * @inheritdoc
    */
   startWithTarget(actionTarget) {
-    super(actionTarget);
+    super.startWithTarget(actionTarget);
 
     this._deltaX = this._destinationPos.posX() - actionTarget.position().posX();
     this._deltaY = this._destinationPos.posY() - actionTarget.position().posY();
@@ -44,11 +45,16 @@ class XXActionMoveTo extends XXActionInterval {
    */
   update(process: float) {
     // 更新target位置
-    let deltaX = this._deltaX * process;
-    let deltaY = this._deltaY * process;
-    let deltaZ = this._deltaZ * process;
+    let deltaX = this._deltaX * (process - 1);
+    let deltaY = this._deltaY * (process - 1);
+    let deltaZ = this._deltaZ * (process - 1);
 
-    this._actionTarget.setPosition();
+    let x = this._destinationPos.posX() + deltaX;
+    let y = this._destinationPos.posY() + deltaY;
+    let z = this._destinationPos.posZ() + deltaZ;
+
+    this._target.moveTo(
+      new XXPosition(x, y, z));
   }
 }
 

@@ -14,11 +14,12 @@ import 'babel-polyfill';
 
 import XXNodeDomActor from 'XXAction/Actor/XXNodeDomActor.js';
 import {XXPosition} from 'XXFundation/Type/XXPosition.js';
-import xxvLog from 'XXTool/LogTool.js';
+// import xxvLog from 'XXTool/LogTool.js';
 
 import Vue from 'vue';
 import hello from './js/hello.vue';
 
+import XXActionMoveTo from 'XXAction/Action/XXActionMoveTo.js';
 
 require('./css/hello.css');
 
@@ -31,9 +32,6 @@ new Vue({
 });
 
 let nodeDomActor = new XXNodeDomActor('.animation-test-object1-js');
-nodeDomActor.position().printInfo();
+let moveToAction = new XXActionMoveTo(new XXPosition(100, 500, 0), 5000);
 
-setTimeout(function() {
-  xxvLog.info('set to new position');
-  nodeDomActor.moveTo(new XXPosition(100, 500, 0));
-}, 5000);
+nodeDomActor.runAction(moveToAction);

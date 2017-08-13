@@ -12,20 +12,20 @@ class XXActionDriver extends XXObject {
    * 正在执行的Action集合
    * @type {[null, Map]}
    */
-  _activeActions: null | Map;
+  _activeTargets: null | Map;
 
   /**
    * 暂停的Action集合
    * @type {[null, Map]}
    */
-  _stoppedActions: null | Map;
+  _stoppedTargets: null | Map;
 
   /**
    * 构造函数
    */
   constructor() {
     super();
-    this.__initActionActionIfNeeded();
+    this.__initDriverTargetsIfNeeded();
   }
 
   /**
@@ -45,27 +45,25 @@ class XXActionDriver extends XXObject {
   /**
    * 将action添加到驱动的执行队列中
    * 在下一次循环时action将得到执行
-   * @param {XXAction} action 动作对象
    * @param {XXActionTarget} target 执行动作的对象
    */
-  addAction(action: XXAction, target: XXActionTarget) {
-    if (!this.isActionExistInActiveSequence(action)) {
-      action.startWithTarget(target);
+  addTarget(target: XXObject) {
+    if (target && !this.isTargetExistInActiveSequence(target)) {
       // 加入执行队列
-      this._activeActions.set(action.UUID, action);
+      this._activeTargets.set(target.UUID, target);
     }
   }
 
   /**
    * 暂停action
-   * @param  {[type]} action [description]
+   * @param  {XXObject} target [description]
    * @return {[type]}        [description]
    */
-  stopAction(action: XXAction) {
-    if (this._activeActions && action) {
-      let oldAction = this._activeActions.delete(action.UUID);
-      if (oldAction) {
-        this._stoppedActions.set(oldAction.UUID, oldAction);
+  stopTarget(target: XXObject) {
+    if (this._activeTargets && target) {
+      let oldTarget = this._activeTargets.delete(target.UUID);
+      if (oldTarget) {
+        this._stoppedTargets.set(target.UUID, target);
       }
       return false;
     }
@@ -75,13 +73,13 @@ class XXActionDriver extends XXObject {
 
 
   /**
-   * [removeAction description]
-   * @param  {[type]} action [description]
+   * [removeTarget description]
+   * @param  {[type]} target [description]
    * @return {[type]}        [description]
    */
-  removeAction(action: XXAction) {
-    if (this._activeActions && action) {
-      this._activeActions.delete(action.getUUID);
+  removeTarget(target: XXObject) {
+    if (this._activeTargets && target) {
+      this._activeTargets.delete(target.getUUID);
       return true;
     }
     return false;
@@ -90,31 +88,31 @@ class XXActionDriver extends XXObject {
   /**
    * 删除所有位于活动队列中的action
    */
-  removeAllActions() {
-    if (this._activeActions) {
-      this._activeActions.clear();
+  removeAllTargets() {
+    if (this._activeTargets) {
+      this._activeTargets.clear();
     }
   }
 
   /**
    * action是否已经存在于活动队列中
-   * @param  {[XXAction]}  action [action对象]
+   * @param  {[XXAction]}  target [action对象]
    * @return {Boolean}        [存在于活动队列，返回true，否则返回false]
    */
-  isActionExistInActiveSequence(action: XXAction) {
-    if (this._activeActions && action) {
-      return this._activeActions.has(action.UUID);
+  isTargetExistInActiveSequence(target: XXObject) {
+    if (this._activeTargets && target) {
+      return this._activeTargets.has(target.UUID);
     }
 
     return false;
   }
   /**
    * 内部函数
-   * 初始化_activeActions, 如果已经初始化过了，则不做任何操作
+   * 初始化_activeTargets, 如果已经初始化过了，则不做任何操作
    */
-  __initActionActionIfNeeded() {
-    if (!this._activeActions) {
-      this._activeActions = new Map();
+  __initDriverTargetsIfNeeded() {
+    if (!this._activeTargets) {
+      this._activeTargets = new Map();
     }
   }
 }

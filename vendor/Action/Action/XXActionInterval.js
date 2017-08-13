@@ -1,7 +1,7 @@
 // @flow
 //
 
-import XXAction from './Action.js';
+import XXAction from './XXAction.js';
 
 /**
  * 用来表示持续性动作
@@ -14,12 +14,13 @@ class XXActionInterval extends XXAction {
 
   /**
    * 构造函数
-   * @param  {number} duration 动画时长
+   * @param  {number} duration 动画时长,单位毫秒
    */
   constructor(duration: number) {
     super();
 
     this._duration = duration;
+    this._elapsed = 0;
   }
   /**
    * @inheritdoc

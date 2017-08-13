@@ -27,6 +27,7 @@ class XXObject {
    * @param  {String} uuid 唯一标识符
    */
   constructor(uuid: string) {
+    this.reset();
     // 不再使用new.tartget === XXObject这种写法
     // 那样子子类实例话就会报错
     // NOTE:babel暂时不支持new.target的继承，所以先取消这种写法
@@ -37,7 +38,6 @@ class XXObject {
       this._uuid = xxfGeneratorUUID();
     }
 
-    this.initObject();
 
     // } else {
     //   throw new Error('请使用new XXObject生成实例对象');
@@ -47,8 +47,9 @@ class XXObject {
   /**
    * 对象的初始化，在生成新对象时调用
    */
-  initObject() {
+  reset() {
     this.name = '';
+    this._uuid = '';
   }
 
   /**
@@ -87,7 +88,7 @@ class XXObject {
    * @override
    */
   copy(): XXObject {
-    return null;
+    return this;
   }
 
   /**
@@ -95,7 +96,10 @@ class XXObject {
    * @override
    */
   clone(): XXObject {
-    return null;
+    let newObject = new XXObject(this.UUID);
+    newObject.name = this.name;
+
+    return newObject;
   }
 
   /**
