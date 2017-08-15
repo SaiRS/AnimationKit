@@ -4,7 +4,8 @@ import XXNodeActor from './XXNodeActor.js';
 
 import $ from 'jquery';
 
-import {XXPosition} from 'XXFoundation/Type/XXPosition.js';
+import XXPosition from 'XXFoundation/Type/XXPosition.js';
+import XXScale from 'XXFoundation/Type/XXScale.js';
 import xxvTypeVerify from 'XXTool/TypeVerify.js';
 import xxvLog from 'XXTool/LogTool.js';
 
@@ -15,9 +16,7 @@ class XXNodeDomActor extends XXNodeActor {
 
   _jqueryObject: null;
 
-  _scaleX: 1;
-  _scaleY: 1;
-  _scaleZ: 1;
+  _scale: null;
 
   /**
    * @inheritdoc
@@ -49,15 +48,25 @@ class XXNodeDomActor extends XXNodeActor {
     if (matches) {
       // parse matrix
       // TODO: parse matrix or matrix3D
-      // let matrix = matches[1].split(','); // 数组（元素还是字符串）
+      let matrix = matches[1].split(','); // 数组（元素还是字符串）
+
+      let scaleX = 1;
+      let scaleY = 1;
+      let scaleZ = 1;
+
+      if (matrix.length > 6) { // 3d
+        scaleX = parseFloat(matrix[0]);
+        scaleY = parseFloat(matrix[5]);
+      } else { // 2d
+        scaleX = parseFloat(matrix[0]);
+        scaleY = parseFloat(matrix[3]);
+      }
+
+      this._scale = new XXScale(scaleX, scaleY, scaleZ);
     } else {
       // set to default value
-      this._scaleX = 1;
-      this._scaleY = 1;
-      this._scaleZ = 1;
+      this._scale = new XXScale(1, 1, 1);
     }
-    // let matrixRegex = /matrix\(.*)/;
-    // let matches = this._jqueryObject.css('transform').match(matrixRegex);
   }
 
   /**
@@ -78,7 +87,7 @@ class XXNodeDomActor extends XXNodeActor {
    * @inheritdoc
    */
   scale(): XXScale {
-    return null;
+    return this._scale;
   }
 
   /**
@@ -96,6 +105,20 @@ class XXNodeDomActor extends XXNodeActor {
       this._jqueryObject.offset(coordinate);
     } else {
       xxvLog.warn('invalid param of moveTo: ' + position);
+    }
+  }
+
+  /**
+   * @inheritdoc
+   */
+  scaleTo(scale: XXScale) {
+    if (scale && xxvTypeVerify.isType(scale, XXScale)) {
+      let scaleX = scale.scaleX();
+      let scaleY = scale.scaleY();
+
+      this._jqueryObject.css('transform', `scale(${scaleX}, ${scaleY})`);
+    } else {
+      xxvLog.warn('invalid param of moveTo: ' + scale);
     }
   }
 }

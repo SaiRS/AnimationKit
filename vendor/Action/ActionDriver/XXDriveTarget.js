@@ -8,22 +8,16 @@ import XXObject from 'XXFoundation/XXObject.js';
  * @class
  * @virtual
  */
-class XXDriveTarget extends XXObject {
-  /**
-   * 构造函数
-   */
-  constructor() {
-    super();
-  }
-
+class XXDriveTargetInterface extends XXObject {
   /**
    * @override
    * 驱动对象的所执行的具体操作，需要重写
    * @param  {float} deltaTime 距离上次回调的时间增量
    */
   step(deltaTime: float) {
-    // override by subclass
+    // implements by subclass
   }
 }
 
-export default XXDriveTarget;
+
+export default XXDriveTargetInterface;

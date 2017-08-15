@@ -13,13 +13,15 @@ import 'babel-polyfill';
 //
 
 import XXNodeDomActor from 'XXAction/Actor/XXNodeDomActor.js';
-import {XXPosition} from 'XXFoundation/Type/XXPosition.js';
+// import XXPosition from 'XXFoundation/Type/XXPosition.js';
+import XXScale from 'XXFoundation/Type/XXScale.js';
 // import xxvLog from 'XXTool/LogTool.js';
 
 import Vue from 'vue';
 import hello from './js/hello.vue';
 
-import XXActionMoveTo from 'XXAction/Action/XXActionMoveTo.js';
+// import XXActionMoveTo from 'XXAction/Action/BaseAction/XXActionMoveTo.js';
+import XXActionScaleTo from 'XXAction/Action/BaseAction/XXActionScaleTo.js';
 
 require('./css/hello.css');
 
@@ -31,7 +33,12 @@ new Vue({
   },
 });
 
-let nodeDomActor = new XXNodeDomActor('.animation-test-object1-js');
-let moveToAction = new XXActionMoveTo(new XXPosition(100, 500, 0), 5000);
+setTimeout(() => {
+  let nodeDomActor = new XXNodeDomActor('.animation-test-object1-js');
+  // let moveToAction = new XXActionMoveTo(new XXPosition(100, 500, 0), 5000);
+  let scaleToAction = new XXActionScaleTo(new XXScale(3, 4), 5000);
 
-nodeDomActor.runAction(moveToAction);
+  setTimeout(() => {
+    nodeDomActor.runAction(scaleToAction);
+  }, 1000);
+}, 2000);

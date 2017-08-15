@@ -9,13 +9,13 @@ import XXObject from '../Foundation/XXObject.js';
 class XXActionDriver extends XXObject {
 
   /**
-   * 正在执行的Action集合
+   * 正在执行的Targets集合
    * @type {[null, Map]}
    */
   _activeTargets: null | Map;
 
   /**
-   * 暂停的Action集合
+   * 暂停的Targets集合
    * @type {[null, Map]}
    */
   _stoppedTargets: null | Map;
@@ -45,9 +45,9 @@ class XXActionDriver extends XXObject {
   /**
    * 将action添加到驱动的执行队列中
    * 在下一次循环时action将得到执行
-   * @param {XXActionTarget} target 执行动作的对象
+   * @param {XXDriveTargetInterface} target 执行动作的对象
    */
-  addTarget(target: XXObject) {
+  addTarget(target: XXDriveTargetInterface) {
     if (target && !this.isTargetExistInActiveSequence(target)) {
       // 加入执行队列
       this._activeTargets.set(target.UUID, target);
@@ -56,10 +56,10 @@ class XXActionDriver extends XXObject {
 
   /**
    * 暂停action
-   * @param  {XXObject} target [description]
+   * @param  {XXDriveTargetInterface} target [description]
    * @return {[type]}        [description]
    */
-  stopTarget(target: XXObject) {
+  stopTarget(target: XXDriveTargetInterface) {
     if (this._activeTargets && target) {
       let oldTarget = this._activeTargets.delete(target.UUID);
       if (oldTarget) {
@@ -77,7 +77,7 @@ class XXActionDriver extends XXObject {
    * @param  {[type]} target [description]
    * @return {[type]}        [description]
    */
-  removeTarget(target: XXObject) {
+  removeTarget(target: XXDriveTargetInterface) {
     if (this._activeTargets && target) {
       this._activeTargets.delete(target.getUUID);
       return true;
@@ -99,7 +99,7 @@ class XXActionDriver extends XXObject {
    * @param  {[XXAction]}  target [action对象]
    * @return {Boolean}        [存在于活动队列，返回true，否则返回false]
    */
-  isTargetExistInActiveSequence(target: XXObject) {
+  isTargetExistInActiveSequence(target: XXDriveTargetInterface) {
     if (this._activeTargets && target) {
       return this._activeTargets.has(target.UUID);
     }

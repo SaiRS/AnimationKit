@@ -9,7 +9,7 @@ class XXAction extends XXObject {
   /**
    * 执行动作的对象
    * @private
-   * @type {XXActionTarget}
+   * @type {XXActor}
    */
   _target: null;
 
@@ -60,12 +60,28 @@ class XXAction extends XXObject {
   }
 
   /**
+   * 执行action完成时的任务(回调)
+   */
+  doDoneTask() {
+
+  }
+
+
+  /**
    * 获得跟当前相反的一个动作
    * @abstract
    * @return {[type]} [description]
    */
   reverse(): XXAction {
     throw new Error('Implement the function [reverse] of your Action class');
+  }
+
+  /**
+   * 返回当前的actor
+   * @return {XXActor} 执行当前动作的actor对象
+   */
+  getTarget(): XXActor {
+    return this._target;
   }
 }
 

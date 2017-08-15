@@ -1,7 +1,7 @@
 // @flow
 //
-import XXActionInterval from './XXActionInterval.js';
-import {XXPosition} from '../Foundation/Type/XXPosition.js';
+import XXActionInterval from '../XXActionInterval.js';
+import XXPosition from '../Foundation/Type/XXPosition.js';
 
 /**
  * 表示移动位置的动画
@@ -55,6 +55,13 @@ class XXActionMoveTo extends XXActionInterval {
 
     this._target.moveTo(
       new XXPosition(x, y, z));
+  }
+
+  /**
+   * @inheritdoc
+   */
+  doDoneTask() {
+
   }
 }
 

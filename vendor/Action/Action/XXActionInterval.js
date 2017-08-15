@@ -32,6 +32,10 @@ class XXActionInterval extends XXAction {
     process = Math.min(1, Math.max(0, process));
 
     this.update(process);
+
+    if (this.isDone()) {
+      this.doDoneTask();
+    }
   }
 
   /**

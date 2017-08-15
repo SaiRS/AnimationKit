@@ -87,28 +87,6 @@ class XXPosition extends XXObject {
   showInfo(output = console) {
     output.info(`x = ${this._x}, y = ${this._y}, z = ${this._z}`);
   }
-
-  /**
-   * 同时修改x,y,z的坐标
-   * @param {XXPosition} position 坐标对象
-   * @return {XXPosition} 修改后的坐标对象
-   */
-  add(position: XXPosition): XXPosition {
-    this._x += position.posX();
-    this._y += position.posY();
-    this._z += position.posZ();
-
-    return this;
-  }
-
-  /**
-   * [scaleBy description]
-   * @param  {[type]} factor [description]
-   * @return {[type]}        [description]
-   */
-  scaleBy(factor): XXPosition {
-    return this;
-  }
 }
 
-export {XXPosition};
+export default XXPosition;

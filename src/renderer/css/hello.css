@@ -8,10 +8,16 @@ html {
   background-image: url('../img/mountain-top.jpg');
 }
 
-.animation-test-object1-css{
+.animation-test-object1-css,
+.animation-test-object2-css{
   width: 20px;
   height: 20px;
   border: 1px solid #000000;
   box-sizing: border-box;
+  transform: scale(10.9, 20.3);
+}
 
+.animation-test-object2-css{
+  transition-duration: 5000ms;
+  transform: translate3d(300px, 80px, 0px);
 }

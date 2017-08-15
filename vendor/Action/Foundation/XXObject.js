@@ -88,7 +88,7 @@ class XXObject {
    * @override
    */
   copy(): XXObject {
-    return this;
+    return this.clone();
   }
 
   /**
@@ -96,7 +96,7 @@ class XXObject {
    * @override
    */
   clone(): XXObject {
-    let newObject = new XXObject(this.UUID);
+    let newObject = new XXObject();
     newObject.name = this.name;
 
     return newObject;

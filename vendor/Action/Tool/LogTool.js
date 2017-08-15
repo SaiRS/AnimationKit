@@ -1,3 +1,6 @@
+// @flow
+//
+import {isDevelopMode} from 'WebpackToolConfig/webpack.environment.js';
 /**
  * log工具，用来调试使用
  * @type {XXLog}
@@ -16,7 +19,9 @@ class XXLog {
    * @param  {[type]} args 可变参数
    */
   info(...args) {
-    console.log(args);
+    if (isDevelopMode()) {
+      console.log(args);
+    }
   }
 
   /**
@@ -32,7 +37,9 @@ class XXLog {
    * @param  {[type]} args 可变参数
    */
   debug(...args) {
-    console.debug(args);
+    if (isDevelopMode()) {
+      console.debug(args);
+    }
   }
 
   /**

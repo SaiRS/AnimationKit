@@ -280,6 +280,8 @@ module.exports = {
       // vue/dist/vue.common.js for webpack 1
       'vue$': 'vue/dist/vue.esm.js',
 
+      // webpack的配置路径
+      'WebpackToolConfig': path.resolve(__dirname),
       // 插件路径
       'XXTool': path.resolve(__dirname, '..', 'vendor', 'Action', 'Tool'),
       'XXFoundation':
