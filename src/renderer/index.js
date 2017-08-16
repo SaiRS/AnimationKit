@@ -12,7 +12,7 @@ import 'babel-polyfill';
 //   from '../../vendor/Action/ActionDriver/XXActionJSDriver.js';
 //
 
-import XXNodeDomActor from 'XXAction/Actor/XXNodeDomActor.js';
+import XXNodeDomActor from 'XXActionAlias/Actor/XXNodeDomActor.js';
 // import XXPosition from 'XXFoundation/Type/XXPosition.js';
 import XXScale from 'XXFoundation/Type/XXScale.js';
 // import xxvLog from 'XXTool/LogTool.js';
@@ -20,8 +20,10 @@ import XXScale from 'XXFoundation/Type/XXScale.js';
 import Vue from 'vue';
 import hello from './js/hello.vue';
 
-// import XXActionMoveTo from 'XXAction/Action/BaseAction/XXActionMoveTo.js';
-import XXActionScaleTo from 'XXAction/Action/BaseAction/XXActionScaleTo.js';
+// import XXActionMoveTo from
+// 'XXActionAlias/Action/BaseAction/XXActionMoveTo.js';
+import XXActionScaleTo from
+  'XXActionAlias/Action/BaseAction/XXActionScaleTo.js';
 
 require('./css/hello.css');
 

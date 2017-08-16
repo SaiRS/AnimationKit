@@ -182,7 +182,7 @@ let rendererConfig = {
       'XXTool': path.resolve(__dirname, '..', 'vendor', 'Tool'),
       'XXFoundation':
         path.resolve(__dirname, '..', 'vendor', 'Foundation'),
-      'XXAction': path.resolve(__dirname, '..', 'vendor', 'Action'),
+      'XXActionAlias': path.resolve(__dirname, '..', 'vendor', 'Action'),
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node'],
   },

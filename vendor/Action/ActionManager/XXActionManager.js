@@ -1,7 +1,7 @@
 // @flow
 //
 // import XXObject from 'XXFoundation/XXObject.js';
-import XXDriveTargetInterface from 'XXAction/ActionDriver/XXDriveTarget.js';
+import XXDriveTargetInterface from '../ActionDriver/XXDriveTarget.js';
 
 import xxvJSDriver from '../ActionDriver/XXActionJSDriver.js';
 

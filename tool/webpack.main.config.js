@@ -72,7 +72,7 @@ let mainConfig = {
       'XXTool': path.resolve(__dirname, '..', 'vendor', 'Tool'),
       'XXFoundation':
         path.resolve(__dirname, '..', 'vendor', 'Foundation'),
-      'XXAction': path.resolve(__dirname, '..', 'vendor', 'Action'),
+      'XXActionAlias': path.resolve(__dirname, '..', 'vendor', 'Action'),
     },
   },
   target: 'electron-main',

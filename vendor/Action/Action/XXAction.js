@@ -1,6 +1,6 @@
 // @flow
 
-import XXObject from '../Foundation/XXObject.js';
+import XXObject from 'XXFoundation/XXObject.js';
 /**
  * 动作的基类，表示执行某项操作
  */

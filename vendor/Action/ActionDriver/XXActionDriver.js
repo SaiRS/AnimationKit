@@ -1,7 +1,7 @@
 // @flow
 //
 
-import XXObject from '../Foundation/XXObject.js';
+import XXObject from 'XXFoundation/XXObject.js';
 /**
  * Action的驱动器，将Action加入到ActionDriver中后，Action便开始执行
  * 同时ActionDriver也可以控制所有动画的执行，暂停和继续，移除执行完成的Action的任务。
