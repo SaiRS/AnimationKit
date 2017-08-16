@@ -32,7 +32,7 @@ class XXActionScaleTo extends XXActionInterval {
   /**
    * @inheritdoc
    */
-  startWithTarget(actionTarget) {
+  startWithTarget(actionTarget: XXActor) {
     super.startWithTarget(actionTarget);
 
     this._deltaScaleX =

@@ -176,10 +176,12 @@ let rendererConfig = {
       '@': path.join(__dirname, '../src/renderer'),
       'vue$': 'vue/dist/vue.esm.js',
 
+      // webpack的配置路径
+      'WebpackToolConfig': path.resolve(__dirname),
       // 插件路径
-      'XXTool': path.resolve(__dirname, '..', 'vendor', 'Action', 'Tool'),
+      'XXTool': path.resolve(__dirname, '..', 'vendor', 'Tool'),
       'XXFoundation':
-        path.resolve(__dirname, '..', 'vendor', 'Action', 'Foundation'),
+        path.resolve(__dirname, '..', 'vendor', 'Foundation'),
       'XXAction': path.resolve(__dirname, '..', 'vendor', 'Action'),
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node'],

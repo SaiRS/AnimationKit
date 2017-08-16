@@ -18,6 +18,5 @@ html {
 }
 
 .animation-test-object2-css{
-  transition-duration: 5000ms;
-  transform: translate3d(300px, 80px, 0px);
+
 }

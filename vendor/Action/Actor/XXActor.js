@@ -1,8 +1,8 @@
 // @flow
 
-import XXObject from '../Foundation/XXObject.js';
-import XXAction from '../Action/XXAction.js';
-import XXActionManager from '../ActionManager/XXActionManager.js';
+import XXObject from 'XXFoundation/XXObject.js';
+import XXAction from 'XXAction/XXAction.js';
+import XXActionManager from 'XXAction/ActionManager/XXActionManager.js';
 
 import xxvTypeVerify from 'XXTool/TypeVerify.js';
 

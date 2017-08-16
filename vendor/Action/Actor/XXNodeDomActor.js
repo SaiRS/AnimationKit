@@ -17,6 +17,7 @@ class XXNodeDomActor extends XXNodeActor {
   _jqueryObject: null;
 
   _scale: null;
+  _rotation: null;
 
   /**
    * @inheritdoc
@@ -39,21 +40,23 @@ class XXNodeDomActor extends XXNodeActor {
    * 内部初始化
    */
   _init() {
-    // matrix(2, 0, 0, 3, 0, 0)
-    // matrix3d(2, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1)
+    // matrix(2, 0, 0, 3, 0, 0) (x, y, 1)T
+    // matrix3d(2, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1) (x, y, 1)T
     let transform = this._jqueryObject.css('transform');
     let matrixRegex = /matrix(?:3d)?\((.*)\)/;
     let matches = transform.match(matrixRegex);
 
     if (matches) {
       // parse matrix
-      // TODO: parse matrix or matrix3D
       let matrix = matches[1].split(','); // 数组（元素还是字符串）
 
       let scaleX = 1;
       let scaleY = 1;
       let scaleZ = 1;
 
+      // FIXME: 暂时不考虑skew部分，
+      // 因为skew(x,y)有两个参数，加上缩放a,b,旋转角度总共有五个参数
+      // 而我们只有四个方程式
       if (matrix.length > 6) { // 3d
         scaleX = parseFloat(matrix[0]);
         scaleY = parseFloat(matrix[5]);
@@ -93,6 +96,13 @@ class XXNodeDomActor extends XXNodeActor {
   /**
    * @inheritdoc
    */
+  rotation(): XXRotation {
+    return this._rotation;
+  }
+
+  /**
+   * @inheritdoc
+   */
   moveTo(position: XXPosition): void {
     // inherit by subclass
     if (position && xxvTypeVerify.isType(position, XXPosition)) {
@@ -119,6 +129,21 @@ class XXNodeDomActor extends XXNodeActor {
       this._jqueryObject.css('transform', `scale(${scaleX}, ${scaleY})`);
     } else {
       xxvLog.warn('invalid param of moveTo: ' + scale);
+    }
+  }
+
+  /**
+   * [rotateTo description]
+   * @param  {[type]} rotation [description]
+   */
+  rotateTo(rotation: XXRotation) {
+    if (rotation && xxvTypeVerify.isType(rotation, XXRotation)) {
+      let angle = rotation.getRotateAngle();
+      // NOTE: 忽略旋转轴信息
+
+      this._jqueryObject.css('transform', `rotate(${angle}deg)`);
+    } else {
+      xxvLog.warn('invalid param of moveTo: ' + rotation);
     }
   }
 }

@@ -27,7 +27,7 @@ class XXAction extends XXObject {
    * 注：不要直接调用action的这个方法，而是使用XXActor的runAction方法
    * @param  {[type]} actionTarget [description]
    */
-  startWithTarget(actionTarget) {
+  startWithTarget(actionTarget: XXActor) {
     this._target = actionTarget;
   }
 

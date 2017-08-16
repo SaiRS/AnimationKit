@@ -1,6 +1,7 @@
 // @flow
 
-import {xxfGeneratorUUID} from '../Tool/GeneratorTool.js';
+import {xxfGeneratorUUID} from 'XXTool/GeneratorTool.js';
+import xxvTypeVerify from 'XXTool/TypeVerify.js';
 /**
  * 用于表示动画库中所有对象的基类，
  * 其他一切对象都是直接或者间接继承自XXObject
@@ -100,6 +101,25 @@ class XXObject {
     newObject.name = this.name;
 
     return newObject;
+  }
+
+  /**
+   * 判断是否相等
+   * @param  {[type]}  obj [description]
+   * @return {Boolean}     [description]
+   */
+  isEqualTo(obj: XXObject): boolean {
+    return this.UUID && obj &&
+           xxvTypeVerify.isType(obj, XXObject) &&
+           obj.UUID === this.UUID;
+  }
+
+  /**
+   * to string
+   * @return {string} 对象的字符串信息
+   */
+  toString() {
+    return '';
   }
 
   /**

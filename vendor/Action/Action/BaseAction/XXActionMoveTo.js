@@ -32,7 +32,7 @@ class XXActionMoveTo extends XXActionInterval {
   /**
    * @inheritdoc
    */
-  startWithTarget(actionTarget) {
+  startWithTarget(actionTarget: XXActor) {
     super.startWithTarget(actionTarget);
 
     this._deltaX = this._destinationPos.posX() - actionTarget.position().posX();
