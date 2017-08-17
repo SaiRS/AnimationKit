@@ -11,7 +11,7 @@ class XXNodeActor extends XXActor {
    * @inheritdoc
    * @param  {[string]} uuid 对象的唯一标识符
    */
-  constructor(uuid: string) {
+  constructor(uuid: ?string = undefined) {
     super(uuid);
   }
 

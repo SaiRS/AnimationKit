@@ -3,6 +3,7 @@
 [include]
 
 [libs]
+./flow-typed
 
 [options]
 module.file_ext=.scss
@@ -13,3 +14,6 @@ module.name_mapper='^XXFoundation' ->'<PROJECT_ROOT>/vendor/Foundation'
 module.name_mapper='^WebpackToolConfig' ->'<PROJECT_ROOT>'
 module.name_mapper='^XXTool' ->'<PROJECT_ROOT>/vendor/Tool'
 module.name_mapper='^XXActionAlias' ->'<PROJECT_ROOT>/vendor/Action'
+module.name_mapper='^WebpackToolConfig'->'<PROJECT_ROOT>/tool'
+
+unsafe.enable_getters_and_setters=true

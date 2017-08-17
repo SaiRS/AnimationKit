@@ -5,3 +5,4 @@
 # !build/index.js
 dist/*
 test/*
+flow-typed/*

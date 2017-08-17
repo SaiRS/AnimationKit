@@ -14,7 +14,7 @@ class XXDriveTargetInterface extends XXObject {
    * 驱动对象的所执行的具体操作，需要重写
    * @param  {float} deltaTime 距离上次回调的时间增量
    */
-  step(deltaTime: float) {
+  step(deltaTime: number) {
     // implements by subclass
   }
 }

@@ -1,7 +1,7 @@
 // @flow
 //
 
-import XXAction from './Action.js';
+import XXAction from './XXAction.js';
 
 /**
  * 用来表示持续性动作

@@ -12,13 +12,13 @@ class XXActionDriver extends XXObject {
    * 正在执行的Targets集合
    * @type {[null, Map]}
    */
-  _activeTargets: null | Map;
+  _activeTargets: null | Map<string, XXDriveTargetInterface>;
 
   /**
    * 暂停的Targets集合
    * @type {[null, Map]}
    */
-  _stoppedTargets: null | Map;
+  _stoppedTargets: null | Map<string, XXDriveTargetInterface>;
 
   /**
    * 构造函数
@@ -50,7 +50,7 @@ class XXActionDriver extends XXObject {
   addTarget(target: XXDriveTargetInterface) {
     if (target && !this.isTargetExistInActiveSequence(target)) {
       // 加入执行队列
-      this._activeTargets.set(target.UUID, target);
+      this._activeTargets && this._activeTargets.set(target.UUID, target);
     }
   }
 
@@ -63,7 +63,7 @@ class XXActionDriver extends XXObject {
     if (this._activeTargets && target) {
       let oldTarget = this._activeTargets.delete(target.UUID);
       if (oldTarget) {
-        this._stoppedTargets.set(target.UUID, target);
+        this._stoppedTargets && this._stoppedTargets.set(target.UUID, target);
       }
       return false;
     }

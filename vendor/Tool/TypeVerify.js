@@ -41,7 +41,7 @@ class XXTypeVerify {
    * @return {boolean} data为数字时返回true,否则返回false
    */
   isNumber(data: mixed): boolean {
-    return data && typeof data === 'number';
+    return data != undefined && typeof data === 'number';
   }
 
   /**
@@ -50,7 +50,7 @@ class XXTypeVerify {
    * @return {boolean} data为NaN返回true,否则返回false
    */
   isNaN(data: mixed): boolean {
-    return data && isNaN(data);
+    return data != undefined && isNaN(data);
   }
 
   /**
@@ -59,7 +59,7 @@ class XXTypeVerify {
    * @return {boolean} data为string返回true,否则返回false
    */
   isString(data: mixed): boolean {
-    return data && typeof data === 'string';
+    return data != undefined && typeof data === 'string';
   }
 
   /**
@@ -68,7 +68,7 @@ class XXTypeVerify {
    * @return {boolean} data为boolean返回true,否则返回false
    */
   isBoolean(data: mixed): boolean {
-    return data && typeof data === 'boolean';
+    return data != undefined && typeof data === 'boolean';
   }
 
   /**
@@ -77,7 +77,7 @@ class XXTypeVerify {
    * @return {boolean} data为symbol返回true,否则返回false
    */
   isSymbol(data: mixed): boolean {
-    return data && typeof data === 'symbol';
+    return data != undefined && typeof data === 'symbol';
   }
 
   /**
@@ -86,7 +86,7 @@ class XXTypeVerify {
    * @return {boolean} data为function返回true,否则返回false
    */
   isFunction(data: mixed): boolean {
-    return data && typeof data === 'function';
+    return data != undefined && typeof data === 'function';
   }
 
   /** **************************
@@ -99,7 +99,7 @@ class XXTypeVerify {
    * @return {boolean} data为function返回true,否则返回false
    */
   isReg(data: mixed): boolean {
-    return data && data instanceof RegExp;
+    return data != undefined && data instanceof RegExp;
   }
 
   /**
@@ -108,7 +108,7 @@ class XXTypeVerify {
    * @return {boolean} data为object返回true,否则返回false
    */
   isObject(data: mixed): boolean {
-    return data && data instanceof Object;
+    return data != undefined && data instanceof Object;
   }
 
   /**
@@ -117,7 +117,7 @@ class XXTypeVerify {
    * @return {boolean} data为array返回true,否则返回false
    */
   isArray(data: mixed): boolean {
-    return data && data instanceof Array;
+    return data != undefined && data instanceof Array;
   }
 
   /** **************************
@@ -131,7 +131,7 @@ class XXTypeVerify {
    * @return {boolean} data为type类型返回true,否则返回false
    */
   isType(data: mixed, type: mixed): boolean {
-    return data && type && data instanceof type;
+    return data != undefined && type != undefined && data instanceof type;
   }
 }
 

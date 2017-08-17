@@ -6,7 +6,6 @@ import xxvTypeVerify from 'XXTool/TypeVerify.js';
  * 用于表示动画库中所有对象的基类，
  * 其他一切对象都是直接或者间接继承自XXObject
  * @class
- * @type {[XXObject]}
  */
 class XXObject {
   /**
@@ -14,20 +13,20 @@ class XXObject {
    * @private
    * @type {String}
    */
-  _uuid: '';  //
+  _uuid: string;
 
   /**
    * 对象的名字，用于显示
    * @public
    * @type {String}
    */
-  name: ''
+  name: string;
 
   /**
    * 构造函数
-   * @param  {String} uuid 唯一标识符
+   * @param  {string} uuid 唯一标识符
    */
-  constructor(uuid: string) {
+  constructor(uuid: ?string = undefined) {
     this.reset();
     // 不再使用new.tartget === XXObject这种写法
     // 那样子子类实例话就会报错
@@ -55,9 +54,9 @@ class XXObject {
 
   /**
    * 获得对象的唯一标识符
-   * @return {[String]} [唯一标志服]
+   * @return {[string]} [唯一标志服]
    */
-  get UUID() {
+  get UUID(): string {
     return this._uuid;
   }
 
@@ -65,7 +64,7 @@ class XXObject {
    * [显示对象的有关信息]
    * @param {[Object]} [output=console] [类console对象，实现了console输出的有关接口的对象]
    */
-  printInfo(output = console) {
+  printInfo(output: Object = console) {
     output.log('===========Object Info================');
     output.log(`Object name: ${this.name}`);
     output.log(`Object uuid: ${this.UUID}`);
@@ -79,7 +78,7 @@ class XXObject {
    * @override
    * @param  {[Object]} [output=console] [类console对象，实现了console输出的有关接口的对象]
    */
-  showInfo(output = console) {
+  showInfo(output: Object = console) {
     // 由子类重载
     output.info(this);
   }
@@ -97,7 +96,7 @@ class XXObject {
    * @override
    */
   clone(): XXObject {
-    let newObject = new XXObject();
+    let newObject: XXObject = new XXObject();
     newObject.name = this.name;
 
     return newObject;
@@ -109,7 +108,7 @@ class XXObject {
    * @return {Boolean}     [description]
    */
   isEqualTo(obj: XXObject): boolean {
-    return this.UUID && obj &&
+    return Boolean(this.UUID) && obj &&
            xxvTypeVerify.isType(obj, XXObject) &&
            obj.UUID === this.UUID;
   }

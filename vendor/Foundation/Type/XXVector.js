@@ -27,9 +27,24 @@ class XXVector extends XXObject {
 
   /**
    * 矢量单位化
+   * @return {XXVector} 单位矢量
    */
-  normalize() {
+  normalize(): XXVector {
+    // TODO:
+    return this;
   }
 }
 
 export default XXVector;
+
+/*
+ * some constant vectors
+ */
+let xxcXAXIS = new XXVector(1, 0, 0);
+let xxcYAXIS = new XXVector(0, 1, 0);
+let xxcZAXIS = new XXVector(0, 0, 1);
+export {
+  xxcXAXIS,
+  xxcYAXIS,
+  xxcZAXIS,
+};

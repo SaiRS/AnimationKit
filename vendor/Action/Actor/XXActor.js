@@ -16,7 +16,7 @@ class XXActor extends XXObject {
    * 构造函数
    * @param  {String} uuid 唯一标识符
    */
-  constructor(uuid: string) {
+  constructor(uuid: ?string = undefined) {
     super(uuid);
   }
 

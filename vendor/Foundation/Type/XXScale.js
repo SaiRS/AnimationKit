@@ -16,7 +16,7 @@ class XXScale extends XXObject {
    * @param  {Number} [scaleY=1] y的缩放因子
    * @param  {Number} [scaleZ=1] z的缩放因子
    */
-  constructor(scaleX = 1, scaleY = 1, scaleZ = 1) {
+  constructor(scaleX: number = 1, scaleY: number = 1, scaleZ: number = 1) {
     super();
 
     // TODO: 数据有效性检验
@@ -76,7 +76,7 @@ class XXScale extends XXObject {
   /**
    * @inheritdoc
    */
-  showInfo(output = console) {
+  showInfo(output: Object = console) {
     output.info(
       `scaleX = ${this.scaleX()}, y = ${this.scaleY()}, z = ${this.scaleZ()}`);
   }

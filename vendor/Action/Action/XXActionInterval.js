@@ -8,9 +8,9 @@ import XXAction from './XXAction.js';
  */
 class XXActionInterval extends XXAction {
   /** 动画总的持续时间*/
-  _duration: 0;
+  _duration: number;
   /** 已执行动画的时间*/
-  _elapsed: 0;
+  _elapsed: number;
 
   /**
    * 构造函数
@@ -25,7 +25,7 @@ class XXActionInterval extends XXAction {
   /**
    * @inheritdoc
    */
-  step(deltaTime: float) {
+  step(deltaTime: number) {
     this._elapsed += deltaTime;
 
     let process = this._elapsed / this._duration;

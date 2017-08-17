@@ -17,7 +17,7 @@ class XXAction extends XXObject {
    * 动画的基类
    * @param  {[string]} uuid [唯一标识符]
    */
-  constructor(uuid: string) {
+  constructor(uuid: ?string = undefined) {
     super(uuid);
   }
 
@@ -36,7 +36,7 @@ class XXAction extends XXObject {
    * @abstract
    * @param  {[float]} process [表示动画进行的进度，0表示尚未开始，1表示已经完成]
    */
-  update(process: float) {
+  update(process: number) {
     throw new Error('Implement the function [update] of your Action class');
   }
 
@@ -45,7 +45,7 @@ class XXAction extends XXObject {
    * @abstract
    * @param  {[float]} deltaTime [这次调用距离上次调用过去的时间，单位ms]
    */
-  step(deltaTime: float) {
+  step(deltaTime: number) {
     throw new Error('Implement the function [step] of your Action class');
   }
 

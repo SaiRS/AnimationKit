@@ -1,7 +1,8 @@
 // @flow
 //
 import XXActionInterval from '../XXActionInterval.js';
-import XXPosition from '../Foundation/Type/XXPosition.js';
+import XXPosition from 'XXFoundation/Type/XXPosition.js';
+import xxvLog from 'XXTool/LogTool.js';
 
 /**
  * 表示移动位置的动画
@@ -12,18 +13,18 @@ class XXActionMoveTo extends XXActionInterval {
    * 目标位置
    * @type {XXPosition}
    */
-  _destinationPos: null;
+  _destinationPos: null | XXPosition;
 
-  _deltaX: 0;
-  _deltaY: 0;
-  _deltaZ: 0;
+  _deltaX: number;
+  _deltaY: number;
+  _deltaZ: number;
 
   /**
    * 构造函数
    * @param  {[type]} position [description]
    * @param  {[type]} duration [description]
    */
-  constructor(position: XXPosition, duration = 1000) {
+  constructor(position: XXPosition, duration: number = 1000) {
     super(duration);
 
     this._destinationPos = position;
@@ -32,29 +33,40 @@ class XXActionMoveTo extends XXActionInterval {
   /**
    * @inheritdoc
    */
-  startWithTarget(actionTarget: XXActor) {
+  startWithTarget(actionTarget: XXNodeActor) {
     super.startWithTarget(actionTarget);
 
-    this._deltaX = this._destinationPos.posX() - actionTarget.position().posX();
-    this._deltaY = this._destinationPos.posY() - actionTarget.position().posY();
-    this._deltaZ = 0;
+    if (this._destinationPos) {
+      let posFlow = this._destinationPos;
+
+      this._deltaX = posFlow.posX() - actionTarget.position().posX();
+      this._deltaY = posFlow.posY() - actionTarget.position().posY();
+      this._deltaZ = 0;
+    }
   }
 
   /**
    * @inheritdoc
    */
-  update(process: float) {
+  update(process: number) {
     // 更新target位置
     let deltaX = this._deltaX * (process - 1);
     let deltaY = this._deltaY * (process - 1);
     let deltaZ = this._deltaZ * (process - 1);
 
-    let x = this._destinationPos.posX() + deltaX;
-    let y = this._destinationPos.posY() + deltaY;
-    let z = this._destinationPos.posZ() + deltaZ;
+    if (this._destinationPos && this._target) {
+      let posFlow = this._destinationPos;
+      let targetFlow = this._target;
 
-    this._target.moveTo(
-      new XXPosition(x, y, z));
+      let x = posFlow.posX() + deltaX;
+      let y = posFlow.posY() + deltaY;
+      let z = posFlow.posZ() + deltaZ;
+
+      targetFlow.moveTo(
+        new XXPosition(x, y, z));
+    } else {
+      xxvLog.warn('[moveTo] update with invalid parameter');
+    }
   }
 
   /**

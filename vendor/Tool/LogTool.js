@@ -18,7 +18,7 @@ class XXLog {
    * 输出info信息
    * @param  {[type]} args 可变参数
    */
-  info(...args) {
+  info(...args: Array<mixed>) {
     if (isDevelopMode()) {
       console.log(args);
     }
@@ -28,7 +28,7 @@ class XXLog {
    * 输出warn信息
    * @param  {[type]} args 可变参数
    */
-  warn(...args) {
+  warn(...args: Array<mixed>) {
     console.warn(args);
   }
 
@@ -36,7 +36,7 @@ class XXLog {
    * 输出debug信息
    * @param  {[type]} args 可变参数
    */
-  debug(...args) {
+  debug(...args: Array<mixed>) {
     if (isDevelopMode()) {
       console.debug(args);
     }
@@ -46,7 +46,7 @@ class XXLog {
    * 输出error信息
    * @param  {[type]} args 可变参数
    */
-  error(...args) {
+  error(...args: Array<mixed>) {
     console.error(args);
   }
 }

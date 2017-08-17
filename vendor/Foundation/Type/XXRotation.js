@@ -1,16 +1,16 @@
 // @flow
 
 import XXObject from '../XXObject.js';
-import XXVector from './XXVector.js';
+import XXVector, {xxcZAXIS} from './XXVector.js';
 
 /**
  * [_angle description]
- * @type {Number}
+ * @class
  */
 class XXRotation extends XXObject {
 
   // 旋转角度，单位deg
-  _angle: number = 0;
+  _angle: number;
   // 旋转轴, 单位矢量
   _axis: XXVector;
 
@@ -21,7 +21,7 @@ class XXRotation extends XXObject {
    * @param  {Object} option  其他的控制参数
    */
   constructor(angle: number,
-              axis: XXVector = new XXVector(0, 0, 1),
+              axis: XXVector = xxcZAXIS,
               option: Object = {}) {
     super();
 
