@@ -2,6 +2,7 @@ extends:
   - eslint:recommended
   - google
   - plugin:flowtype/recommended
+  - plugin:vue/recommended
 parser: "babel-eslint"
 # 增加了babel-eslint之后，下面的这些设置可以注释掉了
 # parserOptions:

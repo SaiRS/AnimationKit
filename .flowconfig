@@ -6,3 +6,10 @@
 
 [options]
 module.file_ext=.scss
+module.file_ext=.css
+module.file_ext=.js
+
+module.name_mapper='^XXFoundation' ->'<PROJECT_ROOT>/vendor/Foundation'
+module.name_mapper='^WebpackToolConfig' ->'<PROJECT_ROOT>'
+module.name_mapper='^XXTool' ->'<PROJECT_ROOT>/vendor/Tool'
+module.name_mapper='^XXActionAlias' ->'<PROJECT_ROOT>/vendor/Action'
