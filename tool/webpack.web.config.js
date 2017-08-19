@@ -290,7 +290,8 @@ module.exports = {
     },
   },
   externals: {
-    jquery: 'jQuery',
+    'jquery': 'jQuery',
+    'lodash': '_',
   },
   plugins: webpackPlugins,
 };

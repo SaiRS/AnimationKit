@@ -64,7 +64,7 @@ class XXActionScaleTo extends XXActionInterval {
       let z = scaleFlow.scaleZ() + deltaZ;
 
       targetFlow.scaleTo(
-        new XXScale(x, y, z));
+        new XXScale(x, y, z), false);
     }
   }
 

@@ -36,6 +36,24 @@ class XXRotation extends XXObject {
   getRotateAngle(): number {
     return this._angle;
   }
+
+  /**
+   * @inheritdoc
+   */
+  toString(): string {
+    let str: string =
+    `rotate angle = ${this.getRotateAngle()} deg,` +
+    ` rotate axis = ${this._axis.toString()}`;
+
+    return str;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  showInfo(output: Object = console) {
+    output.info(this.toString());
+  }
 }
 
 export default XXRotation;

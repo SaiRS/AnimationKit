@@ -8,20 +8,17 @@
 // https://github.com/babel/babel-preset-env
 import 'babel-polyfill';
 
-// import xxvJSDriver
-//   from '../../vendor/Action/ActionDriver/XXActionJSDriver.js';
-//
 
-import XXNodeDomActor from 'XXActionAlias/Actor/XXNodeDomActor.js';
-// import XXPosition from 'XXFoundation/Type/XXPosition.js';
+import XXNodeDomActor, {XXNodeDomActorOption} from
+ 'XXActionAlias/Actor/XXNodeDomActor.js';
+import XXPosition from 'XXFoundation/Type/XXPosition.js';
 import XXScale from 'XXFoundation/Type/XXScale.js';
 // import xxvLog from 'XXTool/LogTool.js';
 
 import Vue from 'vue';
 import hello from './js/hello.vue';
 
-// import XXActionMoveTo from
-// 'XXActionAlias/Action/BaseAction/XXActionMoveTo.js';
+import XXActionMoveTo from 'XXActionAlias/Action/BaseAction/XXActionMoveTo.js';
 import XXActionScaleTo from
   'XXActionAlias/Action/BaseAction/XXActionScaleTo.js';
 
@@ -36,9 +33,15 @@ new Vue({
 });
 
 setTimeout(() => {
-  let nodeDomActor = new XXNodeDomActor('.animation-test-object1-js');
-  // let moveToAction = new XXActionMoveTo(new XXPosition(100, 500, 0), 5000);
+  let option = new XXNodeDomActorOption(
+    ['translate(20px, 14px)', 'scale(10.9, 20.3)', 'rotate(23deg)']);
+
+  let nodeDomActor =
+  new XXNodeDomActor('.animation-test-object1-js', undefined, option);
+  let moveToAction = new XXActionMoveTo(new XXPosition(100, 500, 0), 5000);
   let scaleToAction = new XXActionScaleTo(new XXScale(3, 4), 5000);
+  scaleToAction;
+  moveToAction;
 
   setTimeout(() => {
     nodeDomActor.runAction(scaleToAction);

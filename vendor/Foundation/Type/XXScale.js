@@ -77,8 +77,17 @@ class XXScale extends XXObject {
    * @inheritdoc
    */
   showInfo(output: Object = console) {
-    output.info(
-      `scaleX = ${this.scaleX()}, y = ${this.scaleY()}, z = ${this.scaleZ()}`);
+    output.info(this.toString());
+  }
+
+  /**
+   * @inheritdoc
+   */
+  toString(): string {
+    let str: string =
+    `scaleX = ${this.scaleX()}, y = ${this.scaleY()}, z = ${this.scaleZ()}`;
+
+    return str;
   }
 }
 

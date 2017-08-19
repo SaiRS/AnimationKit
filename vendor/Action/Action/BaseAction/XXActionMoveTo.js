@@ -63,7 +63,7 @@ class XXActionMoveTo extends XXActionInterval {
       let z = posFlow.posZ() + deltaZ;
 
       targetFlow.moveTo(
-        new XXPosition(x, y, z));
+        new XXPosition(x, y, z), false);
     } else {
       xxvLog.warn('[moveTo] update with invalid parameter');
     }

@@ -80,7 +80,7 @@ class XXObject {
    */
   showInfo(output: Object = console) {
     // 由子类重载
-    output.info(this);
+    output.info(this.toString());
   }
 
   /**

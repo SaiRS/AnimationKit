@@ -33,6 +33,23 @@ class XXVector extends XXObject {
     // TODO:
     return this;
   }
+
+  /**
+   * @inheritdoc
+   */
+  toString(): string {
+    let str: string =
+    `xAxis =  ${this._x}, yAxis = ${this._y}, zAxis = ${this._z}`;
+
+    return str;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  showInfo(output: Object = console) {
+    output.info(this.toString());
+  }
 }
 
 export default XXVector;

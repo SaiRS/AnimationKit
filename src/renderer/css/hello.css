@@ -14,7 +14,7 @@ html {
   height: 20px;
   border: 1px solid #000000;
   box-sizing: border-box;
-  transform: scale(10.9, 20.3);
+  transform: translate(20px, 14px) scale(10.9, 20.3) rotate(23deg);
 }
 
 .animation-test-object2-css{

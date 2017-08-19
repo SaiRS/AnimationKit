@@ -85,7 +85,14 @@ class XXPosition extends XXObject {
    * @inheritdoc
    */
   showInfo(output: Object = console) {
-    output.info(`x = ${this._x}, y = ${this._y}, z = ${this._z}`);
+    output.info(this.toString());
+  }
+
+  /**
+   * @inheritdoc
+   */
+  toString(): string {
+    return `x = ${this._x}, y = ${this._y}, z = ${this._z}`;
   }
 }
 

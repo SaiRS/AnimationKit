@@ -50,7 +50,7 @@ class XXActionRotationTo extends XXActionInterval {
       let rotation: number = rotationFlow.getRotateAngle() + deltaRotate;
 
       // NOTE: 忽略旋转轴信息
-      targetFlow.rotateTo(new XXRotation(rotation));
+      targetFlow.rotateTo(new XXRotation(rotation), false);
     }
   }
 }
