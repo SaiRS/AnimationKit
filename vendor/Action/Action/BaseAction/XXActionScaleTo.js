@@ -39,10 +39,10 @@ class XXActionScaleTo extends XXActionInterval {
       let scaleFlow = this._destinationScale;
 
       this._deltaScaleX =
-        scaleFlow.scaleX() - actionTarget.scale().scaleX();
+        scaleFlow.scaleX() / actionTarget.scale().scaleX();
       this._deltaScaleY =
-        scaleFlow.scaleY() - actionTarget.scale().scaleY();
-      this._deltaScaleZ = 0;
+        scaleFlow.scaleY() / actionTarget.scale().scaleY();
+      this._deltaScaleZ = 1;
     }
   }
 
@@ -51,17 +51,17 @@ class XXActionScaleTo extends XXActionInterval {
    */
   update(process: number) {
     // 更新target位置
-    let deltaX = this._deltaScaleX * (process - 1);
-    let deltaY = this._deltaScaleY * (process - 1);
-    let deltaZ = this._deltaScaleZ * (process - 1);
+    // let deltaX = this._deltaScaleX * ( process);
+    // let deltaY = this._deltaScaleY * (process);
+    // let deltaZ = this._deltaScaleZ * ( process);
 
     if (this._destinationScale && this._target) {
-      let scaleFlow = this._destinationScale;
+      // let scaleFlow = this._destinationScale;
       let targetFlow = this._target;
 
-      let x = scaleFlow.scaleX() + deltaX;
-      let y = scaleFlow.scaleY() + deltaY;
-      let z = scaleFlow.scaleZ() + deltaZ;
+      let x = ( this._deltaScaleX - 1 ) * process + 1;
+      let y = ( this._deltaScaleY - 1 ) * process + 1;
+      let z = ( this._deltaScaleZ - 1 ) * process + 1;
 
       targetFlow.scaleTo(
         new XXScale(x, y, z), false);

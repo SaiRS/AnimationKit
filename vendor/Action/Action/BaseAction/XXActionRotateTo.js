@@ -32,7 +32,7 @@ class XXActionRotationTo extends XXActionInterval {
       // NOTE: 忽略旋转轴信息
       this._deltaRotate =
         this._destinationRotation.getRotateAngle()
-        - actionTarget.getRotateAngle().getRotateAngle();
+        - actionTarget.rotation().getRotateAngle();
     }
   }
 
@@ -41,13 +41,12 @@ class XXActionRotationTo extends XXActionInterval {
    */
   update(process: number) {
     // 更新target位置
-    let deltaRotate: number = this._deltaRotate * (process - 1);
+    let deltaRotate: number = this._deltaRotate * process;
 
     if (this._destinationRotation && this._target) {
-      let rotationFlow = this._destinationRotation;
       let targetFlow = this._target;
 
-      let rotation: number = rotationFlow.getRotateAngle() + deltaRotate;
+      let rotation: number = deltaRotate;
 
       // NOTE: 忽略旋转轴信息
       targetFlow.rotateTo(new XXRotation(rotation), false);

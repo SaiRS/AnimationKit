@@ -13,12 +13,15 @@ import XXNodeDomActor, {XXNodeDomActorOption} from
  'XXActionAlias/Actor/XXNodeDomActor.js';
 import XXPosition from 'XXFoundation/Type/XXPosition.js';
 import XXScale from 'XXFoundation/Type/XXScale.js';
+import XXRotation from 'XXFoundation/Type/XXRotation.js';
 // import xxvLog from 'XXTool/LogTool.js';
 
 import Vue from 'vue';
 import hello from './js/hello.vue';
 
 import XXActionMoveTo from 'XXActionAlias/Action/BaseAction/XXActionMoveTo.js';
+import XXActionRotateTo from
+ 'XXActionAlias/Action/BaseAction/XXActionRotateTo.js';
 import XXActionScaleTo from
   'XXActionAlias/Action/BaseAction/XXActionScaleTo.js';
 
@@ -34,14 +37,20 @@ new Vue({
 
 setTimeout(() => {
   let option = new XXNodeDomActorOption(
-    ['translate(20px, 14px)', 'scale(10.9, 20.3)', 'rotate(23deg)']);
+    ['translate(20px, 14px)', 'scale(10.9, 20.3)', 'rotate(23deg)'],
+    23,
+    10.9,
+    20.3);
 
   let nodeDomActor =
   new XXNodeDomActor('.animation-test-object1-js', undefined, option);
   let moveToAction = new XXActionMoveTo(new XXPosition(100, 500, 0), 5000);
-  let scaleToAction = new XXActionScaleTo(new XXScale(3, 4), 5000);
+  let scaleToAction = new XXActionScaleTo(new XXScale(1, 2), 5000);
+
+  let rotationAction = new XXActionRotateTo(new XXRotation(90), 5000);
   scaleToAction;
   moveToAction;
+  rotationAction;
 
   setTimeout(() => {
     nodeDomActor.runAction(scaleToAction);

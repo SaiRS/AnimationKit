@@ -21,24 +21,49 @@ class XXNodeDomActorOption {
 
   initSkewX: number;
   initSkewY: number;
-  initRotate: number;
+  initRotation: number;
   initScaleX: number;
   initScaleY: number;
 
   /**
    * 构造函数
    * @param {Array<string>} transforms 对象的初始化transform数组
+   * @param {number} rotation 对象的初始化rotation的值，单位deg
+   * @param {number} scaleX 对象的初始化scaleX的值
+   * @param {number} scaleY 对象的初始化scaleY的值
+   * @param {number} skewX 对象的初始化skewX的值，单位deg
+   * @param {number} skewY 对象的初始化skewY的值，单位deg
    */
-  constructor(transforms: Array<string> = []) {
-    this.initTransforms = transforms;
+  constructor(transforms: Array<string> = [],
+    rotation: number = 0,
+    scaleX: number = 1,
+    scaleY: number = 1,
+    skewX: number = 0,
+    skewY: number = 0) {
+    this._init(transforms, rotation, scaleX, scaleY, skewX, skewY);
   }
 
   /**
    * 内部初始化，将变量设置为默认值
    * @param {Array<string>} transforms 对象的初始化transform数组
+   * @param {number} rotation 对象的初始化rotation的值，单位deg
+   * @param {number} scaleX 对象的初始化scaleX的值
+   * @param {number} scaleY 对象的初始化scaleY的值
+   * @param {number} skewX 对象的初始化skewX的值，单位deg
+   * @param {number} skewY 对象的初始化skewY的值，单位deg
    */
-  _init(transforms: Array<string> = []) {
+  _init(transforms: Array<string> = [],
+    rotation: number = 0,
+    scaleX: number = 1,
+    scaleY: number = 1,
+    skewX: number = 0,
+    skewY: number = 0) {
     this.initTransforms = transforms;
+    this.initRotation = rotation;
+    this.initScaleX = scaleX;
+    this.initScaleY = scaleY;
+    this.initSkewX = skewX;
+    this.initSkewY = skewY;
   }
 
   /**
@@ -86,7 +111,7 @@ class XXNodeDomActorOption {
    * @return {number} 获得初始化的rotate的值
    */
   getInitRotation(): number {
-    return this.initRotate || 0;
+    return this.initRotation || 0;
   }
 }
 
