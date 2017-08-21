@@ -37,7 +37,7 @@ new Vue({
 
 setTimeout(() => {
   let option = new XXNodeDomActorOption(
-    ['translate(20px, 14px)', 'scale(10.9, 20.3)', 'rotate(23deg)'],
+    [],
     23,
     10.9,
     20.3);
@@ -53,6 +53,6 @@ setTimeout(() => {
   rotationAction;
 
   setTimeout(() => {
-    nodeDomActor.runAction(scaleToAction);
+    nodeDomActor.runAction(moveToAction);
   }, 1000);
 }, 2000);

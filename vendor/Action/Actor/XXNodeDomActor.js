@@ -218,60 +218,6 @@ class XXNodeDomActor extends XXNodeActor {
 
     // 同时修改呈现树的属性
     this._setPresetaionPropertiesToMode();
-
-    // // matrix(2, 0, 0, 3, 0, 0) (x, y, 1)T
-    // // matrix3d(2, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1) (x, y, 1)T
-    // // matrix是竖着排列的
-    // if (this._jqueryObject) {
-    //   let transform = this._jqueryObject.css('transform');
-    //   let matrixRegex = /matrix(?:3d)?\((.*)\)/;
-    //   let matches = transform.match(matrixRegex);
-    //
-    //   if (matches) {
-    //     // parse matrix
-    //     let matrix = matches[1].split(','); // 数组（元素还是字符串）
-    //     console.log(matrix);
-    //     let scaleX = 1;
-    //     let scaleY = 1;
-    //     let scaleZ = 1;
-    //     let rotate = 0;
-    //
-    //     // FIXME: 暂时不考虑skew部分，
-    //     // 因为skew(x,y)有两个参数，加上缩放a,b,旋转角度总共有五个参数
-    //     // 而我们只有四个方程式
-    //     if (matrix.length > 6) { // 3d
-    //       let m11 = parseFloat(matrix[0]);
-    //       let m21 = parseFloat(matrix[1]);
-    //       let m12 = parseFloat(matrix[4]);
-    //       let m22 = parseFloat(matrix[5]);
-    //
-    //       scaleX = Math.sqrt(m11*m11 + m12*m12);
-    //       scaleY = Math.sqrt(m21*m21 + m22*m22);
-    //
-    //       rotate = -Math.atan2(m12, m11) * 180 / Math.PI;
-    //     } else { // 2d
-    //       let m11 = parseFloat(matrix[0]);
-    //       let m21 = parseFloat(matrix[1]);
-    //       let m12 = parseFloat(matrix[2]);
-    //       let m22 = parseFloat(matrix[3]);
-    //       console.log(`m11 = ${m11}, m12=${m12}, m21=${m21}, m22=${m22}`);
-    //       scaleX = Math.sqrt(m11*m11 + m12*m12);
-    //       scaleY = Math.sqrt(m21*m21 + m22*m22);
-    //
-    //       rotate = -Math.atan2(m12, m11) * 180 / Math.PI;
-    //     }
-    //
-    //     this._scale = new XXScale(scaleX, scaleY, scaleZ);
-    //     this._rotation = new XXRotation(rotate);
-    //   } else {
-    //     // set to default value
-    //     this._scale = new XXScale(1, 1, 1);
-    //     this._rotation = new XXRotation(0);
-    //   }
-    // }
-    //
-    // this._scale && console.log(this._scale.toString());
-    // this._rotation && console.log(this._rotation.toString());
   }
 
 

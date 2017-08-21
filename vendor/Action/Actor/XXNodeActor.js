@@ -21,6 +21,7 @@ import XXActor from './XXActor.js';
  * 基于上面的原因，在执行动画的过程中，自然就造成了模型树和呈现树的分离。
  *2. 这种思想也算是借鉴oc中动画的模型树和呈现树的想法。
  *3. 为了统一起见，将模型树和呈现树的体现放在了XXNodeActor这个类中
+ *4. 目前呈现树的一些属性，主要设计来用获得对象的实时信息
  */
 class XXNodeActor extends XXActor {
 

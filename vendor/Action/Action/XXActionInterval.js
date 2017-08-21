@@ -3,6 +3,9 @@
 
 import XXAction from './XXAction.js';
 
+export type XXActionDirectionType =
+  'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
+
 /**
  * 用来表示持续性动作
  */
@@ -12,6 +15,24 @@ class XXActionInterval extends XXAction {
   /** 已执行动画的时间*/
   _elapsed: number;
 
+  /**
+   * 动画执行的方向，可选的参数为
+   * normal, reverse, alternate, alternate-reverse
+   * @type {string}
+   */
+  _directoion: string;
+
+  /**
+   * 动画重复次数, 默认为1，可以为小数
+   * @type {number}
+   */
+  _iterationCount: number;
+
+  /**
+   * 动画执行后应该停留的状态, 与
+   * @type {tring}
+   */
+  _fillMode: string;
   /**
    * 构造函数
    * @param  {number} duration 动画时长,单位毫秒
