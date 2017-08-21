@@ -1,22 +1,18 @@
 // @flow
 //
-import XXActionInterval from '../XXActionInterval.js';
+import XXActionScaleBy from './XXActionScaleBy.js';
 
 import XXScale from 'XXFoundation/Type/XXScale.js';
 
 /**
  * 用来表示缩放的action
  */
-class XXActionScaleTo extends XXActionInterval {
+class XXActionScaleTo extends XXActionScaleBy {
   /**
    * 目标位置
    * @type {XXScale}
    */
   _destinationScale: null | XXScale;
-
-  _deltaScaleX: number;
-  _deltaScaleY: number;
-  _deltaScaleZ: number;
 
   /**
    * 构造函数
@@ -24,7 +20,7 @@ class XXActionScaleTo extends XXActionInterval {
    * @param  {[type]} duration [description]
    */
   constructor(scale: XXScale, duration: number = 1000) {
-    super(duration);
+    super(new XXScale(), duration);
 
     this._destinationScale = scale;
   }
@@ -38,35 +34,37 @@ class XXActionScaleTo extends XXActionInterval {
     if (this._destinationScale) {
       let scaleFlow = this._destinationScale;
 
-      this._deltaScaleX =
+      let deltaScaleX =
         scaleFlow.scaleX() / actionTarget.scale().scaleX();
-      this._deltaScaleY =
+      let deltaScaleY =
         scaleFlow.scaleY() / actionTarget.scale().scaleY();
-      this._deltaScaleZ = 1;
+      let deltaScaleZ = 1;
+
+      this._scaleFactor = new XXScale(deltaScaleX, deltaScaleY, deltaScaleZ);
     }
   }
 
-  /**
-   * @inheritdoc
-   */
-  update(process: number) {
-    // 更新target位置
-    // let deltaX = this._deltaScaleX * ( process);
-    // let deltaY = this._deltaScaleY * (process);
-    // let deltaZ = this._deltaScaleZ * ( process);
-
-    if (this._destinationScale && this._target) {
-      // let scaleFlow = this._destinationScale;
-      let targetFlow = this._target;
-
-      let x = ( this._deltaScaleX - 1 ) * process + 1;
-      let y = ( this._deltaScaleY - 1 ) * process + 1;
-      let z = ( this._deltaScaleZ - 1 ) * process + 1;
-
-      targetFlow.scaleTo(
-        new XXScale(x, y, z), false);
-    }
-  }
+  // /**
+  //  * @inheritdoc
+  //  */
+  // update(process: number) {
+  //   // 更新target位置
+  //   // let deltaX = this._deltaScaleX * ( process);
+  //   // let deltaY = this._deltaScaleY * (process);
+  //   // let deltaZ = this._deltaScaleZ * ( process);
+  //
+  //   if (this._destinationScale && this._target) {
+  //     // let scaleFlow = this._destinationScale;
+  //     let targetFlow = this._target;
+  //
+  //     let x = ( this._deltaScaleX - 1 ) * process + 1;
+  //     let y = ( this._deltaScaleY - 1 ) * process + 1;
+  //     let z = ( this._deltaScaleZ - 1 ) * process + 1;
+  //
+  //     targetFlow.scaleTo(
+  //       new XXScale(x, y, z), false);
+  //   }
+  // }
 
   /**
    * @inheritdoc
