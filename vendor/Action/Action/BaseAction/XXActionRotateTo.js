@@ -1,15 +1,14 @@
 // @flow
 
-import XXActionInterval from '../XXActionInterval.js';
+import XXActionRotateBy from './XXActionRotateBy.js';
 import XXRotation from 'XXFoundation/Type/XXRotation.js';
 
 /**
  * 旋转到某个角度的action
  */
-class XXActionRotationTo extends XXActionInterval {
+class XXActionRotationTo extends XXActionRotateBy {
 
   _destinationRotation: null | XXRotation;
-  _deltaRotate: number;
 
   /**
    * [constructor description]
@@ -17,7 +16,7 @@ class XXActionRotationTo extends XXActionInterval {
    * @param  {[type]} duration [description]
    */
   constructor(rotation: XXRotation, duration: number = 1000) {
-    super(duration);
+    super(new XXRotation(0), duration);
 
     this._destinationRotation = rotation;
   }
@@ -28,28 +27,14 @@ class XXActionRotationTo extends XXActionInterval {
   startWithTarget(actionTarget: XXActor) {
     super.startWithTarget(actionTarget);
 
-    if (this._destinationRotation) {
-      // NOTE: 忽略旋转轴信息
-      this._deltaRotate =
-        this._destinationRotation.getRotateAngle()
-        - actionTarget.rotation().getRotateAngle();
-    }
-  }
+    if (this._destinationRotation && actionTarget) {
+      let destinationRotationFlow = this._destinationRotation;
 
-  /**
-   * @inheritdoc
-   */
-  update(process: number) {
-    // 更新target位置
-    let deltaRotate: number = this._deltaRotate * process;
+      let rotation: number =
+        destinationRotationFlow.getRotateAngle() -
+         actionTarget.rotation().getRotateAngle();
 
-    if (this._destinationRotation && this._target) {
-      let targetFlow = this._target;
-
-      let rotation: number = deltaRotate;
-
-      // NOTE: 忽略旋转轴信息
-      targetFlow.rotateTo(new XXRotation(rotation), false);
+      this._offsetRotation = new XXRotation(rotation);
     }
   }
 }

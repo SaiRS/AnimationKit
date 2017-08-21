@@ -53,6 +53,6 @@ setTimeout(() => {
   rotationAction;
 
   setTimeout(() => {
-    nodeDomActor.runAction(scaleToAction);
+    nodeDomActor.runAction(rotationAction);
   }, 1000);
 }, 2000);
