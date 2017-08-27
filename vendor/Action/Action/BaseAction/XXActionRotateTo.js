@@ -33,7 +33,6 @@ class XXActionRotationTo extends XXActionRotateBy {
       let rotation: number =
         destinationRotationFlow.getRotateAngle() -
          actionTarget.rotation().getRotateAngle();
-
       this._offsetRotation = new XXRotation(rotation);
     }
   }

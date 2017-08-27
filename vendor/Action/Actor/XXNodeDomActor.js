@@ -2,123 +2,15 @@
 
 import XXNodeActor from './XXNodeActor.js';
 
+import XXNodeActorState from './XXNodeActorState.js';
+
 import $ from 'jquery';
-import _ from 'lodash';
 
 import XXPosition from 'XXFoundation/Type/XXPosition.js';
 import XXScale from 'XXFoundation/Type/XXScale.js';
 import XXRotation from 'XXFoundation/Type/XXRotation.js';
 import xxvTypeVerify from 'XXTool/TypeVerify.js';
 import xxvLog from 'XXTool/LogTool.js';
-
-/**
- * XXNodeDomActor Option Config
- * @class
- */
-class XXNodeDomActorOption {
-  // 对象初始化的transform数组
-  initTransforms: Array<string>;
-
-  initSkewX: number;
-  initSkewY: number;
-  initRotation: number;
-  initScaleX: number;
-  initScaleY: number;
-
-  /**
-   * 构造函数
-   * @param {Array<string>} transforms 对象的初始化transform数组
-   * @param {number} rotation 对象的初始化rotation的值，单位deg
-   * @param {number} scaleX 对象的初始化scaleX的值
-   * @param {number} scaleY 对象的初始化scaleY的值
-   * @param {number} skewX 对象的初始化skewX的值，单位deg
-   * @param {number} skewY 对象的初始化skewY的值，单位deg
-   */
-  constructor(transforms: Array<string> = [],
-    rotation: number = 0,
-    scaleX: number = 1,
-    scaleY: number = 1,
-    skewX: number = 0,
-    skewY: number = 0) {
-    this._init(transforms, rotation, scaleX, scaleY, skewX, skewY);
-  }
-
-  /**
-   * 内部初始化，将变量设置为默认值
-   * @param {Array<string>} transforms 对象的初始化transform数组
-   * @param {number} rotation 对象的初始化rotation的值，单位deg
-   * @param {number} scaleX 对象的初始化scaleX的值
-   * @param {number} scaleY 对象的初始化scaleY的值
-   * @param {number} skewX 对象的初始化skewX的值，单位deg
-   * @param {number} skewY 对象的初始化skewY的值，单位deg
-   */
-  _init(transforms: Array<string> = [],
-    rotation: number = 0,
-    scaleX: number = 1,
-    scaleY: number = 1,
-    skewX: number = 0,
-    skewY: number = 0) {
-    this.initTransforms = transforms;
-    this.initRotation = rotation;
-    this.initScaleX = scaleX;
-    this.initScaleY = scaleY;
-    this.initSkewX = skewX;
-    this.initSkewY = skewY;
-  }
-
-  /**
-   * 获得对象的初始化transform数组
-   * @return {Array<string>} 对象的初始化transform数组
-   */
-  getInitTransforms(): Array<string> {
-    return this.initTransforms || [];
-  }
-
-  /**
-   * 获得初始化的skewX的值,单位deg
-   * @return {number} 初始化的skewX的值
-   */
-  getInitSkewX(): number {
-    return this.initSkewX || 0;
-  }
-
-  /**
-   * 获得初始化的skewY的值,单位deg
-   * @return {number} 初始化的skewY的值
-   */
-  getInitSkewY(): number {
-    return this.initSkewY || 0;
-  }
-
-  /**
-   * 获得初始化的scaleX的值
-   * @return {number} 获得初始化的scaleX的值
-   */
-  getInitScaleX(): number {
-    return this.initScaleX || 1;
-  }
-
-  /**
-   * 获得初始化的scaleY的值
-   * @return {number} 获得初始化的scaleY的值
-   */
-  getInitScaleY(): number {
-    return this.initScaleY || 1;
-  }
-
-  /**
-   * 获得初始化的rotate的值, 单位deg
-   * @return {number} 获得初始化的rotate的值
-   */
-  getInitRotation(): number {
-    return this.initRotation || 0;
-  }
-}
-
-/**
- * some constant variable
- */
-let defaultOption = new XXNodeDomActorOption();
 
 /**
  * 需要传递dom对象的动画宿主对象
@@ -128,7 +20,7 @@ class XXNodeDomActor extends XXNodeActor {
   _jqueryObject: null;
 
   // _scale: null | XXScale;
-  // _rotation: null | XXRotation;
+  // _rotationZ: null | XXRotation;
 
   // 模型树的属性
 
@@ -137,13 +29,17 @@ class XXNodeDomActor extends XXNodeActor {
   // 如果没有记录之前的变化，则不能实现在当前状态下无缝的执行下一个动画
   _transforms: Array<string>;
 
-  _skewX: number;
-  _skewY: number;
-  _rotation: number;
+  _rotationZ: number;
+  _rotationX: number;
+  _rotationY: number;
+
   _scaleX: number;
   _scaleY: number;
+  _scaleZ: number;
+
   _positionX: number;
   _positionY: number;
+  _positionZ: number;
 
   // 当前呈现的一些属性
   _presentationTransforms: Array<string>;
@@ -159,12 +55,10 @@ class XXNodeDomActor extends XXNodeActor {
    * @inheritdoc
    * @param  {[string, dom, jquery-object]} domNode  dom选择器， dom对象， jquery对象
    * @param  {[string]} uuid 对象的唯一标识符
-   * @param {XXNodeDomActorOption} option
    * @throws {Error} domSeletor应该是一个正确的字符串
    */
   constructor(domNode: string,
-    uuid: ?string = undefined,
-    option: XXNodeDomActorOption = defaultOption) {
+    uuid: ?string = undefined) {
     super(uuid);
 
     this._jqueryObject = $(domNode);
@@ -172,7 +66,7 @@ class XXNodeDomActor extends XXNodeActor {
       throw new Error(`[XXNodeDomActor] 使用错误的参数:来创建XXNodeDomActor对象`);
     }
 
-    this._init(option);
+    this.reset();
   }
 
   /**
@@ -180,70 +74,64 @@ class XXNodeDomActor extends XXNodeActor {
    */
   reset() {
     this._transforms = [];
+
+    this._rotationX = 0;
+    this._rotationY = 0;
+    this._rotationZ = 0;
+
+    this._scaleX = 1;
+    this._scaleY = 1;
+    this._scaleZ = 1;
+
+    this._positionX = 0;
+    this._positionY = 0;
+    this._positionZ = 0;
   }
 
   /**
-   * 内部初始化
-   * @param {XXNodeDomActorOption} option XXNodeDomActor的Option对象
+   * @inheritdoc
    */
-  _init(option: XXNodeDomActorOption) {
-    if (option) {
-      this._transforms = option.getInitTransforms();
-      this._scaleX = option.getInitScaleX();
-      this._scaleY = option.getInitScaleY();
-      this._rotation = option.getInitRotation();
-      this._skewX = option.getInitSkewX();
-      this._skewY = option.getInitSkewY();
+  restoreState(state: XXNodeActorState) {
+    this._positionX = state.getPositionX();
+    this._positionY = state.getPositionY();
+    this._positionZ = state.getPositionZ();
 
-      // 初始化时使用呈现树的值
-      let position = this.presentationPosition();
-      if (position) {
-        this._positionX = position.posX();
-        this._positionY = position.posY();
-      }
-    } else {
-      this._transforms = [];
+    this._scaleX = state.getScaleX();
+    this._scaleY = state.getScaleY();
+    this._scaleZ = state.getScaleZ();
 
-      this._scaleX = 1;
-      this._scaleY = 1;
+    this._rotationX = state.getRotationX();
+    this._rotationY = state.getRotationY();
+    this._rotationZ = state.getRotationZ();
 
-      this._skewX = 0;
-      this._skewY = 0;
+    this._update();
+  }
 
-      this._rotation = 0;
+  /**
+   * @inheritdoc
+   */
+  getState(): XXNodeActorState {
+    return new XXNodeActorState(
+      this._rotationZ,
+      this._scaleX,
+      this._scaleY,
+      this._positionX,
+      this._positionY,
 
-      this._positionX = 0;
-      this._positionY = 0;
-    }
-
-    // 同时修改呈现树的属性
-    this._setPresetaionPropertiesToMode();
+      this._rotationX,
+      this._rotationY,
+      this._scaleZ,
+      this._positionZ
+    );
   }
 
 
   /**
-   * 将模型树的值赋给呈现树
-   * 设置后记得更新UI，可以使用moveTo, scaleTo, rotateTo方法等
+   * @private
+   * 用来刷新ui
    */
-  _setPresetaionPropertiesToMode() {
-    this._presentationRotation = this._rotation;
-    this._presentationScaleX = this._scaleX;
-    this._presentationScaleY = this._scaleY;
-    this._presentationSkewX = this._skewX;
-    this._presentationSkewY = this._skewY;
-    this._presentationTransforms = this._transforms;
-  }
+  _update() {
 
-  /**
-   * 将模型树的值赋给呈现树
-   */
-  _setModePropertiesToPresentation() {
-    this._rotation = this._presentationRotation;
-    this._scaleX = this._presentationScaleX;
-    this._scaleY = this._presentationScaleY;
-    this._skewX = this._presentationSkewX;
-    this._skewY = this._presentationSkewY;
-    this._transforms = this._presentationTransforms;
   }
 
   /**
@@ -289,7 +177,7 @@ class XXNodeDomActor extends XXNodeActor {
    * @inheritdoc
    */
   rotation(): XXRotation | null {
-    return new XXRotation(this._rotation);
+    return new XXRotation(this._rotationZ);
   }
 
   /**
@@ -300,26 +188,47 @@ class XXNodeDomActor extends XXNodeActor {
   }
 
   /**
+   * 由position, rotate, scale生成对应的transform字符串
+   * @return {string}   应用在css transform的字符串
+   */
+  _buildTransform(): string {
+    let transforms: Array<string> = [];
+
+    if (0 != this._positionX) {
+      transforms.push(`translateX(${this._positionX}px)`);
+    }
+
+    if (0 != this._positionY) {
+      transforms.push(`translateY(${this._positionY}px)`);
+    }
+
+    if (0 != this._rotationZ) {
+      transforms.push(`rotateZ(${this._rotationZ}deg)`);
+    }
+
+    if (1 != this._scaleX) {
+      transforms.push(`scaleX(${this._scaleX})`);
+    }
+
+    if (1 != this._scaleY) {
+      transforms.push(`scaleY(${this._scaleY})`);
+    }
+    console.log('build transform string = ' + transforms.join(' '));
+    return transforms.join(' ');
+  }
+
+  /**
    * @inheritdoc
    */
   moveTo(position: XXPosition, updateModeProperty: boolean = true): void {
     // inherit by subclass
     if (position && xxvTypeVerify.isType(position, XXPosition)) {
-      let coordinate = {
-        left: position.posX(),
-        top: position.posY(),
-        // z: 0,
-      };
+      // update mode property
+      this._positionX = position.posX();
+      this._positionY = position.posY();
 
-      this._jqueryObject && this._jqueryObject.offset(coordinate);
-
-      if (updateModeProperty) {
-        // update mode property
-        this._positionX = position.posX();
-        this._positionY = position.posY();
-      } else {
-        // do nothing
-      }
+      this._jqueryObject &&
+      this._jqueryObject.css('transform', this._buildTransform());
     } else {
       xxvLog.warn('invalid param of moveTo: ' + position.toString());
     }
@@ -337,25 +246,10 @@ class XXNodeDomActor extends XXNodeActor {
       if (this._jqueryObject) {
         let jqueryObjectFlow = this._jqueryObject;
 
-        let transformsClone = _.clone(this._transforms);
-        let scaleTransform = `scale(${scaleX}, ${scaleY})`;
-        transformsClone.push(scaleTransform);
+        this._scaleX = scaleX;
+        this._scaleY = scaleY;
 
-        // 更新呈现的transforms，
-        // 不知道有什么用，说不定可以用来展示matrix
-        this._presentationTransforms = transformsClone;
-        // update presentation property
-        this._presentationScaleX = scaleX;
-        this._presentationScaleY = scaleY;
-        jqueryObjectFlow.css(
-          'transform', this._presentationTransforms.join(' '));
-
-        if (updateModeProperty) {
-          // update mode property
-          this._transforms.push(scaleTransform);
-          this._scaleX = scaleX;
-          this._scaleY = scaleY;
-        }
+        jqueryObjectFlow.css('transform', this._buildTransform());
       }
     } else {
       xxvLog.warn('invalid param of moveTo: ' + scale.toString());
@@ -372,25 +266,8 @@ class XXNodeDomActor extends XXNodeActor {
 
       if (this._jqueryObject) {
         let jqueryObjectFlow = this._jqueryObject;
-
-        let transformsClone = _.clone(this._transforms);
-        let rotateTransform = `rotate(${angle}deg)`;
-        transformsClone.push(rotateTransform);
-
-        // 更新呈现的transforms，
-        // 不知道有什么用，说不定可以用来展示matrix
-        this._presentationTransforms = transformsClone;
-        // update presentation property
-        this._presentationRotation = angle;
-
-        jqueryObjectFlow.css('transform',
-          this._presentationTransforms.join(' '));
-
-        if (updateModeProperty) {
-          // update mode property
-          this._transforms.push(rotateTransform);
-          this._rotation = angle;
-        }
+        this._rotationZ = angle;
+        jqueryObjectFlow.css('transform', this._buildTransform());
       }
     } else {
       xxvLog.warn('invalid param of moveTo: ' + rotation.toString());
@@ -400,5 +277,5 @@ class XXNodeDomActor extends XXNodeActor {
 
 export default XXNodeDomActor;
 export {
-  XXNodeDomActorOption,
+  XXNodeActorState,
 };

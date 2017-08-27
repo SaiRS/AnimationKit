@@ -35,10 +35,10 @@ class XXActionScaleTo extends XXActionScaleBy {
       let scaleFlow = this._destinationScale;
 
       let deltaScaleX =
-        scaleFlow.scaleX() / actionTarget.scale().scaleX();
+        scaleFlow.scaleX() - actionTarget.scale().scaleX();
       let deltaScaleY =
-        scaleFlow.scaleY() / actionTarget.scale().scaleY();
-      let deltaScaleZ = 1;
+        scaleFlow.scaleY() - actionTarget.scale().scaleY();
+      let deltaScaleZ = 0;
 
       this._scaleFactor = new XXScale(deltaScaleX, deltaScaleY, deltaScaleZ);
     }

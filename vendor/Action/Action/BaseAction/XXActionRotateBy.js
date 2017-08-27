@@ -11,7 +11,7 @@ class XXActionRotateBy extends XXActionInterval {
   _offsetRotation: XXRotation | null;
   _startRotation: XXRotation | null;
   /**
-   * 构造hanshu函数
+   * 构造函数
    * @param  {offsetRotation} offsetRotation 相对于当前的旋转角度
    * @param  {number} duration       [description]
    */
@@ -35,11 +35,12 @@ class XXActionRotateBy extends XXActionInterval {
    */
   update(process: number) {
     if (this._offsetRotation) {
-      let deltaRotate = this._offsetRotation.getRotateAngle();
+      let deltaRotate = this._offsetRotation.getRotateAngle() * process;
 
-      // 不更新模型树
-      this._target && this._target.rotateTo(
-        new XXRotation(deltaRotate * process), false);
+      if (this._startRotation) {
+        this._target && this._target.rotateTo(
+          new XXRotation(this._startRotation.getRotateAngle() + deltaRotate));
+      }
     }
   }
 
@@ -55,11 +56,6 @@ class XXActionRotateBy extends XXActionInterval {
    */
   doDoneTask() {
     // 同步模型树和呈现树
-    let targetFlow = this.getTarget();
-    if (targetFlow) {
-      let rotation = targetFlow.presentationRotation();
-      targetFlow.rotateTo(rotation, true);
-    }
   }
 }
 

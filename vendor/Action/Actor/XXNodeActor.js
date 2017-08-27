@@ -2,6 +2,7 @@
 
 import XXActor from './XXActor.js';
 
+
 /**
  * 需要传递dom对象的动画宿主对象
  * NOTE: 对于NodeActor的设计，采用了模型树和呈现树的概念
@@ -128,6 +129,25 @@ class XXNodeActor extends XXActor {
   rotateTo(rotaion: XXRotation, updateModeProperty: boolean = true): void {
     // inheirt by subclass
   }
+
+  /**
+   * 获得当前对象的状态
+   * @override
+   * @return {XXNodeActorState}  当前对象的状态
+   */
+  getState(): XXNodeActorState {
+    return null;
+  }
+
+  /**
+   * 恢复对象的状态
+   * @param  {[type]} state [description]
+   */
+  restoreState(state: XXNodeActorState) {
+
+  }
+
+
 }
 
 export default XXNodeActor;

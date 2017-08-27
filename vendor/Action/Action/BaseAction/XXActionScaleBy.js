@@ -38,15 +38,18 @@ class XXActionScaleBy extends XXActionInterval {
     if (this._scaleFactor) {
       let scaleFactorFlow = this._scaleFactor;
 
-      let scaleXFactor = (scaleFactorFlow.scaleX() - 1) * process + 1;
-      let scaleYFactor = (scaleFactorFlow.scaleY() - 1) * process + 1;
-      let scaleZFactor = (scaleFactorFlow.scaleZ() - 1) * process + 1;
+      let deltaScaleX = scaleFactorFlow.scaleX() * process;
+      let deltaScaleY = scaleFactorFlow.scaleY() * process;
+      let deltaScaleZ = 0;
 
-      // 不更新模型树
-      this._target && this._target.scaleTo(
-          new XXScale(scaleXFactor,
-                      scaleYFactor,
-                      scaleZFactor), false);
+      if (this._startScale) {
+        let startScaleFlow = this._startScale;
+        // 不更新模型树
+        this._target && this._target.scaleTo(
+            new XXScale(startScaleFlow.scaleX() + deltaScaleX,
+                        startScaleFlow.scaleY() + deltaScaleY,
+                        startScaleFlow.scaleZ() + deltaScaleZ));
+      }
     }
   }
 
@@ -62,11 +65,6 @@ class XXActionScaleBy extends XXActionInterval {
    */
   doDoneTask() {
     // 同步模型树和呈现树
-    let targetFlow = this.getTarget();
-    if (targetFlow) {
-      let scale = targetFlow.presentationScale();
-      targetFlow.scaleTo(scale, true);
-    }
   }
 }
 

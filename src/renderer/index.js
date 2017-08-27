@@ -7,12 +7,14 @@
 import 'babel-polyfill';
 
 
-import XXNodeDomActor, {XXNodeDomActorOption} from
+import XXNodeDomActor from
  'XXActionAlias/Actor/XXNodeDomActor.js';
 import XXPosition from 'XXFoundation/Type/XXPosition.js';
 import XXScale from 'XXFoundation/Type/XXScale.js';
 import XXRotation from 'XXFoundation/Type/XXRotation.js';
 // import xxvLog from 'XXTool/LogTool.js';
+//
+import XXNodeActorState from 'XXActionAlias/Actor/XXNodeActorState.js';
 
 import Vue from 'vue';
 import hello from './js/hello.vue';
@@ -38,14 +40,13 @@ new Vue({
 });
 
 setTimeout(() => {
-  let option = new XXNodeDomActorOption(
-    ['translate(20px, 14px)', 'scale(10.9, 20.3)', 'rotate(23deg)'],
-    23,
-    10.9,
-    20.3);
+  let option = new XXNodeActorState(33, 2, 5, 200, 30);
 
   let nodeDomActor =
-  new XXNodeDomActor('.animation-test-object1-js', undefined, option);
+  new XXNodeDomActor('.animation-test-object1-js');
+
+  nodeDomActor.restoreState(option);
+
   let moveToAction = new XXActionMoveTo(new XXPosition(100, 500, 0), 5000);
   let scaleToAction = new XXActionScaleTo(new XXScale(1, 2), 5000);
 

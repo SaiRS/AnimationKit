@@ -10,13 +10,39 @@ html {
 
 .animation-test-object1-css,
 .animation-test-object2-css{
+  position: absolute;
   width: 20px;
   height: 20px;
   border: 1px solid #000000;
   box-sizing: border-box;
-  transform: translate(20px, 14px) scale(10.9, 20.3) rotate(23deg);
+  transform: translate(200px, 30px) rotateZ(33deg) scaleX(2) scaleY(5);
 }
 
 .animation-test-object2-css{
 
+}
+
+.animation-test-object3-css{
+  width: 20px;
+  height: 20px;
+  transform: translate(200px, 14px) scale(1.9, 2.3) rotate(23deg);
+}
+
+.animation-test-object4-css{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid yellow;
+  box-sizing: border-box;
+}
+
+
+.stage{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
 }

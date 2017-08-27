@@ -3,6 +3,8 @@ import XXActor from 'XXActionAlias/Actor/XXActor.js';
 import XXNodeActor from 'XXActionAlias/Actor/XXNodeActor.js';
 import XXNodeDomActor from 'XXActionAlias/Actor/XXNodeDomActor.js';
 
+import XXNodeActorState from 'XXActionAlias/Actor/XXNodeActorState.js';
+
 // action section
 import XXAction from 'XXActionAlias/Action/XXAction.js';
 import XXActionInstant from 'XXActionAlias/Action/XXActionInstant.js';
