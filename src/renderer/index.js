@@ -28,6 +28,7 @@ import XXActionScaleTo from
 import XXActionSpeed from 'XXActionAlias/Action/BaseAction/XXActionSpeed.js';
 import XXActionDelay from 'XXActionAlias/Action/BaseAction/XXActionDelay.js';
 import XXActionSequence from 'XXActionAlias/Action/XXActionSequence.js';
+import XXActionSpawn from 'XXActionAlias/Action/XXActionSpawn.js';
 
 require('./css/hello.css');
 
@@ -47,8 +48,8 @@ setTimeout(() => {
 
   nodeDomActor.restoreState(option);
 
-  let moveToAction = new XXActionMoveTo(new XXPosition(100, 500, 0), 5000);
-  let scaleToAction = new XXActionScaleTo(new XXScale(1, 2), 5000);
+  let moveToAction = new XXActionMoveTo(new XXPosition(100, 500, 0), 2000);
+  let scaleToAction = new XXActionScaleTo(new XXScale(1, 2), 1000);
 
   let rotationAction = new XXActionRotateTo(new XXRotation(90), 5000);
   scaleToAction;
@@ -64,6 +65,12 @@ setTimeout(() => {
                         delayAction,
                         scaleToAction,
                         rotationAction);
+
+  let actionSpawn = new XXActionSpawn(
+    moveToAction,
+    scaleToAction,
+    rotationAction
+  );
   let actionFinishedCallBack = function(event, action, actor) {
     console.log(
       'outter call back, uuid = ' + action.UUID + ' , event = ' + event);
@@ -74,7 +81,7 @@ setTimeout(() => {
   // rotationAction.then(actionFinishedCallBack);
 
   // console.log(actionSequence);
-  nodeDomActor.runAction(actionSequence);
+  nodeDomActor.runAction(actionSpawn);
   // nodeDomActor.moveTo(new XXPosition(100, 500, 0));
 }, 2000);
 
