@@ -37,6 +37,13 @@ class XXActionRotationTo extends XXActionRotateBy {
       this._offsetRotation = new XXRotation(rotation);
     }
   }
+
+  /**
+   * @inheritdoc
+   */
+  className(): string {
+    return 'XXActionRotateTo';
+  }
 }
 
 export default XXActionRotationTo;

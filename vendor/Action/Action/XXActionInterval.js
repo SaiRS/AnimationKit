@@ -20,7 +20,7 @@ class XXActionInterval extends XXAction {
    * normal, reverse, alternate, alternate-reverse
    * @type {string}
    */
-  _directoion: string;
+  _direction: string;
 
   /**
    * 动画重复次数, 默认为1，可以为小数
@@ -37,12 +37,25 @@ class XXActionInterval extends XXAction {
    * 构造函数
    * @param  {number} duration 动画时长,单位毫秒
    */
-  constructor(duration: number) {
+  constructor(duration: ?number) {
     super();
 
+    if (duration) {
+      this.initWithDuration(duration);
+    } else {
+      this.initWithDuration(0);
+    }
+  }
+
+  /**
+   * 初始化action时长
+   * @param  {number} duration action时长, 单位ms
+   */
+  initWithDuration(duration: number) {
     this._duration = duration;
     this._elapsed = 0;
   }
+
   /**
    * @inheritdoc
    */
@@ -61,9 +74,32 @@ class XXActionInterval extends XXAction {
 
   /**
    * @inheritdoc
+   * 子类需重写
+   */
+  update(process: number) {
+
+  }
+
+  /**
+   * @inheritdoc
    */
   isDone() {
     return this._elapsed >= this._duration;
+  }
+
+  /**
+   * 获得action的时长，单位ms
+   * @return {number} action的时长，单位ms
+   */
+  getDuration(): number {
+    return this._duration;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  className(): string {
+    return 'XXActionInterval';
   }
 }
 

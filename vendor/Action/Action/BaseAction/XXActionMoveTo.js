@@ -21,7 +21,7 @@ class XXActionMoveTo extends XXActionMoveBy {
    * @param  {[type]} duration [description]
    */
   constructor(position: XXPosition, duration: number = 1000) {
-    super(new XXPosition());
+    super(new XXPosition(), duration);
 
     this._destinationPos = position;
   }
@@ -47,8 +47,8 @@ class XXActionMoveTo extends XXActionMoveBy {
   /**
    * @inheritdoc
    */
-  doDoneTask() {
-
+  className(): string {
+    return 'XXActionMoveTo';
   }
 }
 

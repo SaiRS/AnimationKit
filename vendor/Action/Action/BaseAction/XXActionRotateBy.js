@@ -42,6 +42,25 @@ class XXActionRotateBy extends XXActionInterval {
         new XXRotation(deltaRotate * process), false);
     }
   }
+
+  /**
+   * @inheritdoc
+   */
+  className(): string {
+    return 'XXActionRoteBy';
+  }
+
+  /**
+   * @inheritdoc
+   */
+  doDoneTask() {
+    // 同步模型树和呈现树
+    let targetFlow = this.getTarget();
+    if (targetFlow) {
+      let rotation = targetFlow.presentationRotation();
+      targetFlow.rotateTo(rotation, true);
+    }
+  }
 }
 
 export default XXActionRotateBy;

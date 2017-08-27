@@ -28,3 +28,30 @@ import XXObject from "XXFoundation/XXObject.js"
 // driver
 import XXActionDriver from 'XXActionAlias/ActionDriver/XXActionDriver.js'
 import XXDriveTargetInterface from 'XXActionAlias/ActionDriver/XXDriveTarget.js'
+
+
+/**
+ * example
+ * https://flow.org/en/docs/libdefs/creation/
+ *
+ * declare A Global function
+ * declare function foo(a: number): string;
+ *
+ * declare A Global Class
+ declare class URL {
+  constructor(urlStr: string): URL;
+  toString(): string;
+
+  static compare(url1: URL, url2: URL): boolean;
+};
+ *
+ *
+ * Declaring A Global Variable
+ * declare var PI: number;
+ *
+ * Declaring A Global Type
+ * declare type UserID = number;
+ *
+ *
+ * Declaring A Module...
+ */

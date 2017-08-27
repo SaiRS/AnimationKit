@@ -23,14 +23,24 @@ class XXActor extends XXObject {
   /**
    * 执行动作
    * @param  {XXAction} actionObject 动画对象
+   * @return {XXActor} 返回当前actor，用于链式执行
    */
   runAction(actionObject: XXAction) {
     if (actionObject && xxvTypeVerify.isType(actionObject, XXAction)) {
       actionObject.startWithTarget(this);
       XXActionManager.addAction(actionObject);
+
+      return this;
     } else {
       throw new Error('runAction with an non-action object');
     }
+  }
+
+  /**
+   * [then description]
+   */
+  then() {
+
   }
 }
 

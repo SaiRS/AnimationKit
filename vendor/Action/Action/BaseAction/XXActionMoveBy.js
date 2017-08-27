@@ -73,7 +73,14 @@ class XXActionMoveBy extends XXActionInterval {
    * @inheritdoc
    */
   doDoneTask() {
+    // 同步模型树和呈现树
+  }
 
+  /**
+   * @inheritdoc
+   */
+  className(): string {
+    return 'XXActionMoveBy';
   }
 }
 

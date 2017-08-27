@@ -44,33 +44,11 @@ class XXActionScaleTo extends XXActionScaleBy {
     }
   }
 
-  // /**
-  //  * @inheritdoc
-  //  */
-  // update(process: number) {
-  //   // 更新target位置
-  //   // let deltaX = this._deltaScaleX * ( process);
-  //   // let deltaY = this._deltaScaleY * (process);
-  //   // let deltaZ = this._deltaScaleZ * ( process);
-  //
-  //   if (this._destinationScale && this._target) {
-  //     // let scaleFlow = this._destinationScale;
-  //     let targetFlow = this._target;
-  //
-  //     let x = ( this._deltaScaleX - 1 ) * process + 1;
-  //     let y = ( this._deltaScaleY - 1 ) * process + 1;
-  //     let z = ( this._deltaScaleZ - 1 ) * process + 1;
-  //
-  //     targetFlow.scaleTo(
-  //       new XXScale(x, y, z), false);
-  //   }
-  // }
-
   /**
    * @inheritdoc
    */
-  doDoneTask() {
-
+  className(): string {
+    return 'XXActionScaleTo';
   }
 }
 

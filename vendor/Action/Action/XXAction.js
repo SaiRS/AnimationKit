@@ -1,5 +1,18 @@
 // @flow
 
+type XXActionEventType = 'actionStart' | 'actionFinished';
+
+/**
+ * [actionEventCallBack description]
+ * @param  {[type]} uuid  [description]
+ * @param  {[type]} event [description]
+ */
+type XXActionEventCallBackFunction =
+    (event: string, action: XXAction, actor: XXActor | null) => void;
+
+export type {XXActionEventType,
+            XXActionEventCallBackFunction};
+
 import XXObject from 'XXFoundation/XXObject.js';
 /**
  * 动作的基类，表示执行某项操作
@@ -11,7 +24,9 @@ class XXAction extends XXObject {
    * @private
    * @type {XXActor}
    */
-  _target: null;
+  _target: XXActor | null;
+
+  _eventCallback: XXActionEventCallBackFunction | null;
 
   /**
    * 动画的基类
@@ -63,7 +78,11 @@ class XXAction extends XXObject {
    * 执行action完成时的任务(回调)
    */
   doDoneTask() {
-
+    // 调用
+    let actor = this.getTarget();
+    if (this._eventCallback) {
+      this._eventCallback('actionFinished', this, actor);
+    }
   }
 
 
@@ -80,8 +99,31 @@ class XXAction extends XXObject {
    * 返回当前的actor
    * @return {XXActor} 执行当前动作的actor对象
    */
-  getTarget(): XXActor {
+  getTarget(): XXActor | null {
     return this._target;
+  }
+
+  /**
+   * action的事件传递
+   * @param {XXActionEventCallBackFunction} callback action的uuid
+   */
+  then(callback: XXActionEventCallBackFunction) {
+    this._eventCallback = callback;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  toString() {
+    return `[className = ${this.className()}]`;
+  }
+
+  /**
+   * 获得className
+   * @return {string} 类名
+   */
+  className(): string {
+    return 'XXAction';
   }
 }
 

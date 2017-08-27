@@ -1,5 +1,3 @@
-// @flow
-
 // Only use require("babel-polyfill"); once in your whole app.
 // Multiple imports or requires of babel-polyfill will throw an error
 // since it can cause global collisions and other issues that are hard to trace.
@@ -24,6 +22,10 @@ import XXActionRotateTo from
  'XXActionAlias/Action/BaseAction/XXActionRotateTo.js';
 import XXActionScaleTo from
   'XXActionAlias/Action/BaseAction/XXActionScaleTo.js';
+
+import XXActionSpeed from 'XXActionAlias/Action/BaseAction/XXActionSpeed.js';
+import XXActionDelay from 'XXActionAlias/Action/BaseAction/XXActionDelay.js';
+import XXActionSequence from 'XXActionAlias/Action/XXActionSequence.js';
 
 require('./css/hello.css');
 
@@ -51,8 +53,119 @@ setTimeout(() => {
   scaleToAction;
   moveToAction;
   rotationAction;
+  nodeDomActor;
+  let speedAction = new XXActionSpeed(20, rotationAction);
+  speedAction;
+  let delayAction = new XXActionDelay(5000);
+  delayAction;
+  let actionSequence =
+    new XXActionSequence(moveToAction,
+                        delayAction,
+                        scaleToAction,
+                        rotationAction);
+  let actionFinishedCallBack = function(event, action, actor) {
+    console.log(
+      'outter call back, uuid = ' + action.UUID + ' , event = ' + event);
+  };
+  actionFinishedCallBack;
+  actionSequence;
 
-  setTimeout(() => {
-    nodeDomActor.runAction(rotationAction);
-  }, 1000);
+  // rotationAction.then(actionFinishedCallBack);
+
+  // console.log(actionSequence);
+  nodeDomActor.runAction(actionSequence);
+  // nodeDomActor.moveTo(new XXPosition(100, 500, 0));
 }, 2000);
+
+
+/**
+ * promise object
+ */
+class XXPromiseInheritObject extends Promise {
+
+  /**
+   * [_testFunction description]
+   */
+  _testFunction() {
+
+  }
+  /**
+   * [constructor description]
+   * @param  {function} executor [description]
+   */
+  constructor(executor) {
+    super((resolve, reject) => {
+      // before
+      return executor(resolve, reject);
+    });
+
+    /**
+     * [first description]
+     * @return {Promise}
+     */
+    this.first = () => {
+      return super.then(() => {
+        return new XXPromiseInheritObject((resolve, reject) => {
+          setTimeout(() => {
+            console.log('first 1000');
+            resolve();
+          }, 1000);
+        });
+      });
+    };
+
+    /**
+     * [first description]
+     * @return {Promise}
+     */
+    this.second = function() {
+      return this.then(() => {
+        return new XXPromiseInheritObject((resolve, reject) => {
+          setTimeout(() => {
+            console.log('second 2000');
+            resolve();
+          }, 2000);
+        });
+      });
+    };
+
+    /**
+     * [first description]
+     * @return {Promise}
+     */
+    this.third = function() {
+      return this.then(() => {
+        return new XXPromiseInheritObject((resolve, reject) => {
+          setTimeout(() => {
+            console.log('third 3000');
+            resolve();
+          }, 3000);
+        });
+      });
+    };
+
+    /**
+     * [then description]
+     * @param  {[type]} onFulfilled [description]
+     * @param  {[type]} onRejected  [description]
+     * @return {[type]}             [description]
+     */
+    this.then = (onFulfilled, onRejected) => {
+      // before
+      super.then(onFulfilled, onRejected);
+      // after
+      return new XXPromiseInheritObject((resolve, reject) => {
+        resolve();
+      });
+    };
+  }
+
+
+}
+
+let inheritedPromise = new XXPromiseInheritObject(
+  (resolve, reject) => {
+    resolve();
+  });
+console.log(inheritedPromise);
+inheritedPromise.first().second().third();

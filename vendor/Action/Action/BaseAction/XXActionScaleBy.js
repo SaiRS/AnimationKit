@@ -49,6 +49,25 @@ class XXActionScaleBy extends XXActionInterval {
                       scaleZFactor), false);
     }
   }
+
+  /**
+   * @inheritdoc
+   */
+  className(): string {
+    return 'XXActionScaleBy';
+  }
+
+  /**
+   * @inheritdoc
+   */
+  doDoneTask() {
+    // 同步模型树和呈现树
+    let targetFlow = this.getTarget();
+    if (targetFlow) {
+      let scale = targetFlow.presentationScale();
+      targetFlow.scaleTo(scale, true);
+    }
+  }
 }
 
 
