@@ -131,7 +131,9 @@ class XXNodeDomActor extends XXNodeActor {
    * 用来刷新ui
    */
   _update() {
-
+    if (this._jqueryObject) {
+      this._jqueryObject.css('transform', this._buildTransform());
+    }
   }
 
   /**
@@ -213,7 +215,7 @@ class XXNodeDomActor extends XXNodeActor {
     if (1 != this._scaleY) {
       transforms.push(`scaleY(${this._scaleY})`);
     }
-    console.log('build transform string = ' + transforms.join(' '));
+
     return transforms.join(' ');
   }
 
@@ -227,8 +229,7 @@ class XXNodeDomActor extends XXNodeActor {
       this._positionX = position.posX();
       this._positionY = position.posY();
 
-      this._jqueryObject &&
-      this._jqueryObject.css('transform', this._buildTransform());
+      this._update();
     } else {
       xxvLog.warn('invalid param of moveTo: ' + position.toString());
     }
@@ -242,15 +243,10 @@ class XXNodeDomActor extends XXNodeActor {
       let scaleX = scale.scaleX();
       let scaleY = scale.scaleY();
 
-      // TODO: 不影响其他的transform属性
-      if (this._jqueryObject) {
-        let jqueryObjectFlow = this._jqueryObject;
+      this._scaleX = scaleX;
+      this._scaleY = scaleY;
 
-        this._scaleX = scaleX;
-        this._scaleY = scaleY;
-
-        jqueryObjectFlow.css('transform', this._buildTransform());
-      }
+      this._update();
     } else {
       xxvLog.warn('invalid param of moveTo: ' + scale.toString());
     }
@@ -263,12 +259,8 @@ class XXNodeDomActor extends XXNodeActor {
     if (rotation && xxvTypeVerify.isType(rotation, XXRotation)) {
       let angle = rotation.getRotateAngle();
       // NOTE: 忽略旋转轴信息
-
-      if (this._jqueryObject) {
-        let jqueryObjectFlow = this._jqueryObject;
-        this._rotationZ = angle;
-        jqueryObjectFlow.css('transform', this._buildTransform());
-      }
+      this._rotationZ = angle;
+      this._update();
     } else {
       xxvLog.warn('invalid param of moveTo: ' + rotation.toString());
     }
