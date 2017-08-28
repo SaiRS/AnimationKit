@@ -5,6 +5,7 @@
   "main": "./dist/electron/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "documentation": "documentation build vendor/** -f md -o doc/documentation.md",
     "eslint-init": "eslint --init",
     "flow": "flow",
     "eslint": "eslint",
