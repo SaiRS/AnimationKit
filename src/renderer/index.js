@@ -30,6 +30,9 @@ import XXActionDelay from 'XXActionAlias/Action/BaseAction/XXActionDelay.js';
 import XXActionSequence from 'XXActionAlias/Action/XXActionSequence.js';
 import XXActionSpawn from 'XXActionAlias/Action/XXActionSpawn.js';
 
+
+import XXActionRepeat from 'XXActionAlias/Action/BaseAction/XXActionRepeat.js';
+
 // time function
 import XXTimeFunctionEaseOutSine from
   'XXActionAlias/TimeFunction/XXTimeFunctionEaseOutSine.js';
@@ -83,7 +86,9 @@ setTimeout(() => {
   actionFinishedCallBack;
   actionSequence;
 
-  nodeDomActor.runAction(moveToAction);
+
+  let repeatAction = new XXActionRepeat(moveToAction, 4.3);
+  nodeDomActor.runAction(repeatAction);
   // nodeDomActor.moveTo(new XXPosition(100, 500, 0));
 }, 2000);
 
