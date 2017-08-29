@@ -57,18 +57,15 @@ class XXActionRepeat extends XXActionInterval {
     let maxRepeatValue = this._currentRepeatedTimes * repeatGapProcess;
 
     let realProcess = 0;
-    if (process > maxRepeatValue) {
+    while (process > maxRepeatValue) {
       this._currentRepeatedTimes ++;
       // 重新计算当前重复区间最大值
       maxRepeatValue = this._currentRepeatedTimes * repeatGapProcess;
-
-      realProcess = (maxRepeatValue - process) / repeatGapProcess;
-    } else {
-      // 计算当前重复区间的最小值
-      let minRepeatValue = (this._currentRepeatedTimes - 1) * repeatGapProcess;
-
-      realProcess = (process - minRepeatValue) / repeatGapProcess;
     }
+
+    // 计算当前重复区间的最小值
+    let minRepeatValue = (this._currentRepeatedTimes - 1) * repeatGapProcess;
+    realProcess = (process - minRepeatValue) / repeatGapProcess;
 
     this._innerAction.update(realProcess);
   }
