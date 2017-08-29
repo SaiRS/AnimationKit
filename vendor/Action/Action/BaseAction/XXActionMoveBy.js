@@ -49,17 +49,29 @@ class XXActionMoveBy extends XXActionInterval {
    */
   update(process: number) {
     // 更新target位置
-    let deltaX = this._offsetPosition.posX() * (process);
-    let deltaY = this._offsetPosition.posY() * (process);
-    let deltaZ = this._offsetPosition.posZ() * (process);
+    // let deltaX = this._offsetPosition.posX() * (process);
+    // let deltaY = this._offsetPosition.posY() * (process);
+    // let deltaZ = this._offsetPosition.posZ() * (process);
 
     if (this._startPosition && this._target) {
       let posFlow = this._startPosition;
       let targetFlow = this._target;
 
-      let x = posFlow.posX() + deltaX;
-      let y = posFlow.posY() + deltaY;
-      let z = posFlow.posZ() + deltaZ;
+      let beginX = posFlow.posX();
+      let beginY = posFlow.posY();
+      let beginZ = posFlow.posZ();
+
+      let changeX = this._offsetPosition.posX();
+      let changeY = this._offsetPosition.posY();
+      let changeZ = this._offsetPosition.posZ();
+
+      // 应用time function
+      let x = this._timeFunction.easeFunction(process, beginX, changeX, 1);
+      let y = this._timeFunction.easeFunction(process, beginY, changeY, 1);
+      let z = this._timeFunction.easeFunction(process, beginZ, changeZ, 1);
+      // let x = posFlow.posX() + deltaX;
+      // let y = posFlow.posY() + deltaY;
+      // let z = posFlow.posZ() + deltaZ;
 
       // 不更新模型树
       targetFlow.moveTo(

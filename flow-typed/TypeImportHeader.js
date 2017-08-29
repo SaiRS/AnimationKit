@@ -18,6 +18,9 @@ import XXActionMoveTo from 'XXActionAlias/Action/BaseAction/XXActionMoveTo.js';
 import XXActionRotateTo from    'XXActionAlias/Action/BaseAction/XXActionRotateTo.js';
 import XXActionScaleTo from   'XXActionAlias/Action/BaseAction/XXActionScaleTo.js';
 
+// time function
+import type {XXTimeFunctionInterface} from './XXTimeFunction.js'
+
 // Type
 import XXMatrix from "XXFoundation/Type/XXMatrix.js"
 import XXPosition from "XXFoundation/Type/XXPosition.js"

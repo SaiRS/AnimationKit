@@ -3,6 +3,24 @@
 import XXObject from 'XXFoundation/XXObject.js';
 import type {XXTimeFunctionInterface} from './XXTimeFunction.js';
 
+
+/**
+ * [xxfEaseInOutCubic description]
+ * @param  {number} t current time
+ * @param  {number} b begin value
+ * @param  {number} c change
+ * @param  {number} d duration
+ * @return {number}   [description]
+ */
+function xxfEaseInOutCubic(t: number, b: number, c: number, d: number): number {
+  if ((t/=d/2) < 1) {
+    return c/2*t*t*t + b;
+  } else {
+    return c/2*((t-=2)*t*t + 2) + b;
+  }
+}
+
+
 /**
  * 用来表示ease in out cubic的time function
  * http://easings.net/zh-cn
@@ -25,13 +43,7 @@ class XXTimeFunctionEaseInOutCubic extends XXObject
     //	if ((t/=d/2) < 1) return c/2*t*t*t + b;
 		// return c/2*((t-=2)*t*t + 2) + b;
     // https://github.com/danro/jquery-easing/blob/master/jquery.easing.js
-    let t = elapseTime / (duration/2);
-    if (t < 1) {
-      return change * t * t * t / 2 + begin;
-    } else {
-      t -= 2;
-      return change * (t * t * t + 2) / 2 + begin;
-    }
+    return xxfEaseInOutCubic(elapseTime, begin, change, duration);
   }
 }
 

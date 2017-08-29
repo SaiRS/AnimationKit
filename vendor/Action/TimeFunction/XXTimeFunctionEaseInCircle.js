@@ -4,6 +4,19 @@ import XXObject from 'XXFoundation/XXObject.js';
 import type {XXTimeFunctionInterface} from './XXTimeFunction.js';
 
 /**
+ * [xxfEaseInCircle description]
+ * @param  {number} t current time
+ * @param  {number} b begin value
+ * @param  {number} c change
+ * @param  {number} d duration
+ * @return {number}   [description]
+ */
+function xxfEaseInCircle(t: number, b: number, c: number, d: number): number {
+  return -c * (Math.sqrt(1 - (t/=d)*t) - 1) + b;
+}
+
+
+/**
  * 用来表示ease in circle的time function
  * http://easings.net/zh-cn
  */
@@ -24,8 +37,7 @@ class XXTimeFunctionEaseInCircle extends XXObject
                    duration: number): number {
     // y = -c * (Math.sqrt(1 - (t/=d)*t) - 1) + b;
     // https://github.com/danro/jquery-easing/blob/master/jquery.easing.js
-    let t = elapseTime / duration;
-    return -change * (Math.sqrt(1 - t*t) - 1) + begin;
+    return xxfEaseInCircle(elapseTime, begin, change, duration);
   }
 }
 

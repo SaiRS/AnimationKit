@@ -4,6 +4,21 @@ import XXObject from 'XXFoundation/XXObject.js';
 import type {XXTimeFunctionInterface} from './XXTimeFunction.js';
 
 /**
+ * [xxfEaseOutExponential description]
+ * @param  {number} t current time
+ * @param  {number} b begin value
+ * @param  {number} c change
+ * @param  {number} d duration
+ * @return {number}   [description]
+ */
+function xxfEaseOutExponential(t: number,
+                              b: number,
+                              c: number,
+                              d: number): number {
+  return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+}
+
+/**
  * 用来表示ease out exponential的time function
  * http://easings.net/zh-cn
  */
@@ -24,11 +39,7 @@ class XXTimeFunctionEaseOutExponential extends XXObject
                    duration: number): number {
     //	(t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
     // https://github.com/danro/jquery-easing/blob/master/jquery.easing.js
-    if (duration == elapseTime) {
-      return begin + change;
-    } else {
-      return change * (-Math.pow(2, 10 * (elapseTime / duration)) + 1) + begin;
-    }
+    return xxfEaseOutExponential(elapseTime, begin, change, duration);
   }
 }
 

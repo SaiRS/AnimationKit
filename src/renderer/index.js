@@ -30,6 +30,10 @@ import XXActionDelay from 'XXActionAlias/Action/BaseAction/XXActionDelay.js';
 import XXActionSequence from 'XXActionAlias/Action/XXActionSequence.js';
 import XXActionSpawn from 'XXActionAlias/Action/XXActionSpawn.js';
 
+// time function
+import XXTimeFunctionEaseOutSine from
+  'XXActionAlias/TimeFunction/XXTimeFunctionEaseOutSine.js';
+
 require('./css/hello.css');
 
 new Vue({
@@ -53,7 +57,7 @@ setTimeout(() => {
 
   let rotationAction = new XXActionRotateTo(new XXRotation(90), 5000);
   scaleToAction;
-  moveToAction;
+  moveToAction.setTimeFunction(new XXTimeFunctionEaseOutSine());
   rotationAction;
   nodeDomActor;
   let speedAction = new XXActionSpeed(20, rotationAction);
@@ -71,6 +75,7 @@ setTimeout(() => {
     scaleToAction,
     rotationAction
   );
+  actionSpawn;
   let actionFinishedCallBack = function(event, action, actor) {
     console.log(
       'outter call back, uuid = ' + action.UUID + ' , event = ' + event);
@@ -78,10 +83,7 @@ setTimeout(() => {
   actionFinishedCallBack;
   actionSequence;
 
-  // rotationAction.then(actionFinishedCallBack);
-
-  // console.log(actionSequence);
-  nodeDomActor.runAction(actionSpawn);
+  nodeDomActor.runAction(moveToAction);
   // nodeDomActor.moveTo(new XXPosition(100, 500, 0));
 }, 2000);
 

@@ -6,10 +6,10 @@ import type {XXTimeFunctionInterface} from './XXTimeFunction.js';
 
 /**
  * [xxfEaseOutBounce description]
- * @param  {number} t [description]
- * @param  {number} b [description]
- * @param  {number} c [description]
- * @param  {number} d [description]
+ * @param  {number} t current time
+ * @param  {number} b begin value
+ * @param  {number} c change
+ * @param  {number} d duration
  * @return {number}   [description]
  */
 function xxfEaseOutBounce(t: number, b: number, c: number, d: number): number {

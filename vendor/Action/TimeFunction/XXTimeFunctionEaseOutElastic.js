@@ -4,6 +4,44 @@ import XXObject from 'XXFoundation/XXObject.js';
 import type {XXTimeFunctionInterface} from './XXTimeFunction.js';
 
 /**
+ * [xxfEaseOutElastic description]
+ * @param  {number} t current time
+ * @param  {number} b begin value
+ * @param  {number} c change
+ * @param  {number} d duration
+ * @return {number}   [description]
+ */
+function xxfEaseOutElastic(t: number,
+                          b: number,
+                          c: number,
+                          d: number): number {
+  let s=1.70158;
+  let p=0;
+  let a=c;
+
+  if (t==0) {
+    return b;
+  }
+
+  if ((t/=d)==1) {
+    return b+c;
+  }
+
+  if (!p) {
+    p=d*.3;
+  }
+
+  if (a < Math.abs(c)) {
+    a=c;
+    s=p/4;
+  } else {
+    s = p/(2*Math.PI) * Math.asin(c/a);
+  }
+
+  return a*Math.pow(2, -10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
+}
+
+/**
  * 用来表示ease out elastic的time function
  * http://easings.net/zh-cn
  */
@@ -33,33 +71,7 @@ class XXTimeFunctionEaseOutElastic extends XXObject
       Math.sin( (t*d-s)*(2*Math.PI)/p )*.5 + c + b;
      */
     // https://github.com/danro/jquery-easing/blob/master/jquery.easing.js
-    let s = 1.70158;
-    let p = 0;
-    let a = change;
-
-    if (0 == elapseTime) {
-      return begin;
-    }
-
-    if (duration == elapseTime) {
-      return begin + change;
-    }
-
-    let t = elapseTime / duration;
-
-    if (!p) {
-      p = duration * 0.3;
-    }
-
-    if (a < Math.abs(change)) {
-      a = change;
-      s = p /4;
-    } else {
-      s = p / (2*Math.PI) * Math.asin(change/a);
-    }
-
-    return a*Math.pow(2, -10*t) *
-          Math.sin( (t*duration-s)*(2*Math.PI)/p ) + change + begin;
+    return xxfEaseOutElastic(elapseTime, begin, change, duration);
   }
 }
 
