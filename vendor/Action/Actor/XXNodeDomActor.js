@@ -19,15 +19,7 @@ class XXNodeDomActor extends XXNodeActor {
 
   _jqueryObject: null;
 
-  // _scale: null | XXScale;
-  // _rotationZ: null | XXRotation;
-
   // 模型树的属性
-
-  // NOTE: 这个数组记录了应用于css transform的一系列变化
-  // 在执行动画时，因为会覆盖css transform的值，
-  // 如果没有记录之前的变化，则不能实现在当前状态下无缝的执行下一个动画
-  _transforms: Array<string>;
 
   _rotationZ: number;
   _rotationX: number;
@@ -40,16 +32,6 @@ class XXNodeDomActor extends XXNodeActor {
   _positionX: number;
   _positionY: number;
   _positionZ: number;
-
-  // 当前呈现的一些属性
-  _presentationTransforms: Array<string>;
-  _presentationSkewX: number;
-  _presentationSkewY: number;
-  _presentationRotation: number;
-  _presentationScaleX: number;
-  _presentationScaleY: number;
-  _presentationPositionX: number;
-  _presentationPositionY: number;
 
   /**
    * @inheritdoc
@@ -73,8 +55,6 @@ class XXNodeDomActor extends XXNodeActor {
    * inheirtdoc
    */
   reset() {
-    this._transforms = [];
-
     this._rotationX = 0;
     this._rotationY = 0;
     this._rotationZ = 0;
@@ -146,34 +126,10 @@ class XXNodeDomActor extends XXNodeActor {
   /**
    * @inheritdoc
    */
-  presentationPosition(): ?XXPosition {
-    if (this._jqueryObject) {
-      let offset = this._jqueryObject.offset() || {left: 0, top: 0};
-
-      let x = offset['left'] || 0;
-      let y = offset['top'] || 0;
-      let z = 0;
-
-      let result = new XXPosition(x, y, z);
-      return result;
-    } else {
-      return null;
-    }
-  }
-
-  /**
-   * @inheritdoc
-   */
   scale(): ?XXScale {
     return new XXScale(this._scaleX, this._scaleY);
   }
 
-  /**
-   * @inheritdoc
-   */
-  presentationScale(): ?XXScale {
-    return new XXScale(this._presentationScaleX, this._presentationScaleY);
-  }
 
   /**
    * @inheritdoc
@@ -182,12 +138,6 @@ class XXNodeDomActor extends XXNodeActor {
     return new XXRotation(this._rotationZ);
   }
 
-  /**
-   * @inheritdoc
-   */
-  presentationRotation(): XXRotation | null {
-    return new XXRotation(this._presentationRotation);
-  }
 
   /**
    * 由position, rotate, scale生成对应的transform字符串
@@ -264,6 +214,20 @@ class XXNodeDomActor extends XXNodeActor {
     } else {
       xxvLog.warn('invalid param of moveTo: ' + rotation.toString());
     }
+  }
+
+  /**
+   * @inheritdoc
+   */
+  show() {
+    this._jqueryObject && this._jqueryObject.show();
+  }
+
+  /**
+   * @inheritdoc
+   */
+  hide() {
+    this._jqueryObject && this._jqueryObject.hide();
   }
 }
 

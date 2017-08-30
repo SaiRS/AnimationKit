@@ -30,6 +30,9 @@ import XXActionDelay from 'XXActionAlias/Action/BaseAction/XXActionDelay.js';
 import XXActionSequence from 'XXActionAlias/Action/XXActionSequence.js';
 import XXActionSpawn from 'XXActionAlias/Action/XXActionSpawn.js';
 
+import XXActionShow from 'XXActionAlias/Action/BaseAction/XXActionShow.js';
+import XXActionHide from 'XXActionAlias/Action/BaseAction/XXActionHide.js';
+
 
 import XXActionRepeatForever from
  'XXActionAlias/Action/BaseAction/XXActionRepeatForever.js';
@@ -68,11 +71,19 @@ setTimeout(() => {
   speedAction;
   let delayAction = new XXActionDelay(5000);
   delayAction;
+
+  let showAction = new XXActionShow();
+  let hideAction = new XXActionHide();
+
   let actionSequence =
     new XXActionSequence(moveToAction,
+                        hideAction,
                         delayAction,
+                        showAction,
                         scaleToAction,
-                        rotationAction);
+                        rotationAction
+                      );
+
 
   let actionSpawn = new XXActionSpawn(
     moveToAction,
@@ -89,7 +100,10 @@ setTimeout(() => {
 
 
   let repeatAction = new XXActionRepeatForever(moveToAction);
-  nodeDomActor.runAction(repeatAction);
+  repeatAction;
+
+  console.log(actionSequence);
+  nodeDomActor.runAction(actionSequence);
   // nodeDomActor.moveTo(new XXPosition(100, 500, 0));
 }, 2000);
 

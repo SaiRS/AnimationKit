@@ -57,6 +57,7 @@ class XXActionRepeat extends XXActionInterval {
     let maxRepeatValue = this._currentRepeatedTimes * repeatGapProcess;
 
     let realProcess = 0;
+    // 长时间的后台切换到前台时，确保计算到正确的区间
     while (process > maxRepeatValue) {
       this._currentRepeatedTimes ++;
       // 重新计算当前重复区间最大值

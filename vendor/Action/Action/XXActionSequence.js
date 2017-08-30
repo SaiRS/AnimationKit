@@ -79,7 +79,7 @@ class XXActionSequence extends XXActionInterval {
     if (this._elapsed > firstActionDuration) {
       // 转换到下一个action时，执行上一个action的完成回调
       if (0 == this._currentExecuteActionIndex) {
-        if (this._actions[0].isDone()) {
+        if (!this._actions[0].isDone()) {
           // 如果duration很小，导致deltaTime一来就大于duration,
           // 则可能会造成actions[0]没有执行。我们的instantAction就会出现这种情况
           // 所以先判断一下是否已经完成，再执行对应的逻辑
