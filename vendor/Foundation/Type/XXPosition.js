@@ -82,6 +82,19 @@ class XXPosition extends XXObject {
   }
 
   /**
+   * 每个坐标值都乘以一个数
+   * @param  {number} factor 乘数
+   * @return {XXPosition}    位置信息
+   */
+  multiply(factor: number): XXPosition {
+    return new XXPosition(
+      factor * this.posX(),
+      factor * this.posY(),
+      factor * this.posZ()
+    );
+  }
+
+  /**
    * @inheritdoc
    */
   showInfo(output: Object = console) {

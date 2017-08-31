@@ -20,6 +20,15 @@ class XXActionInterval extends XXAction {
 
   _timeFunction: XXTimeFunctionInterface;
 
+
+  /**
+   * @private
+   * 将this的属性复制到action中去
+   * @param {XXActionInterval} action 目标action
+   */
+  _copyDecoratorTo(action: XXActionInterval) {
+    action.setTimeFunction(this._timeFunction);
+  }
   /**
    * 构造函数
    * @param  {number} duration 动画时长,单位毫秒
@@ -97,6 +106,13 @@ class XXActionInterval extends XXAction {
    */
   className(): string {
     return 'XXActionInterval';
+  }
+
+  /**
+   * @inheritdoc
+   */
+  reverse(): XXActionInterval {
+    throw new Error('Implement the function [reverse] of your Action class');
   }
 }
 

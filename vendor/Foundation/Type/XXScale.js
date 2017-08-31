@@ -74,6 +74,19 @@ class XXScale extends XXObject {
   }
 
   /**
+   * [multiply description]
+   * @param  {[type]} mul [description]
+   * @return {[type]}     [description]
+   */
+  multiply(mul: number): XXScale {
+    return new XXScale(
+      mul * this.scaleX(),
+      mul * this.scaleY(),
+      mul * this.scaleZ()
+    );
+  }
+
+  /**
    * @inheritdoc
    */
   showInfo(output: Object = console) {

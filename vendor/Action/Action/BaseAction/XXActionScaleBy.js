@@ -8,7 +8,7 @@ import XXScale from 'XXFoundation/Type/XXScale.js';
  */
 class XXActionScaleBy extends XXActionInterval {
 
-  _scaleFactor: XXScale | null;
+  _scaleFactor: XXScale;
   _startScale: XXScale | null;
 
   /**
@@ -65,6 +65,28 @@ class XXActionScaleBy extends XXActionInterval {
    */
   doDoneTask() {
     // 同步模型树和呈现树
+  }
+
+  /**
+   * @inheritdoc
+   */
+  reverse(): XXActionScaleBy {
+    let scale = new XXScale(
+      this._scaleFactor.scaleX(),
+      this._scaleFactor.scaleY(),
+      this._scaleFactor.scaleZ(),
+    );
+
+    scale.setScaleX(1 / scale.scaleX());
+    scale.setScaleY(1 / scale.scaleY());
+    let action = new XXActionScaleBy(
+      scale,
+      this._duration
+    );
+
+    this._copyDecoratorTo(action);
+    console.log(action);
+    return action;
   }
 }
 

@@ -110,6 +110,22 @@ class XXActionSequence extends XXActionInterval {
   className(): string {
     return 'XXActionSequence';
   }
+
+  /**
+   * @inheritdoc
+   */
+  reverse(): XXAction {
+    if (0 == this._totalActions) {
+      return new XXActionSequence();
+    } else if (1 == this._totalActions) {
+      let action = this._actions[0];
+      return new XXActionSequence(action.reverse());
+    } else {
+      let action1 = this._actions[0];
+      let action2 = this._actions[1];
+      return new XXActionSequence(action2.reverse(), action1.reverse());
+    }
+  }
 }
 
 export default XXActionSequence;

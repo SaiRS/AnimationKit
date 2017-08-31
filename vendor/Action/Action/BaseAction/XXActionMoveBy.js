@@ -91,6 +91,19 @@ class XXActionMoveBy extends XXActionInterval {
   /**
    * @inheritdoc
    */
+  reverse(): XXAction {
+    let action = new XXActionMoveBy(
+      this._offsetPosition.multiply(-1),
+      this._duration);
+
+    this._copyDecoratorTo(action);
+
+    return action;
+  }
+
+  /**
+   * @inheritdoc
+   */
   className(): string {
     return 'XXActionMoveBy';
   }

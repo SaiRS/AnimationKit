@@ -8,7 +8,7 @@ import XXRotation from 'XXFoundation/Type/XXRotation.js';
  */
 class XXActionRotateBy extends XXActionInterval {
 
-  _offsetRotation: XXRotation | null;
+  _offsetRotation: XXRotation;
   _startRotation: XXRotation | null;
   /**
    * 构造函数
@@ -56,6 +56,18 @@ class XXActionRotateBy extends XXActionInterval {
    */
   doDoneTask() {
     // 同步模型树和呈现树
+  }
+
+  /**
+   * @inheritdoc
+   */
+  reverse(): XXActionRotateBy {
+    let action = new XXActionRotateBy(
+        this._offsetRotation.multiply(-1),
+        this._duration);
+
+    this._copyDecoratorTo(action);
+    return action;
   }
 }
 

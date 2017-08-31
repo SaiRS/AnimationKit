@@ -1,6 +1,7 @@
 // @flow
 
 import XXActionInstant from '../XXActionInstant.js';
+import XXActionHide from './XXActionHide.js';
 
 /**
  * 表示显示的动画
@@ -22,6 +23,13 @@ class XXActionShow extends XXActionInstant {
    */
   className(): string {
     return 'XXActionShow';
+  }
+
+  /**
+   * @inheritdoc
+   */
+  reverse(): XXActionHide {
+    return new XXActionHide();
   }
 }
 

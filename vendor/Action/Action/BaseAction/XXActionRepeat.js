@@ -70,6 +70,13 @@ class XXActionRepeat extends XXActionInterval {
 
     this._innerAction.update(realProcess);
   }
+
+  /**
+   * @inheritdoc
+   */
+  reverse(): XXActionRepeat {
+    return new XXActionRepeat(this._innerAction.reverse(), this._repeatTimes);
+  }
 }
 
 

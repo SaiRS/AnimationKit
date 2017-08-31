@@ -19,13 +19,13 @@ import XXNodeActorState from 'XXActionAlias/Actor/XXNodeActorState.js';
 import Vue from 'vue';
 import hello from './js/hello.vue';
 
-import XXActionMoveTo from 'XXActionAlias/Action/BaseAction/XXActionMoveTo.js';
-import XXActionRotateTo from
- 'XXActionAlias/Action/BaseAction/XXActionRotateTo.js';
-import XXActionScaleTo from
-  'XXActionAlias/Action/BaseAction/XXActionScaleTo.js';
+import XXActionMoveBy from 'XXActionAlias/Action/BaseAction/XXActionMoveBy.js';
+import XXActionRotateBy from
+ 'XXActionAlias/Action/BaseAction/XXActionRotateBy.js';
+import XXActionScaleBy from
+  'XXActionAlias/Action/BaseAction/XXActionScaleBy.js';
 
-import XXActionSpeed from 'XXActionAlias/Action/BaseAction/XXActionSpeed.js';
+import XXActionSpeed from 'XXActionAlias/Action/XXActionSpeed.js';
 import XXActionDelay from 'XXActionAlias/Action/BaseAction/XXActionDelay.js';
 import XXActionSequence from 'XXActionAlias/Action/XXActionSequence.js';
 import XXActionSpawn from 'XXActionAlias/Action/XXActionSpawn.js';
@@ -52,22 +52,22 @@ new Vue({
 });
 
 setTimeout(() => {
-  let option = new XXNodeActorState(33, 2, 5, 200, 30);
+  let option = new XXNodeActorState(33, 2, 5, 200, 300);
 
   let nodeDomActor =
   new XXNodeDomActor('.animation-test-object1-js');
 
   nodeDomActor.restoreState(option);
 
-  let moveToAction = new XXActionMoveTo(new XXPosition(100, 500, 0), 2000);
-  let scaleToAction = new XXActionScaleTo(new XXScale(1, 2), 1000);
+  let moveToAction = new XXActionMoveBy(new XXPosition(100, 200, 0), 2000);
+  let scaleToAction = new XXActionScaleBy(new XXScale(1, 2), 1000);
 
-  let rotationAction = new XXActionRotateTo(new XXRotation(90), 5000);
+  let rotationAction = new XXActionRotateBy(new XXRotation(90), 5000);
   scaleToAction;
   moveToAction.setTimeFunction(new XXTimeFunctionEaseOutSine());
   rotationAction;
   nodeDomActor;
-  let speedAction = new XXActionSpeed(20, rotationAction);
+  let speedAction = new XXActionSpeed(rotationAction, 20);
   speedAction;
   let delayAction = new XXActionDelay(5000);
   delayAction;
@@ -76,14 +76,13 @@ setTimeout(() => {
   let hideAction = new XXActionHide();
 
   let actionSequence =
-    new XXActionSequence(moveToAction,
+    new XXActionSequence(moveToAction.reverse(),
                         hideAction,
-                        delayAction,
-                        showAction,
-                        scaleToAction,
-                        rotationAction
-                      );
 
+                        showAction,
+                        scaleToAction.reverse(),
+                        rotationAction.reverse()
+                      );
 
   let actionSpawn = new XXActionSpawn(
     moveToAction,
@@ -103,7 +102,7 @@ setTimeout(() => {
   repeatAction;
 
   console.log(actionSequence);
-  nodeDomActor.runAction(actionSequence);
+  nodeDomActor.runAction(actionSequence.reverse());
   // nodeDomActor.moveTo(new XXPosition(100, 500, 0));
 }, 2000);
 

@@ -14,6 +14,13 @@ class XXActionRepeatForever extends XXActionRepeat {
   constructor(action: XXActionInterval) {
     super(action, Number.MAX_SAFE_INTEGER);
   }
+
+  /**
+   * @inheritdoc
+   */
+  reverse(): XXActionRepeatForever {
+    return new XXActionRepeatForever(this._innerAction);
+  }
 }
 
 

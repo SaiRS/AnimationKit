@@ -118,6 +118,22 @@ class XXActionSpawn extends XXActionInterval {
   className(): string {
     return 'XXActionSpawn';
   }
+
+  /**
+   * @inheritdoc
+   */
+  reverse(): XXAction {
+    if (0 == this._totalActions) {
+      return new XXActionSpawn();
+    } else if (1 == this._totalActions) {
+      let action = this._actions[0];
+      return new XXActionSpawn(action.reverse());
+    } else {
+      let action1 = this._actions[0];
+      let action2 = this._actions[1];
+      return new XXActionSpawn(action2.reverse(), action1.reverse());
+    }
+  }
 }
 
 export default XXActionSpawn;

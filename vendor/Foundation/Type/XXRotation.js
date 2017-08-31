@@ -49,6 +49,15 @@ class XXRotation extends XXObject {
   }
 
   /**
+   * [multiply description]
+   * @param  {number} mul 乘数
+   * @return {XXRotation}     [description]
+   */
+  multiply(mul: number): XXRotation {
+    return new XXRotation(mul * this._angle, this._axis);
+  }
+
+  /**
    * @inheritdoc
    */
   showInfo(output: Object = console) {
