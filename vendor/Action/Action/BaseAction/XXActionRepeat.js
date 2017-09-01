@@ -41,6 +41,14 @@ class XXActionRepeat extends XXActionInterval {
   /**
    * @inheritdoc
    */
+  resetActionState() {
+    super.resetActionState();
+    this._innerAction.resetActionState();
+  }
+
+  /**
+   * @inheritdoc
+   */
   startWithTarget(actionTarget: XXNodeActor) {
     super.startWithTarget(actionTarget);
 

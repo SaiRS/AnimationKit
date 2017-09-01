@@ -97,32 +97,8 @@ class XXActionInterval extends XXAction {
   /**
    * 重置action的状态
    */
-  _reset() {
+  resetActionState() {
     this._elapsed = 0;
-  }
-  /** **********************
-  *  action control
-  * ***********************/
-
-  /**
-   * @inheritdoc
-   */
-  start() {
-    this._reset();
-  }
-
-  /**
-   * @inheritdoc
-   */
-  pause() {
-
-  }
-
-  /**
-   * @inheritdoc
-   */
-  restart() {
-
   }
 
   /**

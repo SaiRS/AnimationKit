@@ -14,6 +14,8 @@ export type {XXActionEventType,
             XXActionEventCallBackFunction};
 
 import XXObject from 'XXFoundation/XXObject.js';
+
+import xxvActionManager from 'XXActionAlias/ActionManager/XXActionManager.js';
 /**
  * 动作的基类，表示执行某项操作
  */
@@ -90,24 +92,33 @@ class XXAction extends XXObject {
   * ***********************/
 
   /**
+   * 重置action的状态
+   * @abstract
+   */
+  resetActionState() {
+
+  }
+
+  /**
    * 开始从头执行action
    */
   start() {
-
+    console.log('[action start]');
+    xxvActionManager.startAction(this);
   }
 
   /**
    * 暂停action
    */
   pause() {
-
+    xxvActionManager.pauseAction(this);
   }
 
   /**
    * 继续执行action
    */
   restart() {
-
+    xxvActionManager.restartAction(this);
   }
 
   /**

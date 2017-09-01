@@ -41,8 +41,6 @@ import XXActionRepeatForever from
 import XXTimeFunctionEaseOutSine from
   'XXActionAlias/TimeFunction/XXTimeFunctionEaseOutSine.js';
 
-import xxvActionManager from 'XXActionAlias/ActionManager/XXActionManager.js';
-
 require('./css/hello.css');
 
 new Vue({
@@ -103,16 +101,20 @@ setTimeout(() => {
   let repeatAction = new XXActionRepeatForever(moveToAction);
   repeatAction;
 
-  console.log(actionSequence);
-  nodeDomActor.runAction(actionSequence.reverse());
+  nodeDomActor.runAction(actionSequence, false);
 
   setTimeout(() => {
-    xxvActionManager.pause();
-  }, 1200);
+    actionSequence.start();
+  }, 1630);
 
   setTimeout(() => {
-    xxvActionManager.start();
-  }, 3200);
+    actionSequence.pause();
+  }, 3000);
+
+  setTimeout(() => {
+    actionSequence.start();
+  }, 4500);
+
 
   // nodeDomActor.moveTo(new XXPosition(100, 500, 0));
 }, 2000);

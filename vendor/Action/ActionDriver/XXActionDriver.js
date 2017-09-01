@@ -112,9 +112,9 @@ class XXActionDriver extends XXObject {
    * 删除所有位于活动队列中的action
    */
   removeAllTargets() {
-    if (this._activeTargets) {
-      this._activeTargets.clear();
-    }
+    this._activeTargets.clear();
+
+    this._stoppedTargets.clear();
   }
 
   /**

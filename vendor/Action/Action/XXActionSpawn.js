@@ -80,6 +80,25 @@ class XXActionSpawn extends XXActionInterval {
   /**
    * @inheritdoc
    */
+  resetActionState() {
+    super.resetActionState();
+
+    if (0 == this._totalActions) {
+      // do nothing
+    } else if (1 == this._totalActions) {
+      let action = this._actions[0];
+      action.resetActionState();
+    } else {
+      let action1 = this._actions[0];
+      let action2 = this._actions[1];
+      action1.resetActionState();
+      action2.resetActionState();
+    }
+  }
+
+  /**
+   * @inheritdoc
+   */
   startWithTarget(actionTarget: XXActor) {
     super.startWithTarget(actionTarget);
 

@@ -37,6 +37,15 @@ class XXActionJSDriver extends XXActionDriver {
   }
 
   /**
+   * @inheritdoc
+   */
+  mainLoop() {
+    this._animationFrameId = window.requestAnimationFrame((timestamp) => {
+      this.play(timestamp);
+    });
+  }
+
+  /**
    * 驱动器循环调用的方法
    * @param  {float} timestamp 当前时间距离开始触发 requestAnimationFrame 的回调的时间,这个时间一直增加的
    */
@@ -58,15 +67,6 @@ class XXActionJSDriver extends XXActionDriver {
       // 循环调用
       this.mainLoop();
     }
-  }
-
-  /**
-   * @inheritdoc
-   */
-  mainLoop() {
-    this._animationFrameId = window.requestAnimationFrame((timestamp) => {
-      this.play(timestamp);
-    });
   }
 
   /**

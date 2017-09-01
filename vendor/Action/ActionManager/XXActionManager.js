@@ -9,8 +9,6 @@ import XXAction from '../Action/XXAction.js';
 
 import xxvTypeVerify from 'XXTool/TypeVerify.js';
 
-// import XXActor from '../Actor/XXActor.js';
-
 import xxvLog from 'XXTool/LogTool.js';
 
 /**
@@ -21,6 +19,8 @@ import xxvLog from 'XXTool/LogTool.js';
  * @type {XXActionManager}
  */
 class XXActionManager extends XXDriveTargetInterface {
+
+  _speed: number;
 
   /** ********动作队列****************/
   _activeActions: Map<string, XXAction>;  // 活动队列
@@ -42,24 +42,40 @@ class XXActionManager extends XXDriveTargetInterface {
   reset() {
     this._activeActions = new Map();
     this._stoppedActions = new Map();
+
+    this._speed = 1;
   }
 
   /**
-   * 添加新的动作并执行
+   * 添加新的动作
    * @param {[XXAction]} action 动作对象
    * @param {boolean} isStartDefault = true 表示是否默认开始执行
    */
   addAction(action: XXAction, isStartDefault: boolean = true) {
     if (action && xxvTypeVerify.isType(action, XXAction)) {
       // 排除重复添加情况
-      if (this.isUniqueAction(action)) {
+      if (this._isActionExistInActiveQuence(action)) {
         if (isStartDefault) {
-          this._activeActions.set(action.UUID, action);
+          // do nothing
+          xxvLog.warn('[XXActionManager] addAction with same action parameter');
         } else {
-          this._stoppedActions.set(action.UUID, action);
+          this._removeActionFromActiveQueue(action);
+          this._addActionToUnActiveQuence(action);
+        }
+      } else if (this._isActionExistInUnactiveQuence(action)) {
+        if (isStartDefault) {
+          this._removeActionFromUnActiveQueue(action);
+          this._addActionToActiveQuence(action);
+        } else {
+          // do nothing
+          xxvLog.warn('[XXActionManager] addAction with same action parameter');
         }
       } else {
-        xxvLog.warn('[XXActionManager] addAction with same action parameter');
+        if (isStartDefault) {
+          this._addActionToActiveQuence(action);
+        } else {
+          this._addActionToUnActiveQuence(action);
+        }
       }
     } else {
       xxvLog.warn('[XXActionManager] addAction with invalid action parameter');
@@ -69,37 +85,56 @@ class XXActionManager extends XXDriveTargetInterface {
   /**
    * 暂停动作
    * @param  {[type]} action [description]
-   * @return {[type]}        [description]
    */
   pauseAction(action: XXAction) {
-    return true;
+    if (action) {
+      if (this._isActionExistInUnactiveQuence(action)) {
+        // do nothing
+      } else if (this._isActionExistInActiveQuence(action)) {
+        this._removeActionFromActiveQueue(action);
+        this._addActionToUnActiveQuence(action);
+      }
+    }
   }
 
   /**
    * 移除动作
    * @param  {[type]} action [description]
-   * @return {[type]}        [description]
    */
   removeAction(action: XXAction) {
-    return true;
+    if (action) {
+      if (this._isActionExistInActiveQuence(action)) {
+        this._removeActionFromActiveQueue(action);
+      } else if (this._isActionExistInUnactiveQuence(action)) {
+        this._removeActionFromUnActiveQueue(action);
+      }
+    }
   }
 
   /**
    * 重新执行动作
    * @param  {[type]} action [description]
-   * @return {[type]}        [description]
    */
   startAction(action: XXAction) {
-    return true;
+    action.resetActionState();
+    console.log('start action =========');
+    console.log(action);
+    this.restartAction(action);
   }
 
   /**
    * 继续开始执行动作
    * @param  {[type]} action [description]
-   * @return {[type]}        [description]
    */
   restartAction(action: XXAction) {
-    return true;
+    if (this._isActionExistInActiveQuence(action)) {
+      // do nothing
+    } else if (this._isActionExistInUnactiveQuence(action)) {
+      this._removeActionFromUnActiveQueue(action);
+      this._addActionToActiveQuence(action);
+    } else {
+      this._addActionToActiveQuence(action);
+    }
   }
 
   /**
@@ -127,16 +162,24 @@ class XXActionManager extends XXDriveTargetInterface {
 
       for (let action of actions.values()) {
         // target 需要支持step方法
-        action.step(deltaTime);
+        action.step(deltaTime * this._speed);
       }
 
       // 删除那些已经完成的action
-      for (let [key, action] of actions.entries()) {
+      for (let action of actions.values()) {
         if (action.isDone()) {
-          actions.delete(key);
+          this.removeAction(action);
         }
       }
     }
+  }
+
+  /**
+   * 设置action运行的速度
+   * @param {number} speed action运行速度，代表倍数的意思
+   */
+  setSpeed(speed: number) {
+    this._speed = speed;
   }
 
 
@@ -150,16 +193,35 @@ class XXActionManager extends XXDriveTargetInterface {
    * @return {Boolean}        [description]
    */
   isUniqueAction(action: XXAction): boolean {
-    if (action && xxvTypeVerify.isType(action, XXAction) ) {
-      // 当前队列中是否存在action和target同时相同的情况
-      if (!this._activeActions.has(action.UUID) &&
-          !this._stoppedActions.has(action.UUID)) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
+    return !this._isActionExistInActiveQuence(action) &&
+        !this._isActionExistInUnactiveQuence(action);
+  }
+
+  /**
+   * action是否已经存在活动队列中
+   * @param  {[type]}  action [description]
+   * @return {Boolean}        [description]
+   */
+  _isActionExistInActiveQuence(action: XXAction) {
+    return action && this._activeActions.has(action.UUID);
+  }
+
+  /**
+   * action是否存在非活动队列中
+   * @param  {[type]}  action [description]
+   * @return {Boolean}        [description]
+   */
+  _isActionExistInUnactiveQuence(action: XXAction) {
+    return action && this._stoppedActions.has(action.UUID);
+  }
+
+  /**
+   * 将action从活动队列中移除
+   * @param  {XXAction} action action对象
+   */
+  _removeActionFromActiveQueue(action: XXAction) {
+    if (action && this._activeActions.has(action.UUID)) {
+      this._activeActions.delete(action.UUID);
     }
   }
 
@@ -167,9 +229,29 @@ class XXActionManager extends XXDriveTargetInterface {
    * 将action从活动队列中移除
    * @param  {XXAction} action action对象
    */
-  removeActionInActiveQueue(action: XXAction) {
-    if (action && this._activeActions && this._activeActions.has(action.UUID)) {
-      this._activeActions.delete(action.UUID);
+  _removeActionFromUnActiveQueue(action: XXAction) {
+    if (action && this._stoppedActions.has(action.UUID)) {
+      this._stoppedActions.delete(action.UUID);
+    }
+  }
+
+  /**
+   * 将action添加到活动队列中
+   * @param {XXAction} action [description]
+   */
+  _addActionToActiveQuence(action: XXAction) {
+    if (action) {
+      this._activeActions.set(action.UUID, action);
+    }
+  }
+
+  /**
+   * 将action添加到非活动队列中
+   * @param {XXAction} action [description]
+   */
+  _addActionToUnActiveQuence(action: XXAction) {
+    if (action) {
+      this._stoppedActions.set(action.UUID, action);
     }
   }
 }

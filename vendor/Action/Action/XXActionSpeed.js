@@ -35,6 +35,14 @@ class XXActionSpeed extends XXAction {
   /**
    * @inheritdoc
    */
+  resetActionState() {
+    super.resetActionState();
+    this._innerAction.resetActionState();
+  }
+
+  /**
+   * @inheritdoc
+   */
   step(deltaTime: number) {
     this._innerAction.step(this._speed * deltaTime);
   }
