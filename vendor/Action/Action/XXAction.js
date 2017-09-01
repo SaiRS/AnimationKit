@@ -1,6 +1,5 @@
 // @flow
 
-type XXActionEventType = 'actionStart' | 'actionFinished';
 
 /**
  * [actionEventCallBack description]
@@ -10,12 +9,11 @@ type XXActionEventType = 'actionStart' | 'actionFinished';
 type XXActionEventCallBackFunction =
     (event: string, action: XXAction, actor: XXActor | null) => void;
 
-export type {XXActionEventType,
-            XXActionEventCallBackFunction};
 
 import XXObject from 'XXFoundation/XXObject.js';
 
 import xxvActionManager from 'XXActionAlias/ActionManager/XXActionManager.js';
+
 /**
  * 动作的基类，表示执行某项操作
  */
@@ -76,16 +74,6 @@ class XXAction extends XXObject {
     return true;
   }
 
-  /**
-   * 执行action完成时的任务(回调)
-   */
-  doDoneTask() {
-    // 调用
-    let actor = this.getTarget();
-    if (this._eventCallback) {
-      this._eventCallback('actionFinished', this, actor);
-    }
-  }
 
   /** **********************
   *  action control
@@ -100,10 +88,9 @@ class XXAction extends XXObject {
   }
 
   /**
-   * 开始从头执行action
+   * 继续执行action
    */
   start() {
-    console.log('[action start]');
     xxvActionManager.startAction(this);
   }
 
@@ -115,7 +102,7 @@ class XXAction extends XXObject {
   }
 
   /**
-   * 继续执行action
+   * 重新执行action
    */
   restart() {
     xxvActionManager.restartAction(this);
@@ -136,6 +123,48 @@ class XXAction extends XXObject {
    */
   getTarget(): XXActor | null {
     return this._target;
+  }
+
+  /** *****************
+  * action event call back
+  * ******************/
+
+  /**
+   * 动画start的回调，不管是调用actor.runAction(action, true)
+   * 还是单独执行action.start()
+   * 都会触发这个事件
+   * 不过需要真正的触发action start，比如说action在start的状态中是不会触发这个事件的
+   */
+  doStartTask() {
+    console.log(`${this.className()} started`);
+  }
+
+  /**
+  * 动画restart的回调，执行action.restart()会触发这个事件
+  * 不过需要真正的触发action restart，比如说action在start的状态中是不会触发这个事件的
+  */
+  doRestartTask() {
+    console.log(`${this.className()} restarted`);
+  }
+
+  /**
+  * 动画pause的回调，执行action.pause()会触发这个事件
+  * 不过需要真正的触发action pause，比如说action在非start的状态中是不会触发这个事件的
+   */
+  doPauseTask() {
+    console.log(`${this.className()} paused`);
+  }
+
+  /**
+   * 执行action完成时的任务(回调)
+   */
+  doDoneTask() {
+    console.log(`${this.className()} finished`);
+    // 调用
+    let actor = this.getTarget();
+    if (this._eventCallback) {
+      this._eventCallback('actionFinished', this, actor);
+    }
   }
 
   /**

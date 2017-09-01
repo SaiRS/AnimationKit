@@ -54,27 +54,26 @@ class XXActionManager extends XXDriveTargetInterface {
   addAction(action: XXAction, isStartDefault: boolean = true) {
     if (action && xxvTypeVerify.isType(action, XXAction)) {
       // 排除重复添加情况
+
       if (this._isActionExistInActiveQuence(action)) {
         if (isStartDefault) {
           // do nothing
           xxvLog.warn('[XXActionManager] addAction with same action parameter');
         } else {
-          this._removeActionFromActiveQueue(action);
-          this._addActionToUnActiveQuence(action);
+          // 移动到非活动队列中
+          this.pauseAction(action);
         }
       } else if (this._isActionExistInUnactiveQuence(action)) {
         if (isStartDefault) {
-          this._removeActionFromUnActiveQueue(action);
-          this._addActionToActiveQuence(action);
+          this.startAction(action);
         } else {
           // do nothing
           xxvLog.warn('[XXActionManager] addAction with same action parameter');
         }
       } else {
+        this._addActionToUnActiveQuence(action);
         if (isStartDefault) {
-          this._addActionToActiveQuence(action);
-        } else {
-          this._addActionToUnActiveQuence(action);
+          this.startAction(action);
         }
       }
     } else {
@@ -83,18 +82,33 @@ class XXActionManager extends XXDriveTargetInterface {
   }
 
   /**
-   * 暂停动作
+   * 暂停动作， 并发送通知
    * @param  {[type]} action [description]
    */
   pauseAction(action: XXAction) {
+    if (this._pauseAction(action)) {
+      action.doPauseTask();
+    }
+  }
+
+  /**
+   * 暂停动作
+   * @param  {[type]} action [description]
+   * @return {boolean} 是否执行了暂停动作
+   */
+  _pauseAction(action: XXAction): boolean {
     if (action) {
       if (this._isActionExistInUnactiveQuence(action)) {
         // do nothing
       } else if (this._isActionExistInActiveQuence(action)) {
         this._removeActionFromActiveQueue(action);
         this._addActionToUnActiveQuence(action);
+
+        return true;
       }
     }
+
+    return false;
   }
 
   /**
@@ -112,28 +126,44 @@ class XXActionManager extends XXDriveTargetInterface {
   }
 
   /**
-   * 重新执行动作
+   * 继续执行动作, 并发送通知
    * @param  {[type]} action [description]
    */
   startAction(action: XXAction) {
-    action.resetActionState();
-    console.log('start action =========');
-    console.log(action);
-    this.restartAction(action);
+    if (this._startAction(action)) {
+      action.doStartTask();
+    }
   }
 
   /**
-   * 继续开始执行动作
+   * 继续执行动作
    * @param  {[type]} action [description]
+   * @return {boolean} 是否执行了执行action的动作
    */
-  restartAction(action: XXAction) {
+  _startAction(action: XXAction): boolean {
     if (this._isActionExistInActiveQuence(action)) {
       // do nothing
     } else if (this._isActionExistInUnactiveQuence(action)) {
       this._removeActionFromUnActiveQueue(action);
       this._addActionToActiveQuence(action);
+
+      return true;
     } else {
       this._addActionToActiveQuence(action);
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * 重新开始执行动作, 并发送通知
+   * @param  {[type]} action [description]
+   */
+  restartAction(action: XXAction) {
+    action.resetActionState();
+    if (this._startAction(action)) {
+      action.doRestartTask();
     }
   }
 

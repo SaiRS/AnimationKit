@@ -112,7 +112,7 @@ setTimeout(() => {
   }, 3000);
 
   setTimeout(() => {
-    actionSequence.start();
+    actionSequence.restart();
   }, 4500);
 
 
