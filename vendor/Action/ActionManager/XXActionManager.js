@@ -23,13 +23,9 @@ import xxvLog from 'XXTool/LogTool.js';
 class XXActionManager extends XXDriveTargetInterface {
 
   /** ********动作队列****************/
-  _activeActions: null | Map<string, XXAction>;  // 活动队列
-  _stoppedActions: null | Map<string, XXAction>; // 暂停队列
+  _activeActions: Map<string, XXAction>;  // 活动队列
+  _stoppedActions: Map<string, XXAction>; // 暂停队列
   /** ******************************/
-
-  /** **********动作驱动器*************/
-  _jsDriver: null | XXActionDriver;   // js驱动器
-  /** *******************************/
 
   /**
    * 构造函数
@@ -37,7 +33,7 @@ class XXActionManager extends XXDriveTargetInterface {
   constructor() {
     super();
 
-    this._jsDriver = xxvJSDriver;
+    this.reset();
   }
 
   /**
@@ -51,13 +47,17 @@ class XXActionManager extends XXDriveTargetInterface {
   /**
    * 添加新的动作并执行
    * @param {[XXAction]} action 动作对象
-   * @param {[XXActor]} target 执行动作的对象
+   * @param {boolean} isStartDefault = true 表示是否默认开始执行
    */
-  addAction(action: XXAction) {
+  addAction(action: XXAction, isStartDefault: boolean = true) {
     if (action && xxvTypeVerify.isType(action, XXAction)) {
       // 排除重复添加情况
       if (this.isUniqueAction(action)) {
-        this._activeActions && this._activeActions.set(action.UUID, action);
+        if (isStartDefault) {
+          this._activeActions.set(action.UUID, action);
+        } else {
+          this._stoppedActions.set(action.UUID, action);
+        }
       } else {
         xxvLog.warn('[XXActionManager] addAction with same action parameter');
       }
@@ -71,7 +71,7 @@ class XXActionManager extends XXDriveTargetInterface {
    * @param  {[type]} action [description]
    * @return {[type]}        [description]
    */
-  stopAction(action: XXAction) {
+  pauseAction(action: XXAction) {
     return true;
   }
 
@@ -85,7 +85,7 @@ class XXActionManager extends XXDriveTargetInterface {
   }
 
   /**
-   * 继续执行动作
+   * 重新执行动作
    * @param  {[type]} action [description]
    * @return {[type]}        [description]
    */
@@ -94,7 +94,7 @@ class XXActionManager extends XXDriveTargetInterface {
   }
 
   /**
-   * 重新开始执行动作
+   * 继续开始执行动作
    * @param  {[type]} action [description]
    * @return {[type]}        [description]
    */
@@ -103,27 +103,17 @@ class XXActionManager extends XXDriveTargetInterface {
   }
 
   /**
-   * [stopAllActions description]
-   * @return {[type]} [description]
+   * 开始执行acttion
    */
-  stopAllActions() {
-    return true;
+  start() {
+    xxvJSDriver.startTarget(this);
   }
 
   /**
    * [pause description]
-   * @return {[type]} [description]
    */
   pause() {
-    return true;
-  }
-
-  /**
-   * [stop description]
-   * @return {[type]} [description]
-   */
-  stop() {
-    return true;
+    xxvJSDriver.pauseTarget(this);
   }
 
   /**
@@ -155,16 +145,14 @@ class XXActionManager extends XXDriveTargetInterface {
    ***********************/
 
   /**
-   * [isUniqueAction description]
+   * action是否没有在当前的活动队列和暂停队列中出现
    * @param  {XXAction}  action action对象
    * @return {Boolean}        [description]
    */
   isUniqueAction(action: XXAction): boolean {
     if (action && xxvTypeVerify.isType(action, XXAction) ) {
       // 当前队列中是否存在action和target同时相同的情况
-      if (this._activeActions &&
-          !this._activeActions.has(action.UUID) &&
-          this._stoppedActions &&
+      if (!this._activeActions.has(action.UUID) &&
           !this._stoppedActions.has(action.UUID)) {
         return true;
       } else {
@@ -187,6 +175,6 @@ class XXActionManager extends XXDriveTargetInterface {
 }
 
 let xxvActionManager = new XXActionManager();
-xxvJSDriver.addTarget(xxvActionManager);
+xxvActionManager.start();
 
 export default xxvActionManager;

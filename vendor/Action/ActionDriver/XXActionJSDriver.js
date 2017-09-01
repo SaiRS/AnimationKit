@@ -1,7 +1,7 @@
 // @flow
 
 import XXActionDriver from './XXActionDriver.js';
-// import xxvLog from '../Tool/LogTool.js';
+
 /**
  * 用js实现的的驱动器
  */

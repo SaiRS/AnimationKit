@@ -85,6 +85,30 @@ class XXAction extends XXObject {
     }
   }
 
+  /** **********************
+  *  action control
+  * ***********************/
+
+  /**
+   * 开始从头执行action
+   */
+  start() {
+
+  }
+
+  /**
+   * 暂停action
+   */
+  pause() {
+
+  }
+
+  /**
+   * 继续执行action
+   */
+  restart() {
+
+  }
 
   /**
    * 获得跟当前相反的一个动作

@@ -93,6 +93,38 @@ class XXActionInterval extends XXAction {
     return this._elapsed >= this._duration;
   }
 
+
+  /**
+   * 重置action的状态
+   */
+  _reset() {
+    this._elapsed = 0;
+  }
+  /** **********************
+  *  action control
+  * ***********************/
+
+  /**
+   * @inheritdoc
+   */
+  start() {
+    this._reset();
+  }
+
+  /**
+   * @inheritdoc
+   */
+  pause() {
+
+  }
+
+  /**
+   * @inheritdoc
+   */
+  restart() {
+
+  }
+
   /**
    * 获得action的时长，单位ms
    * @return {number} action的时长，单位ms

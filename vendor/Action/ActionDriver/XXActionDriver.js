@@ -12,13 +12,13 @@ class XXActionDriver extends XXObject {
    * 正在执行的Targets集合
    * @type {[null, Map]}
    */
-  _activeTargets: null | Map<string, XXDriveTargetInterface>;
+  _activeTargets: Map<string, XXDriveTargetInterface>;
 
   /**
    * 暂停的Targets集合
    * @type {[null, Map]}
    */
-  _stoppedTargets: null | Map<string, XXDriveTargetInterface>;
+  _stoppedTargets: Map<string, XXDriveTargetInterface>;
 
   /**
    * 构造函数
@@ -43,46 +43,69 @@ class XXActionDriver extends XXObject {
   }
 
   /**
-   * 将action添加到驱动的执行队列中
+   * @private
+   * 将action添加到驱动的队列中
    * 在下一次循环时action将得到执行
    * @param {XXDriveTargetInterface} target 执行动作的对象
+   * @param {boolean} startDefault 是否默认执行
    */
-  addTarget(target: XXDriveTargetInterface) {
-    if (target && !this.isTargetExistInActiveSequence(target)) {
-      // 加入执行队列
-      this._activeTargets && this._activeTargets.set(target.UUID, target);
+  _addTarget(target: XXDriveTargetInterface, startDefault: boolean = true) {
+    if (target) {
+      if (startDefault) {
+        this._addTargetToActiveQuence(target);
+      } else {
+        this._addTargetToUnActiveQuence(target);
+      }
+    }
+  }
+
+  /**
+   * 如果target不存在记录中，则将target将入到记录，并开始执行target
+   * 如果target已经存在暂停队列中，则恢复target的活动状态
+   * 如果target已经存在活动队列中，则不做任何操作
+   * @param  {[type]} target [description]
+   */
+  startTarget(target: XXDriveTargetInterface) {
+    if (this.isTargetExistInActiveSequence(target)) {
+      // do nothing
+    } else if (this.isTargetExistInUnActiveSequence(target)) {
+      this._removeTargetFromUnActiveQuence(target);
+      this._addTargetToActiveQuence(target);
+    } else {
+      this._addTarget(target, true);
     }
   }
 
   /**
    * 暂停action
    * @param  {XXDriveTargetInterface} target [description]
-   * @return {[type]}        [description]
    */
-  stopTarget(target: XXDriveTargetInterface) {
-    if (this._activeTargets && target) {
-      let oldTarget = this._activeTargets.delete(target.UUID);
-      if (oldTarget) {
-        this._stoppedTargets && this._stoppedTargets.set(target.UUID, target);
+  pauseTarget(target: XXDriveTargetInterface) {
+    if (target) {
+      if (this.isTargetExistInUnActiveSequence(target)) {
+        // do nothing
+      } else if (this.isTargetExistInActiveSequence(target)) {
+        this._removeTargetFromActiveQuence(target);
+        this._addTargetToUnActiveQuence(target);
+      } else {
+        // do nothing
       }
-      return false;
     }
-
-    return false;
   }
 
 
   /**
    * [removeTarget description]
    * @param  {[type]} target [description]
-   * @return {[type]}        [description]
    */
   removeTarget(target: XXDriveTargetInterface) {
-    if (this._activeTargets && target) {
-      this._activeTargets.delete(target.getUUID);
-      return true;
+    if (target) {
+      if (this.isTargetExistInActiveSequence(target)) {
+        this._removeTargetFromActiveQuence(target);
+      } else if (this.isTargetExistInUnActiveSequence(target)) {
+        this._removeTargetFromUnActiveQuence(target);
+      }
     }
-    return false;
   }
 
   /**
@@ -106,6 +129,20 @@ class XXActionDriver extends XXObject {
 
     return false;
   }
+
+  /**
+   * target是否位于暂停队列中
+   * @param  {XXDriveTargetInterface}  target 实现XXDriveTargetInterface接口的对象
+   * @return {Boolean}        true表示target位于暂停队列中
+   */
+  isTargetExistInUnActiveSequence(target: XXDriveTargetInterface) {
+    if (this._stoppedTargets && target) {
+      return this._stoppedTargets.has(target.UUID);
+    }
+
+    return false;
+  }
+
   /**
    * 内部函数
    * 初始化_activeTargets, 如果已经初始化过了，则不做任何操作
@@ -113,6 +150,50 @@ class XXActionDriver extends XXObject {
   __initDriverTargetsIfNeeded() {
     if (!this._activeTargets) {
       this._activeTargets = new Map();
+    }
+
+    if (!this._stoppedTargets) {
+      this._stoppedTargets = new Map();
+    }
+  }
+
+  /**
+   * 将target加入到活动队列
+   * @param  {XXDriveTargetInterface} target [description]
+   */
+  _addTargetToActiveQuence(target: XXDriveTargetInterface) {
+    if (target) {
+      this._activeTargets.set(target.UUID, target);
+    }
+  }
+
+  /**
+   * 将target从活动队列中移除
+   * @param  {XXDriveTargetInterface} target [description]
+   */
+  _removeTargetFromActiveQuence(target: XXDriveTargetInterface) {
+    if (target) {
+      this._activeTargets.delete(target.UUID);
+    }
+  }
+
+  /**
+   * 将target加入到非活动队列
+   * @param  {XXDriveTargetInterface} target [description]
+   */
+  _addTargetToUnActiveQuence(target: XXDriveTargetInterface) {
+    if (target) {
+      this._stoppedTargets.set(target.UUID, target);
+    }
+  }
+
+  /**
+   * 将target从活动队列中移除
+   * @param  {XXDriveTargetInterface} target [description]
+   */
+  _removeTargetFromUnActiveQuence(target: XXDriveTargetInterface) {
+    if (target) {
+      this._stoppedTargets.delete(target.UUID);
     }
   }
 }
