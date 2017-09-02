@@ -54,13 +54,6 @@ class XXActionRotateBy extends XXActionInterval {
   /**
    * @inheritdoc
    */
-  doDoneTask() {
-    // 同步模型树和呈现树
-  }
-
-  /**
-   * @inheritdoc
-   */
   reverse(): XXActionRotateBy {
     let action = new XXActionRotateBy(
         this._offsetRotation.multiply(-1),

@@ -168,6 +168,14 @@ class XXAction extends XXObject {
   }
 
   /**
+   * 执行action repeat时的回调
+   * 需要由repeat action去重写
+   */
+  doRepeatedTask() {
+    // do nothing
+  }
+
+  /**
    * action的事件传递
    * @param {XXActionEventCallBackFunction} callback action的uuid
    */

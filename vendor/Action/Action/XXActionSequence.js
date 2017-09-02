@@ -118,10 +118,6 @@ class XXActionSequence extends XXActionInterval {
     if (executedAction && !executedAction.isDone()) {
       executedAction.step(deltaTime);
     }
-
-    if (this.isDone()) {
-      this.doDoneTask();
-    }
   }
 
   /**

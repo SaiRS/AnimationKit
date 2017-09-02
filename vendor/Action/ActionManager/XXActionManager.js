@@ -198,6 +198,7 @@ class XXActionManager extends XXDriveTargetInterface {
       // 删除那些已经完成的action
       for (let action of actions.values()) {
         if (action.isDone()) {
+          action.doDoneTask();  // 事件
           this.removeAction(action);
         }
       }

@@ -18,13 +18,6 @@ class XXActionDelay extends XXActionInterval {
   /**
    * @inheritdoc
    */
-  doDoneTask() {
-    // TODO: delay done task
-  }
-
-  /**
-   * @inheritdoc
-   */
   className(): string {
     return 'XXActionDelay';
   }

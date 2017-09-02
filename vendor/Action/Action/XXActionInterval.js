@@ -5,10 +5,6 @@ import XXAction from './XXAction.js';
 import XXTimeFunctionLinear from
  'XXActionAlias/TimeFunction/XXTimeFunctionLinear.js';
 
-export type XXActionDirectionType =
-  'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
-
-
 /**
  * 用来表示持续性动作
  */
@@ -64,9 +60,10 @@ class XXActionInterval extends XXAction {
 
     this.update(process);
 
-    if (this.isDone()) {
-      this.doDoneTask();
-    }
+    // 将这段逻辑放在XXActionManager中执行
+    // if (this.isDone()) {
+    //   this.doDoneTask();
+    // }
   }
 
   /**

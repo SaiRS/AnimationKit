@@ -125,10 +125,6 @@ class XXActionSpawn extends XXActionInterval {
       this._actions[0].step(deltaTime);
       this._actions[1].step(deltaTime);
     }
-
-    if (this.isDone()) {
-      this.doDoneTask();
-    }
   }
 
   /**

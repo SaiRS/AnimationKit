@@ -63,13 +63,6 @@ class XXActionScaleBy extends XXActionInterval {
   /**
    * @inheritdoc
    */
-  doDoneTask() {
-    // 同步模型树和呈现树
-  }
-
-  /**
-   * @inheritdoc
-   */
   reverse(): XXActionScaleBy {
     let scale = new XXScale(
       this._scaleFactor.scaleX(),
@@ -85,7 +78,6 @@ class XXActionScaleBy extends XXActionInterval {
     );
 
     this._copyDecoratorTo(action);
-    console.log(action);
     return action;
   }
 }
