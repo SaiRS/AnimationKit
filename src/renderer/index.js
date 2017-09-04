@@ -41,6 +41,8 @@ import XXActionRepeatForever from
 import XXTimeFunctionEaseOutSine from
   'XXActionAlias/TimeFunction/XXTimeFunctionEaseOutSine.js';
 
+import xxvNotificationCenter from 'XXVendor/Notification/NotificationCenter.js';
+import XXObject from 'XXFoundation/XXObject.js';
 require('./css/hello.css');
 
 new Vue({
@@ -101,19 +103,19 @@ setTimeout(() => {
   let repeatAction = new XXActionRepeatForever(moveToAction);
   repeatAction;
 
-  nodeDomActor.runAction(actionSequence, false);
-
-  setTimeout(() => {
-    actionSequence.start();
-  }, 1630);
-
-  setTimeout(() => {
-    actionSequence.pause();
-  }, 3000);
-
-  setTimeout(() => {
-    actionSequence.restart();
-  }, 4500);
+  // nodeDomActor.runAction(actionSequence, false);
+  //
+  // setTimeout(() => {
+  //   actionSequence.start();
+  // }, 1630);
+  //
+  // setTimeout(() => {
+  //   actionSequence.pause();
+  // }, 3000);
+  //
+  // setTimeout(() => {
+  //   actionSequence.restart();
+  // }, 4500);
 
 
   // nodeDomActor.moveTo(new XXPosition(100, 500, 0));
@@ -210,4 +212,46 @@ let inheritedPromise = new XXPromiseInheritObject(
     resolve();
   });
 console.log(inheritedPromise);
-inheritedPromise.first().second().third();
+
+
+/**
+ *
+ */
+class Test1 extends XXObject {
+  /**
+   * [call1 description]
+   */
+  call1() {
+    console.log('test class 1 received');
+  }
+}
+
+/**
+ *
+ */
+class Test2 extends XXObject {
+  /**
+   * [call2 description]
+   */
+  call2() {
+    console.log('Test 2 class received nontification');
+  }
+}
+
+let test1 = new Test1();
+let test2 = new Test2();
+xxvNotificationCenter.addObserver(test1, 'call1', 'test1notification', test2);
+xxvNotificationCenter.addObserver(test2, 'call2', 'test2notification', null);
+
+console.log(xxvNotificationCenter);
+setTimeout(() => {
+  console.log('post notification');
+  xxvNotificationCenter.postNotification('test1notification', test2);
+  xxvNotificationCenter.postNotification('test2notification');
+}, 2323);
+
+
+setTimeout(() => {
+  xxvNotificationCenter.removeObserver(test1,
+     'test1notification', test2);
+}, 4500);

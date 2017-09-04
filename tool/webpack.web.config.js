@@ -287,6 +287,7 @@ module.exports = {
       'XXFoundation':
         path.resolve(__dirname, '..', 'vendor', 'Foundation'),
       'XXActionAlias': path.resolve(__dirname, '..', 'vendor', 'Action'),
+      'XXVendor': path.resolve(__dirname, '..', 'vendor'),
     },
   },
   externals: {

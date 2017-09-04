@@ -183,6 +183,7 @@ let rendererConfig = {
       'XXFoundation':
         path.resolve(__dirname, '..', 'vendor', 'Foundation'),
       'XXActionAlias': path.resolve(__dirname, '..', 'vendor', 'Action'),
+      'XXVendor': path.resolve(__dirname, '..', 'vendor'),
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node'],
   },

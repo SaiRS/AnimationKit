@@ -1,7 +1,7 @@
 // @flow
 
 import {xxfGeneratorUUID} from 'XXTool/GeneratorTool.js';
-import xxvTypeVerify from 'XXTool/TypeVerify.js';
+// import xxvTypeVerify from 'XXTool/TypeVerify.js';
 /**
  * 用于表示动画库中所有对象的基类，
  * 其他一切对象都是直接或者间接继承自XXObject
@@ -107,10 +107,16 @@ class XXObject {
    * @param  {[type]}  obj [description]
    * @return {Boolean}     [description]
    */
-  isEqualTo(obj: XXObject): boolean {
-    return Boolean(this.UUID) && obj &&
-           xxvTypeVerify.isType(obj, XXObject) &&
-           obj.UUID === this.UUID;
+  isEqualTo(obj: mixed | null): boolean {
+    if (obj) {
+      if (obj instanceof XXObject) {
+        return Boolean(this.UUID) && (this.UUID === obj.UUID);
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 
   /**
