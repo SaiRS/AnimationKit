@@ -82,7 +82,7 @@ class XXActionRepeat extends XXActionInterval {
     this._innerAction.update(realProcess);
 
     if (repeated) {
-      this._innerAction.doRepeatedTask();
+      this.doRepeatedTask();
     }
   }
 

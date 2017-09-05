@@ -11,8 +11,10 @@ type XXActionEventCallBackFunction =
 
 
 import XXObject from 'XXFoundation/XXObject.js';
-
+import XXActionEvent from './XXActionEvent.js';
 import xxvActionManager from 'XXActionAlias/ActionManager/XXActionManager.js';
+
+import xxvNotificationCenter from 'XXVendor/Notification/NotificationCenter.js';
 
 /**
  * 动作的基类，表示执行某项操作
@@ -137,6 +139,11 @@ class XXAction extends XXObject {
    */
   doStartTask() {
     console.log(`${this.className()} started`);
+
+    // 发送通知
+    xxvNotificationCenter.postNotification(
+      XXActionEvent.ActionStartEvet,
+      this);
   }
 
   /**
@@ -145,6 +152,11 @@ class XXAction extends XXObject {
   */
   doRestartTask() {
     console.log(`${this.className()} restarted`);
+
+    // 发送通知
+    xxvNotificationCenter.postNotification(
+      XXActionEvent.ActionRestartEvent,
+      this);
   }
 
   /**
@@ -153,6 +165,11 @@ class XXAction extends XXObject {
    */
   doPauseTask() {
     console.log(`${this.className()} paused`);
+
+    // 发送通知
+    xxvNotificationCenter.postNotification(
+      XXActionEvent.ActionPausedEvent,
+      this);
   }
 
   /**
@@ -160,6 +177,12 @@ class XXAction extends XXObject {
    */
   doDoneTask() {
     console.log(`${this.className()} finished`);
+
+    // 发送通知
+    xxvNotificationCenter.postNotification(
+      XXActionEvent.ActionFinishedEvent,
+      this);
+
     // 调用
     let actor = this.getTarget();
     if (this._eventCallback) {
@@ -169,10 +192,12 @@ class XXAction extends XXObject {
 
   /**
    * 执行action repeat时的回调
-   * 需要由repeat action去重写
    */
   doRepeatedTask() {
-    // do nothing
+    // 发送通知
+    xxvNotificationCenter.postNotification(
+      XXActionEvent.ActionRepeatEvent,
+      this);
   }
 
   /**

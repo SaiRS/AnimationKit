@@ -125,133 +125,141 @@ setTimeout(() => {
 /**
  * promise object
  */
-class XXPromiseInheritObject extends Promise {
+class XXPromiseInheritObject {
 
+  _promise;
   /**
    * [_testFunction description]
    */
   _testFunction() {
 
   }
+
   /**
    * [constructor description]
-   * @param  {function} executor [description]
    */
-  constructor(executor) {
-    super((resolve, reject) => {
-      // before
-      return executor(resolve, reject);
-    });
-
-    /**
-     * [first description]
-     * @return {Promise}
-     */
-    this.first = () => {
-      return super.then(() => {
-        return new XXPromiseInheritObject((resolve, reject) => {
-          setTimeout(() => {
-            console.log('first 1000');
-            resolve();
-          }, 1000);
-        });
-      });
-    };
-
-    /**
-     * [first description]
-     * @return {Promise}
-     */
-    this.second = function() {
-      return this.then(() => {
-        return new XXPromiseInheritObject((resolve, reject) => {
-          setTimeout(() => {
-            console.log('second 2000');
-            resolve();
-          }, 2000);
-        });
-      });
-    };
-
-    /**
-     * [first description]
-     * @return {Promise}
-     */
-    this.third = function() {
-      return this.then(() => {
-        return new XXPromiseInheritObject((resolve, reject) => {
-          setTimeout(() => {
-            console.log('third 3000');
-            resolve();
-          }, 3000);
-        });
-      });
-    };
-
-    /**
-     * [then description]
-     * @param  {[type]} onFulfilled [description]
-     * @param  {[type]} onRejected  [description]
-     * @return {[type]}             [description]
-     */
-    this.then = (onFulfilled, onRejected) => {
-      // before
-      super.then(onFulfilled, onRejected);
-      // after
-      return new XXPromiseInheritObject((resolve, reject) => {
-        resolve();
-      });
-    };
+  constructor() {
+    this._promise = Promise.resolve();
   }
 
+  /**
+   * [_then description]
+   * @param  {[type]} resolve [description]
+   * @param  {[type]} reject  [description]
+   * @return {[type]}         [description]
+   */
+  _then(resolve, reject) {
+    this._promise = this._promise.then(resolve, reject);
+    return this;
+  }
 
+  /**
+   * [first description]
+   * @return {[type]} [description]
+   */
+  first() {
+    return this._then(function() {
+      return new Promise(function(resolve, reject) {
+        setTimeout(() => {
+          console.log('first 1000 delay');
+          resolve();
+        }, 1000);
+      });
+    });
+  }
+
+  /**
+   * [second description]
+   * @return {[type]} [description]
+   */
+  second() {
+    return this._then(function() {
+      return new Promise(function(resolve, reject) {
+        setTimeout(() => {
+          console.log('second 2000 delay');
+          resolve();
+        }, 2000);
+      });
+    });
+  }
+
+  /**
+   * [third description]
+   * @return {[type]} [description]
+   */
+  third() {
+    return this._then(function() {
+      return new Promise(function(resolve, reject) {
+        setTimeout(() => {
+          console.log('third 500 delay');
+          resolve();
+        }, 500);
+      });
+    });
+  }
 }
 
-let inheritedPromise = new XXPromiseInheritObject(
-  (resolve, reject) => {
-    resolve();
-  });
+let inheritedPromise = new XXPromiseInheritObject();
 console.log(inheritedPromise);
 
+inheritedPromise.first().second().third();
+
+
+// let promise4 = Promise.resolve();
+// promise4.then(function() {
+//   setTimeout(() => {
+//     console.log('delay 1000');
+//   }, 1000);
+// }).then(function() {
+//   setTimeout(() => {
+//     console.log('delay 500 1');
+//   }, 500);
+// }).then(function() {
+//   setTimeout(() => {
+//     console.log('delay 200 1');
+//   }, 200);
+// });
 
 /**
  *
  */
-class Test1 extends XXObject {
-  /**
-   * [call1 description]
-   */
-  call1() {
-    console.log('test class 1 received');
-  }
-}
+// class Test1 extends XXObject {
+//   /**
+//    * [call1 description]
+//    */
+//   call1() {
+//     console.log('test class 1 received');
+//   }
+// }
 
 /**
  *
  */
-class Test2 extends XXObject {
-  /**
-   * [call2 description]
-   */
-  call2() {
-    console.log('Test 2 class received nontification');
-  }
-}
+// class Test2 extends XXObject {
+//   /**
+//    * [call2 description]
+//    */
+//   call2() {
+//     console.log('Test 2 class received nontification');
+//   }
+// }
 
-let test1 = new Test1();
-let test2 = new Test2();
-xxvNotificationCenter.addObserver(test1, 'call1', 'test1notification', test2);
-xxvNotificationCenter.addObserver(test2, 'call2', 'test2notification', null);
-
-console.log(xxvNotificationCenter);
-setTimeout(() => {
-  console.log('post notification');
-  xxvNotificationCenter.postNotification('test1notification', test2);
-  xxvNotificationCenter.postNotification('test2notification');
-}, 2323);
-
-
-setTimeout(() => {
-  xxvNotificationCenter.removeObserver(test1,
-     'test1notification', test2);
-}, 4500);
+// let test1 = new Test1();
+// let test2 = new Test2();
+// xxvNotificationCenter.addObserver(test1, 'call1', 'test1notification', test2);
+// xxvNotificationCenter.addObserver(test2, 'call2', 'test2notification', null);
+//
+// console.log(xxvNotificationCenter);
+// setTimeout(() => {
+//   console.log('post notification');
+//   xxvNotificationCenter.postNotification('test1notification', test2);
+//   xxvNotificationCenter.postNotification('test2notification');
+// }, 2323);
+//
+//
+// setTimeout(() => {
+//   xxvNotificationCenter.removeObserver(test1,
+//      'test1notification', test2);
+// }, 4500);
+//
+//

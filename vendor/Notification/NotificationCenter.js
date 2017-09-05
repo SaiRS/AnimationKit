@@ -63,7 +63,7 @@ class XXNotificationCenter extends XXObject {
    */
   postNotification(name,
     sender,
-    userInfo) {
+    userInfo = null) {
     // find observer
     let observerStructor = this._getObserverStructor(name);
     if (observerStructor) { // 有记录

@@ -15,5 +15,6 @@ module.name_mapper='^WebpackToolConfig' ->'<PROJECT_ROOT>'
 module.name_mapper='^XXTool' ->'<PROJECT_ROOT>/vendor/Tool'
 module.name_mapper='^XXActionAlias' ->'<PROJECT_ROOT>/vendor/Action'
 module.name_mapper='^WebpackToolConfig'->'<PROJECT_ROOT>/tool'
+module.name_mapper='^XXVendor'->'<PROJECT_ROOT>/vendor'
 
 unsafe.enable_getters_and_setters=true
