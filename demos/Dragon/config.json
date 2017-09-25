@@ -29,10 +29,11 @@
         "name": "anchorPoint"
       },
       {
-        "type": "Scale2D",
+        "type": "Scale",
         "value": {
           "scaleX": "1",
           "scaleY": "1",
+          "scaleZ": "",
           "lock": false
         },
         "name": "scale"
