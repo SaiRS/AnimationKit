@@ -17,7 +17,8 @@ import XXRotation from 'XXFoundation/Type/XXRotation.js';
 import XXNodeActorState from 'XXActionAlias/Actor/XXNodeActorState.js';
 
 import Vue from 'vue';
-import hello from './js/hello.vue';
+
+import XXActionKitEditApp from 'XXAppUI/XXActionKitEditApp.vue';
 
 import XXActionMoveBy from 'XXActionAlias/Action/BaseAction/XXActionMoveBy.js';
 import XXActionRotateBy from
@@ -48,9 +49,9 @@ require('./css/hello.css');
 
 new Vue({
   el: '.mount-point-for-vue-js',
-  template: '<hello></hello>',
+  template: '<XXActionKitEditApp></XXActionKitEditApp>',
   components: {
-    hello: hello,
+    XXActionKitEditApp: XXActionKitEditApp,
   },
 });
 
