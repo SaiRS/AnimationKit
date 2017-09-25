@@ -73,6 +73,7 @@ function build() {
 
   let results = '';
 
+  // 注册通知
   m.on('success', () => {
     process.stdout.write('\x1B[2J\x1B[0f');
     Log.info(`\n\n${results}`);
@@ -83,7 +84,7 @@ function build() {
 
   pack(mainConfig).then((result) => {
     results += result + '\n\n';
-    m.success('main');
+    m.success('main'); // 发送通知
   }).catch((err) => {
     m.error('main');
     Log.warning(`\n  ${errorLog}failed to build main process`);
@@ -138,7 +139,7 @@ function bundleApp() {
 }
 
 /**
- * 打包
+ * web打包
  * @param  {[type]} config [description]
  * @return {[type]}        [description]
  */
