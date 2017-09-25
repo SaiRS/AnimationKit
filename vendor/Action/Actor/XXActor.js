@@ -12,12 +12,22 @@ import xxvTypeVerify from 'XXTool/TypeVerify.js';
  * @class
  */
 class XXActor extends XXObject {
+
+  _children: Array<XXActor>;
+  _parent: XXActor | null;
+  _isShowed: boolean;
+
   /**
    * 构造函数
    * @param  {String} uuid 唯一标识符
    */
   constructor(uuid: ?string = undefined) {
     super(uuid);
+
+    // 初始化
+    this._children = [];
+    this._parent = null;
+    this._isShowed = false;
   }
 
   /**
@@ -37,11 +47,121 @@ class XXActor extends XXObject {
     }
   }
 
-  /**
-   * [then description]
-   */
-  then() {
+  /** *************************************************
+  * 层级操作
+  *****************************************************/
 
+  /**
+   * 设置父节点，不要直接调用
+   * @param {XXActor} parent 父节点对象
+   */
+  setParent(parent: XXActor | null) {
+    this._parent = parent;
+  }
+
+  /**
+   * 添加子节点
+   * @param {XXActor} child Actor对象
+   */
+  addChild(child: XXActor) {
+    if (child) {
+      // 数据
+      this._children.push(child);
+      child.setParent(this);
+      // view
+      this.addChildElement(child);
+    }
+  }
+
+  /**
+   * 移除子节点
+   * @param {XXActor} child Actor对象
+   */
+  removeChild(child: XXActor) {
+    for (let i = 0; i < this._children.length; i++) {
+      let existedChild = this._children[i];
+
+      if (existedChild.isEqualTo(child)) {
+        this._children.splice(i, 1);
+        child.setParent(null);
+
+        child.removeFromParentTree();
+        break;
+      }
+    }
+  }
+
+  /**
+   * 清空所有子节点
+   */
+  removeAllChildren() {
+    for (let i = 0; i < this._children.length; i++) {
+      let child = this._children[i];
+      child.setParent(null);
+
+      child.removeFromParentTree();
+    }
+
+    this._children = [];
+  }
+
+  /**
+   * 从父节点中移除
+   */
+  removeFromParent() {
+    if (this._parent) {
+      this._parent.removeChild(this);
+    }
+  }
+
+
+  /** **********************
+  * 显示部分
+  *************************/
+
+  /**
+   * 加入显示
+   */
+  setShowedInTree() {
+
+  }
+
+  /**
+   * 移除显示
+   */
+  setHiddenInTree() {
+  }
+
+  /**
+   * 是否已经加入显示
+   * @return {Boolean} [description]
+   */
+  isShowedInTree() {
+    return false;
+  }
+
+  /**
+   * @override
+   * 添加子节点的显示元素
+   * @param {[type]} child [description]
+   */
+  addChildElement(child: XXActor) {
+
+  }
+
+  /**
+   * 移除显示
+   */
+  removeFromParentTree() {
+    // inherit
+  }
+
+  /**
+   * 获得用于显示的部分
+   * @return {[type]} [description]
+   */
+  getShowElement() {
+    return null;
   }
 }
 

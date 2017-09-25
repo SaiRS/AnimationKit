@@ -18,7 +18,7 @@ import xxvLog from 'XXTool/LogTool.js';
 class XXNodeDomActor extends XXNodeActor {
 
   _jqueryObject: null;
-
+  _showed: boolean; // 是否在body中了
   // 模型树的属性
 
   _rotationZ: number;
@@ -33,22 +33,28 @@ class XXNodeDomActor extends XXNodeActor {
   _positionY: number;
   _positionZ: number;
 
+
   /**
    * @inheritdoc
-   * @param  {[string, dom, jquery-object]} domNode  dom选择器， dom对象， jquery对象
+   * @param  {[string, dom, jquery-object]} domNode
+   * dom选择器， dom对象， jquery对象, 如果不传，则会创建一个新对象
    * @param  {[string]} uuid 对象的唯一标识符
    * @throws {Error} domSeletor应该是一个正确的字符串
    */
-  constructor(domNode: string,
+  constructor(domNode: string | null,
     uuid: ?string = undefined) {
     super(uuid);
 
+    this.reset();
+
     this._jqueryObject = $(domNode);
     if (!this._jqueryObject.length) {
-      throw new Error(`[XXNodeDomActor] 使用错误的参数:来创建XXNodeDomActor对象`);
+      this.createShowElement();
+      this._showed = false;
+      // throw new Error(`[XXNodeDomActor] 使用错误的参数:来创建XXNodeDomActor对象`);
+    } else {
+      this._showed = true;
     }
-
-    this.reset();
   }
 
   /**
@@ -66,6 +72,14 @@ class XXNodeDomActor extends XXNodeActor {
     this._positionX = 0;
     this._positionY = 0;
     this._positionZ = 0;
+  }
+
+  /**
+   * 创建显示元素，子类需要继承，从而得到不同的显示元素
+   */
+  createShowElement() {
+    let domElement = document.createElement('div');
+    this._jqueryObject = $(domElement);
   }
 
   /**
@@ -228,6 +242,143 @@ class XXNodeDomActor extends XXNodeActor {
    */
   hide() {
     this._jqueryObject && this._jqueryObject.hide();
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getShowElement() {
+    return this._jqueryObject;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  addChildElement(actor: XXActor) {
+    if (this._jqueryObject && actor) {
+      this._jqueryObject.append(actor.getShowElement());
+
+      if (this.isShowedInTree()) {
+        actor.setShowedInTree();
+      } else {
+        actor.setHiddenInTree();
+      }
+    }
+  }
+
+  /**
+   * @inheritdoc
+   */
+  setShowedInTree() {
+    this._showed = true;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  setHiddenInTree() {
+    this._showed = false;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  isShowedInTree() {
+    return this._showed;
+  }
+
+  /**
+   * @inheritdoc
+   * parentNode为dom节点或者元素选择器
+   */
+  showInParent(parantNode: Object | string) {
+    if (!this._showed) {
+      $(parantNode).append(this.getShowElement());
+      // 事件
+      this.initEvent();
+
+      this.setShowedInTree();
+      for (let i = 0; i < this._children.length; i++) {
+        this._children[i].setShowedInTree();
+      }
+    }
+  }
+
+  /**
+   * @inheritdoc
+   */
+  removeFromParentTree() {
+    if (this._jqueryObject) {
+      this._jqueryObject.remove();
+
+      this.setHiddenInTree();
+      for (let i = 0; i < this._children.length; i++) {
+        this._children[i].setHiddenInTree();
+      }
+    }
+  }
+
+
+  /** *********************
+  * 事件
+  ************************/
+
+  /**
+   * 初始化事件
+   * @override
+   * 子类继承重写，可以提供自定义的事件
+   */
+  initEvent() {
+    this.clearAllEvent();
+  }
+
+
+  /**
+   * 移除所有事件
+   */
+  clearAllEvent() {
+    if (this._jqueryObject) {
+        // TODO:
+    }
+  }
+
+  /**
+   * 添加一个事件监听
+   * @param {Object} eventListener 拥有handleEvent方法的对象
+   */
+  addEventListener(eventListener: {handleEvent: ()=>{}}) {
+
+  }
+
+  /**
+   * 这个方法使得我们对象成为一个EventListener对象
+   * @param  {event} event 事件
+   */
+  handleEvent(event: Event) {
+
+  }
+
+  /**
+   * [postEvent description]
+   */
+  postEvent() {
+
+  }
+
+  /** ********************
+  * UI属性调整
+  ************************/
+
+  /**
+   * 修改样式
+   * @private
+   * @param  {[type]} property      [description]
+   * @param  {[type]} propertyValue [description
+   */
+  _css(property: string, propertyValue: mixed) {
+    if (this._jqueryObject) {
+      this._jqueryObject.css(property, propertyValue);
+    }
   }
 }
 

@@ -119,8 +119,6 @@ class XXNodeActor extends XXActor {
   restoreState(state: XXNodeActorState) {
 
   }
-
-
 }
 
 export default XXNodeActor;
