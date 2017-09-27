@@ -47,6 +47,27 @@ import XXTimeFunctionEaseOutSine from
 // import XXObject from 'XXFoundation/XXObject.js';
 require('./css/hello.css');
 
+// vue inject
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';    // 使用 CSS
+Vue.use(iView);
+
+import XXStaticTipView from './js/VueInject/XXStaticTipView.js';
+Vue.use(XXStaticTipView);
+
+import XXToastView from './js/VueInject/XXToastView.js';
+Vue.use(XXToastView);
+
+import XXNoticeView from './js/VueInject/XXNoticeView.js';
+Vue.use(XXNoticeView);
+
+import XXAlertView from './js/VueInject/XXAlertView.js';
+Vue.use(XXAlertView);
+
+import XXConfirmView from './js/VueInject/XXConfirmView.js';
+Vue.use(XXConfirmView);
+
+
 new Vue({
   el: '.mount-point-for-vue-js',
   template: '<XXActionKitEditApp></XXActionKitEditApp>',

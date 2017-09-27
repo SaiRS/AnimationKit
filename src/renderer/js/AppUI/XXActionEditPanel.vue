@@ -6,7 +6,13 @@
 
 <script>
   export default {
-    name: 'XXActionEditPanel'
+    name: 'XXActionEditPanel',
+
+    mounted: function () {
+    },
+
+    updated: function () {
+    }
   }
 </script>
 

@@ -1,8 +1,10 @@
 module.exports = {
   // parser: 'sugarss',
   plugins: {
+    // plugin: option
     'postcss-import': {},
-    'autoprefix': {},
+    'autoprefixer': {}, // 之前写错了，导致一些plugin不存在的bug
+
     // 'postcss-url': {},
     // 'postcss-cssnext': {},
     // add your 'plugins' here

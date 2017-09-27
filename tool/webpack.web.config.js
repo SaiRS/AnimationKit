@@ -198,8 +198,8 @@ module.exports = {
 
         // file
       {
-        test: /\.(png|jpeg|jpg|gif|svg)$/,
-        exclude: /node_modules/,
+        test: /\.(png|jpeg|jpg|gif|svg)\??.*$/,
+        // exclude: /node_modules/,
         use: {
           loader: 'url-loader',
           query: {
@@ -212,7 +212,7 @@ module.exports = {
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        exclude: /node_modules/,
+        // exclude: /node_modules/,
         use: {
           loader: 'url-loader',
           query: {
