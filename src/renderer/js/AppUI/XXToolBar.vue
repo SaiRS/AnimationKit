@@ -39,6 +39,8 @@
   import xxvNotificationCenter from
         'XXVendor/Notification/NotificationCenter.js';
 
+  import {XXSelectedElementsChangedNotification} from
+    '../Notification/XXElementEditNotification.js'
 
   export default {
     name: 'XXToolBar',
@@ -57,7 +59,7 @@
       xxvNotificationCenter.addObserver(
         this,
         'selectedElementsChanged',
-        'xxSelectedElementsChanged'
+        XXSelectedElementsChangedNotification
       )
     },
 
