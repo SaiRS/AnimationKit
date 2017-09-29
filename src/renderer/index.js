@@ -8,13 +8,16 @@ import 'babel-polyfill';
 
 
 import XXNodeDomActor from
- 'XXActionAlias/Actor/XXNodeDomActor.js';
+'XXActionAlias/Actor/XXNodeDomActor.js';
+import XXNodeDomTextActor from 'XXActionAlias/Actor/XXNodeDomTextActor.js';
+import XXNodeDomImageActor from 'XXActionAlias/Actor/XXNodeDomImageActor.js';
+
 import XXPosition from 'XXFoundation/Type/XXPosition.js';
 import XXScale from 'XXFoundation/Type/XXScale.js';
 import XXRotation from 'XXFoundation/Type/XXRotation.js';
 // import xxvLog from 'XXTool/LogTool.js';
 //
-import XXNodeActorState from 'XXActionAlias/Actor/XXNodeActorState.js';
+// import XXNodeActorState from 'XXActionAlias/Actor/XXNodeActorState.js';
 
 import Vue from 'vue';
 
@@ -30,9 +33,9 @@ import XXActionSpeed from 'XXActionAlias/Action/XXActionSpeed.js';
 import XXActionDelay from 'XXActionAlias/Action/BaseAction/XXActionDelay.js';
 import XXActionSequence from 'XXActionAlias/Action/XXActionSequence.js';
 import XXActionSpawn from 'XXActionAlias/Action/XXActionSpawn.js';
-
-import XXActionShow from 'XXActionAlias/Action/BaseAction/XXActionShow.js';
-import XXActionHide from 'XXActionAlias/Action/BaseAction/XXActionHide.js';
+//
+// import XXActionShow from 'XXActionAlias/Action/BaseAction/XXActionShow.js';
+// import XXActionHide from 'XXActionAlias/Action/BaseAction/XXActionHide.js';
 
 
 import XXActionRepeatForever from
@@ -77,34 +80,46 @@ new Vue({
 });
 
 setTimeout(() => {
-  let option = new XXNodeActorState(33, 2, 5, 200, 300);
+  // let option = new XXNodeActorState(33, 2, 5, 200, 300);
 
-  let nodeDomActor =
-  new XXNodeDomActor('.animation-test-object1-js');
+  let nodeDomActor = new XXNodeDomActor();
+  nodeDomActor.modifyStyle('border', '1px solid #000');
+  nodeDomActor.showInParent('.animation-test-object1-js');
 
-  nodeDomActor.restoreState(option);
+  let textActor = new XXNodeDomTextActor();
+  textActor.addText('Hello World', {'color': '#f00'});
+  textActor.addText('I love you', {'color': '#00ffff'});
+  textActor.insertText(10, ' insertText ', {'background-color': '#f44336'});
+  nodeDomActor.addChild(textActor);
+
+  let imageActor = new XXNodeDomImageActor();
+  imageActor.setImageSrc('./img/mountain-top.jpg');
+  nodeDomActor.addChild(imageActor);
+  // nodeDomActor.removeFromParentTree();
+  // nodeDomActor.restoreState(option);
 
   let moveToAction = new XXActionMoveBy(new XXPosition(100, 200, 0), 2000);
-  let scaleToAction = new XXActionScaleBy(new XXScale(1, 2), 1000);
+  let scaleToAction = new XXActionScaleBy(new XXScale(10, 20), 1000);
 
   let rotationAction = new XXActionRotateBy(new XXRotation(90), 5000);
   scaleToAction;
   moveToAction.setTimeFunction(new XXTimeFunctionEaseOutSine());
   rotationAction;
-  nodeDomActor;
+
   let speedAction = new XXActionSpeed(rotationAction, 20);
   speedAction;
   let delayAction = new XXActionDelay(5000);
   delayAction;
 
-  let showAction = new XXActionShow();
-  let hideAction = new XXActionHide();
+  // let showAction = new XXActionShow();
+  // let hideAction = new XXActionHide();
 
   let actionSequence =
-    new XXActionSequence(moveToAction.reverse(),
-                        hideAction,
-
-                        showAction,
+    new XXActionSequence(
+                      // moveToAction.reverse(),
+                      //   hideAction,
+                      //
+                      //   showAction,
                         scaleToAction.reverse(),
                         rotationAction.reverse()
                       );
@@ -126,7 +141,7 @@ setTimeout(() => {
   let repeatAction = new XXActionRepeatForever(moveToAction);
   repeatAction;
 
-  // nodeDomActor.runAction(actionSequence, false);
+  // nodeDomActor.runAction(actionSequence);
   //
   // setTimeout(() => {
   //   actionSequence.start();

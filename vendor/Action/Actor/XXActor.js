@@ -55,7 +55,7 @@ class XXActor extends XXObject {
    * 设置父节点，不要直接调用
    * @param {XXActor} parent 父节点对象
    */
-  setParent(parent: XXActor | null) {
+  _setParent(parent: XXActor | null) {
     this._parent = parent;
   }
 
@@ -67,7 +67,7 @@ class XXActor extends XXObject {
     if (child) {
       // 数据
       this._children.push(child);
-      child.setParent(this);
+      child._setParent(this);
       // view
       this.addChildElement(child);
     }
@@ -83,7 +83,7 @@ class XXActor extends XXObject {
 
       if (existedChild.isEqualTo(child)) {
         this._children.splice(i, 1);
-        child.setParent(null);
+        child._setParent(null);
 
         child.removeFromParentTree();
         break;
@@ -97,7 +97,7 @@ class XXActor extends XXObject {
   removeAllChildren() {
     for (let i = 0; i < this._children.length; i++) {
       let child = this._children[i];
-      child.setParent(null);
+      child._setParent(null);
 
       child.removeFromParentTree();
     }
@@ -120,20 +120,20 @@ class XXActor extends XXObject {
   *************************/
 
   /**
-   * 加入显示
+   * 标记已经加入显示
    */
   setShowedInTree() {
 
   }
 
   /**
-   * 移除显示
+   * 标记没有加入显示
    */
   setHiddenInTree() {
   }
 
   /**
-   * 是否已经加入显示
+   * 是否已经标记显示
    * @return {Boolean} [description]
    */
   isShowedInTree() {
@@ -150,7 +150,15 @@ class XXActor extends XXObject {
   }
 
   /**
-   * 移除显示
+   * 加入显示
+   * @param {mixed} parantNode 父节点
+   */
+  showInParent(parantNode: mixed) {
+
+  }
+
+  /**
+   * 移除显示(view)
    */
   removeFromParentTree() {
     // inherit

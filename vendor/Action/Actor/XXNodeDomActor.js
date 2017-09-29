@@ -47,9 +47,10 @@ class XXNodeDomActor extends XXNodeActor {
 
     this.reset();
 
-    this._jqueryObject = $(domNode);
-    if (!this._jqueryObject.length) {
-      this.createShowElement();
+    this._initJQueryObjectWith(domNode);
+    if (this._jqueryObject && !this._jqueryObject.length) {
+      let element = this.createShowElement();
+      this._initJQueryObjectWith(element);
       this._showed = false;
       // throw new Error(`[XXNodeDomActor] 使用错误的参数:来创建XXNodeDomActor对象`);
     } else {
@@ -76,9 +77,19 @@ class XXNodeDomActor extends XXNodeActor {
 
   /**
    * 创建显示元素，子类需要继承，从而得到不同的显示元素
+   * @override
+   * @return {Element}
    */
   createShowElement() {
-    let domElement = document.createElement('div');
+    let domElement: Element = document.createElement('div');
+    return domElement;
+  }
+
+  /**
+   * 初始化jqueryObject
+   * @param  {[type]} domElement [description]
+   */
+  _initJQueryObjectWith(domElement: mixed) {
     this._jqueryObject = $(domElement);
   }
 
@@ -254,21 +265,6 @@ class XXNodeDomActor extends XXNodeActor {
   /**
    * @inheritdoc
    */
-  addChildElement(actor: XXActor) {
-    if (this._jqueryObject && actor) {
-      this._jqueryObject.append(actor.getShowElement());
-
-      if (this.isShowedInTree()) {
-        actor.setShowedInTree();
-      } else {
-        actor.setHiddenInTree();
-      }
-    }
-  }
-
-  /**
-   * @inheritdoc
-   */
   setShowedInTree() {
     this._showed = true;
   }
@@ -291,8 +287,8 @@ class XXNodeDomActor extends XXNodeActor {
    * @inheritdoc
    * parentNode为dom节点或者元素选择器
    */
-  showInParent(parantNode: Object | string) {
-    if (!this._showed) {
+  showInParent(parantNode: mixed) {
+    if (!this._showed) { // 之前没显示在body中
       $(parantNode).append(this.getShowElement());
       // 事件
       this.initEvent();
@@ -300,6 +296,21 @@ class XXNodeDomActor extends XXNodeActor {
       this.setShowedInTree();
       for (let i = 0; i < this._children.length; i++) {
         this._children[i].setShowedInTree();
+      }
+    }
+  }
+
+  /**
+   * @inheritdoc
+   */
+  addChildElement(actor: XXActor) {
+    if (this._jqueryObject && actor) {
+      this._jqueryObject.append(actor.getShowElement());
+
+      if (this.isShowedInTree()) {
+        actor.setShowedInTree();
+      } else {
+        actor.setHiddenInTree();
       }
     }
   }
@@ -375,11 +386,12 @@ class XXNodeDomActor extends XXNodeActor {
    * @param  {[type]} property      [description]
    * @param  {[type]} propertyValue [description
    */
-  _css(property: string, propertyValue: mixed) {
+  modifyStyle(property: string, propertyValue: mixed) {
     if (this._jqueryObject) {
       this._jqueryObject.css(property, propertyValue);
     }
   }
+
 }
 
 export default XXNodeDomActor;
