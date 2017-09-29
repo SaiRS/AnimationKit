@@ -70,6 +70,7 @@ Vue.use(XXAlertView);
 import XXConfirmView from './js/VueInject/XXConfirmView.js';
 Vue.use(XXConfirmView);
 
+import imgSrc from './img/mountain-top.jpg';
 
 new Vue({
   el: '.mount-point-for-vue-js',
@@ -93,7 +94,7 @@ setTimeout(() => {
   nodeDomActor.addChild(textActor);
 
   let imageActor = new XXNodeDomImageActor();
-  imageActor.setImageSrc('./img/mountain-top.jpg');
+  imageActor.setImageSrc(imgSrc);
   nodeDomActor.addChild(imageActor);
   // nodeDomActor.removeFromParentTree();
   // nodeDomActor.restoreState(option);
