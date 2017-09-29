@@ -21,7 +21,6 @@ class XXNodeDomImageActor extends XXNodeDomActor {
    * @param {string} src 图片地址
    * @NOTE:
    * 1. 怎么将引用资源加入到工程？
-   * 2. 打包时会修改资源名字，怎么处理
    * 3，引用的如果是相对路径，则还会和output设置有关，怎么处理？
    * 4. 引用绝对路径呢？
    */

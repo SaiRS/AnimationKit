@@ -6,7 +6,8 @@
 
   "plugins": [
     "syntax-flow",
-    "transform-runtime"
+    "transform-runtime",
+    "syntax-dynamic-import"
   ]
 }
 

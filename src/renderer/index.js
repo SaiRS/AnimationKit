@@ -80,42 +80,43 @@ new Vue({
   },
 });
 
-setTimeout(() => {
+
   // let option = new XXNodeActorState(33, 2, 5, 200, 300);
 
-  let nodeDomActor = new XXNodeDomActor();
-  nodeDomActor.modifyStyle('border', '1px solid #000');
-  nodeDomActor.showInParent('.animation-test-object1-js');
+let nodeDomActor = new XXNodeDomActor();
+nodeDomActor.modifyStyle('border', '1px solid #000');
+nodeDomActor.showInParent('.animation-test-object1-js');
 
-  let textActor = new XXNodeDomTextActor();
-  textActor.addText('Hello World', {'color': '#f00'});
-  textActor.addText('I love you', {'color': '#00ffff'});
-  textActor.insertText(10, ' insertText ', {'background-color': '#f44336'});
-  nodeDomActor.addChild(textActor);
+let textActor = new XXNodeDomTextActor();
+textActor.addText('Hello World', {'color': '#f00'});
+textActor.addText('I love you', {'color': '#00ffff'});
+textActor.insertText(10, ' insertText ', {'background-color': '#f44336'});
+nodeDomActor.addChild(textActor);
 
-  let imageActor = new XXNodeDomImageActor();
-  imageActor.setImageSrc(imgSrc);
-  nodeDomActor.addChild(imageActor);
+let imageActor = new XXNodeDomImageActor();
+
+nodeDomActor.addChild(imageActor);
+imageActor.setImageSrc(imgSrc);
   // nodeDomActor.removeFromParentTree();
   // nodeDomActor.restoreState(option);
 
-  let moveToAction = new XXActionMoveBy(new XXPosition(100, 200, 0), 2000);
-  let scaleToAction = new XXActionScaleBy(new XXScale(10, 20), 1000);
+let moveToAction = new XXActionMoveBy(new XXPosition(100, 200, 0), 2000);
+let scaleToAction = new XXActionScaleBy(new XXScale(10, 20), 1000);
 
-  let rotationAction = new XXActionRotateBy(new XXRotation(90), 5000);
-  scaleToAction;
-  moveToAction.setTimeFunction(new XXTimeFunctionEaseOutSine());
-  rotationAction;
+let rotationAction = new XXActionRotateBy(new XXRotation(90), 5000);
+scaleToAction;
+moveToAction.setTimeFunction(new XXTimeFunctionEaseOutSine());
+rotationAction;
 
-  let speedAction = new XXActionSpeed(rotationAction, 20);
-  speedAction;
-  let delayAction = new XXActionDelay(5000);
-  delayAction;
+let speedAction = new XXActionSpeed(rotationAction, 20);
+speedAction;
+let delayAction = new XXActionDelay(5000);
+delayAction;
 
   // let showAction = new XXActionShow();
   // let hideAction = new XXActionHide();
 
-  let actionSequence =
+let actionSequence =
     new XXActionSequence(
                       // moveToAction.reverse(),
                       //   hideAction,
@@ -125,22 +126,22 @@ setTimeout(() => {
                         rotationAction.reverse()
                       );
 
-  let actionSpawn = new XXActionSpawn(
+let actionSpawn = new XXActionSpawn(
     moveToAction,
     scaleToAction,
     rotationAction
   );
-  actionSpawn;
-  let actionFinishedCallBack = function(event, action, actor) {
-    console.log(
+actionSpawn;
+let actionFinishedCallBack = function(event, action, actor) {
+  console.log(
       'outter call back, uuid = ' + action.UUID + ' , event = ' + event);
-  };
-  actionFinishedCallBack;
-  actionSequence;
+};
+actionFinishedCallBack;
+actionSequence;
 
 
-  let repeatAction = new XXActionRepeatForever(moveToAction);
-  repeatAction;
+let repeatAction = new XXActionRepeatForever(moveToAction);
+repeatAction;
 
   // nodeDomActor.runAction(actionSequence);
   //
@@ -158,7 +159,6 @@ setTimeout(() => {
 
 
   // nodeDomActor.moveTo(new XXPosition(100, 500, 0));
-}, 2000);
 
 
 /**

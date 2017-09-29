@@ -1,6 +1,8 @@
 <template>
-  <div>
-    这是动作编辑区
+  <div class='xxActionEditPanel-vueContainer'>
+    <div>
+
+    </div>
   </div>
 </template>
 
@@ -16,5 +18,12 @@
   }
 </script>
 
-<style>
+<style type='scss'>
+
+.xxActionEditPanel-vueContainer{
+  background-color: white;
+
+  
+}
+
 </style>
