@@ -12,3 +12,9 @@
 
 <style>
 </style>
+
+
+<xx-vue-docs>
+## StatusBar
+this is tool document for the vue.
+</xx-vue-docs>

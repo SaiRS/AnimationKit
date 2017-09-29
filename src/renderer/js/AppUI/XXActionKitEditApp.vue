@@ -34,6 +34,10 @@ import XXResourceInspector from 'XXAppUI/XXResourceInspector.vue';
 import XXStatusBar from 'XXAppUI/XXStatusBar.vue';
 import XXToolBar from 'XXAppUI/XXToolBar.vue';
 
+import xxvNotificationCenter from
+  'XXVendor/Notification/NotificationCenter.js';
+import {XXToolBarShowRightPanelNotification} from
+  '../Notification/XXToolBarNotification.js'
 
 export default {
   name: 'XXActionKitEditApp',
@@ -45,6 +49,29 @@ export default {
     XXResourceInspectorComponent: XXResourceInspector,
     XXStatusBarComponent: XXStatusBar,
     XXToolBarComponent: XXToolBar
+  },
+
+  /****************************
+  * 生命周期
+  *****************************/
+
+  mounted: function () {
+    // 注册通知
+    xxvNotificationCenter.addObserver(
+      this,
+      'receivedToolBarRightPanelVisibleChangedNotification',
+      XXToolBarShowRightPanelNotification
+    )
+  },
+
+  methods: {
+    /******************
+    * 通知
+    *******************/
+    receivedToolBarRightPanelVisibleChangedNotification(info) {
+      console.log('收到tool bar right panel 改变的消息');
+      console.dir(info)
+    }
   }
 }
 
@@ -93,19 +120,19 @@ export default {
 
   .xxMiddlePart-leftPart{
     height: 100%;
-    width: 88px;
+    width: 160px;
     flex: 0 0 auto;
   }
 
   .xxMiddlePart-centerPart{
     height: 100%;
-    width: calc(100% - 176px);
+    width: calc(100% - 160px - 320px);
     flex: 1 1 auto;
   }
 
   .xxMiddlePart-rightPart{
     height: 100%;
-    width: 88px;
+    width: 320px;
     flex: 0 0 auto;
   }
 }
@@ -130,3 +157,9 @@ export default {
 }
 
 </style>
+
+
+<xx-vue-docs>
+## App
+this is tool document for the vue.
+</xx-vue-docs>

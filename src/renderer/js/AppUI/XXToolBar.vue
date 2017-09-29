@@ -37,17 +37,22 @@
 
 <script>
   import xxvNotificationCenter from
-        'XXVendor/Notification/NotificationCenter.js';
+    'XXVendor/Notification/NotificationCenter.js';
 
   import {XXSelectedElementsChangedNotification} from
     '../Notification/XXElementEditNotification.js'
+
+  import {XXToolBarShowRightPanelNotification} from
+    '../Notification/XXToolBarNotification.js'
 
   export default {
     name: 'XXToolBar',
 
     data: function() {
       return {
-
+        leftShowed: true,
+        bottomShowed: true,
+        rightShowed: true,
       }
     },
 
@@ -71,7 +76,9 @@
       selectedElementsChanged() {
         console.log('接收到通知，然后移除监听')
 
-        xxvNotificationCenter.removeObserver(this)
+        xxvNotificationCenter.removeObserverWithNameSender(
+          this,
+          XXSelectedElementsChangedNotification)
       },
 
       /************************
@@ -108,6 +115,14 @@
 
       right: function() {
         console.log('clicked right');
+
+        this.rightShowed = !this.rightShowed;
+        xxvNotificationCenter.postNotification(
+          XXToolBarShowRightPanelNotification,
+          this,
+          {
+            show: this.rightShowed
+          })
       }
     }
   }
@@ -161,3 +176,9 @@
   padding: 4px 8px;
 }
 </style>
+
+
+<xx-vue-docs>
+## ToolBar
+this is tool document for the vue.
+</xx-vue-docs>

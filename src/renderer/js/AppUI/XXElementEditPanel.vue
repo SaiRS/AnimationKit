@@ -40,3 +40,9 @@
   color: #191919;
 }
 </style>
+
+
+<xx-vue-docs>
+## ElementEditPanel
+this is tool document for the vue.
+</xx-vue-docs>

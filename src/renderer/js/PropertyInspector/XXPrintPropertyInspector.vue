@@ -1,26 +1,19 @@
 <template>
-  <div class='xxActionEditPanel-rootVueContainer'>
+  <div>
+    排版检查器
   </div>
 </template>
 
 <script>
   export default {
-    name: 'XXActionEditPanel',
-
-    updated: function () {
-    }
+    name: 'XXPrintPropertyInspector'
   }
 </script>
 
 <style lang='scss' scoped>
-
-.xxActionEditPanel-rootVueContainer{
-}
-
 </style>
 
-
 <xx-vue-docs>
-## ActionEditPanel
+## XXPrintPropertyInspector
 this is tool document for the vue.
 </xx-vue-docs>

@@ -1,26 +1,19 @@
 <template>
-  <div class='xxActionEditPanel-rootVueContainer'>
+  <div>
+    度量检查器
   </div>
 </template>
 
 <script>
   export default {
-    name: 'XXActionEditPanel',
-
-    updated: function () {
-    }
+    name: 'XXMeasurementPropertyInspector'
   }
 </script>
 
 <style lang='scss' scoped>
-
-.xxActionEditPanel-rootVueContainer{
-}
-
 </style>
 
-
 <xx-vue-docs>
-## ActionEditPanel
+## XXMeasurementPropertyInspector
 this is tool document for the vue.
 </xx-vue-docs>

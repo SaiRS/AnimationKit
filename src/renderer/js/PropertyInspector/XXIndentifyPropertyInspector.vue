@@ -1,19 +1,19 @@
 <template>
   <div>
-    这是资源检查器
+    标识检查器
   </div>
 </template>
 
 <script>
   export default {
-    name: 'XXResourceInspector'
-  }
+    name: 'XXIndentifyPropertyInspector',
+  };
 </script>
 
-<style>
+<style lang='scss' scoped>
 </style>
 
 <xx-vue-docs>
-## ResourceBar
+## XXIndentifyPropertyInspector
 this is tool document for the vue.
 </xx-vue-docs>
