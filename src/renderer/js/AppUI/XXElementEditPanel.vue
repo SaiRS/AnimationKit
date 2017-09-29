@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='xxElementEditPanel-rootVueContainer'>
     这是元素编辑区
   </div>
 </template>
@@ -10,5 +10,10 @@
   }
 </script>
 
-<style>
+<style lang='scss' scoped>
+
+.xxElementEditPanel-rootVueContainer{
+  background-color: white;
+  color: #191919;
+}
 </style>
