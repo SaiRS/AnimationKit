@@ -134,6 +134,7 @@ export default {
     height: 100%;
     width: 320px;
     flex: 0 0 auto;
+    overflow-y: scroll;
   }
 }
 
