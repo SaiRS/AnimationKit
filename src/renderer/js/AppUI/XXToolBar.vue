@@ -1,9 +1,18 @@
 <template>
   <div class='xxToolBar-rootVueContainer'>
     <div class="xxToolBar-firstGroup">
-      <div class='xxToolBarItem' @click='insert'>
-        插入
-      </div>
+
+      <Dropdown class='xxToolBarItem' @on-click="insert">
+        <a href="javascript:void(0)">
+            元素
+            <Icon type="arrow-down-b"></Icon>
+        </a>
+        <DropdownMenu slot="list">
+            <DropdownItem name='imageactor'>图片</DropdownItem>
+            <DropdownItem name='textactor'>文本</DropdownItem>
+            <DropdownItem divided name='baseactor'>矩形</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
     </div>
 
     <div class='xxToolBar-seconGroup'>
@@ -36,11 +45,17 @@
 </template>
 
 <script>
+  // 通知
   import xxvNotificationCenter from
     'XXVendor/Notification/NotificationCenter.js';
 
   import {XXSelectedElementsChangedNotification} from
     '../Notification/XXElementEditNotification.js'
+
+  import {XXInsertBasicActorNotification,
+          XXInsertTextActorNotification,
+          XXInsertImageActorNotification} from
+    '../Notification/XXInsertElementNotification.js'
 
   import {XXToolBarShowRightPanelNotification} from
     '../Notification/XXToolBarNotification.js'
@@ -85,8 +100,33 @@
        * 事件
        ************************/
 
-      insert: function() {
-        console.log('clicked insert');
+      insert: function(itemName) {
+        // 显示下拉菜单
+        if ('baseactor' === itemName) {
+          this.insertBasicActor();
+        } else if ('textactor' === itemName) {
+          this.insertTextActor();
+        } else if ('imageactor' === itemName) {
+          this.insertImageActor();
+        }
+      },
+
+      insertBasicActor() {
+        console.log('insertBasicActor');
+        xxvNotificationCenter.postNotification(
+          XXInsertBasicActorNotification, this);
+      },
+
+      insertImageActor() {
+        console.log('insertImageActor');
+        xxvNotificationCenter.postNotification(
+          XXInsertImageActorNotification, this);
+      },
+
+      insertTextActor() {
+        console.log('insertTextActor');
+        xxvNotificationCenter.postNotification(
+          XXInsertTextActorNotification, this);
       },
 
       group: function() {

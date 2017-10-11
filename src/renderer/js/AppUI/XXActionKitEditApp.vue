@@ -42,6 +42,12 @@ import {XXToolBarShowRightPanelNotification} from
 export default {
   name: 'XXActionKitEditApp',
 
+  data: function() {
+    return {
+      // 整个项目的数据
+    }
+  },
+
   components: {
     XXActionEditPanelComponent: XXActionEditPanel,
     XXElementEditPanelComponent: XXElementEditPanel,
