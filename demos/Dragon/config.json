@@ -1,0 +1,471 @@
+{
+  "timeFunctions": {
+    "Linear": "",
+    "BounceOut": ""
+  },
+  "actions": [
+    {
+      "actionName": "Flying",
+      "duration": "1s"
+    },
+    {
+      "actionName": "Hit",
+      "duration": "2s"
+    }
+  ],
+  "nodeGraph": {
+    "uuid": "",
+    "name": "Dragon",
+    "className": "Dragon",
+    "parentClassName": "XXNodeDomActor",
+    "properties": [
+      {
+        "type": "Point",
+        "value": {
+          "x": "0",
+          "y": "0",
+          "z": "0"
+        },
+        "name": "anchorPoint"
+      },
+      {
+        "type": "Scale",
+        "value": {
+          "scaleX": "1",
+          "scaleY": "1",
+          "scaleZ": "",
+          "lock": false
+        },
+        "name": "scale"
+      },
+      {
+        "type": "Check",
+        "value": true,
+        "name": "visible"
+      }
+    ],
+    "actions": [
+    ],
+    "children": [
+      {
+        "uuid": "",
+        "name": "Right Wing",
+        "className": "",
+        "parentClassName": "XXNodeDomImageActor",
+        "properties": [
+          {
+            "type": "Position",
+            "value": {
+              "x": "-8",
+              "y": "4",
+              "z": "0"
+            },
+            "name": "position"
+          },
+          {
+            "type": "Point",
+            "value": {
+              "z": "0",
+              "y": "0.09429931640625",
+              "x": "0.840423583984375"
+            },
+            "name": "anchorPoint"
+          },
+          {
+            "type": "Scale",
+            "value": {
+              "scaleX": "1",
+              "scaleY": "1",
+              "scaleZ": "1",
+              "lock": false
+            },
+            "name": "scale"
+          },
+          {
+            "type": "Degrees",
+            "value": "0deg",
+            "name": "rotation"
+          },
+          {
+            "type": "Check",
+            "value": true,
+            "name": "visible"
+          },
+          {
+            "type": "SpriteFrame",
+            "value": {
+              "imgPath": "res/img/gameobjects.png",
+              "isImgPathAbsolutePath": false,
+              "spriteSheetConfigPath": "res/img/gameobjects.plist",
+              "isSpriteSheetConfigPathAbsolutePath": false,
+              "spriteName": "dragon-wing.png"
+            },
+            "name": "spriteFrame"
+          }
+        ],
+        "actions": [
+          {
+            "actionName": "Flying",
+            "actionProperties": [
+              {
+                "type": "DegreeAction",
+                "keyframes": [
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "0s",
+                    "timeFuction": {
+                      "name": "BounceOut"
+                    },
+                    "value": {
+                      "ignorePartOver360": true,
+                      "ignorePreKeyPartOver360": true,
+                      "degree": "0deg",
+                      "minActionDegree": false,
+                      "actionDirection": "anti"
+                    }
+                  },
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "0.5s",
+                    "timeFuction": {
+                      "name": "BounceOut"
+                    },
+                    "value": {
+                      "ignorePartOver360": true,
+                      "ignorePreKeyPartOver360": true,
+                      "degree": "-80deg",
+                      "minActionDegree": false,
+                      "actionDirection": "anti"
+                    }
+                  },
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "1s",
+                    "timeFuction": {
+                      "name": "BounceOut"
+                    },
+                    "value": {
+                      "ignorePartOver360": true,
+                      "ignorePreKeyPartOver360": true,
+                      "degree": "0deg",
+                      "minActionDegree": false,
+                      "actionDirection": "anti"
+                    }
+                  }
+                ],
+                "name": "rotation"
+              }
+            ]
+          },
+          {
+            "actionName": "Hit",
+            "actionProperties": [
+              {
+                "type": "DegreeAction",
+                "keyframes": [
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "0s",
+                    "timeFuction": {
+                      "name": "BounceOut"
+                    },
+                    "value": {
+                      "ignorePartOver360": true,
+                      "ignorePreKeyPartOver360": true,
+                      "degree": "-123deg",
+                      "minActionDegree": false,
+                      "actionDirection": "anti"
+                    }
+                  },
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "2s",
+                    "timeFuction": {
+                      "name": "BounceOut"
+                    },
+                    "value": {
+                      "ignorePartOver360": true,
+                      "ignorePreKeyPartOver360": true,
+                      "degree": "0deg",
+                      "minActionDegree": false,
+                      "actionDirection": "anti"
+                    }
+                  }
+                ],
+                "name": "rotation"
+              }
+            ]
+          }
+        ],
+        "children": [
+        ]
+      },
+      {
+        "uuid": "",
+        "name": "Left Wing",
+        "className": "",
+        "parentClassName": "XXNodeDomImageActor",
+        "properties": [
+          {
+            "type": "Position",
+            "value": {
+              "x": "-8",
+              "y": "4",
+              "z": "0"
+            },
+            "name": "position"
+          },
+          {
+            "type": "Point",
+            "value": {
+              "z": "0",
+              "y": "0.09429931640625",
+              "x": "0.840423583984375"
+            },
+            "name": "anchorPoint"
+          },
+          {
+            "type": "Scale",
+            "value": {
+              "scaleX": "1",
+              "scaleY": "1",
+              "scaleZ": "1",
+              "lock": false
+            },
+            "name": "scale"
+          },
+          {
+            "type": "Degrees",
+            "value": "0deg",
+            "name": "rotation"
+          },
+          {
+            "type": "Check",
+            "value": true,
+            "name": "visible"
+          },
+          {
+            "type": "SpriteFrame",
+            "value": {
+              "imgPath": "gameobjects.png",
+              "isImgPathAbsolutePath": false,
+              "spriteSheetConfigPath": "res/img/gameobjects.plist",
+              "isSpriteSheetConfigPathAbsolutePath": false,
+              "spriteName": "dragon-wing.png"
+            },
+            "name": "spriteFrame"
+          },
+          {
+            "type": "Flip",
+            "value": {
+              "horizon": true,
+              "vertical": false
+            },
+            "name": "flip"
+          }
+        ],
+        "actions": [
+          {
+            "actionName": "Flying",
+            "actionProperties": [
+              {
+                "type": "DegreeAction",
+                "keyframes": [
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "0s",
+                    "timeFuction": {
+                      "name": "BounceOut"
+                    },
+                    "value": {
+                      "ignorePartOver360": true,
+                      "ignorePreKeyPartOver360": true,
+                      "degree": "0deg",
+                      "minActionDegree": false,
+                      "actionDirection": "anti"
+                    }
+                  },
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "0.5s",
+                    "timeFuction": {
+                      "name": "BounceOut"
+                    },
+                    "value": {
+                      "ignorePartOver360": true,
+                      "ignorePreKeyPartOver360": true,
+                      "degree": "80deg",
+                      "minActionDegree": false,
+                      "actionDirection": "anti"
+                    }
+                  },
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "1s",
+                    "timeFuction": {
+                      "name": "BounceOut"
+                    },
+                    "value": {
+                      "ignorePartOver360": true,
+                      "ignorePreKeyPartOver360": true,
+                      "degree": "0deg",
+                      "minActionDegree": false,
+                      "actionDirection": "anti"
+                    }
+                  }
+                ],
+                "name": "rotation"
+              }
+            ]
+          },
+          {
+            "actionName": "Hit",
+            "actionProperties": [
+              {
+                "type": "DegreeAction",
+                "keyframes": [
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "0s",
+                    "timeFuction": {
+                      "name": "BounceOut"
+                    },
+                    "value": {
+                      "ignorePartOver360": true,
+                      "ignorePreKeyPartOver360": true,
+                      "degree": "123deg",
+                      "minActionDegree": false,
+                      "actionDirection": "anti"
+                    }
+                  },
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "2s",
+                    "timeFuction": {
+                      "name": "BounceOut"
+                    },
+                    "value": {
+                      "ignorePartOver360": true,
+                      "ignorePreKeyPartOver360": true,
+                      "degree": "0deg",
+                      "minActionDegree": false,
+                      "actionDirection": "anti"
+                    }
+                  }
+                ],
+                "name": "rotation"
+              }
+            ]
+          }
+        ],
+        "children": [
+        ]
+      },
+      {
+        "uuid": "",
+        "name": "Body",
+        "className": "",
+        "parentClassName": "XXNodeDomImageActor",
+        "properties": [
+          {
+            "type": "Scale2D",
+            "value": {
+              "scaleX": "1",
+              "scaleY": "1",
+              "lock": false
+            },
+            "name": "scale"
+          },
+          {
+            "type": "Check",
+            "value": true,
+            "name": "visible"
+          },
+          {
+            "type": "SpriteFrame",
+            "value": {
+              "imgPath": "gameobjects.png",
+              "isImgPathAbsolutePath": false,
+              "spriteSheetConfigPath": "res/img/gameobjects.plist",
+              "isSpriteSheetConfigPathAbsolutePath": false,
+              "spriteName": "dragon-body.png"
+            },
+            "name": "spriteFrame"
+          }
+        ],
+        "actions": [
+          {
+            "actionName": "Hit",
+            "actionProperties": [
+              {
+                "type": "SpriteFrame",
+                "keyframes": [
+                  {
+                    "method": "set",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "0s",
+                    "timeFuction": {
+                      "name": "BounceOut"
+                    },
+                    "value": {
+                      "imgPath": "gameobjects.png",
+                      "isImgPathAbsolutePath": false,
+                      "spriteName": "dragon-body-hit.png",
+                      "spriteSheetConfigPath": "res/img/gameobjects.plist",
+                      "isSpriteSheetConfigPathAbsolutePath": false
+                    }
+                  },
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "0.5s",
+                    "timeFuction": {
+                      "name": "BounceOut"
+                    },
+                    "value": {
+                      "imgPath": "gameobjects.png",
+                      "isImgPathAbsolutePath": false,
+                      "spriteName": "dragon-body.png",
+                      "spriteSheetConfigPath": "res/img/gameobjects.plist",
+                      "isSpriteSheetConfigPathAbsolutePath": false
+                    }
+                  }
+                ],
+                "name": "displayFrame"
+              }
+            ]
+          }
+        ],
+        "children": [
+        ]
+      }
+    ]
+  },
+  "editProperties": {
+  },
+  "meta": {
+    "version": "september"
+  }
+}

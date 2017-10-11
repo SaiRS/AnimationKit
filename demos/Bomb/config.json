@@ -1,0 +1,172 @@
+{
+  "timeFunctions": {
+    "linear": ""
+  },
+  "actions": [
+    {
+      "actionName": "bombRotate",
+      "duration": "2s"
+    }
+  ],
+  "nodeGraph": {
+    "uuid": "",
+    "name": "Bomb",
+    "className": "Bomb",
+    "parentClassName": "XXNodeDomActor",
+    "properties": [
+      {
+        "type": "Point2D",
+        "value": {
+          "x": "0",
+          "y": "0"
+        },
+        "name": "anchorPoint"
+      },
+      {
+        "type": "Scale2D",
+        "value": {
+          "scaleX": "1",
+          "scaleY": "1",
+          "lock": false
+        },
+        "name": "scale"
+      },
+      {
+        "type": "Check",
+        "value": true,
+        "name": "visible"
+      }
+    ],
+    "actions": [
+    ],
+    "children": [
+      {
+        "uuid": "",
+        "name": "Spikes",
+        "className": "",
+        "parentClassName": "XXNodeDomImageActor",
+        "properties": [
+          {
+            "type": "Scale2D",
+            "value": {
+              "scaleX": "1",
+              "scaleY": "1",
+              "lock": false
+            },
+            "name": "scale"
+          },
+          {
+            "type": "Degrees",
+            "value": "360deg",
+            "name": "rotation"
+          },
+          {
+            "type": "Check",
+            "value": true,
+            "name": "visible"
+          },
+          {
+            "type": "SpriteFrame",
+            "value": {
+              "imgPath": "gameobjects.png",
+              "isImgPathAbsolutePath": false,
+              "spriteName": "bomb-spikes.png",
+              "spriteSheetConfigPath": "res/img/gameobjects.plist",
+              "isSpriteSheetConfigPathAbsolutePath": false
+            },
+            "name": "spriteFrame"
+          }
+        ],
+        "actions": [
+          {
+            "actionName": "bombRotate",
+            "actionProperties": [
+              {
+                "type": "DegreeAction",
+                "keyframes": [
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "0s",
+                    "timeFuction": {
+                      "name": "linear"
+                    },
+                    "value": {
+                      "ignorePartOver360": true,
+                      "ignorePreKeyPartOver360": true,
+                      "degree": "0deg",
+                      "minActionDegree": false,
+                      "actionDirection": "anti"
+                    }
+                  },
+                  {
+                    "method": "to",
+                    "type": "DegreeAction",
+                    "name": "rotation",
+                    "time": "2s",
+                    "timeFuction": {
+                      "name": "linear"
+                    },
+                    "value": {
+                      "ignorePartOver360": true,
+                      "ignorePreKeyPartOver360": true,
+                      "degree": "360deg",
+                      "minActionDegree": false,
+                      "actionDirection": "anti"
+                    }
+                  }
+                ],
+                "name": "rotation"
+              }
+            ]
+          }
+        ],
+        "children": [
+        ]
+      },
+      {
+        "uuid": "",
+        "name": "Body",
+        "className": "",
+        "parentClassName": "XXNodeDomImageActor",
+        "properties": [
+          {
+            "type": "Scale2D",
+            "value": {
+              "scaleX": "1",
+              "scaleY": "1",
+              "lock": false
+            },
+            "name": "scale"
+          },
+          {
+            "type": "Check",
+            "value": true,
+            "name": "visible"
+          },
+          {
+            "type": "SpriteFrame",
+            "value": {
+              "imgPath": "gameobjects.png",
+              "isImgPathAbsolutePath": false,
+              "spriteName": "bomb-body.png",
+              "spriteSheetConfigPath": "res/img/gameobjects.plist",
+              "isSpriteSheetConfigPathAbsolutePath": false
+            },
+            "name": "spriteFrame"
+          }
+        ],
+        "actions": [
+        ],
+        "children": [
+        ]
+      }
+    ]
+  },
+  "editProperties": {
+  },
+  "meta": {
+    "version": "september"
+  }
+}
