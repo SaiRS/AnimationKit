@@ -19,7 +19,7 @@ class XXNodeDomImageActor extends XXNodeDomActor {
   /**
    * 设置图片地址
    * @param {string} src 图片地址
-   * @NOTE:
+   * @NOTE: 图片地址的引用？
    * 1. 怎么将引用资源加入到工程？
    * 3，引用的如果是相对路径，则还会和output设置有关，怎么处理？
    * 4. 引用绝对路径呢？

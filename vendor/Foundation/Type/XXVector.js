@@ -30,7 +30,7 @@ class XXVector extends XXObject {
    * @return {XXVector} 单位矢量
    */
   normalize(): XXVector {
-    // TODO:
+    // TODO: 矢量单位化
     return this;
   }
 

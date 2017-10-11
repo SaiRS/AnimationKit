@@ -140,7 +140,7 @@ class XXNotificationCenter extends XXObject {
               }
             }
 
-            // TODO:判断一下是不是observer所有的selector都已经没有了。
+            // TODO: 判断一下是不是observer所有的selector都已经没有了。
             if (!observerStructor.values().length) {
               observerStructor.delete(registerObserver);
             }

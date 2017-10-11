@@ -38,14 +38,19 @@ import xxvNotificationCenter from
   'XXVendor/Notification/NotificationCenter.js';
 import {XXToolBarShowRightPanelNotification} from
   '../Notification/XXToolBarNotification.js'
+import {XXInsertBasicActorNotification,
+        XXInsertTextActorNotification,
+        XXInsertImageActorNotification} from
+  '../Notification/XXInsertElementNotification.js'
+
+// TODO: 测试数据
+import demoData from '../../../../demos/Bomb/config.json';
 
 export default {
   name: 'XXActionKitEditApp',
 
   data: function() {
-    return {
-      // 整个项目的数据
-    }
+    return demoData; // 测试数据
   },
 
   components: {
@@ -63,11 +68,34 @@ export default {
 
   mounted: function () {
     // 注册通知
+
+    // 右边面板可见性改变
     xxvNotificationCenter.addObserver(
       this,
       'receivedToolBarRightPanelVisibleChangedNotification',
       XXToolBarShowRightPanelNotification
-    )
+    );
+
+    // 插入基本元素
+    xxvNotificationCenter.addObserver(
+      this,
+      'receivedInsertBasicActorNotification',
+      XXInsertBasicActorNotification
+    );
+
+    // 插入文字元素
+    xxvNotificationCenter.addObserver(
+      this,
+      'receivedInsertTextActorNotification',
+      XXInsertTextActorNotification
+    );
+
+    // 插入图片元素
+    xxvNotificationCenter.addObserver(
+      this,
+      'receivedInsertImageActorNotification',
+      XXInsertImageActorNotification
+    );
   },
 
   methods: {
@@ -77,6 +105,19 @@ export default {
     receivedToolBarRightPanelVisibleChangedNotification(info) {
       console.log('收到tool bar right panel 改变的消息');
       console.dir(info)
+    },
+
+    receivedInsertBasicActorNotification(info) {
+      console.log('收到插入基本元素的通知');
+      console.dir(info)
+    },
+    receivedInsertTextActorNotification(info) {
+      console.log('收到插入文字元素的通知');
+      console.dir(info);
+    },
+    receivedInsertImageActorNotification(info) {
+      console.log('收到插入图片元素的通知');
+      console.dir(info);
     }
   }
 }
