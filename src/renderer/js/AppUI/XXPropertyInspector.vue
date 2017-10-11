@@ -1,27 +1,27 @@
 <template>
   <div class='xxPropertyInspector-rootVueContainer'>
     <div class='propertyInspector-titleBar'>
-      <div class='titleItem' @click='showDocument'>
+      <div class='titleItem' :class='{inspectorselected: documentShowed}' @click='showDocument'>
         文稿
       </div>
 
-      <div class='titleItem' @click='showMeasurement'>
+      <div class='titleItem' :class='{inspectorselected: measurementShowed}' @click='showMeasurement'>
         度量
       </div>
 
-      <div class='titleItem' @click='showElement'>
+      <div class='titleItem' :class='{inspectorselected: elementShowed}' @click='showElement'>
         元素
       </div>
 
-      <div class='titleItem' @click='showPrint'>
+      <div class='titleItem' :class='{inspectorselected: printShowed}' @click='showPrint'>
         文字
       </div>
 
-      <div class='titleItem' @click='showEvent'>
+      <div class='titleItem' :class='{inspectorselected: eventShowed}' @click='showEvent'>
         事件
       </div>
 
-      <div class='titleItem' @click='showIndentify'>
+      <div class='titleItem' :class='{inspectorselected: indentifyShowed}' @click='showIndentify'>
         身份
       </div>
     </div>
@@ -95,8 +95,6 @@
       **************/
 
       showDocument() {
-        console.log('clicked document ' + this.documentShowed)
-
         if (!this.documentShowed) {
           this.documentShowed = true;
 
@@ -109,7 +107,6 @@
       },
 
       showMeasurement() {
-        console.log('clicked measurement ' + this.measurementShowed)
 
         if (!this.measurementShowed) {
           this.measurementShowed = true;
@@ -123,7 +120,6 @@
       },
 
       showElement() {
-        console.log('clicked element')
 
         if (!this.elementShowed) {
           this.elementShowed = true;
@@ -137,7 +133,6 @@
       },
 
       showPrint() {
-        console.log('clicked print')
 
         if (!this.printShowed) {
           this.printShowed = true;
@@ -151,7 +146,6 @@
       },
 
       showEvent() {
-        console.log('clicked event')
 
         if (!this.eventShowed) {
           this.eventShowed = true;
@@ -165,7 +159,6 @@
       },
 
       showIndentify() {
-        console.log('clicked indentify')
 
         if (!this.indentifyShowed) {
           this.indentifyShowed = true;
@@ -203,6 +196,11 @@
     width: 40px;
     height: 30px;
   }
+}
+
+.inspectorselected{
+  background-color: white;
+  color: black
 }
 
 </style>

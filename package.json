@@ -12,7 +12,7 @@
     "webpack": "webpack --config ./tool/webpack.web.config.js",
     "webpack:renderer": "webpack --config ./tool/webpack.renderer.config.js",
     "start": "electron .",
-    "build": "node ./tool/build.js",
+    "build": "NODE_ENV=production node ./tool/build.js",
     "build:web": "cross-env BUILD_TARGET=web node ./tool/build.js",
     "build:darwin": "cross-env BUILD_TARGET=darwin node ./tool/build.js",
     "build:clean": "cross-env BUILD_TARGET=clean node ./tool/build.js",
