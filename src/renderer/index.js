@@ -22,7 +22,6 @@ import 'babel-polyfill';
 import Vue from 'vue';
 
 import XXActionKitEditApp from 'XXAppUI/XXActionKitEditApp.vue';
-
 // import XXActionRotateBy from
 //  'XXActionAlias/Action/BaseAction/XXActionRotateBy.js';
 // import XXActionScaleBy from
@@ -73,6 +72,14 @@ import XXObjectLike from './js/VueInject/XXObjectLike.js';
 Vue.use(XXObjectLike);
 
 // import imgSrc from './img/mountain-top.jpg';
+//
+import XXBasicActor from './js/ActorComponents/XXBasicActor.vue';
+import XXTextActor from './js/ActorComponents/XXTextActor.vue';
+import XXImageActor from './js/ActorComponents/XXImageActor.vue';
+// 全局组件
+Vue.component('XXBasicActor', XXBasicActor);
+Vue.component('XXTextActor', XXTextActor);
+Vue.component('XXImageActor', XXImageActor);
 
 new Vue({
   el: '.mount-point-for-vue-js',

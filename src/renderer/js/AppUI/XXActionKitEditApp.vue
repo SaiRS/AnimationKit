@@ -8,7 +8,7 @@
       </XXResourceInspectorComponent>
 
       <div class='xxMiddlePart-centerPart'>
-        <XXElementEditPanelComponent class='xxCenterPart-topPart'>
+        <XXElementEditPanelComponent class='xxCenterPart-topPart' :nodeGraph="nodeGraph">
         </XXElementEditPanelComponent>
 
         <XXActionEditPanelComponent class='xxCenterPart-bottomPart'>
@@ -111,10 +111,12 @@ export default {
       console.log('收到插入基本元素的通知');
       console.dir(info)
     },
+
     receivedInsertTextActorNotification(info) {
       console.log('收到插入文字元素的通知');
       console.dir(info);
     },
+
     receivedInsertImageActorNotification(info) {
       console.log('收到插入图片元素的通知');
       console.dir(info);

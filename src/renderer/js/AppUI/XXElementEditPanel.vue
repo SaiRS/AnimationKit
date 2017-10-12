@@ -1,6 +1,9 @@
 <template>
   <div class='xxElementEditPanel-rootVueContainer'>
-    这是元素编辑区
+    <div class='xx-elements-container'>
+      <!-- 唯一的节点 -->
+      <XXBasicActor :nodeGraph='nodeGraph'></XXBasicActor>
+    </div>
   </div>
 </template>
 
@@ -10,14 +13,25 @@
   import {XXSelectedElementsChangedNotification} from
     '../Notification/XXElementEditNotification.js'
 
+
   export default {
     name: 'XXElementEditPanel',
+
+    props: {
+      nodeGraph: {
+        type: Object
+      }
+    },
+
+    components: {
+    },
 
     /******************
     * 生命周期
     *******************/
 
     mounted: function () {
+
       setTimeout(() => {
         console.log('发送通知')
         xxvNotificationCenter.postNotification(
@@ -38,6 +52,16 @@
 .xxElementEditPanel-rootVueContainer{
   background-color: white;
   color: #191919;
+
+  position: relative;
+
+  .xx-elements-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+  }
 }
 </style>
 
