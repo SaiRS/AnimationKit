@@ -10,6 +10,9 @@
 
 
 <script>
+  import {XXNodeGraphParser,
+    XXPositionPropertyParser,
+    XXSizePropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
   export default {
     name: 'XXBasicActor',
@@ -30,19 +33,43 @@
        */
 
       left: function() {
-        return 0;
+        let posprop = XXNodeGraphParser.getPositionProperty(this.nodeGraph);
+        let pos = XXPositionPropertyParser.getPosition(posprop);
+        if (pos) {
+          return pos['x'];
+        } else {
+          return 0;
+        }
       },
 
       top: function() {
-        return 10;
+        let posprop = XXNodeGraphParser.getPositionProperty(this.nodeGraph);
+        let pos = XXPositionPropertyParser.getPosition(posprop);
+        if (pos) {
+          return pos['y'];
+        } else {
+          return 0;
+        }
       },
 
       width: function() {
-        return 86;
+        let sizeprop = XXNodeGraphParser.getSizeProperty(this.nodeGraph);
+        let size = XXSizePropertyParser.getSize(sizeprop);
+        if (size) {
+          return size['width'];
+        } else {
+          return 0;
+        }
       },
 
       height: function() {
-        return 86;
+        let sizeprop = XXNodeGraphParser.getSizeProperty(this.nodeGraph);
+        let size = XXSizePropertyParser.getSize(sizeprop);
+        if (size) {
+          return size['height'];
+        } else {
+          return 0;
+        }
       },
 
       overflow: function() {

@@ -15,7 +15,7 @@
     "parentClassName": "XXNodeDomActor",
     "properties": [
       {
-        "type": "Point2D",
+        "type": "Point",
         "value": {
           "x": "0",
           "y": "0"
@@ -23,7 +23,24 @@
         "name": "anchorPoint"
       },
       {
-        "type": "Scale2D",
+        "type": "Point",
+        "value": {
+          "x": 86,
+          "y": 20,
+          "z": 0
+        },
+        "name": "position"
+      },
+      {
+        "type": "Size",
+        "value": {
+          "width": 99,
+          "height": 55
+        },
+        "name": "size"
+      },
+      {
+        "type": "Scale",
         "value": {
           "scaleX": "1",
           "scaleY": "1",
@@ -47,7 +64,7 @@
         "parentClassName": "XXNodeDomImageActor",
         "properties": [
           {
-            "type": "Scale2D",
+            "type": "Scale",
             "value": {
               "scaleX": "1",
               "scaleY": "1",
@@ -132,7 +149,7 @@
         "parentClassName": "XXNodeDomImageActor",
         "properties": [
           {
-            "type": "Scale2D",
+            "type": "Scale",
             "value": {
               "scaleX": "1",
               "scaleY": "1",

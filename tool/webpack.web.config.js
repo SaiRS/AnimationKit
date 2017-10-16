@@ -290,6 +290,7 @@ module.exports = {
         path.resolve(__dirname, '..', 'vendor', 'Foundation'),
       'XXActionAlias': path.resolve(__dirname, '..', 'vendor', 'Action'),
       'XXVendor': path.resolve(__dirname, '..', 'vendor'),
+      'XXLoader': path.resolve(__dirname, '..', 'vendor', 'loader'),
 
       // 编辑器路径
       'XXAppUI':

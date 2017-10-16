@@ -3,6 +3,9 @@
 
 // 属性类型
 let XXLoaderPropertyType = {
+  // 未知类型
+  UnknownType: 'unknown',
+
   // 简单boolean类型
   CheckType: 'Check',
 
@@ -19,14 +22,6 @@ let XXLoaderPropertyType = {
   // }
   FlipType: 'Flip',
 
-  // 位置类型，对应的value格式为
-  // {
-  //   x: 0,
-  //   y: 0,
-  //   z: 0, //暂时没有修改入口
-  // }
-  PositionType: 'Position',
-
   // 点类型，对应的value为
   // {
   //   x: 0,
@@ -34,6 +29,13 @@ let XXLoaderPropertyType = {
   //   z: 0, // 暂时没有修改入口
   // }
   PointType: 'Point',
+
+  // 尺寸类型
+  // {
+  //    width: 0,
+  //    height: 0,
+  // }
+  SizeType: 'Size',
 
   // 缩放类型，对应的value格式为
   // {
@@ -74,6 +76,18 @@ let XXLoaderPropertyType = {
   SpriteType: 'SpriteFrame',
 };
 
+// 属性名字
+let XXLoaderPropertyName = {
+  Anchor: 'anchorPoint', // 锚点
+  Scale: 'scale', // 缩放
+  Position: 'position', // 位置
+  Size: 'size', // 尺寸
+  Rotate: 'rotation', // 旋转
+  Visible: 'visible', // 可见性
+  SpriteFrame: 'spriteFrame', // 图片帧
+};
+
 export {
   XXLoaderPropertyType,
+  XXLoaderPropertyName,
 };
