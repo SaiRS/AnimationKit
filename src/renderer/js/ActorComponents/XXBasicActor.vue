@@ -15,7 +15,8 @@
     XXSizePropertyParser,
     XXStringPropertyParser,
     XXScalePropertyParser,
-    XXRotationPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+    XXRotationPropertyParser,
+    XXAnchorPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
   export default {
     name: 'XXBasicActor',
@@ -136,11 +137,23 @@
       },
 
       anchorX: function() {
-        return 0.5;
+        let anchorprop = XXNodeGraphParser.getAnchorProperty(this.nodeGraph);
+        let anchor = XXAnchorPropertyParser.getAnchor(anchorprop);
+        if (anchor) {
+          return anchor['anchorX'];
+        } else {
+          return 0.5;
+        }
       },
 
       anchorY: function() {
-        return 0.5;
+        let anchorprop = XXNodeGraphParser.getAnchorProperty(this.nodeGraph);
+        let anchor = XXAnchorPropertyParser.getAnchor(anchorprop);
+        if (anchor) {
+          return anchor['anchorY'];
+        } else {
+          return 0.5;
+        }
       },
 
       /**
