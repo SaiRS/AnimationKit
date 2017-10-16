@@ -47,8 +47,8 @@
       {
         "type": "Scale",
         "value": {
-          "scaleX": "1",
-          "scaleY": "1",
+          "scaleX": "1.5",
+          "scaleY": "2.9",
           "lock": false
         },
         "name": "scale"

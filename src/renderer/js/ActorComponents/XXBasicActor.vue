@@ -13,7 +13,8 @@
   import {XXNodeGraphParser,
     XXPositionPropertyParser,
     XXSizePropertyParser,
-    XXStringPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+    XXStringPropertyParser,
+    XXScalePropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
   export default {
     name: 'XXBasicActor',
@@ -84,11 +85,23 @@
       },
 
       scaleX: function() {
-        return 1;
+        let scaleprop = XXNodeGraphParser.getScaleProperty(this.nodeGraph);
+        let scale = XXScalePropertyParser.getScale(scaleprop);
+        if (scale) {
+          return scale['scaleX'];
+        } else {
+          return 1;
+        }
       },
 
       scaleY: function() {
-        return 1;
+        let scaleprop = XXNodeGraphParser.getScaleProperty(this.nodeGraph);
+        let scale = XXScalePropertyParser.getScale(scaleprop);
+        if (scale) {
+          return scale['scaleY'];
+        } else {
+          return 1;
+        }
       },
 
       rotateZ: function() {
