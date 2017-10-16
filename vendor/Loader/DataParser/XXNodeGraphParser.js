@@ -185,6 +185,22 @@ class XXNodeGraphParser {
       }
     });
   }
+
+  /**
+   * 获得overflow属性
+   * @param  {[type]} nodeGraph [description]
+   * @return {[type]}           [description]
+   */
+  static getOverflowProperty(nodeGraph) {
+    return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
+      if (XXPropertyParser.getPropertyName(property) ==
+       XXLoaderPropertyName.Overflow) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
 }
 
 export {

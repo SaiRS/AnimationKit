@@ -85,6 +85,7 @@ let XXLoaderPropertyName = {
   Rotate: 'rotation', // 旋转
   Visible: 'visible', // 可见性
   SpriteFrame: 'spriteFrame', // 图片帧
+  Overflow: 'overflow', //
 };
 
 export {

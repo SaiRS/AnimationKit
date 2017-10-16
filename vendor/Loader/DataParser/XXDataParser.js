@@ -10,3 +10,4 @@ export {XXPropertyParser};
 
 export {XXPositionPropertyParser} from './XXPositionPropertyParser.js';
 export {XXSizePropertyParser} from './XXSizePropertyParser.js';
+export {XXStringPropertyParser} from './XXStringPropertyParser.js';

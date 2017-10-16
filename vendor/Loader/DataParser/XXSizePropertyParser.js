@@ -2,11 +2,11 @@ import {XXLoaderPropertyType} from '../XXLoaderConstant.js';
 import XXPropertyParser from './XXPropertyParser.js';
 
 /**
- * 位置属性解析
+ * 尺寸属性解析
  */
 class XXSizePropertyParser {
   /**
-   * 获取位置信息
+   * 获取尺寸信息
    * @param  {Object} property [description]
    * @return {Object}           {width: 0, height:0}
    */

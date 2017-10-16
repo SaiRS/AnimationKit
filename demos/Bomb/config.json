@@ -40,6 +40,11 @@
         "name": "size"
       },
       {
+        "type": "String",
+        "value": "hidden",
+        "name": "overflow"
+      },
+      {
         "type": "Scale",
         "value": {
           "scaleX": "1",

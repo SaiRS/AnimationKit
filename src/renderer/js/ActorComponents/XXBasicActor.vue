@@ -12,7 +12,8 @@
 <script>
   import {XXNodeGraphParser,
     XXPositionPropertyParser,
-    XXSizePropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+    XXSizePropertyParser,
+    XXStringPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
   export default {
     name: 'XXBasicActor',
@@ -73,7 +74,13 @@
       },
 
       overflow: function() {
-        return 'auto';
+        let overflowprop = XXNodeGraphParser.getOverflowProperty(this.nodeGraph);
+        let overflow = XXStringPropertyParser.getString(overflowprop);
+        if (overflow) {
+          return overflow;
+        } else {
+          return 'auto';
+        }
       },
 
       scaleX: function() {
