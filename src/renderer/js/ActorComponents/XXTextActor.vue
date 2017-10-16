@@ -1,7 +1,7 @@
 <template>
-  <XXBasicNode>
+  <div>
     <input />
-  </XXBasicNode>
+  </div>
 </template>
 
 <script>

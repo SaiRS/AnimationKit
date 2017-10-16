@@ -141,7 +141,9 @@ module.exports = {
   },
   output: {
     filename: '[name].[hash].js',
-    path: path.resolve(__dirname, '..', 'dist', 'web'),
+    path: path.resolve(
+      __dirname, '..', '..', '..', '..', '..',
+      'publish', 'webs', 'AnimationKitEditor'),
     // publicPath: '',
   },
   module: {

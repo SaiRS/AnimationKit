@@ -1,7 +1,7 @@
 <template>
-  <XXBasicNode>
+  <div>
     <img src='' />
-  </XXBasicNode>
+  </div>
 </template>
 
 <script>

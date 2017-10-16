@@ -42,7 +42,9 @@ function clean() {
  * 打包web项目
  */
 function web() {
-  del.sync(['dist/web/*', '!.gitkeep']);
+  del.sync(['../../../../publish/webs/AnimationKitEditor', '!.gitkeep'], {
+    force: true,
+  });
   webpack(webConfig, (err, stats) => {
     if (err || stats.hasErrors()) {
       Log.error(err);
