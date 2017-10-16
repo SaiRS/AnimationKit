@@ -14,7 +14,8 @@
     XXPositionPropertyParser,
     XXSizePropertyParser,
     XXStringPropertyParser,
-    XXScalePropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+    XXScalePropertyParser,
+    XXRotationPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
   export default {
     name: 'XXBasicActor',
@@ -105,15 +106,33 @@
       },
 
       rotateZ: function() {
-        return 0;
+        let rotationprop = XXNodeGraphParser.getRotationProperty(this.nodeGraph);
+        let rotation = XXRotationPropertyParser.getRotation(rotationprop);
+        if (rotation) {
+          return rotation['rotationZ'];
+        } else {
+          return 0;
+        }
       },
 
       rotateX: function() {
-        return 0;
+        let rotationprop = XXNodeGraphParser.getRotationProperty(this.nodeGraph);
+        let rotation = XXRotationPropertyParser.getRotation(rotationprop);
+        if (rotation) {
+          return rotation['rotationX'];
+        } else {
+          return 0;
+        }
       },
 
       rotateY: function() {
-        return 0;
+        let rotationprop = XXNodeGraphParser.getRotationProperty(this.nodeGraph);
+        let rotation = XXRotationPropertyParser.getRotation(rotationprop);
+        if (rotation) {
+          return rotation['rotationY'];
+        } else {
+          return 0;
+        }
       },
 
       anchorX: function() {

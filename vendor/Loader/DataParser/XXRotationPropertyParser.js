@@ -2,23 +2,23 @@ import {XXLoaderPropertyType} from '../XXLoaderConstant.js';
 import XXPropertyParser from './XXPropertyParser.js';
 
 /**
- * 缩放属性解析
+ * 旋转属性解析
  */
-class XXScalePropertyParser {
+class XXRotationPropertyParser {
   /**
    * 获取缩放信息
    * @param  {Object} property [description]
    * @return {Object}           {scaleX: 0, scaleY:0, scaleZ: 0}
    */
-  static getScale(property) {
+  static getRotation(property) {
     if (XXPropertyParser.getPropertyType(property) ==
-       XXLoaderPropertyType.ScaleType) {
+       XXLoaderPropertyType.RotationType) {
       // 属性的值
       let value = XXPropertyParser.getPropertyValue(property);
       return {
-        scaleX: value['scaleX'],
-        scaleY: value['scaleY'],
-        scaleZ: value['scaleZ'],
+        rotationX: value['rotationX'],
+        rotationY: value['rotationY'],
+        rotationZ: value['rotationZ'],
       };
     } else {
       return null;
@@ -26,4 +26,4 @@ class XXScalePropertyParser {
   }
 }
 
-export {XXScalePropertyParser};
+export {XXRotationPropertyParser};

@@ -45,6 +45,14 @@ let XXLoaderPropertyType = {
   // }
   ScaleType: 'Scale',
 
+  // 旋转类型，对应的value为
+  // {
+  //  rotationX: 0,
+  //  rotationY: 0,
+  //  rotationZ: 0
+  // }
+  RotationType: 'Rotation',
+
   // 角度类型，对应的value格式为简单字符串
   // 234deg/0.2rad/-24deg/-0.8rad
   DegreesType: 'Degrees',

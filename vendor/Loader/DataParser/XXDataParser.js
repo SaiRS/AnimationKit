@@ -12,3 +12,4 @@ export {XXPositionPropertyParser} from './XXPositionPropertyParser.js';
 export {XXSizePropertyParser} from './XXSizePropertyParser.js';
 export {XXStringPropertyParser} from './XXStringPropertyParser.js';
 export {XXScalePropertyParser} from './XXScalePropertyParser.js';
+export {XXRotationPropertyParser} from './XXRotationPropertyParser.js';

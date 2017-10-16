@@ -54,6 +54,15 @@
         "name": "scale"
       },
       {
+        "type": "Rotation",
+        "value": {
+          "rotationX": "15deg",
+          "rotationY": "29deg",
+          "rotationZ": "47deg"
+        },
+        "name": "rotation"
+      },
+      {
         "type": "Check",
         "value": true,
         "name": "visible"
