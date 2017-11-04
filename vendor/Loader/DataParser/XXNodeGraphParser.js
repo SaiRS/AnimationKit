@@ -2,10 +2,15 @@
 
 import {XXLoaderPropertyName} from '../XXLoaderConstant.js';
 import XXPropertyParser from './XXPropertyParser.js';
+import {XXPositionPropertyParser} from './XXPositionPropertyParser.js';
 /**
  * 解析节点的帮助方法
  */
 class XXNodeGraphParser {
+
+  /** **************************
+   * 读取部分
+   ****************************/
 
   /**
    * 获得节点的uuid
@@ -200,6 +205,25 @@ class XXNodeGraphParser {
         return false;
       }
     });
+  }
+
+  /** **************************
+   * 修改部分
+   ****************************/
+
+  /**
+   * [setPositionByOffset description]
+   * @param {[type]} nodeGraph   [description]
+   * @param {Number} [offsetX=0] [description]
+   * @param {Number} [offsetY=0] [description]
+   * @param {Number} [offsetZ=0] [description]
+   */
+  static setPositionByOffset(nodeGraph, offsetX = 0, offsetY = 0, offsetZ = 0) {
+    let positionProperty = XXNodeGraphParser.getPositionProperty(nodeGraph);
+    if (positionProperty) {
+      XXPositionPropertyParser.setPositionByOffset(positionProperty,
+        offsetX, offsetY, offsetZ);
+    }
   }
 }
 

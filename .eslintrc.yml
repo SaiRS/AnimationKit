@@ -24,3 +24,4 @@ rules:
     -
       SwitchCase: 1
   no-console: ["error", { allow: ["warn", "error", "log", "debug"] }]
+  max-len: ["error", {code: 160}]

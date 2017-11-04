@@ -6,6 +6,10 @@
  */
 class XXAnimationKitParser {
 
+  /** **************************
+   * 读取部分
+   ****************************/
+
   /**
    * 获取组件的动作信息
    * @param  {Object} animationKitJson animationkit的配置文件内容

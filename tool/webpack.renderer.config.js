@@ -145,6 +145,10 @@ let rendererConfig = {
           },
         },
       },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
     ],
   },
   plugins: [
@@ -179,11 +183,11 @@ let rendererConfig = {
       // webpack的配置路径
       'WebpackToolConfig': path.resolve(__dirname),
       // 插件路径
-      'XXTool': path.resolve(__dirname, '..', 'vendor', 'Tool'),
+      'XXTool': path.resolve(__dirname, '..', 'Vendor', 'Tool'),
       'XXFoundation':
-        path.resolve(__dirname, '..', 'vendor', 'Foundation'),
-      'XXActionAlias': path.resolve(__dirname, '..', 'vendor', 'Action'),
-      'XXVendor': path.resolve(__dirname, '..', 'vendor'),
+        path.resolve(__dirname, '..', 'Vendor', 'Foundation'),
+      'XXActionAlias': path.resolve(__dirname, '..', 'Vendor', 'Action'),
+      'XXVendor': path.resolve(__dirname, '..', 'Vendor'),
 
       // 编辑器路径
       'XXAppUI':

@@ -1,5 +1,13 @@
 <template>
-  <div class='xx-basic-actor' :style='styleObject'>
+  <div class='xx-basic-actor'
+    :style='styleObject'
+    draggable="true"
+    @click.exact='onClick'
+    @click.alt.exact='onAltClick'
+
+    @dragstart='onDragStart'
+    @drag='onDrag'
+    @dragend='onDragEnd'>
     <template v-for='(child, index) in nodeGraph.children'>
       <XXBasicActor style='padding: 0px 0 0 8px' :nodeGraph="child" v-if='child.parentClassName == "XXNodeDomActor"'></XXBasicActor>
       <XXTextActor style='padding: 0px 0 0 8px' :nodeGraph="child" v-if='child.parentClassName == "XXNodeDomTextActor"'></XXTextActor>
@@ -18,11 +26,21 @@
     XXRotationPropertyParser,
     XXAnchorPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
+  import xxvNotificationCenter from
+    'XXVendor/Notification/NotificationCenter.js';
+
   export default {
     name: 'XXBasicActor',
 
     components: {
 
+    },
+
+    data: function() {
+      return {
+        dragStartX: 0,
+        dragStartY: 0,
+      }
     },
 
     props: {
@@ -272,10 +290,10 @@
         return {
           // 度量
           overflow: this.overflow,
-          left: this.left + 'px',
-          top: this.top + 'px',
-          width: this.width + 'px',
-          height: this.height + 'px',
+          left: this.left,
+          top: this.top,
+          width: this.width,
+          height: this.height,
           transform: `scaleX(${this.scaleX}) scaleY(${this.scaleY})
             rotateZ(${this.rotateZ})
             rotateX(${this.rotateX}) rotateY(${this.rotateY})`,
@@ -307,7 +325,67 @@
     },
 
     methods: {
+      onClick(event) {
+        console.log('选中了元素 ' + this.$getUUID(this.nodeGraph));
+        console.log(`isTheCurrentActorByUUID = ${this.isTheCurrentActorByUUID(this.$getUUID(this.nodeGraph))}`);
+        if (this.isTheCurrentActorByUUID(this.$getUUID(this.nodeGraph))) {
+          // do nothing
+        } else {
+          // 设置
+          this.setCurrentSelectedActor(this.nodeGraph);
+        }
+      },
 
+      onAltClick(event) {
+        console.log('on Control click');
+      },
+
+      onDragEnter() {
+        console.log('onDragEnter');
+      },
+
+      onDragStart(event) {
+        console.log('onDragStart');
+        event.dataTransfer.effectAllowed = "move";
+
+        this.dragStartX = event.clientX;
+        this.dragStartY = event.clientY;
+        if (this.currentSelectedActor) {
+          // do nothing
+        } else {
+          this.setCurrentSelectedActor(this.nodeGraph);
+        }
+      },
+
+      onDrag(event) {
+        event.preventDefault();
+
+        let offset = {
+          x: event.clientX - this.dragStartX,
+          y: event.clientY - this.dragStartY,
+        };
+        this.moveCurrentActorByOffset(offset);
+        // 重新设置start
+        this.dragStartX = event.clientX;
+        this.dragStartY = event.clientY;
+      },
+
+      onDragEnd(event) {
+        console.log('onDragEnd');
+        event.preventDefault();
+      },
+
+      onDragExit() {
+        console.log('onDragExit');
+      },
+
+      onDragLeave() {
+        console.log('onDragLeave');
+      },
+
+      onDragOver() {
+        console.log('onDragOver');
+      },
     },
   }
 </script>

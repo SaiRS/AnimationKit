@@ -1,6 +1,10 @@
 <template>
   <div class='xxElementEditPanel-rootVueContainer'>
-    <div class='xx-elements-container'>
+    <div class='xx-elements-container'
+      @click.self.stop='onClick'
+
+      @dragenter='onDragEnter'
+      @dragover='onDragOver'>
       <!-- 唯一的节点 -->
       <XXBasicActor :nodeGraph='nodeGraph'></XXBasicActor>
     </div>
@@ -43,6 +47,23 @@
         xxvNotificationCenter.postNotification(
           XXSelectedElementsChangedNotification, this);
       }, 2000);
+    },
+
+    methods: {
+      onClick() {
+        // 取消当前选择的元素
+        this.resetCurrentSelectedActor();
+      },
+
+      onDragEnter() {
+        console.log('on Drag Enter');
+        event.preventDefault();
+      },
+
+      onDragOver(event) {
+        console.log('on Drag Over');
+        event.preventDefault();
+      }
     },
   }
 </script>

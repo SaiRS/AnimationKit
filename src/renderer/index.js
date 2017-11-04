@@ -21,6 +21,8 @@ import 'babel-polyfill';
 
 import Vue from 'vue';
 
+import Store from './store/index.js';
+
 import XXActionKitEditApp from 'XXAppUI/XXActionKitEditApp.vue';
 // import XXActionRotateBy from
 //  'XXActionAlias/Action/BaseAction/XXActionRotateBy.js';
@@ -53,40 +55,54 @@ import iView from 'iview';
 import 'iview/dist/styles/iview.css';    // 使用 CSS
 Vue.use(iView);
 
-import XXStaticTipView from './js/VueInject/XXStaticTipView.js';
+// 提示组件的插件
+import XXStaticTipView from './plugins/components/XXStaticTipView.js';
 Vue.use(XXStaticTipView);
 
-import XXToastView from './js/VueInject/XXToastView.js';
+import XXToastView from './plugins/components/XXToastView.js';
 Vue.use(XXToastView);
 
-import XXNoticeView from './js/VueInject/XXNoticeView.js';
+import XXNoticeView from './plugins/components/XXNoticeView.js';
 Vue.use(XXNoticeView);
 
-import XXAlertView from './js/VueInject/XXAlertView.js';
+import XXAlertView from './plugins/components/XXAlertView.js';
 Vue.use(XXAlertView);
 
-import XXConfirmView from './js/VueInject/XXConfirmView.js';
+import XXConfirmView from './plugins/components/XXConfirmView.js';
 Vue.use(XXConfirmView);
 
-import XXObjectLike from './js/VueInject/XXObjectLike.js';
+// TODO: 对象(不知道能不能用上)
+import XXObjectLike from './plugins/dataStruct/XXObjectLike.js';
 Vue.use(XXObjectLike);
+
+// 数据解析插件
+import {XXNodeGraphParserPlugin} from './plugins/dataParser/XXNodeGraphParserPlugin.js';
+Vue.use(XXNodeGraphParserPlugin);
 
 // import imgSrc from './img/mountain-top.jpg';
 //
+// 全局组件
 import XXBasicActor from './js/ActorComponents/XXBasicActor.vue';
 import XXTextActor from './js/ActorComponents/XXTextActor.vue';
 import XXImageActor from './js/ActorComponents/XXImageActor.vue';
-// 全局组件
 Vue.component('XXBasicActor', XXBasicActor);
 Vue.component('XXTextActor', XXTextActor);
 Vue.component('XXImageActor', XXImageActor);
 
+// mixin
+import XXEditStoreMixin from './mixin/xxEditStoreMixin.js';
+// 全局 mixin
+Vue.mixin(XXEditStoreMixin);
+
+
+// 实例化
 new Vue({
   el: '.mount-point-for-vue-js',
   template: '<XXActionKitEditApp></XXActionKitEditApp>',
   components: {
     XXActionKitEditApp: XXActionKitEditApp,
   },
+  store: Store,
 });
 
 

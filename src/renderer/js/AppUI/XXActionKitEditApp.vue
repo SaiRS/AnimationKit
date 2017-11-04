@@ -43,14 +43,16 @@ import {XXInsertBasicActorNotification,
         XXInsertImageActorNotification} from
   '../Notification/XXInsertElementNotification.js'
 
-// TODO: 测试数据
-import demoData from '../../../../demos/Bomb/config.json';
+
+import XXBaseActorBuilder from 'XXVendor/Builder/BaseActor/XXBaseActorBuilder.js';
 
 export default {
   name: 'XXActionKitEditApp',
 
   data: function() {
-    return demoData; // 测试数据
+    return {
+      nodeGraph: {}, // 当前元素的结构图
+    };
   },
 
   components: {
@@ -85,7 +87,6 @@ export default {
 
     // 插入文字元素
     xxvNotificationCenter.addObserver(
-      this,
       'receivedInsertTextActorNotification',
       XXInsertTextActorNotification
     );
@@ -109,7 +110,13 @@ export default {
 
     receivedInsertBasicActorNotification(info) {
       console.log('收到插入基本元素的通知');
-      console.dir(info)
+      console.dir(info);
+      if (!Object.keys(this.nodeGraph).length) {
+        this.nodeGraph = XXBaseActorBuilder.buildInitActor();
+      } else {
+        this.nodeGraph['children'].push(XXBaseActorBuilder.buildInitActor());
+      }
+
     },
 
     receivedInsertTextActorNotification(info) {
