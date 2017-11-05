@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class='classObject'>
     <!-- 背景 -->
     <div class='xx-element-inspector-group'>
       <div>背景</div>
@@ -18,7 +18,7 @@
             <div class='gradient-color-container'>
               <ColorPicker v-model="gradientstart" alpha />
               <Button type="text" style="color:white" @click='switchGrident'><-----></Button>
-              <ColorPicker v-model="gradientend" alpha />
+              <ColorPicker v-model="gradientend" alpha />·
             </div>
             <div class="gradient-angle-container">
               <Slider v-model="gradientangle" :max=360 :min=0 show-input></Slider>
@@ -235,6 +235,14 @@
 
         shadowcolor: 'rgba(0, 0, 0, 1)'
       }
+    },
+
+    computed: {
+      classObject() {
+        return {
+          'xxg-disabled': this.currentSelectedActorMixin ? false : true,
+        };
+      },
     },
 
     methods: {

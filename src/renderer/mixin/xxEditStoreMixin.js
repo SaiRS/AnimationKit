@@ -7,7 +7,7 @@ import {mapState, mapGetters, mapMutations} from 'vuex';
 const XXEditStoreMixin = {
   computed: {
     ...mapState({
-      currentSelectedActor: function(state) {
+      currentSelectedActorMixin: function(state) {
         // 模块化的
         return state.xxEditStore.currentSelectedActor;
       },
@@ -16,6 +16,9 @@ const XXEditStoreMixin = {
     ...mapGetters({
       'isTheCurrentActorByUUIDMixin': 'isTheCurrentActorByUUID',
       'isTheCurrentActorByActorMixin': 'isTheCurrentActorByActor',
+
+      'currentActorPositionMixin': 'currentActorPosition',
+      'currentActorSizeMixin': 'currentActorSize',
     }),
   },
 

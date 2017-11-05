@@ -49,6 +49,7 @@ import XXActionKitEditApp from 'XXAppUI/XXActionKitEditApp.vue';
 
 
 require('./css/reset.css');
+require('./css/xxGlobalStyle.css');
 
 // vue inject
 import iView from 'iview';

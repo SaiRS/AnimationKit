@@ -1,4 +1,6 @@
-import {XXNodeGraphParser} from 'XXLoader/DataParser/XXNodeGraphParser.js';
+import {XXNodeGraphParser,
+  XXPositionPropertyParser,
+  XXSizePropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
 const state = {
   currentSelectedActor: null,  // 数据对象
@@ -21,6 +23,28 @@ const getters = {
   isTheCurrentActorByActor: (state) => (actor) => {
     return (state.currentSelectedActor && actor &&
         state.currentSelectedActor.uuid && actor.uuid && state.currentSelectedActor.uuid === actor.uuid) ? true : false;
+  },
+
+  /** ************************************
+  * 读取部分
+  ****************************************/
+
+  currentActorPosition(state) {
+    let positionProp = XXNodeGraphParser.getPositionProperty(state.currentSelectedActor);
+    if (positionProp) {
+      return XXPositionPropertyParser.getPosition(positionProp);
+    } else {
+      return null;
+    }
+  },
+
+  currentActorSize(state) {
+    let sizeProp = XXNodeGraphParser.getSizeProperty(state.currentSelectedActor);
+    if (sizeProp) {
+      return XXSizePropertyParser.getSize(sizeProp);
+    } else {
+      return null;
+    }
   },
 };
 
@@ -50,6 +74,15 @@ const mutations = {
 
   },
 
+  /** ************************************
+  * 修改部分
+  ****************************************/
+
+  /**
+   * [moveCurrentActorByOffset description]
+   * @param {[type]} state  [description]
+   * @param {[type]} offset [description]
+   */
   moveCurrentActorByOffset(state, offset) {
     let offsetX = offset && offset.x || 0;
     let offsetY = offset && offset.y || 0;

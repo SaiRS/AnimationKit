@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class='classObject'>
     <!-- 内容概览 -->
     <div class="xx-measurement-inspector-group">
       <div>
@@ -139,7 +139,6 @@
 
     data: function () {
       return {
-
         visibilitylist: [
           {
             label: '可见',
@@ -169,18 +168,6 @@
         type: String,
         default: 'visible'  // 默认可见
       },
-      left: {
-        type: Number
-      },
-      top: {
-        type: Number
-      },
-      width: {
-        type: Number
-      },
-      height: {
-        type: Number
-      },
 
       widthScale: {
         type: Number
@@ -204,7 +191,35 @@
       anchorY: {
         type: Number
       },
-    }
+    },
+
+    computed: {
+      classObject() {
+        return {
+          'xxg-disabled': this.currentSelectedActorMixin ? false : true,
+        };
+      },
+
+      left() {
+        let pos = this.currentActorPositionMixin;
+        return pos ? pos['x'] : 0;
+      },
+
+      top() {
+        let pos = this.currentActorPositionMixin;
+        return pos ? pos['y'] : 0;
+      },
+
+      width() {
+        let size = this.currentActorSizeMixin;
+        return size ? size['width'] : 0;
+      },
+
+      height() {
+        let size = this.currentActorSizeMixin;
+        return size ? size['height'] : 0;
+      }
+    },
   }
 </script>
 

@@ -352,9 +352,7 @@
 
         this.dragStartX = event.clientX;
         this.dragStartY = event.clientY;
-        console.log('当前node');
-        console.log(this.currentSelectedActorMixin);
-        if (!this.currentSelectedActorMixin || this.isTheCurrentActorByUUIDMixin(this.nodeGraph)) {
+        if (this.isTheCurrentActorByUUIDMixin(this.nodeGraph)) {
           // 设置为当前node
           this.setCurrentSelectedActorMixin(this.nodeGraph);
         }
@@ -362,13 +360,7 @@
 
       onDrag(event) {
         event.preventDefault();
-        // console.log('========================== start');
-        // console.log(event);
-        // console.log(`event.clientX = ${event.clientX}`);
-        // console.log(`event.clientY = ${event.clientY}`);
-        // console.log(`event.screenX = ${event.screenX}`);
-        // console.log(`event.screenY = ${event.screenY}`);
-        // console.log('========================== end');
+
         let offset = {
           x: event.clientX - this.dragStartX,
           y: event.clientY - this.dragStartY,
