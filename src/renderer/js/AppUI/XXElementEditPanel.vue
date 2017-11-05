@@ -52,16 +52,16 @@
     methods: {
       onClick() {
         // 取消当前选择的元素
-        this.resetCurrentSelectedActor();
+        this.resetCurrentSelectedActorMixin();
       },
 
       onDragEnter() {
-        console.log('on Drag Enter');
+        // console.log('on Drag Enter');
         event.preventDefault();
       },
 
       onDragOver(event) {
-        console.log('on Drag Over');
+        // console.log('on Drag Over');
         event.preventDefault();
       }
     },

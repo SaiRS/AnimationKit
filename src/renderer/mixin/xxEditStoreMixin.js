@@ -14,19 +14,19 @@ const XXEditStoreMixin = {
     }),
 
     ...mapGetters({
-      'isTheCurrentActorByUUID': 'isTheCurrentActorByUUID',
-      'isTheCurrentActorByActor': 'isTheCurrentActorByActor',
+      'isTheCurrentActorByUUIDMixin': 'isTheCurrentActorByUUID',
+      'isTheCurrentActorByActorMixin': 'isTheCurrentActorByActor',
     }),
   },
 
   methods: {
     ...mapMutations({
-      'setCurrentSelectedActor': 'setCurrentSelectedActor',
-      'addSelectedActor': 'addSelectedActor',
-      'resetCurrentSelectedActor': 'resetCurrentSelectedActor',
+      'setCurrentSelectedActorMixin': 'setCurrentSelectedActor',
+      'addSelectedActorMixin': 'addSelectedActor',
+      'resetCurrentSelectedActorMixin': 'resetCurrentSelectedActor',
 
       // 编辑属性
-      'moveCurrentActorByOffset': 'moveCurrentActorByOffset',
+      'moveCurrentActorByOffsetMixin': 'moveCurrentActorByOffset',
     }),
   },
 };

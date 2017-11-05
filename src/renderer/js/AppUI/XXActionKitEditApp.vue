@@ -111,12 +111,21 @@ export default {
     receivedInsertBasicActorNotification(info) {
       console.log('收到插入基本元素的通知');
       console.dir(info);
+
+      // 先取消当前选择的actor, 否则this.nodeGraph有可能是当前的actor，再
+      // 执行this.nodeGraph['children'].push会因为再store之外修改state的值
+      // 而出错。
+      this.resetCurrentSelectedActorMixin();
+
+      let newNode = XXBaseActorBuilder.buildInitActor();
       if (!Object.keys(this.nodeGraph).length) {
-        this.nodeGraph = XXBaseActorBuilder.buildInitActor();
+        this.nodeGraph = newNode;
       } else {
-        this.nodeGraph['children'].push(XXBaseActorBuilder.buildInitActor());
+        this.nodeGraph['children'].push(newNode);
       }
 
+      // 选中新增的元素
+      this.setCurrentSelectedActorMixin(newNode);
     },
 
     receivedInsertTextActorNotification(info) {
