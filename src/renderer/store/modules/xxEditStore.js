@@ -158,6 +158,14 @@ const mutations = {
       XXNodeGraphParser.setSize(state.currentSelectedActor, width, height);
     }
   },
+
+  setCurrentSelectedActorScale(state, scale) {
+    let scaleX = scale && scale['scaleX'] || 1;
+    let scaleY = scale && scale['scaleY'] || 1;
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setScale(state.currentSelectedActor, scaleX, scaleY, 1);
+    }
+  },
 };
 
 export default {

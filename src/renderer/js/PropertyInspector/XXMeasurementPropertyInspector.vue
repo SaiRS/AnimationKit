@@ -253,6 +253,13 @@
             return 1;
           }
         },
+
+        set(value) {
+          this.setCurrentSelectedActorScaleMixin({
+            scaleX: value,
+            scaleY: this.scaleY
+          });
+        }
       },
 
       scaleY: {
@@ -264,6 +271,13 @@
             return 1;
           }
         },
+
+        set(value) {
+          this.setCurrentSelectedActorScaleMixin({
+            scaleX: this.scaleX,
+            scaleY: value
+          });
+        }
       },
 
       rotationZ: {

@@ -24,6 +24,26 @@ class XXScalePropertyParser {
       return null;
     }
   }
+
+  /** **************************
+   * 修改部分
+   ****************************/
+
+  /**
+   * [setScale description]
+   * @param {[type]} property   [description]
+   * @param {Number} [scaleX=1] [description]
+   * @param {Number} [scaleY=1] [description]
+   * @param {Number} [scaleZ=1] [description]
+   */
+  static setScale(property, scaleX = 1, scaleY = 1, scaleZ = 1) {
+    if (XXPropertyParser.getPropertyType(property) == XXLoaderPropertyType.ScaleType) {
+      let value = XXPropertyParser.getPropertyValue(property);
+      value['scaleX'] = scaleX;
+      value['scaleY'] = scaleY;
+      value['scaleZ'] = scaleZ;
+    }
+  }
 }
 
 export {XXScalePropertyParser};

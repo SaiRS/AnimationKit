@@ -4,6 +4,7 @@ import {XXLoaderPropertyName, XXLoaderPropertyType} from '../XXLoaderConstant.js
 import XXPropertyParser from './XXPropertyParser.js';
 import {XXPositionPropertyParser} from './XXPositionPropertyParser.js';
 import {XXSizePropertyParser} from './XXSizePropertyParser.js';
+import {XXScalePropertyParser} from './XXScalePropertyParser.js';
 /**
  * 解析节点的帮助方法
  */
@@ -268,6 +269,21 @@ class XXNodeGraphParser {
     if (sizeProperty) {
       XXSizePropertyParser.setSize(sizeProperty,
         width, height);
+    }
+  }
+
+  /**
+   * [setScale description]
+   * @param {[type]} nodeGraph  [description]
+   * @param {Number} [scaleX=1] [description]
+   * @param {Number} [scaleY=1] [description]
+   * @param {Number} [scaleZ=1] [description]
+   */
+  static setScale(nodeGraph, scaleX = 1, scaleY = 1, scaleZ = 1) {
+    let scaleProperty = XXNodeGraphParser.getScaleProperty(nodeGraph);
+    if (scaleProperty) {
+      XXScalePropertyParser.setScale(scaleProperty,
+        scaleX, scaleY, scaleZ);
     }
   }
 
