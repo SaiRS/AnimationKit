@@ -133,6 +133,16 @@ const mutations = {
     }
   },
 
+  setCurrentSelectedActorPosition(state, position) {
+    let x = position && position.x || 0;
+    let y = position && position.y || 0;
+    let z = 0;
+
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setPosition(state.currentSelectedActor, x, y, z);
+    }
+  },
+
   modifyCurrentActorOverflowProp(state, newoverflow) {
     // 过滤
     let validoverflow = ['visible', 'hidden', 'scroll', 'auto'];

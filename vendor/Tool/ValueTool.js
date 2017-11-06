@@ -29,7 +29,27 @@ function xxfExtractUnitFromStringValue(stringValue: string) {
   }
 }
 
+/**
+ * [xxfIsValidUnitOfPosition description]
+ * @param  {[type]} unit [description]
+ * @return {[type]}      [description]
+ */
+function xxfIsValidUnitOfPosition(unit: string) {
+  return ['px'].includes(unit);
+}
+
+/**
+ * [xxfDefaultUnitOfPosition description]
+ * @return {[type]} [description]
+ */
+function xxfDefaultUnitOfPosition() {
+  return 'px';
+}
+
 export {
   xxfExtractNumberValueFromStringValue,
   xxfExtractUnitFromStringValue,
+
+  xxfIsValidUnitOfPosition,
+  xxfDefaultUnitOfPosition,
 };

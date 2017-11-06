@@ -41,15 +41,29 @@ class XXPositionPropertyParser {
    * @param {Number} [y=0]    [description]
    * @param {Number} [z=0]    [description]
    */
-  static setPosition(property, x = 0, y = 0, z = 0) {
+  static setPosition(property, x = '0', y = '0', z = '0') {
     if (XXPropertyParser.getPropertyType(property) == XXLoaderPropertyType.PointType) {
       // 属性的值
       let value = XXPropertyParser.getPropertyValue(property);
 
       // 值，单位
-      value['x'] = x + ValueTool.xxfExtractUnitFromStringValue(value['x']);
-      value['y'] = y + ValueTool.xxfExtractUnitFromStringValue(value['y']);
-      value['z'] = z + ValueTool.xxfExtractUnitFromStringValue(value['z']);
+      let xunit = ValueTool.xxfExtractUnitFromStringValue(value['x']);
+      if (!ValueTool.xxfIsValidUnitOfPosition(xunit)) {
+        xunit = ValueTool.xxfDefaultUnitOfPosition();
+      }
+
+      let yunit = ValueTool.xxfExtractUnitFromStringValue(value['y']);
+      if (!ValueTool.xxfIsValidUnitOfPosition(yunit)) {
+        yunit = ValueTool.xxfDefaultUnitOfPosition();
+      }
+
+      let zunit = ValueTool.xxfExtractUnitFromStringValue(value['z']);
+      if (!ValueTool.xxfIsValidUnitOfPosition(zunit)) {
+        zunit = ValueTool.xxfDefaultUnitOfPosition();
+      }
+      value['x'] = ValueTool.xxfExtractNumberValueFromStringValue(x) + xunit;
+      value['y'] = ValueTool.xxfExtractNumberValueFromStringValue(y) + yunit;
+      value['z'] = ValueTool.xxfExtractNumberValueFromStringValue(z) + zunit;
     }
   }
 
@@ -60,33 +74,31 @@ class XXPositionPropertyParser {
    * @param {Number} [offsetY=0] [description]
    * @param {Number} [offsetZ=0] [description]
    */
-  static setPositionByOffset(property, offsetX = 0, offsetY = 0, offsetZ = 0) {
+  static setPositionByOffset(property, offsetX = '0', offsetY = '0', offsetZ = '0') {
     if (XXPropertyParser.getPropertyType(property) == XXLoaderPropertyType.PointType) {
       // 属性的值
       let value = XXPropertyParser.getPropertyValue(property);
-      // console.log('================== Start');
-      // console.log(`pre value[x] = ${value['x']}`);
-      // console.log(`pre value[y] = ${value['y']}`);
-      // console.log(`pre value[z] = ${value['z']}`);
 
       let x = (ValueTool.xxfExtractNumberValueFromStringValue(value['x']) + offsetX);
-      value['x'] = x + ValueTool.xxfExtractUnitFromStringValue(value['x']);
+      let xunit = ValueTool.xxfExtractUnitFromStringValue(value['x']);
+      if (!ValueTool.xxfIsValidUnitOfPosition(xunit)) {
+        xunit = ValueTool.xxfDefaultUnitOfPosition();
+      }
+      value['x'] = x + xunit;
 
       let y = (ValueTool.xxfExtractNumberValueFromStringValue(value['y']) + offsetY);
-      value['y'] = y + ValueTool.xxfExtractUnitFromStringValue(value['y']);
+      let yunit = ValueTool.xxfExtractUnitFromStringValue(value['y']);
+      if (!ValueTool.xxfIsValidUnitOfPosition(yunit)) {
+        yunit = ValueTool.xxfDefaultUnitOfPosition();
+      }
+      value['y'] = y + yunit;
 
       let z = (ValueTool.xxfExtractNumberValueFromStringValue(value['z']) + offsetZ);
-      value['z'] = z + ValueTool.xxfExtractUnitFromStringValue(value['z']);
-      // console.log(`offsetX = ${offsetX}`);
-      // console.log(`offsetY = ${offsetY}`);
-      // console.log(`offsetZ = ${offsetZ}`);
-      // console.log(`x = ${x}`);
-      // console.log(`y = ${y}`);
-      // console.log(`z = ${z}`);
-      // console.log(`value[x] = ${value['x']}`);
-      // console.log(`value[y] = ${value['y']}`);
-      // console.log(`value[z] = ${value['z']}`);
-      // console.log('================== End');
+      let zunit = ValueTool.xxfExtractUnitFromStringValue(value['z']);
+      if (!ValueTool.xxfIsValidUnitOfPosition(zunit)) {
+        zunit = ValueTool.xxfDefaultUnitOfPosition();
+      }
+      value['z'] = z + zunit;
     }
   }
 }

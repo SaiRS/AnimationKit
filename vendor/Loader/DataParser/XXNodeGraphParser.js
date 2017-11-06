@@ -227,6 +227,21 @@ class XXNodeGraphParser {
   }
 
   /**
+   * [setPosition description]
+   * @param {[type]} nodeGraph [description]
+   * @param {Number} [x=0]     [description]
+   * @param {Number} [y=0]     [description]
+   * @param {Number} [z=0]     [description]
+   */
+  static setPosition(nodeGraph, x = 0, y = 0, z = 0) {
+    let positionProperty = XXNodeGraphParser.getPositionProperty(nodeGraph);
+    if (positionProperty) {
+      XXPositionPropertyParser.setPosition(positionProperty,
+        x, y, z);
+    }
+  }
+
+  /**
    * [setOverflowProp description]
    * @param {[type]} nodeGraph            [description]
    * @param {String} [newoverflow='auto'] [description]

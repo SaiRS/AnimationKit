@@ -35,6 +35,7 @@ const XXEditStoreMixin = {
 
       // 编辑属性
       'moveCurrentActorByOffsetMixin': 'moveCurrentActorByOffset',
+      'setCurrentSelectedActorPositionMixin': 'setCurrentSelectedActorPosition',
       'modifyCurrentActorOverflowPropMixin': 'modifyCurrentActorOverflowProp',
     }),
   },

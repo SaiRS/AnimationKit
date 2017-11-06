@@ -195,7 +195,10 @@
         },
 
         set(value) {
-          // TODO:
+          this.setCurrentSelectedActorPositionMixin({
+            x: value,
+            y: this.top
+          });
         }
       },
 
@@ -206,7 +209,10 @@
         },
 
         set(value) {
-          // TODO:
+          this.setCurrentSelectedActorPositionMixin({
+            x: this.left,
+            y: value
+          });
         }
       },
 
