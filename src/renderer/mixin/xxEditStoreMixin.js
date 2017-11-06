@@ -17,8 +17,10 @@ const XXEditStoreMixin = {
       'isTheCurrentActorByUUIDMixin': 'isTheCurrentActorByUUID',
       'isTheCurrentActorByActorMixin': 'isTheCurrentActorByActor',
 
+      // 属性
       'currentActorPositionMixin': 'currentActorPosition',
       'currentActorSizeMixin': 'currentActorSize',
+      'currentActorOverflowMixin': 'currentActorOverflow',
     }),
   },
 
@@ -30,6 +32,7 @@ const XXEditStoreMixin = {
 
       // 编辑属性
       'moveCurrentActorByOffsetMixin': 'moveCurrentActorByOffset',
+      'modifyCurrentActorOverflowPropMixin': 'modifyCurrentActorOverflowProp',
     }),
   },
 };

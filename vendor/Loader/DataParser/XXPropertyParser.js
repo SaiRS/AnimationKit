@@ -39,6 +39,40 @@ class XXPropertyParser {
   static getPropertyName(property) {
     return property && property['name'];
   }
+
+  /** ****************
+  * 修改部分
+  ********************/
+
+  /**
+   * [modifyPropertyValue description]
+   * @param  {[type]} property [description]
+   * @param  {[type]} newValue [description]
+   */
+  static modifyPropertyValue(property, newValue) {
+    if (property) {
+      property['value'] = newValue;
+    }
+  }
+
+  /** **************************
+   * 增加部分
+   ****************************/
+
+  /**
+   * [createNewProperty description]
+   * @param  {[type]} type  [description]
+   * @param  {[type]} name  [description]
+   * @param  {[type]} value [description]
+   * @return {[type]}       [description]
+   */
+  static createNewProperty(type, name, value) {
+    return {
+      type: type,
+      value: value,
+      name: name,
+    };
+  }
 }
 
 

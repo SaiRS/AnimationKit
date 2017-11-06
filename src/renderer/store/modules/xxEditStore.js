@@ -1,6 +1,7 @@
 import {XXNodeGraphParser,
   XXPositionPropertyParser,
-  XXSizePropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+  XXSizePropertyParser,
+  XXStringPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
 const state = {
   currentSelectedActor: null,  // 数据对象
@@ -42,6 +43,15 @@ const getters = {
     let sizeProp = XXNodeGraphParser.getSizeProperty(state.currentSelectedActor);
     if (sizeProp) {
       return XXSizePropertyParser.getSize(sizeProp);
+    } else {
+      return null;
+    }
+  },
+
+  currentActorOverflow(state) {
+    let overflowProp = XXNodeGraphParser.getOverflowProperty(state.currentSelectedActor);
+    if (overflowProp) {
+      return XXStringPropertyParser.getString(overflowProp);
     } else {
       return null;
     }
@@ -89,6 +99,14 @@ const mutations = {
 
     if (state.currentSelectedActor) {
       XXNodeGraphParser.setPositionByOffset(state.currentSelectedActor, offsetX, offsetY, 0);
+    }
+  },
+
+  modifyCurrentActorOverflowProp(state, newoverflow) {
+    // 过滤
+    let validoverflow = ['visible', 'hidden', 'scroll', 'auto'];
+    if (validoverflow.includes(newoverflow) && state.currentSelectedActor) {
+      XXNodeGraphParser.setOverflowProp(state.currentSelectedActor, newoverflow);
     }
   },
 };

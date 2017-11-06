@@ -100,7 +100,7 @@
         if (overflow) {
           return overflow;
         } else {
-          return 'auto';
+          return 'visible';
         }
       },
 
@@ -289,7 +289,7 @@
       styleObject: function() {
         return {
           // 度量
-          // overflow: this.overflow,
+          overflow: this.overflow,
           left: this.left,
           top: this.top,
           width: this.width,

@@ -5,8 +5,8 @@
       <div>
         内容概览
       </div>
-      <Select v-model="visibility" style="width:200px">
-          <Option v-for="item in visibilitylist" :value="item.value" :key="item.value">{{ item.label }}</Option>
+      <Select v-model="overflow" style="width:200px">
+          <Option v-for="item in overflowlist" :value="item.value" :key="item.value">{{ item.label }}</Option>
       </Select>
     </div>
     <!-- 放置 -->
@@ -139,7 +139,7 @@
 
     data: function () {
       return {
-        visibilitylist: [
+        overflowlist: [
           {
             label: '可见',
             value: 'visible'
@@ -198,6 +198,17 @@
         return {
           'xxg-disabled': this.currentSelectedActorMixin ? false : true,
         };
+      },
+
+      overflow: {
+        get() {
+          let overflow = this.currentActorOverflowMixin;
+          return overflow ? overflow : '';
+        },
+
+        set(value) {
+          this.modifyCurrentActorOverflowPropMixin(value);
+        }
       },
 
       left() {

@@ -1,6 +1,6 @@
 // @flow
 
-import {XXLoaderPropertyName} from '../XXLoaderConstant.js';
+import {XXLoaderPropertyName, XXLoaderPropertyType} from '../XXLoaderConstant.js';
 import XXPropertyParser from './XXPropertyParser.js';
 import {XXPositionPropertyParser} from './XXPositionPropertyParser.js';
 /**
@@ -225,6 +225,78 @@ class XXNodeGraphParser {
         offsetX, offsetY, offsetZ);
     }
   }
+
+  /**
+   * [setOverflowProp description]
+   * @param {[type]} nodeGraph            [description]
+   * @param {String} [newoverflow='auto'] [description]
+   */
+  static setOverflowProp(nodeGraph, newoverflow = 'auto') {
+    let overflowProp = XXNodeGraphParser.getOverflowProperty(nodeGraph);
+    if (overflowProp) {
+      XXPropertyParser.modifyPropertyValue(overflowProp, newoverflow);
+    } else {
+      // 新增一个属性
+      XXNodeGraphParser.addOverflowProperty(nodeGraph, newoverflow);
+    }
+  }
+
+  /** **************************
+   * 增加部分
+   ****************************/
+
+   /**
+    * [__addProperty description]
+    * @param {[type]} nodeGraph [description]
+    * @param {[type]} property  [description]
+    */
+  static __addProperty(nodeGraph, property) {
+    if (nodeGraph && property) {
+      let properties = nodeGraph['properties'];
+      if (properties) {
+        properties.push(property);
+      } else {
+        nodeGraph['properties'] = [property];
+      }
+    }
+  }
+
+  /**
+   * [addPositionProperty description]
+   * @param {[type]} nodeGraph                            [description]
+   * @param {[type]} value                                [description]
+   * @param {[type]} [name=XXLoaderPropertyName.Position] [description]
+   */
+  static addPositionProperty(nodeGraph, value, name = XXLoaderPropertyName.Position) {
+    let property =
+      XXPropertyParser.createNewProperty(
+        XXLoaderPropertyType.PointType,
+        name,
+        value
+      );
+
+    XXNodeGraphParser.__addProperty(nodeGraph, property);
+  }
+
+  /**
+   * [addOverflowProperty description]
+   * @param {[type]} nodeGraph                            [description]
+   * @param {[type]} value                                [description]
+   * @param {[type]} [name=XXLoaderPropertyName.Overflow] [description]
+   */
+  static addOverflowProperty(nodeGraph, value, name = XXLoaderPropertyName.Overflow) {
+    let property = XXPropertyParser.createNewProperty(
+      XXLoaderPropertyType.StringType,
+      name,
+      value
+    );
+
+    XXNodeGraphParser.__addProperty(nodeGraph, property);
+  }
+
+  /** **************************
+   * 删除部分
+   ****************************/
 }
 
 export {
