@@ -40,6 +40,7 @@ const XXEditStoreMixin = {
       'setCurrentSelectedActorSizeMixin': 'setCurrentSelectedActorSize',
       'setCurrentSelectedActorScaleMixin': 'setCurrentSelectedActorScale',
       'setCurrentSelectedActorRotationMixin': 'setCurrentSelectedActorRotation',
+      'setCurrentSelectedActorAnchorMixin': 'setCurrentSelectedActorAnchor',
     }),
   },
 };

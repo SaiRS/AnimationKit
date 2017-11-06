@@ -160,7 +160,7 @@
         if (anchor) {
           return anchor['anchorX'];
         } else {
-          return 0.5;
+          return '50%';
         }
       },
 
@@ -170,7 +170,7 @@
         if (anchor) {
           return anchor['anchorY'];
         } else {
-          return 0.5;
+          return '50%';
         }
       },
 

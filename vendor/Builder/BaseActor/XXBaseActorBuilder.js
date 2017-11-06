@@ -20,9 +20,9 @@ class XXBaseActorBuilder {
         {
           'type': 'Point',
           'value': {
-            'x': '0.5',
-            'y': '0.5',
-            'z': '0.5',
+            'x': '50%',
+            'y': '50%',
+            'z': '50%',
           },
           'name': 'anchorPoint',
         },

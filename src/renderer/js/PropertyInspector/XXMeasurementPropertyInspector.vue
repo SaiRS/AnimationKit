@@ -343,12 +343,15 @@
           if (anchor) {
             return anchor['anchorX'];
           } else {
-            return 0.5;
+            return '50%';
           }
         },
 
         set(value) {
-
+          this.setCurrentSelectedActorAnchorMixin({
+            anchorX: value,
+            anchorY: this.anchorY
+          });
         }
       },
 
@@ -358,12 +361,15 @@
           if (anchor) {
             return anchor['anchorY'];
           } else {
-            return 0.5;
+            return '50%';
           }
         },
 
         set(value) {
-
+          this.setCurrentSelectedActorAnchorMixin({
+            anchorX: this.anchorX,
+            anchorY: value
+          });
         }
       }
     },

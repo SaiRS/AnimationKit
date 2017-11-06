@@ -175,6 +175,14 @@ const mutations = {
       XXNodeGraphParser.setRotation(state.currentSelectedActor, rotationZ, rotationX, rotationY);
     }
   },
+
+  setCurrentSelectedActorAnchor(state, anchor) {
+    let anchorX = anchor && anchor['anchorX'] || '50%';
+    let anchorY = anchor && anchor['anchorY'] || '50%';
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setAnchor(state.currentSelectedActor, anchorX, anchorY);
+    }
+  },
 };
 
 export default {

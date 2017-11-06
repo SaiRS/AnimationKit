@@ -81,6 +81,23 @@ function xxfDefaultUnitOfRotation() {
   return 'deg';
 }
 
+/**
+ * [xxfIsValidUnitOfRotation description]
+ * @param  {[type]} unit [description]
+ * @return {[type]}      [description]
+ */
+function xxfIsValidUnitOfAnchor(unit: string) {
+  return ['%'].includes(unit);
+}
+
+/**
+ * [xxfDefaultUnitOfRotation description]
+ * @return {[type]} [description]
+ */
+function xxfDefaultUnitOfAnchor() {
+  return '%';
+}
+
 export {
   xxfExtractNumberValueFromStringValue,
   xxfExtractUnitFromStringValue,
@@ -93,4 +110,7 @@ export {
 
   xxfIsValidUnitOfRotation,
   xxfDefaultUnitOfRotation,
+
+  xxfIsValidUnitOfAnchor,
+  xxfDefaultUnitOfAnchor,
 };

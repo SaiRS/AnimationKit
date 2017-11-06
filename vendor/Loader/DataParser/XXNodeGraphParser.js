@@ -6,6 +6,7 @@ import {XXPositionPropertyParser} from './XXPositionPropertyParser.js';
 import {XXSizePropertyParser} from './XXSizePropertyParser.js';
 import {XXScalePropertyParser} from './XXScalePropertyParser.js';
 import {XXRotationPropertyParser} from './XXRotationPropertyParser.js';
+import {XXAnchorPropertyParser} from './XXAnchorPropertyParser.js';
 /**
  * 解析节点的帮助方法
  */
@@ -299,6 +300,19 @@ class XXNodeGraphParser {
     let rotationProperty = XXNodeGraphParser.getRotationProperty(nodeGraph);
     if (rotationProperty) {
       XXRotationPropertyParser.setRotation(rotationProperty, rotationZ, rotationX, rotationY);
+    }
+  }
+
+  /**
+   * [setAnchor description]
+   * @param {[type]} nodeGraph       [description]
+   * @param {String} [anchorX='50%'] [description]
+   * @param {String} [anchorY='50%'] [description]
+   */
+  static setAnchor(nodeGraph, anchorX = '50%', anchorY = '50%') {
+    let anchorProperty = XXNodeGraphParser.getAnchorProperty(nodeGraph);
+    if (anchorProperty) {
+      XXAnchorPropertyParser.setAnchor(anchorProperty, anchorX, anchorY);
     }
   }
 
