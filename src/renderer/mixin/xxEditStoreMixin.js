@@ -37,6 +37,7 @@ const XXEditStoreMixin = {
       'moveCurrentActorByOffsetMixin': 'moveCurrentActorByOffset',
       'setCurrentSelectedActorPositionMixin': 'setCurrentSelectedActorPosition',
       'modifyCurrentActorOverflowPropMixin': 'modifyCurrentActorOverflowProp',
+      'setCurrentSelectedActorSizeMixin': 'setCurrentSelectedActorSize',
     }),
   },
 };

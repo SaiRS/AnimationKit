@@ -150,6 +150,14 @@ const mutations = {
       XXNodeGraphParser.setOverflowProp(state.currentSelectedActor, newoverflow);
     }
   },
+
+  setCurrentSelectedActorSize(state, size) {
+    let width = size && size['width'] || '0px';
+    let height = size && size['height'] || '0px';
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setSize(state.currentSelectedActor, width, height);
+    }
+  },
 };
 
 export default {

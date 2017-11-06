@@ -46,10 +46,30 @@ function xxfDefaultUnitOfPosition() {
   return 'px';
 }
 
+/**
+ * [xxfIsValidUnitOfSize description]
+ * @param  {[type]} unit [description]
+ * @return {[type]}      [description]
+ */
+function xxfIsValidUnitOfSize(unit: string) {
+  return ['px'].includes(unit);
+}
+
+/**
+ * [xxfDefaultUnitOfSize description]
+ * @return {[type]} [description]
+ */
+function xxfDefaultUnitOfSize() {
+  return 'px';
+}
+
 export {
   xxfExtractNumberValueFromStringValue,
   xxfExtractUnitFromStringValue,
 
   xxfIsValidUnitOfPosition,
   xxfDefaultUnitOfPosition,
+
+  xxfIsValidUnitOfSize,
+  xxfDefaultUnitOfSize,
 };

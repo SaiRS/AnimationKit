@@ -223,7 +223,10 @@
         },
 
         set(value) {
-          // TODO:
+          this.setCurrentSelectedActorSizeMixin({
+            width: value,
+            height: this.height
+          });
         }
       },
 
@@ -234,7 +237,10 @@
         },
 
         set(value) {
-          // TODO:
+          this.setCurrentSelectedActorSizeMixin({
+            width: this.width,
+            height: value
+          });
         }
       },
 

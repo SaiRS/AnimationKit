@@ -3,6 +3,7 @@
 import {XXLoaderPropertyName, XXLoaderPropertyType} from '../XXLoaderConstant.js';
 import XXPropertyParser from './XXPropertyParser.js';
 import {XXPositionPropertyParser} from './XXPositionPropertyParser.js';
+import {XXSizePropertyParser} from './XXSizePropertyParser.js';
 /**
  * 解析节点的帮助方法
  */
@@ -253,6 +254,20 @@ class XXNodeGraphParser {
     } else {
       // 新增一个属性
       XXNodeGraphParser.addOverflowProperty(nodeGraph, newoverflow);
+    }
+  }
+
+  /**
+   * [setSize description]
+   * @param {[type]} nodeGraph      [description]
+   * @param {String} [width='0px']  [description]
+   * @param {String} [height='0px'] [description]
+   */
+  static setSize(nodeGraph, width = '0px', height = '0px') {
+    let sizeProperty = XXNodeGraphParser.getSizeProperty(nodeGraph);
+    if (sizeProperty) {
+      XXSizePropertyParser.setSize(sizeProperty,
+        width, height);
     }
   }
 
