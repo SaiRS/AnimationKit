@@ -168,13 +168,6 @@
         type: String,
         default: 'visible'  // 默认可见
       },
-
-      anchorX: {
-        type: Number
-      },
-      anchorY: {
-        type: Number
-      },
     },
 
     computed: {
@@ -305,6 +298,36 @@
 
         }
       },
+
+      anchorX: {
+        get() {
+          let anchor = this.currentActorAnchorPointMixin;
+          if (anchor) {
+            return anchor['anchorX'];
+          } else {
+            return 0.5;
+          }
+        },
+
+        set(value) {
+
+        }
+      },
+
+      anchorY: {
+        get() {
+          let anchor = this.currentActorAnchorPointMixin;
+          if (anchor) {
+            return anchor['anchorY'];
+          } else {
+            return 0.5;
+          }
+        },
+
+        set(value) {
+
+        }
+      }
     },
   }
 </script>

@@ -3,7 +3,8 @@ import {XXNodeGraphParser,
   XXSizePropertyParser,
   XXStringPropertyParser,
   XXScalePropertyParser,
-  XXRotationPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+  XXRotationPropertyParser,
+  XXAnchorPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
 const state = {
   currentSelectedActor: null,  // 数据对象
@@ -73,6 +74,15 @@ const getters = {
 
     if (rotation) {
       return XXRotationPropertyParser.getRotation(rotation);
+    } else {
+      return null;
+    }
+  },
+
+  currentActorAnchorPoint(state) {
+    let anchor = XXNodeGraphParser.getAnchorProperty(state.currentSelectedActor);
+    if (anchor) {
+      return XXAnchorPropertyParser.getAnchor(anchor);
     } else {
       return null;
     }

@@ -23,6 +23,7 @@ const XXEditStoreMixin = {
       'currentActorOverflowMixin': 'currentActorOverflow',
       'currentActorScaleMixin': 'currentActorScale',
       'currentActorRotationMixin': 'currentActorRotation',
+      'currentActorAnchorPointMixin': 'currentActorAnchorPoint',
     }),
   },
 
