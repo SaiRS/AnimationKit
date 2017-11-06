@@ -166,6 +166,15 @@ const mutations = {
       XXNodeGraphParser.setScale(state.currentSelectedActor, scaleX, scaleY, 1);
     }
   },
+
+  setCurrentSelectedActorRotation(state, rotation) {
+    let rotationX = rotation && rotation['rotationX'] || '0deg';
+    let rotationY = rotation && rotation['rotationY'] || '0deg';
+    let rotationZ = rotation && rotation['rotationZ'] || '0deg';
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setRotation(state.currentSelectedActor, rotationZ, rotationX, rotationY);
+    }
+  },
 };
 
 export default {

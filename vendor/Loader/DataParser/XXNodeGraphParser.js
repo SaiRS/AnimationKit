@@ -5,6 +5,7 @@ import XXPropertyParser from './XXPropertyParser.js';
 import {XXPositionPropertyParser} from './XXPositionPropertyParser.js';
 import {XXSizePropertyParser} from './XXSizePropertyParser.js';
 import {XXScalePropertyParser} from './XXScalePropertyParser.js';
+import {XXRotationPropertyParser} from './XXRotationPropertyParser.js';
 /**
  * 解析节点的帮助方法
  */
@@ -284,6 +285,20 @@ class XXNodeGraphParser {
     if (scaleProperty) {
       XXScalePropertyParser.setScale(scaleProperty,
         scaleX, scaleY, scaleZ);
+    }
+  }
+
+  /**
+   * [setRotation description]
+   * @param {[type]} nodeGraph          [description]
+   * @param {String} [rotationZ='0deg'] [description]
+   * @param {String} [rotationX='0deg'] [description]
+   * @param {String} [rotationY='0deg'] [description]
+   */
+  static setRotation(nodeGraph, rotationZ = '0deg', rotationX = '0deg', rotationY = '0deg') {
+    let rotationProperty = XXNodeGraphParser.getRotationProperty(nodeGraph);
+    if (rotationProperty) {
+      XXRotationPropertyParser.setRotation(rotationProperty, rotationZ, rotationX, rotationY);
     }
   }
 

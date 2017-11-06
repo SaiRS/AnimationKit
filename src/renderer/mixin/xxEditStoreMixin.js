@@ -39,6 +39,7 @@ const XXEditStoreMixin = {
       'modifyCurrentActorOverflowPropMixin': 'modifyCurrentActorOverflowProp',
       'setCurrentSelectedActorSizeMixin': 'setCurrentSelectedActorSize',
       'setCurrentSelectedActorScaleMixin': 'setCurrentSelectedActorScale',
+      'setCurrentSelectedActorRotationMixin': 'setCurrentSelectedActorRotation',
     }),
   },
 };

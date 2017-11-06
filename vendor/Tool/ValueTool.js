@@ -1,14 +1,15 @@
 // @flow
 
 /**
- * 从字符串的值中抽离出数字的值
- * @param  {string} stringValue [description]
- * @return {[type]}             [description]
+ * [xxfExtractNumberValueFromStringValue description]
+ * @param  {[type]} stringValue  [description]
+ * @param  {[type]} defaultValue [description]
+ * @return {[type]}              [description]
  */
-function xxfExtractNumberValueFromStringValue(stringValue: string) {
+function xxfExtractNumberValueFromStringValue(stringValue: string, defaultValue: number = 0) {
   let num = Number.parseFloat(stringValue);
   if (Number.isNaN(num)) {
-    return null;
+    return defaultValue;
   } else {
     return num;
   }
@@ -63,6 +64,23 @@ function xxfDefaultUnitOfSize() {
   return 'px';
 }
 
+/**
+ * [xxfIsValidUnitOfRotation description]
+ * @param  {[type]} unit [description]
+ * @return {[type]}      [description]
+ */
+function xxfIsValidUnitOfRotation(unit: string) {
+  return ['deg', 'rad'].includes(unit);
+}
+
+/**
+ * [xxfDefaultUnitOfRotation description]
+ * @return {[type]} [description]
+ */
+function xxfDefaultUnitOfRotation() {
+  return 'deg';
+}
+
 export {
   xxfExtractNumberValueFromStringValue,
   xxfExtractUnitFromStringValue,
@@ -72,4 +90,7 @@ export {
 
   xxfIsValidUnitOfSize,
   xxfDefaultUnitOfSize,
+
+  xxfIsValidUnitOfRotation,
+  xxfDefaultUnitOfRotation,
 };

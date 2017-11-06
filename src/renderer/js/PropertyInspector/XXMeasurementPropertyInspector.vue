@@ -291,7 +291,11 @@
         },
 
         set(value) {
-
+          this.setCurrentSelectedActorRotationMixin({
+            rotationZ: value,
+            rotationX: this.rotationX,
+            rotationY: this.rotationY
+          });
         }
       },
 
@@ -306,7 +310,11 @@
         },
 
         set(value) {
-
+          this.setCurrentSelectedActorRotationMixin({
+            rotationZ: this.rotationZ,
+            rotationX: value,
+            rotationY: this.rotationY
+          });
         }
       },
 
@@ -321,7 +329,11 @@
         },
 
         set(value) {
-
+          this.setCurrentSelectedActorRotationMixin({
+            rotationZ: this.rotationZ,
+            rotationX: this.rotationX,
+            rotationY: value
+          });
         }
       },
 
