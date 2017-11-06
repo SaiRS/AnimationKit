@@ -1,7 +1,9 @@
 import {XXNodeGraphParser,
   XXPositionPropertyParser,
   XXSizePropertyParser,
-  XXStringPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+  XXStringPropertyParser,
+  XXScalePropertyParser,
+  XXRotationPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
 const state = {
   currentSelectedActor: null,  // 数据对象
@@ -52,6 +54,25 @@ const getters = {
     let overflowProp = XXNodeGraphParser.getOverflowProperty(state.currentSelectedActor);
     if (overflowProp) {
       return XXStringPropertyParser.getString(overflowProp);
+    } else {
+      return null;
+    }
+  },
+
+  currentActorScale(state) {
+    let scale = XXNodeGraphParser.getScaleProperty(state.currentSelectedActor);
+    if (scale) {
+      return XXScalePropertyParser.getScale(scale);
+    } else {
+      return null;
+    }
+  },
+
+  currentActorRotation(state) {
+    let rotation = XXNodeGraphParser.getRotationProperty(state.currentSelectedActor);
+
+    if (rotation) {
+      return XXRotationPropertyParser.getRotation(rotation);
     } else {
       return null;
     }

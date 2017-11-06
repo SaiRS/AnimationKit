@@ -21,6 +21,8 @@ const XXEditStoreMixin = {
       'currentActorPositionMixin': 'currentActorPosition',
       'currentActorSizeMixin': 'currentActorSize',
       'currentActorOverflowMixin': 'currentActorOverflow',
+      'currentActorScaleMixin': 'currentActorScale',
+      'currentActorRotationMixin': 'currentActorRotation',
     }),
   },
 

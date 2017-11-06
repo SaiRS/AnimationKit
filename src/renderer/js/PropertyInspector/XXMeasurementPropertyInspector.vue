@@ -72,13 +72,13 @@
             <div>
               宽度
             </div>
-            <Input v-model="widthScale" size="small" placeholder="small size"></Input>
+            <Input v-model="scaleX" size="small" placeholder="small size"></Input>
           </div>
           <div class='scale-info-item'>
             <div>
               高度
             </div>
-            <Input v-model="heightScale" size="small" placeholder="small size"></Input>
+            <Input v-model="scaleY" size="small" placeholder="small size"></Input>
           </div>
         </div>
         <div class='scale-keep-scale'>
@@ -96,9 +96,9 @@
           <div>
             角度
           </div>
-          <Input class="rotate-content-item" v-model="rotateZ" size="small" placeholder="small size"></Input>
-          <Input class="rotate-content-item" v-model="rotateY" size="small" placeholder="small size"></Input>
-          <Input class="rotate-content-item" v-model="rotateX" size="small" placeholder="small size"></Input>
+          <Input class="rotate-content-item" v-model="rotationZ" size="small" placeholder="small size"></Input>
+          <Input class="rotate-content-item" v-model="rotationY" size="small" placeholder="small size"></Input>
+          <Input class="rotate-content-item" v-model="rotationX" size="small" placeholder="small size"></Input>
         </div>
         <div class='rotate-group-item'>
           <div style='visibility: hidden;'>角度</div>
@@ -169,22 +169,6 @@
         default: 'visible'  // 默认可见
       },
 
-      widthScale: {
-        type: Number
-      },
-      heightScale: {
-        type: Number
-      },
-      rotateZ: {
-        type: Number
-      },
-      rotateY: {
-        type: Number
-      },
-      rotateX: {
-        type: Number
-      },
-
       anchorX: {
         type: Number
       },
@@ -211,25 +195,116 @@
         }
       },
 
-      left() {
-        let pos = this.currentActorPositionMixin;
-        return pos ? pos['x'] : 0;
+      left: {
+        get() {
+          let pos = this.currentActorPositionMixin;
+          return pos ? pos['x'] : 0;
+        },
+
+        set(value) {
+          // TODO:
+        }
       },
 
-      top() {
-        let pos = this.currentActorPositionMixin;
-        return pos ? pos['y'] : 0;
+      top: {
+        get() {
+          let pos = this.currentActorPositionMixin;
+          return pos ? pos['y'] : 0;
+        },
+
+        set(value) {
+          // TODO:
+        }
       },
 
-      width() {
-        let size = this.currentActorSizeMixin;
-        return size ? size['width'] : 0;
+      width: {
+        get() {
+          let size = this.currentActorSizeMixin;
+          return size ? size['width'] : 0;
+        },
+
+        set(value) {
+          // TODO:
+        }
       },
 
-      height() {
-        let size = this.currentActorSizeMixin;
-        return size ? size['height'] : 0;
-      }
+      height: {
+        get() {
+          let size = this.currentActorSizeMixin;
+          return size ? size['height'] : 0;
+        },
+
+        set(value) {
+          // TODO:
+        }
+      },
+
+      scaleX: {
+        get() {
+          let scale = this.currentActorScaleMixin;
+          if (scale) {
+            return scale['scaleX'];
+          } else {
+            return 1;
+          }
+        },
+      },
+
+      scaleY: {
+        get() {
+          let scale = this.currentActorScaleMixin;
+          if (scale) {
+            return scale['scaleY'];
+          } else {
+            return 1;
+          }
+        },
+      },
+
+      rotationZ: {
+        get() {
+          let rotation = this.currentActorRotationMixin;
+          if (rotation) {
+            return rotation['rotationZ'];
+          } else {
+            return 0;
+          }
+        },
+
+        set(value) {
+
+        }
+      },
+
+      rotationX: {
+        get() {
+          let rotation = this.currentActorRotationMixin;
+          if (rotation) {
+            return rotation['rotationX'];
+          } else {
+            return 0;
+          }
+        },
+
+        set(value) {
+
+        }
+      },
+
+      rotationY: {
+        get() {
+          let rotation = this.currentActorRotationMixin;
+          if (rotation) {
+            return rotation['rotationY'];
+          } else {
+            return 0;
+          }
+        },
+
+        set(value) {
+
+        }
+      },
     },
   }
 </script>
