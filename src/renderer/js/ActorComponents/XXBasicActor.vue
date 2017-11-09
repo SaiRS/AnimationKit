@@ -24,7 +24,8 @@
     XXStringPropertyParser,
     XXScalePropertyParser,
     XXRotationPropertyParser,
-    XXAnchorPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+    XXAnchorPropertyParser,
+    XXBackgroundPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
   import xxvNotificationCenter from
     'XXVendor/Notification/NotificationCenter.js';
@@ -181,6 +182,24 @@
         return '#000';
       },
 
+      backgroundcolor: function() {
+        let background = XXNodeGraphParser.getBackgroundProperty(this.nodeGraph);
+        if (background) {
+          return XXBackgroundPropertyParser.getBackgroundColor(background);
+        } else {
+          return null;
+        }
+      },
+
+      backgroundimage: function() {
+        let background = XXNodeGraphParser.getBackgroundProperty(this.nodeGraph);
+        if (background) {
+          return XXBackgroundPropertyParser.getValidBackgroundImageCSSSyntax(background);
+        } else {
+          return null;
+        }
+      },
+
       leftBorderWidth: function() {
         return 1;
       },
@@ -299,7 +318,8 @@
             rotateX(${this.rotateX}) rotateY(${this.rotateY})`,
           'transform-origin': `${this.anchorX} ${this.anchorY}`,
           // 元素
-          'background': this.background,
+          'background-image': this.backgroundimage,
+          'background-color': this.backgroundcolor,
           'border-left': `${this.leftBorderColor} ${this.leftBorderStyle}
             ${this.leftBorderWidth}`,
           'border-right': `${this.rightBorderColor} ${this.rightBorderStyle}

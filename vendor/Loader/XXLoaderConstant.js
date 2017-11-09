@@ -70,6 +70,22 @@ let XXLoaderPropertyType = {
   // }
   DegreeActionType: 'DegreeAction',
 
+  // 背景
+  // {
+  //  background-origin: {x: ..., y: ...},
+  //  background-size: {width height}
+  //  background-image: {
+  //    type: 'image/gradient',
+  //    value: '' / {}
+  //  },
+  //  background-color: '',
+  //  background-repeat: 'repeatx repeaty',
+  //  background-position: 'x y',
+  //  background-attatchment: '',
+  //  background-blend-mode: ''
+  // }
+  BackagroundType: 'Backgroud',
+
   // 图片类型，对应的value格式为
   // {
   //   imgPath: ****, // 图片路径
@@ -94,6 +110,7 @@ let XXLoaderPropertyName = {
   Visible: 'visible', // 可见性
   SpriteFrame: 'spriteFrame', // 图片帧
   Overflow: 'overflow', //
+  Background: 'background',
 };
 
 export {

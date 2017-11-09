@@ -14,3 +14,4 @@ export {XXStringPropertyParser} from './XXStringPropertyParser.js';
 export {XXScalePropertyParser} from './XXScalePropertyParser.js';
 export {XXRotationPropertyParser} from './XXRotationPropertyParser.js';
 export {XXAnchorPropertyParser} from './XXAnchorPropertyParser.js';
+export {XXBackgroundPropertyParser} from './XXBackgroundPropertyParser.js';

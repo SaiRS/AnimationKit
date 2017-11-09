@@ -1,5 +1,5 @@
 <template>
-  <div :class='classObject'>
+  <div class='xx-element-inspector-vue-container' :class='classObject'>
     <!-- 背景 -->
     <div class='xx-element-inspector-group'>
       <div>背景</div>
@@ -11,10 +11,10 @@
           </Select>
         </div>
         <div class='background-content-container'>
-          <div v-if="fillmode==='none' || fillmode==='color'">
+          <div v-if="fillmode=='none' || fillmode=='color'">
             <ColorPicker v-model="backgroundcolor" alpha />
           </div>
-          <div v-else-if="fillmode==='gradient' " class='gradient-container'>
+          <div v-else-if="fillmode=='gradient' " class='gradient-container'>
             <div class='gradient-color-container'>
               <ColorPicker v-model="gradientstart" alpha />
               <Button type="text" style="color:white" @click='switchGrident'><-----></Button>
@@ -142,8 +142,6 @@
 
     data: function () {
       return {
-        fillmode: 'none',
-
         fillmodelist: [
           {
             value: 'none',
@@ -162,11 +160,6 @@
             label: '图片'
           }
         ],
-
-        backgroundcolor: 'rgba(1, 1, 1, 1)',
-        gradientstart: 'rgba(1, 1, 1, 1)',
-        gradientend: 'rgba(1, 1, 1, 1)',
-        gradientangle: 0,
 
         backgroundimagemode: 'scaleToFill',
         backgroundimagemodelist: [
@@ -243,6 +236,100 @@
           'xxg-disabled': this.currentSelectedActorMixin ? false : true,
         };
       },
+
+      fillmode: {
+        get() {
+          let color = this.currentActorBackgroundColorMixin;
+          if (this.currentActorBackgroundImageMixin) {
+            if (this.isCurrentActorBackgroundImageImageModeMixin) {
+              return 'image';
+            } else if (this.isCurrentActorBackgroundImageGradientModeMixin) {
+              return 'gradient';
+            } else {
+              return 'none';
+            }
+          } else if (color) {
+            return 'color';
+          } else {
+            return 'none';
+          }
+        },
+
+        set(value) {
+          console.log('set fill mode ' + value);
+          // 先删除
+          this.deleteCurrentSelectedActorBackgroundMixin();
+          if ('image' === value) {
+
+          } else if ('gradient' === value) {
+            this.setCurrentSelectedActorBackgroundGradientColorMixin({
+              angle: '270deg',
+              start: 'rgba(255, 255, 255, 1)',
+              end: 'rgba(0, 0, 0, 1)'
+            });
+          } else if ('color' === value) {
+            this.setCurrentSelectedActorBackgroundColorMixin('rgba(0, 0, 0, 1)');
+          } else {
+            // 删除background信息
+          }
+        },
+      },
+
+      backgroundcolor: {
+        get() {
+          let color = this.currentActorBackgroundColorMixin;
+          if (color) {
+            return color;
+          } else {
+            return 'rgba(0, 0, 0, 1)';
+          }
+        },
+
+        set(value) {
+          this.setCurrentSelectedActorBackgroundColorMixin(value);
+        }
+      },
+
+      gradientstart: {
+        get() {
+          let color = this.currentActorBackgroundGradientStartColorMixin;
+          if (color) {
+            return color;
+          } else {
+            return 'rgba(255, 255, 255, 1)';
+          }
+        },
+
+        set(value) {
+          console.log('set gradient start ' + value);
+        }
+      },
+
+      gradientend: {
+        get() {
+          let color = this.currentActorBackgroundGradientEndColorMixin;
+          if (color) {
+            return color;
+          } else {
+            return 'rgba(0, 0, 0, 1)';
+          }
+        },
+
+        set(value) {
+          console.log('set gradient end ' + value);
+        }
+      },
+
+      gradientangle: {
+        get() {
+          let angle = this.currentActorBackgroundGradientAngleMixin;
+          return angle;
+        },
+
+        set(value) {
+
+        }
+      }
     },
 
     methods: {
@@ -296,7 +383,6 @@
   .background-content-container{
     width: 100%;
 
-
     .gradient-container{
       display: flex;
       justify-content: space-around;
@@ -310,6 +396,11 @@
       justify-content: center;
     }
   }
+}
+
+.xx-element-inspector-vue-container{
+  overflow-x: visible;
+  overflow-y: scroll;
 }
 
 

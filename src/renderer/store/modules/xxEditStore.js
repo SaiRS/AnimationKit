@@ -4,7 +4,8 @@ import {XXNodeGraphParser,
   XXStringPropertyParser,
   XXScalePropertyParser,
   XXRotationPropertyParser,
-  XXAnchorPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+  XXAnchorPropertyParser,
+  XXBackgroundPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
 const state = {
   currentSelectedActor: null,  // 数据对象
@@ -86,6 +87,54 @@ const getters = {
     } else {
       return null;
     }
+  },
+
+  currentSelectedActorBackground(state) {
+    let background = XXNodeGraphParser.getBackgroundProperty(state.currentSelectedActor);
+    return background;
+  },
+
+  currentActorBackgroundColor(state) {
+    let background = XXNodeGraphParser.getBackgroundProperty(state.currentSelectedActor);
+    if (background) {
+      return XXBackgroundPropertyParser.getBackgroundColor(background);
+    } else {
+      return null;
+    }
+  },
+
+  currentActorBackgroundImage(state) {
+    let background = XXNodeGraphParser.getBackgroundProperty(state.currentSelectedActor);
+    if (background) {
+      return XXBackgroundPropertyParser.getBackgroundImage(background);
+    } else {
+      return null;
+    }
+  },
+
+  isCurrentActorBackgroundImageImageMode(state, getter) {
+    let background = getter.currentSelectedActorBackground;
+    return XXBackgroundPropertyParser.isBackgroundImageImageMode(background);
+  },
+
+  isCurrentActorBackgroundImageGradientMode(state, getter) {
+    let background = getter.currentSelectedActorBackground;
+    return XXBackgroundPropertyParser.isBackgroundImageGradientMode(background);
+  },
+
+  currentActorBackgroundGradientStartColor(state, getter) {
+    let background = getter.currentSelectedActorBackground;
+    return XXBackgroundPropertyParser.backgroundGradientStartColor(background);
+  },
+
+  currentActorBackgroundGradientEndColor(state, getter) {
+    let background = XXNodeGraphParser.getBackgroundProperty(state.currentSelectedActor);
+    return XXBackgroundPropertyParser.backgroundGradientEndColor(background);
+  },
+
+  currentActorBackgroundGradientAngle(state, getter) {
+    let background = XXNodeGraphParser.getBackgroundProperty(state.currentSelectedActor);
+    return XXBackgroundPropertyParser.backgroundGradientAngle(background);
   },
 };
 
@@ -181,6 +230,27 @@ const mutations = {
     let anchorY = anchor && anchor['anchorY'] || '50%';
     if (state.currentSelectedActor) {
       XXNodeGraphParser.setAnchor(state.currentSelectedActor, anchorX, anchorY);
+    }
+  },
+
+  setCurrentSelectedActorBackgroundColor(state, backgroundcolor = 'rgba(0, 0, 0, 1)') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBackgroundColor(state.currentSelectedActor, backgroundcolor);
+    }
+  },
+
+  setCurrentSelectedActorBackgroundGradientColor(state, gradient) {
+    let angle = gradient && gradient['angle'] || '0deg';
+    let start = gradient && gradient['start'] || 'rgba(1, 1, 1, 1)';
+    let end = gradient && gradient['end'] || 'rgba(0, 0, 0, 1)';
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBackgroundLineGradient(state.currentSelectedActor, angle, start, end);
+    }
+  },
+
+  deleteCurrentSelectedActorBackground(state) {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.deleteBackground(state.currentSelectedActor);
     }
   },
 };

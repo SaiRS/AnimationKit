@@ -7,6 +7,7 @@ import {XXSizePropertyParser} from './XXSizePropertyParser.js';
 import {XXScalePropertyParser} from './XXScalePropertyParser.js';
 import {XXRotationPropertyParser} from './XXRotationPropertyParser.js';
 import {XXAnchorPropertyParser} from './XXAnchorPropertyParser.js';
+import {XXBackgroundPropertyParser} from './XXBackgroundPropertyParser.js';
 /**
  * 解析节点的帮助方法
  */
@@ -97,6 +98,25 @@ class XXNodeGraphParser {
     }
 
     return null;
+  }
+
+  /**
+   * [deleteSpecialProperty description]
+   * @param  {[type]} nodeGraph      [description]
+   * @param  {function} varifyFunction [description]
+   * @return {[type]}                [description]
+   */
+  static deleteSpecialProperty(nodeGraph, varifyFunction) {
+    let properties = this.getProperties(nodeGraph);
+    for (let i = 0; i < properties.length; i++) {
+      // 判断条件
+      if (varifyFunction && varifyFunction(properties[i])) {
+        properties.splice(i, 1);
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**
@@ -211,6 +231,22 @@ class XXNodeGraphParser {
     });
   }
 
+  /**
+   * [getBackgroundProperty description]
+   * @param  {[type]} nodeGraph [description]
+   * @return {[type]}           [description]
+   */
+  static getBackgroundProperty(nodeGraph) {
+    return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
+      if (XXPropertyParser.getPropertyName(property) ==
+       XXLoaderPropertyName.Background) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
   /** **************************
    * 修改部分
    ****************************/
@@ -316,6 +352,61 @@ class XXNodeGraphParser {
     }
   }
 
+  /**
+   * [setBackgroundColor description]
+   * @param {[type]} nodeGraph       [description]
+   * @param {[type]} backgroundcolor [description]
+   */
+  static setBackgroundColor(nodeGraph, backgroundcolor) {
+    let backgroundcolorProperty = XXNodeGraphParser.getBackgroundProperty(nodeGraph);
+    if (backgroundcolorProperty) {
+      XXBackgroundPropertyParser.setBackgroundColor(backgroundcolorProperty, backgroundcolor);
+    } else {
+      // 增加属性
+      let newBackgroundValue = XXBackgroundPropertyParser.createBackgroundValue();
+      XXNodeGraphParser.addBackgroundProperty(nodeGraph, newBackgroundValue);
+
+      let newBackgroundColorProperty = XXNodeGraphParser.getBackgroundProperty(nodeGraph);
+      XXBackgroundPropertyParser.setBackgroundColor(newBackgroundColorProperty, backgroundcolor);
+    }
+  }
+
+  /**
+   * [setBackgroundLineGradient description]
+   * @param {[type]} nodeGraph         [description]
+   * @param {String} [angle='0deg']    [description]
+   * @param {String} [start='rgba(255, 255,          255, 1)'] [description]
+   * @param {String} [end='rgba(0,     0,            0,   1)'] [description]
+   */
+  static setBackgroundLineGradient(nodeGraph, angle = '0deg', start = 'rgba(255, 255, 255, 1)', end = 'rgba(0, 0, 0, 1)') {
+    let backgroundProperty = XXNodeGraphParser.getBackgroundProperty(nodeGraph);
+    if (backgroundProperty) {
+      XXBackgroundPropertyParser.setBackgroundLineGradient(backgroundProperty, angle, start, end);
+    } else {
+      // 增加属性
+      let newBackgroundValue = XXBackgroundPropertyParser.createBackgroundValue();
+      XXNodeGraphParser.addBackgroundProperty(nodeGraph, newBackgroundValue);
+
+      let newBackgroundColorProperty = XXNodeGraphParser.getBackgroundProperty(nodeGraph);
+      XXBackgroundPropertyParser.setBackgroundLineGradient(newBackgroundColorProperty, angle, start, end);
+    }
+  }
+
+  /**
+   * [deleteBackground description]
+   * @param  {[type]} nodeGraph [description]
+   */
+  static deleteBackground(nodeGraph) {
+    XXNodeGraphParser.deleteSpecialProperty(nodeGraph, function(property) {
+      if (XXPropertyParser.getPropertyName(property) ==
+       XXLoaderPropertyName.Background) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
   /** **************************
    * 增加部分
    ****************************/
@@ -369,6 +460,22 @@ class XXNodeGraphParser {
     XXNodeGraphParser.__addProperty(nodeGraph, property);
   }
 
+  /**
+   * [addBackgroundProperty description]
+   * @param {[type]} nodeGraph                              [description]
+   * @param {[type]} value                                  [description]
+   * @param {[type]} [name=XXLoaderPropertyName.Background] [description]
+   */
+  static addBackgroundProperty(nodeGraph, value, name = XXLoaderPropertyName.Background) {
+    let property =
+      XXPropertyParser.createNewProperty(
+        XXLoaderPropertyType.BackagroundType,
+        name,
+        value
+      );
+
+    XXNodeGraphParser.__addProperty(nodeGraph, property);
+  }
   /** **************************
    * 删除部分
    ****************************/

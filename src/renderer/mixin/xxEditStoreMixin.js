@@ -24,6 +24,15 @@ const XXEditStoreMixin = {
       'currentActorScaleMixin': 'currentActorScale',
       'currentActorRotationMixin': 'currentActorRotation',
       'currentActorAnchorPointMixin': 'currentActorAnchorPoint',
+
+      'currentActorBackgroundColorMixin': 'currentActorBackgroundColor',
+      'currentActorBackgroundImageMixin': 'currentActorBackgroundImage',
+      'isCurrentActorBackgroundImageImageModeMixin': 'isCurrentActorBackgroundImageImageMode',
+      'isCurrentActorBackgroundImageGradientModeMixin': 'isCurrentActorBackgroundImageGradientMode',
+
+      'currentActorBackgroundGradientAngleMixin': 'currentActorBackgroundGradientAngle',
+      'currentActorBackgroundGradientEndColorMixin': 'currentActorBackgroundGradientEndColor',
+      'currentActorBackgroundGradientStartColorMixin': 'currentActorBackgroundGradientStartColor',
     }),
   },
 
@@ -41,6 +50,10 @@ const XXEditStoreMixin = {
       'setCurrentSelectedActorScaleMixin': 'setCurrentSelectedActorScale',
       'setCurrentSelectedActorRotationMixin': 'setCurrentSelectedActorRotation',
       'setCurrentSelectedActorAnchorMixin': 'setCurrentSelectedActorAnchor',
+
+      'setCurrentSelectedActorBackgroundColorMixin': 'setCurrentSelectedActorBackgroundColor',
+      'deleteCurrentSelectedActorBackgroundMixin': 'deleteCurrentSelectedActorBackground',
+      'setCurrentSelectedActorBackgroundGradientColorMixin': 'setCurrentSelectedActorBackgroundGradientColor',
     }),
   },
 };
