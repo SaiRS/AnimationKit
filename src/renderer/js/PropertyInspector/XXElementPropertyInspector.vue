@@ -137,6 +137,7 @@
 </template>
 
 <script>
+  import * as XXValueTool from 'XXTool/ValueTool.js';
   export default {
     name: 'XXElementPropertyInspector',
 
@@ -302,6 +303,11 @@
 
         set(value) {
           console.log('set gradient start ' + value);
+          this.setCurrentSelectedActorBackgroundGradientColorMixin({
+            angle: this.gradientangle + XXValueTool.xxfDefaultUnitOfAngle(),
+            start: value,
+            end: this.gradientend,
+          });
         }
       },
 
@@ -317,17 +323,26 @@
 
         set(value) {
           console.log('set gradient end ' + value);
+          this.setCurrentSelectedActorBackgroundGradientColorMixin({
+            angle: this.gradientangle + XXValueTool.xxfDefaultUnitOfAngle(),
+            start: this.gradientstart,
+            end: value,
+          });
         }
       },
 
       gradientangle: {
         get() {
           let angle = this.currentActorBackgroundGradientAngleMixin;
-          return angle;
+          return XXValueTool.xxfExtractNumberValueFromStringValue(angle);
         },
 
         set(value) {
-
+          this.setCurrentSelectedActorBackgroundGradientColorMixin({
+            angle: value + XXValueTool.xxfDefaultUnitOfAngle(),
+            start: this.gradientstart,
+            end: this.gradientend,
+          });
         }
       }
     },

@@ -189,6 +189,19 @@ class XXBackgroundPropertyParser {
   }
 
   /**
+   * [createNewProperty description]
+   * @param  {[type]} name [description]
+   * @return {[type]}      [description]
+   */
+  static createNewProperty(name) {
+    return XXPropertyParser.createNewProperty(
+      XXLoaderPropertyType.BackagroundType,
+      name,
+      {}
+    );
+  }
+
+  /**
    * [setBackgroundColor description]
    * @param {[type]} property        [description]
    * @param {[type]} backgroundcolor [description]
@@ -204,19 +217,22 @@ class XXBackgroundPropertyParser {
    * [setBackgroundLineGradient description]
    * @param {[type]} property          [description]
    * @param {String} [angle='0deg']    [description]
-   * @param {String} [start='rgba(255, 255,          255, 1)'] [description]
-   * @param {String} [end='rgba(0,     0,            0,   1)'] [description]
+   * @param {String} [start='rgba(255, 255, 255, 1)'] [description]
+   * @param {String} [end='rgba(0, 0, 0, 1)'] [description]
    */
   static setBackgroundLineGradient(property, angle = '0deg', start = 'rgba(255, 255, 255, 1)', end = 'rgba(0, 0, 0, 1)') {
     if (XXPropertyParser.getPropertyType(property) == XXLoaderPropertyType.BackagroundType) {
       let value = XXPropertyParser.getPropertyValue(property);
-      let backgroundImage = value['background-image'];
-      if (backgroundImage) {
-        XXBackgroundImagePropertyParser.setBackgroundLineGradient(backgroundImage, angle, start, end);
-      } else {
-        value['background-image'] = {};
-        XXBackgroundImagePropertyParser.setBackgroundLineGradient(value['background-image'], angle, start, end);
-      }
+
+      value['background-image'] = {};
+      XXBackgroundImagePropertyParser.setBackgroundLineGradient(value['background-image'], angle, start, end);
+      // let backgroundImage = value['background-image'];
+      // if (backgroundImage) {
+      //   XXBackgroundImagePropertyParser.setBackgroundLineGradient(backgroundImage, angle, start, end);
+      // } else {
+      //   value['background-image'] = {};
+      //   XXBackgroundImagePropertyParser.setBackgroundLineGradient(value['background-image'], angle, start, end);
+      // }
     }
   }
 }

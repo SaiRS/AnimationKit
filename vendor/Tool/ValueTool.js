@@ -65,24 +65,24 @@ function xxfDefaultUnitOfSize() {
 }
 
 /**
- * [xxfIsValidUnitOfRotation description]
+ * [xxfIsValidUnitOfAngle description]
  * @param  {[type]} unit [description]
  * @return {[type]}      [description]
  */
-function xxfIsValidUnitOfRotation(unit: string) {
+function xxfIsValidUnitOfAngle(unit: string) {
   return ['deg', 'rad'].includes(unit);
 }
 
 /**
- * [xxfDefaultUnitOfRotation description]
+ * [xxfDefaultUnitOfAngle description]
  * @return {[type]} [description]
  */
-function xxfDefaultUnitOfRotation() {
+function xxfDefaultUnitOfAngle() {
   return 'deg';
 }
 
 /**
- * [xxfIsValidUnitOfRotation description]
+ * [xxfIsValidUnitOfAngle description]
  * @param  {[type]} unit [description]
  * @return {[type]}      [description]
  */
@@ -91,12 +91,13 @@ function xxfIsValidUnitOfAnchor(unit: string) {
 }
 
 /**
- * [xxfDefaultUnitOfRotation description]
+ * [xxfDefaultUnitOfAngle description]
  * @return {[type]} [description]
  */
 function xxfDefaultUnitOfAnchor() {
   return '%';
 }
+
 
 export {
   xxfExtractNumberValueFromStringValue,
@@ -108,8 +109,8 @@ export {
   xxfIsValidUnitOfSize,
   xxfDefaultUnitOfSize,
 
-  xxfIsValidUnitOfRotation,
-  xxfDefaultUnitOfRotation,
+  xxfIsValidUnitOfAngle,
+  xxfDefaultUnitOfAngle,
 
   xxfIsValidUnitOfAnchor,
   xxfDefaultUnitOfAnchor,

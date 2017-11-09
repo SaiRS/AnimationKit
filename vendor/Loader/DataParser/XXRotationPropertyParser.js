@@ -43,18 +43,18 @@ class XXRotationPropertyParser {
       let value = XXPropertyParser.getPropertyValue(property);
 
       let zunit = ValueTool.xxfExtractUnitFromStringValue(rotationZ);
-      if (!ValueTool.xxfIsValidUnitOfRotation(zunit)) {
-        zunit = ValueTool.xxfDefaultUnitOfRotation();
+      if (!ValueTool.xxfIsValidUnitOfAngle(zunit)) {
+        zunit = ValueTool.xxfDefaultUnitOfAngle();
       }
 
       let xunit = ValueTool.xxfExtractUnitFromStringValue(rotationX);
-      if (!ValueTool.xxfIsValidUnitOfRotation(xunit)) {
-        xunit = ValueTool.xxfDefaultUnitOfRotation();
+      if (!ValueTool.xxfIsValidUnitOfAngle(xunit)) {
+        xunit = ValueTool.xxfDefaultUnitOfAngle();
       }
 
       let yunit = ValueTool.xxfExtractUnitFromStringValue(rotationY);
-      if (!ValueTool.xxfIsValidUnitOfRotation(yunit)) {
-        yunit = ValueTool.xxfDefaultUnitOfRotation();
+      if (!ValueTool.xxfIsValidUnitOfAngle(yunit)) {
+        yunit = ValueTool.xxfDefaultUnitOfAngle();
       }
 
       value['rotationX'] = ValueTool.xxfExtractNumberValueFromStringValue(rotationX) + xunit;

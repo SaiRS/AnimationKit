@@ -375,13 +375,16 @@ class XXNodeGraphParser {
    * [setBackgroundLineGradient description]
    * @param {[type]} nodeGraph         [description]
    * @param {String} [angle='0deg']    [description]
-   * @param {String} [start='rgba(255, 255,          255, 1)'] [description]
-   * @param {String} [end='rgba(0,     0,            0,   1)'] [description]
+   * @param {String} [start='rgba(255, 255, 255, 1)'] [description]
+   * @param {String} [end='rgba(0, 0, 0, 1)'] [description]
    */
   static setBackgroundLineGradient(nodeGraph, angle = '0deg', start = 'rgba(255, 255, 255, 1)', end = 'rgba(0, 0, 0, 1)') {
     let backgroundProperty = XXNodeGraphParser.getBackgroundProperty(nodeGraph);
-    if (backgroundProperty) {
-      XXBackgroundPropertyParser.setBackgroundLineGradient(backgroundProperty, angle, start, end);
+    if (backgroundProperty) { // 覆盖
+      // XXBackgroundPropertyParser.setBackgroundLineGradient(backgroundProperty, angle, start, end);
+      let newBackgroundProperty = XXBackgroundPropertyParser.createNewProperty(XXPropertyParser.getPropertyName(backgroundProperty));
+      XXBackgroundPropertyParser.setBackgroundLineGradient(newBackgroundProperty, angle, start, end);
+      XXNodeGraphParser._modifyProperty(nodeGraph, XXPropertyParser.getPropertyName(backgroundProperty), newBackgroundProperty);
     } else {
       // 增加属性
       let newBackgroundValue = XXBackgroundPropertyParser.createBackgroundValue();
@@ -479,6 +482,26 @@ class XXNodeGraphParser {
   /** **************************
    * 删除部分
    ****************************/
+
+  /**
+   * [_modifyProperty description]
+   * @param  {[type]} nodeGraph    [description]
+   * @param  {[type]} propertyName [description]
+   * @param  {[type]} newProperty  [description]
+   */
+  static _modifyProperty(nodeGraph, propertyName, newProperty) {
+    if (propertyName === XXPropertyParser.getPropertyName(newProperty)) {
+      let properties = this.getProperties(nodeGraph);
+      for (let i = 0; i < properties.length; i++) {
+        // 判断条件
+        if (propertyName == XXPropertyParser.getPropertyName(properties[i])) {
+          // 直接替换
+          properties[i] = Object.assign(properties[i], newProperty);
+          break;
+        }
+      }
+    }
+  }
 }
 
 export {

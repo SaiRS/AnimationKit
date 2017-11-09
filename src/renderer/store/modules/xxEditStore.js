@@ -94,46 +94,38 @@ const getters = {
     return background;
   },
 
-  currentActorBackgroundColor(state) {
-    let background = XXNodeGraphParser.getBackgroundProperty(state.currentSelectedActor);
-    if (background) {
-      return XXBackgroundPropertyParser.getBackgroundColor(background);
-    } else {
-      return null;
-    }
+  currentActorBackgroundColor(state, getters) {
+    let background = getters.currentSelectedActorBackground;
+    return XXBackgroundPropertyParser.getBackgroundColor(background);
   },
 
-  currentActorBackgroundImage(state) {
-    let background = XXNodeGraphParser.getBackgroundProperty(state.currentSelectedActor);
-    if (background) {
-      return XXBackgroundPropertyParser.getBackgroundImage(background);
-    } else {
-      return null;
-    }
+  currentActorBackgroundImage(state, getters) {
+    let background = getters.currentSelectedActorBackground;
+    return XXBackgroundPropertyParser.getBackgroundImage(background);
   },
 
-  isCurrentActorBackgroundImageImageMode(state, getter) {
-    let background = getter.currentSelectedActorBackground;
+  isCurrentActorBackgroundImageImageMode(state, getters) {
+    let background = getters.currentSelectedActorBackground;
     return XXBackgroundPropertyParser.isBackgroundImageImageMode(background);
   },
 
-  isCurrentActorBackgroundImageGradientMode(state, getter) {
-    let background = getter.currentSelectedActorBackground;
+  isCurrentActorBackgroundImageGradientMode(state, getters) {
+    let background = getters.currentSelectedActorBackground;
     return XXBackgroundPropertyParser.isBackgroundImageGradientMode(background);
   },
 
-  currentActorBackgroundGradientStartColor(state, getter) {
-    let background = getter.currentSelectedActorBackground;
+  currentActorBackgroundGradientStartColor(state, getters) {
+    let background = getters.currentSelectedActorBackground;
     return XXBackgroundPropertyParser.backgroundGradientStartColor(background);
   },
 
-  currentActorBackgroundGradientEndColor(state, getter) {
-    let background = XXNodeGraphParser.getBackgroundProperty(state.currentSelectedActor);
+  currentActorBackgroundGradientEndColor(state, getters) {
+    let background = getters.currentSelectedActorBackground;
     return XXBackgroundPropertyParser.backgroundGradientEndColor(background);
   },
 
-  currentActorBackgroundGradientAngle(state, getter) {
-    let background = XXNodeGraphParser.getBackgroundProperty(state.currentSelectedActor);
+  currentActorBackgroundGradientAngle(state, getters) {
+    let background = getters.currentSelectedActorBackground;
     return XXBackgroundPropertyParser.backgroundGradientAngle(background);
   },
 };
@@ -241,7 +233,7 @@ const mutations = {
 
   setCurrentSelectedActorBackgroundGradientColor(state, gradient) {
     let angle = gradient && gradient['angle'] || '0deg';
-    let start = gradient && gradient['start'] || 'rgba(1, 1, 1, 1)';
+    let start = gradient && gradient['start'] || 'rgba(255, 255, 255, 1)';
     let end = gradient && gradient['end'] || 'rgba(0, 0, 0, 1)';
     if (state.currentSelectedActor) {
       XXNodeGraphParser.setBackgroundLineGradient(state.currentSelectedActor, angle, start, end);

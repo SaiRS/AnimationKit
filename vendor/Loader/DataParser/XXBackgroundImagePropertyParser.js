@@ -1,6 +1,5 @@
 // @flow
 
-import * as XXValueTool from 'XXTool/ValueTool.js';
 /**
  *
  */
@@ -85,7 +84,7 @@ class XXBackgroundImagePropertyParser {
    */
   static backgroundGradientAngle(backgroundImageProperty) {
     if (XXBackgroundImagePropertyParser.isBackgroundImageGradientMode(backgroundImageProperty)) {
-      return XXValueTool.xxfExtractNumberValueFromStringValue(backgroundImageProperty['value']['angle']);
+      return backgroundImageProperty['value']['angle'];
     } else {
       return undefined;
     }
@@ -111,8 +110,8 @@ class XXBackgroundImagePropertyParser {
    * [setBackgroundLineGradient description]
    * @param {[type]} backgroundImageProperty [description]
    * @param {String} [angle='0deg']          [description]
-   * @param {String} [start='rgba(255,       255,          255, 1)'] [description]
-   * @param {String} [end='rgba(0,           0,            0,   1)'] [description]
+   * @param {String} [start='rgba(255, 255, 255, 1)'] [description]
+   * @param {String} [end='rgba(0, 0, 0, 1)'] [description]
    */
   static setBackgroundLineGradient(backgroundImageProperty, angle = '0deg', start = 'rgba(255, 255, 255, 1)', end = 'rgba(0, 0, 0, 1)') {
     if (backgroundImageProperty) {
@@ -122,6 +121,15 @@ class XXBackgroundImagePropertyParser {
         gradients: [start, end],
       };
     }
+  }
+
+  /**
+   * [createNewProperty description]
+   * @return {[type]} [description]
+   */
+  static createNewProperty() {
+    return {
+    };
   }
 }
 
