@@ -46,7 +46,7 @@ const getters = {
   currentActorSize(state) {
     let sizeProp = XXNodeGraphParser.getSizeProperty(state.currentSelectedActor);
     if (sizeProp) {
-      return XXSizePropertyParser.getSize(sizeProp);
+      return XXSizePropertyParser.getSizeValue(sizeProp);
     } else {
       return null;
     }
@@ -55,7 +55,7 @@ const getters = {
   currentActorOverflow(state) {
     let overflowProp = XXNodeGraphParser.getOverflowProperty(state.currentSelectedActor);
     if (overflowProp) {
-      return XXStringPropertyParser.getString(overflowProp);
+      return XXStringPropertyParser.getStringValue(overflowProp);
     } else {
       return null;
     }
@@ -64,7 +64,7 @@ const getters = {
   currentActorScale(state) {
     let scale = XXNodeGraphParser.getScaleProperty(state.currentSelectedActor);
     if (scale) {
-      return XXScalePropertyParser.getScale(scale);
+      return XXScalePropertyParser.getScaleValue(scale);
     } else {
       return null;
     }

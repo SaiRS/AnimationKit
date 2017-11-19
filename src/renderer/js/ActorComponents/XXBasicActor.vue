@@ -77,7 +77,7 @@
 
       width: function() {
         let sizeprop = XXNodeGraphParser.getSizeProperty(this.nodeGraph);
-        let size = XXSizePropertyParser.getSize(sizeprop);
+        let size = XXSizePropertyParser.getSizeValue(sizeprop);
         if (size) {
           return size['width'];
         } else {
@@ -87,7 +87,7 @@
 
       height: function() {
         let sizeprop = XXNodeGraphParser.getSizeProperty(this.nodeGraph);
-        let size = XXSizePropertyParser.getSize(sizeprop);
+        let size = XXSizePropertyParser.getSizeValue(sizeprop);
         if (size) {
           return size['height'];
         } else {
@@ -97,7 +97,7 @@
 
       overflow: function() {
         let overflowprop = XXNodeGraphParser.getOverflowProperty(this.nodeGraph);
-        let overflow = XXStringPropertyParser.getString(overflowprop);
+        let overflow = XXStringPropertyParser.getStringValue(overflowprop);
         if (overflow) {
           return overflow;
         } else {
@@ -107,7 +107,7 @@
 
       scaleX: function() {
         let scaleprop = XXNodeGraphParser.getScaleProperty(this.nodeGraph);
-        let scale = XXScalePropertyParser.getScale(scaleprop);
+        let scale = XXScalePropertyParser.getScaleValue(scaleprop);
         if (scale) {
           return scale['scaleX'];
         } else {
@@ -117,7 +117,7 @@
 
       scaleY: function() {
         let scaleprop = XXNodeGraphParser.getScaleProperty(this.nodeGraph);
-        let scale = XXScalePropertyParser.getScale(scaleprop);
+        let scale = XXScalePropertyParser.getScaleValue(scaleprop);
         if (scale) {
           return scale['scaleY'];
         } else {

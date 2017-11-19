@@ -1,4 +1,4 @@
-import {XXLoaderPropertyType} from '../XXLoaderConstant.js';
+import {XXPropertyTypeEnum} from '../Constant/XXPropertyTypeConstant.js';
 import XXPropertyParser from './XXPropertyParser.js';
 
 import * as ValueTool from 'XXTool/ValueTool.js';
@@ -13,7 +13,7 @@ class XXAnchorPropertyParser {
    */
   static getAnchor(property) {
     if (XXPropertyParser.getPropertyType(property) ==
-       XXLoaderPropertyType.PointType) {
+       XXPropertyTypeEnum.PointType) {
       // 属性的值
       let value = XXPropertyParser.getPropertyValue(property);
       return {
@@ -36,7 +36,7 @@ class XXAnchorPropertyParser {
    * @param {[type]} anchorY  [description]
    */
   static setAnchor(property, anchorX, anchorY) {
-    if (XXPropertyParser.getPropertyType(property) == XXLoaderPropertyType.PointType) {
+    if (XXPropertyParser.getPropertyType(property) == XXPropertyTypeEnum.PointType) {
       // 属性的值
       let value = XXPropertyParser.getPropertyValue(property);
 

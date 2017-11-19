@@ -1,4 +1,4 @@
-import {XXLoaderPropertyType} from '../XXLoaderConstant.js';
+import {XXPropertyTypeEnum} from '../Constant/XXPropertyTypeConstant.js';
 import XXPropertyParser from './XXPropertyParser.js';
 
 import * as ValueTool from 'XXTool/ValueTool.js';
@@ -6,7 +6,7 @@ import * as ValueTool from 'XXTool/ValueTool.js';
 /**
  * 旋转属性解析
  */
-class XXRotationPropertyParser {
+class XXRotationPropertyParser extends XXPropertyParser {
   /**
    * 获取缩放信息
    * @param  {Object} property [description]
@@ -14,7 +14,7 @@ class XXRotationPropertyParser {
    */
   static getRotation(property) {
     if (XXPropertyParser.getPropertyType(property) ==
-       XXLoaderPropertyType.RotationType) {
+       XXPropertyTypeEnum.RotationType) {
       // 属性的值
       let value = XXPropertyParser.getPropertyValue(property);
       return {
@@ -39,7 +39,7 @@ class XXRotationPropertyParser {
    * @param {[type]} rotationY [description]
    */
   static setRotation(property, rotationZ = '0deg', rotationX = '0deg', rotationY = '0deg') {
-    if (XXPropertyParser.getPropertyType(property) == XXLoaderPropertyType.RotationType) {
+    if (XXPropertyParser.getPropertyType(property) == XXPropertyTypeEnum.RotationType) {
       let value = XXPropertyParser.getPropertyValue(property);
 
       let zunit = ValueTool.xxfExtractUnitFromStringValue(rotationZ);

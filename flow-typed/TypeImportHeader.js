@@ -60,3 +60,25 @@ import XXDriveTargetInterface from 'XXActionAlias/ActionDriver/XXDriveTarget.js'
  *
  * Declaring A Module...
  */
+
+// 基本属性结构
+declare type XXProperty = {
+  type: string,
+  name: string,
+  value: mixed,
+};
+
+// string属性结构
+declare type XXStringProperty = {
+  type: 'string',
+  name: string,
+  value: string,
+};
+
+// 颜色值结构
+declare type XXColorValue = {
+  red: number,
+  green: number,
+  blue: number,
+  alpha: number
+};

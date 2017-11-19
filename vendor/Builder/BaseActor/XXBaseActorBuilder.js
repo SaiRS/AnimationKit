@@ -18,7 +18,7 @@ class XXBaseActorBuilder {
       'parentClassName': 'XXNodeDomActor',
       'properties': [
         {
-          'type': 'Point',
+          'type': 'point',
           'value': {
             'x': '50%',
             'y': '50%',
@@ -27,7 +27,7 @@ class XXBaseActorBuilder {
           'name': 'anchorPoint',
         },
         {
-          'type': 'Point',
+          'type': 'point',
           'value': {
             'x': '0px',
             'y': '0px',
@@ -36,7 +36,7 @@ class XXBaseActorBuilder {
           'name': 'position',
         },
         {
-          'type': 'Size',
+          'type': 'size',
           'value': {
             'width': '55px',
             'height': '55px',
@@ -44,12 +44,12 @@ class XXBaseActorBuilder {
           'name': 'size',
         },
         {
-          'type': 'String',
+          'type': 'string',
           'value': 'auto',
           'name': 'overflow',
         },
         {
-          'type': 'Scale',
+          'type': 'scale',
           'value': {
             'scaleX': '1',
             'scaleY': '1',
@@ -58,7 +58,7 @@ class XXBaseActorBuilder {
           'name': 'scale',
         },
         {
-          'type': 'Rotation',
+          'type': 'rotation',
           'value': {
             'rotationX': '0deg',
             'rotationY': '0deg',
@@ -67,7 +67,7 @@ class XXBaseActorBuilder {
           'name': 'rotation',
         },
         {
-          'type': 'Check',
+          'type': 'boolean',
           'value': true,
           'name': 'visible',
         },

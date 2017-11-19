@@ -1,19 +1,18 @@
-import {XXLoaderPropertyType} from '../XXLoaderConstant.js';
+import {XXPropertyTypeEnum} from '../Constant/XXPropertyTypeConstant.js';
 import XXPropertyParser from './XXPropertyParser.js';
 
 import * as ValueTool from 'XXTool/ValueTool.js';
 /**
  * 尺寸属性解析
  */
-class XXSizePropertyParser {
+class XXSizePropertyParser extends XXPropertyParser {
   /**
    * 获取尺寸信息
    * @param  {Object} property [description]
    * @return {Object}           {width: 0, height:0}
    */
-  static getSize(property) {
-    if (XXPropertyParser.getPropertyType(property) ==
-       XXLoaderPropertyType.SizeType) {
+  static getSizeValue(property) {
+    if (XXPropertyParser.getPropertyType(property) == XXPropertyTypeEnum.SizeType) {
       // 属性的值
       let value = XXPropertyParser.getPropertyValue(property);
       return {
@@ -36,7 +35,7 @@ class XXSizePropertyParser {
    * @param {String} [height='0px'] [description]
    */
   static setSize(property, width = '0px', height = '0px') {
-    if (XXPropertyParser.getPropertyType(property) == XXLoaderPropertyType.SizeType) {
+    if (XXPropertyParser.getPropertyType(property) == XXPropertyTypeEnum.SizeType) {
       let value = XXPropertyParser.getPropertyValue(property);
 
       // 值，单位

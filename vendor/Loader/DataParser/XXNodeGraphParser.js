@@ -1,6 +1,5 @@
-// @flow
-
-import {XXLoaderPropertyName, XXLoaderPropertyType} from '../XXLoaderConstant.js';
+import {XXPropertyNameEnum} from '../Constant/XXPropertyNameConstant.js';
+import {XXPropertyTypeEnum} from '../Constant/XXPropertyTypeConstant.js';
 import XXPropertyParser from './XXPropertyParser.js';
 import {XXPositionPropertyParser} from './XXPositionPropertyParser.js';
 import {XXSizePropertyParser} from './XXSizePropertyParser.js';
@@ -101,7 +100,7 @@ class XXNodeGraphParser {
   }
 
   /**
-   * [deleteSpecialProperty description]
+   * 删除某一属性
    * @param  {[type]} nodeGraph      [description]
    * @param  {function} varifyFunction [description]
    * @return {[type]}                [description]
@@ -127,7 +126,7 @@ class XXNodeGraphParser {
   static getPositionProperty(nodeGraph) {
     return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
       if (XXPropertyParser.getPropertyName(property) ==
-       XXLoaderPropertyName.Position) {
+       XXPropertyNameEnum.Position) {
         return true;
       } else {
         return false;
@@ -143,7 +142,7 @@ class XXNodeGraphParser {
   static getSizeProperty(nodeGraph) {
     return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
       if (XXPropertyParser.getPropertyName(property) ==
-       XXLoaderPropertyName.Size) {
+       XXPropertyNameEnum.Size) {
         return true;
       } else {
         return false;
@@ -159,7 +158,7 @@ class XXNodeGraphParser {
   static getScaleProperty(nodeGraph) {
     return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
       if (XXPropertyParser.getPropertyName(property) ==
-       XXLoaderPropertyName.Scale) {
+       XXPropertyNameEnum.Scale) {
         return true;
       } else {
         return false;
@@ -175,7 +174,7 @@ class XXNodeGraphParser {
   static getRotationProperty(nodeGraph) {
     return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
       if (XXPropertyParser.getPropertyName(property) ==
-       XXLoaderPropertyName.Rotate) {
+       XXPropertyNameEnum.Rotate) {
         return true;
       } else {
         return false;
@@ -191,7 +190,7 @@ class XXNodeGraphParser {
   static getAnchorProperty(nodeGraph) {
     return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
       if (XXPropertyParser.getPropertyName(property) ==
-       XXLoaderPropertyName.Anchor) {
+       XXPropertyNameEnum.Anchor) {
         return true;
       } else {
         return false;
@@ -207,7 +206,7 @@ class XXNodeGraphParser {
   static getVisibleProperty(nodeGraph) {
     return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
       if (XXPropertyParser.getPropertyName(property) ==
-       XXLoaderPropertyName.Visible) {
+       XXPropertyNameEnum.Visible) {
         return true;
       } else {
         return false;
@@ -223,7 +222,7 @@ class XXNodeGraphParser {
   static getOverflowProperty(nodeGraph) {
     return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
       if (XXPropertyParser.getPropertyName(property) ==
-       XXLoaderPropertyName.Overflow) {
+       XXPropertyNameEnum.Overflow) {
         return true;
       } else {
         return false;
@@ -239,7 +238,7 @@ class XXNodeGraphParser {
   static getBackgroundProperty(nodeGraph) {
     return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
       if (XXPropertyParser.getPropertyName(property) ==
-       XXLoaderPropertyName.Background) {
+       XXPropertyNameEnum.Background) {
         return true;
       } else {
         return false;
@@ -402,7 +401,7 @@ class XXNodeGraphParser {
   static deleteBackground(nodeGraph) {
     XXNodeGraphParser.deleteSpecialProperty(nodeGraph, function(property) {
       if (XXPropertyParser.getPropertyName(property) ==
-       XXLoaderPropertyName.Background) {
+       XXPropertyNameEnum.Background) {
         return true;
       } else {
         return false;
@@ -423,7 +422,9 @@ class XXNodeGraphParser {
     if (nodeGraph && property) {
       let properties = nodeGraph['properties'];
       if (properties) {
-        properties.push(property);
+        // 为了触发vue的更新事件
+        nodeGraph['properties'] = properties.concat([property]);
+        // properties.push(property);
       } else {
         nodeGraph['properties'] = [property];
       }
@@ -434,12 +435,12 @@ class XXNodeGraphParser {
    * [addPositionProperty description]
    * @param {[type]} nodeGraph                            [description]
    * @param {[type]} value                                [description]
-   * @param {[type]} [name=XXLoaderPropertyName.Position] [description]
+   * @param {[type]} [name=XXPropertyNameEnum.Position] [description]
    */
-  static addPositionProperty(nodeGraph, value, name = XXLoaderPropertyName.Position) {
+  static addPositionProperty(nodeGraph, value, name = XXPropertyNameEnum.Position) {
     let property =
       XXPropertyParser.createNewProperty(
-        XXLoaderPropertyType.PointType,
+        XXPropertyTypeEnum.PointType,
         name,
         value
       );
@@ -451,11 +452,11 @@ class XXNodeGraphParser {
    * [addOverflowProperty description]
    * @param {[type]} nodeGraph                            [description]
    * @param {[type]} value                                [description]
-   * @param {[type]} [name=XXLoaderPropertyName.Overflow] [description]
+   * @param {[type]} [name=XXPropertyNameEnum.Overflow] [description]
    */
-  static addOverflowProperty(nodeGraph, value, name = XXLoaderPropertyName.Overflow) {
+  static addOverflowProperty(nodeGraph, value, name = XXPropertyNameEnum.Overflow) {
     let property = XXPropertyParser.createNewProperty(
-      XXLoaderPropertyType.StringType,
+      XXPropertyTypeEnum.StringType,
       name,
       value
     );
@@ -467,12 +468,12 @@ class XXNodeGraphParser {
    * [addBackgroundProperty description]
    * @param {[type]} nodeGraph                              [description]
    * @param {[type]} value                                  [description]
-   * @param {[type]} [name=XXLoaderPropertyName.Background] [description]
+   * @param {[type]} [name=XXPropertyNameEnum.Background] [description]
    */
-  static addBackgroundProperty(nodeGraph, value, name = XXLoaderPropertyName.Background) {
+  static addBackgroundProperty(nodeGraph, value, name = XXPropertyNameEnum.Background) {
     let property =
       XXPropertyParser.createNewProperty(
-        XXLoaderPropertyType.BackagroundType,
+        XXPropertyTypeEnum.BackgroundType,
         name,
         value
       );

@@ -2,7 +2,7 @@
 
 
 // 属性类型
-let XXLoaderPropertyType = {
+let XXPropertyNameEnum = {
   // 未知类型
   UnknownType: 'unknown',
 
@@ -20,7 +20,7 @@ let XXLoaderPropertyType = {
   //  horizon: boolean,  // 水平翻转
   //  vertical: boolean, // 垂直翻转
   // }
-  FlipType: 'Flip',
+  // FlipType: 'Flip',
 
   // 点类型，对应的value为
   // {
@@ -55,7 +55,7 @@ let XXLoaderPropertyType = {
 
   // 角度类型，对应的value格式为简单字符串
   // 234deg/0.2rad/-24deg/-0.8rad
-  DegreesType: 'Degrees',
+  // DegreesType: 'Degrees',
 
   // 角度动作类型，对应的value格式为
   // {
@@ -68,7 +68,7 @@ let XXLoaderPropertyType = {
   //   // 是否选择最小旋转路径，如果有一个以上的关键帧考虑超出360部分,则这个设置不起作用
   //   minActionDegree: boolean,
   // }
-  DegreeActionType: 'DegreeAction',
+  // DegreeActionType: 'DegreeAction',
 
   // 背景
   // {
@@ -84,7 +84,7 @@ let XXLoaderPropertyType = {
   //  background-attatchment: '',
   //  background-blend-mode: ''
   // }
-  BackagroundType: 'Backgroud',
+  BackgroundType: 'Backgroud',
 
   // 图片类型，对应的value格式为
   // {
@@ -114,6 +114,6 @@ let XXLoaderPropertyName = {
 };
 
 export {
-  XXLoaderPropertyType,
+  XXPropertyNameEnum,
   XXLoaderPropertyName,
 };

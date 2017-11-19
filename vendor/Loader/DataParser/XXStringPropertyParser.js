@@ -1,23 +1,36 @@
-import {XXLoaderPropertyType} from '../XXLoaderConstant.js';
+import {XXPropertyTypeEnum} from '../Constant/XXPropertyTypeConstant.js';
 import XXPropertyParser from './XXPropertyParser.js';
 
 /**
- * 位置属性解析
+ * String属性解析
  */
-class XXStringPropertyParser {
+class XXStringPropertyParser extends XXPropertyParser {
   /**
    * 获取尺寸信息
    * @param  {Object} property [description]
    * @return {String}
    */
-  static getString(property) {
-    if (XXPropertyParser.getPropertyType(property) ==
-       XXLoaderPropertyType.StringType) {
+  static getStringValue(property) {
+    if (XXPropertyParser.getPropertyType(property) == XXPropertyTypeEnum.StringType) {
       // 属性的值
-      return XXPropertyParser.getPropertyValue(property);
+      let result = XXPropertyParser.getPropertyValue(property);
+      if (typeof result === 'string') {
+        return result;
+      } else {
+        return null;
+      }
     } else {
       return null;
     }
+  }
+
+  /**
+   * [getPropertyValue description]
+   * @param  {[type]} stringProperty [description]
+   * @return {[type]}                [description]
+   */
+  getStringValue(stringProperty) {
+    return XXStringPropertyParser.getStringValue(stringProperty);
   }
 }
 

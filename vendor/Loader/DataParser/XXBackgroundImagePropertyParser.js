@@ -1,7 +1,5 @@
-// @flow
-
 /**
- *
+ * background image 数据结构解析
  */
 class XXBackgroundImagePropertyParser {
 

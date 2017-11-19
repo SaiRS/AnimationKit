@@ -1,11 +1,13 @@
-import {XXLoaderPropertyType} from '../XXLoaderConstant.js';
+import {XXPropertyTypeEnum} from '../Constant/XXPropertyTypeConstant.js';
 import XXPropertyParser from './XXPropertyParser.js';
 
 import * as ValueTool from 'XXTool/ValueTool.js';
+
+
 /**
  * 位置属性解析
  */
-class XXPositionPropertyParser {
+class XXPositionPropertyParser extends XXPropertyParser {
   /** **************************
    * 读取部分
    ****************************/
@@ -17,7 +19,7 @@ class XXPositionPropertyParser {
    */
   static getPosition(property) {
     if (XXPropertyParser.getPropertyType(property) ==
-       XXLoaderPropertyType.PointType) {
+       XXPropertyTypeEnum.PointType) {
       // 属性的值
       let value = XXPropertyParser.getPropertyValue(property);
       return {
@@ -42,7 +44,7 @@ class XXPositionPropertyParser {
    * @param {Number} [z=0]    [description]
    */
   static setPosition(property, x = '0', y = '0', z = '0') {
-    if (XXPropertyParser.getPropertyType(property) == XXLoaderPropertyType.PointType) {
+    if (XXPropertyParser.getPropertyType(property) == XXPropertyTypeEnum.PointType) {
       // 属性的值
       let value = XXPropertyParser.getPropertyValue(property);
 
@@ -75,7 +77,7 @@ class XXPositionPropertyParser {
    * @param {Number} [offsetZ=0] [description]
    */
   static setPositionByOffset(property, offsetX = '0', offsetY = '0', offsetZ = '0') {
-    if (XXPropertyParser.getPropertyType(property) == XXLoaderPropertyType.PointType) {
+    if (XXPropertyParser.getPropertyType(property) == XXPropertyTypeEnum.PointType) {
       // 属性的值
       let value = XXPropertyParser.getPropertyValue(property);
 
@@ -100,6 +102,25 @@ class XXPositionPropertyParser {
       }
       value['z'] = z + zunit;
     }
+  }
+
+
+  /** ************************************************************
+   *  实例方法
+   ***************************************************************/
+
+  /**
+   * [createNewPositionProperty description]
+   * @param  {XXPosition} value [description]
+   * @param  {string} name  [description]
+   * @return {[type]}       [description]
+   */
+  createNewPositionProperty(value, name) {
+    return super.createNewProperty(
+      XXPropertyTypeEnum.PointType,
+      name,
+      value,
+    );
   }
 }
 

@@ -1,6 +1,3 @@
-// @flow
-
-
 /**
  * Animationkit解析
  */
