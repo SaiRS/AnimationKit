@@ -422,9 +422,9 @@ class XXNodeGraphParser {
     if (nodeGraph && property) {
       let properties = nodeGraph['properties'];
       if (properties) {
-        // 为了触发vue的更新事件
-        nodeGraph['properties'] = properties.concat([property]);
-        // properties.push(property);
+        // 为了触发vue的更新事件, 直接push也可以，vue扩展了Array的方法，使得变成reactive
+        // nodeGraph['properties'] = properties.concat([property]);
+        properties.push(property);
       } else {
         nodeGraph['properties'] = [property];
       }
