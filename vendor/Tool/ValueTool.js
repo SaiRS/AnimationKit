@@ -98,6 +98,23 @@ function xxfDefaultUnitOfAnchor() {
   return '%';
 }
 
+/**
+ * 长度的有效单位
+ * @param  {[type]} unit [description]
+ * @return {[type]}      [description]
+ */
+function xxfIsValidUnitOfLength(unit: string) {
+  return ['px'].includes(unit);
+}
+
+/**
+ * [xxfDefaultUnitOfLength description]
+ * @return {[type]} [description]
+ */
+function xxfDefaultUnitOfLength() {
+  return 'px';
+}
+
 
 export {
   xxfExtractNumberValueFromStringValue,
@@ -114,4 +131,7 @@ export {
 
   xxfIsValidUnitOfAnchor,
   xxfDefaultUnitOfAnchor,
+
+  xxfIsValidUnitOfLength,
+  xxfDefaultUnitOfLength,
 };

@@ -5,7 +5,8 @@ import {XXNodeGraphParser,
   XXScalePropertyParser,
   XXRotationPropertyParser,
   XXAnchorPropertyParser,
-  XXBackgroundPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+  XXBackgroundPropertyParser,
+  XXBorderPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
 const state = {
   currentSelectedActor: null,  // 数据对象
@@ -89,6 +90,7 @@ const getters = {
     }
   },
 
+  // background
   currentSelectedActorBackground(state) {
     let background = XXNodeGraphParser.getBackgroundProperty(state.currentSelectedActor);
     return background;
@@ -127,6 +129,32 @@ const getters = {
   currentActorBackgroundGradientAngle(state, getters) {
     let background = getters.currentSelectedActorBackground;
     return XXBackgroundPropertyParser.backgroundGradientAngle(background);
+  },
+
+  // border
+  currentSelectedActorBorder(state) {
+    let border = XXNodeGraphParser.getBorderProperty(state.currentSelectedActor);
+    return border;
+  },
+
+  currentActorBorderTopWidth(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getTopBorderWidth(border);
+  },
+
+  currentActorBorderBottomWidth(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getBottomBorderWidth(border);
+  },
+
+  currentActorBorderLeftWidth(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getLeftBorderWidth(border);
+  },
+
+  currentActorBorderRightWidth(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getRightBorderWidth(border);
   },
 };
 
@@ -243,6 +271,29 @@ const mutations = {
   deleteCurrentSelectedActorBackground(state) {
     if (state.currentSelectedActor) {
       XXNodeGraphParser.deleteBackground(state.currentSelectedActor);
+    }
+  },
+
+  // border
+  setCurrentSelectedActorBorderTopWidth(state, width = '1px') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderTopWidth(state.currentSelectedActor, width);
+    }
+  },
+
+  setCurrentSelectedActorBorderBottomWidth(state, width = '1px') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderBottomWidth(state.currentSelectedActor, width);
+    }
+  },
+  setCurrentSelectedActorBorderLeftWidth(state, width = '1px') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderLeftWidth(state.currentSelectedActor, width);
+    }
+  },
+  setCurrentSelectedActorBorderRightWidth(state, width = '1px') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderRightWidth(state.currentSelectedActor, width);
     }
   },
 };

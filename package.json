@@ -84,7 +84,7 @@
     "url-loader": "^0.5.8",
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^12.2.1",
-    "vue-template-compiler": "^2.3.4",
+    "vue-template-compiler": "^2.5.7",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5",
     "yalm": "^4.0.2"
@@ -94,7 +94,7 @@
     "babel-polyfill": "^6.23.0",
     "babel-runtime": "^6.23.0",
     "iview": "^2.6.0",
-    "vue": "^2.5.2",
+    "vue": "^2.5.6",
     "vue-electron": "^1.0.6",
     "vue-router": "^2.5.3",
     "vuex": "^2.3.1"

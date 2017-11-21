@@ -11,6 +11,7 @@ const XXPropertyNameEnum = {
   SpriteFrame: 'spriteFrame', // 图片帧
   Overflow: 'overflow', //
   Background: 'background', // 背景
+  Border: 'border', // 边框
 };
 
 export {

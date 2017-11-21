@@ -298,6 +298,8 @@ module.exports = {
       // 编辑器路径
       'XXAppUI':
         path.resolve(__dirname, '..', 'src', 'renderer', 'js', 'AppUI'),
+      'XXComponents':
+        path.resolve(__dirname, '..', 'src', 'renderer', 'js', 'Components'),
     },
   },
   externals: {

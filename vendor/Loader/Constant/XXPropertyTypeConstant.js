@@ -34,6 +34,14 @@ const XXPropertyTypeEnum = {
   // 背景类型，对应的value
   // 可以查看FlowType/XXBackgroundProperty.js
   BackgroundType: 'background',
+
+  // 边框类型，对应的value
+  // 可以查看FlowType/XXBorderProperty.js
+  BorderType: 'border',
+
+  // 内边框类型，对应的value
+  // 可是查看FlowType/XXPaddingProperty.js
+  PaddingType: 'padding',
 };
 
 export {

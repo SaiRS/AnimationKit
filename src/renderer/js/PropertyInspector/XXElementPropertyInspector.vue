@@ -45,7 +45,7 @@
       <div class='border-group-container'>
         <div class='border-group-left-container'>
           <div>宽度</div>
-          <Input size="small" placeholder="宽度"></Input>
+          <Input size="small" v-model='currentBorderWidth' :disabled='!isBorderSelected' placeholder="宽度"></Input>
           <div>样式</div>
           <Select v-model="currentborderstyle">
               <Option v-for="item in borderstylelist" :value="item.value" :key="item.value">{{ item.label }}</Option>
@@ -53,7 +53,7 @@
         </div>
         <div class='border-group-middle-container'>
           <div class='current-border-selected-container'>
-
+            <xx-border-selector :selectedBorderType='selectedBorderType' @selectedBorderChanged='onSelectedBorder'></xx-border-selector>
           </div>
           <div class='current-border-color-container'>
             <ColorPicker v-model="currentbordercolor" alpha />
@@ -61,9 +61,9 @@
         </div>
         <div class="border-group-right-container">
           <div>半径</div>
-          <Input size="small" placeholder="半径"></Input>
+          <Input size="small" :disabled='!isBorderRadiusSelected' placeholder="半径"></Input>
           <div>补白</div>
-          <Input size="small" placeholder="补白"></Input>
+          <Input size="small" :disabled='!isBorderSelected' placeholder="补白"></Input>
         </div>
       </div>
     </div>
@@ -138,6 +138,7 @@
 
 <script>
   import * as XXValueTool from 'XXTool/ValueTool.js';
+  import XXBorderSelector from 'XXComponents/BorderSelector/XXBorderSelector.vue'
   export default {
     name: 'XXElementPropertyInspector',
 
@@ -222,6 +223,7 @@
           },
         ],
 
+        selectedBorderType: 'none', // 当前选中的border
         currentbordercolor: 'rgba(1, 1, 1, 1)',
 
         alpha: 100,
@@ -229,6 +231,10 @@
 
         shadowcolor: 'rgba(0, 0, 0, 1)'
       }
+    },
+
+    components: {
+      'xx-border-selector': XXBorderSelector,
     },
 
     computed: {
@@ -344,7 +350,84 @@
             end: this.gradientend,
           });
         }
-      }
+      },
+
+      currentBorderWidth: {
+        get() {
+          // 判断当前是哪个边框
+          if (this.selectedBorderType == 'top') {
+            if (!this.currentActorBorderTopWidthMixin) {
+              this.setCurrentSelectedActorBorderTopWidthMixin('1px');
+              return '1px';
+            } else {
+              return this.currentActorBorderTopWidthMixin;
+            }
+          } else if(this.selectedBorderType == 'bottom'){
+            if (!this.currentActorBorderBottomWidthMixin) {
+              this.setCurrentSelectedActorBorderBottomWidthMixin('1px');
+              return '1px';
+            } else {
+              return this.currentActorBorderBottomWidthMixin;
+            }
+          } else if (this.selectedBorderType == 'left') {
+            if (!this.currentActorBorderLeftWidthMixin) {
+              this.setCurrentSelectedActorBorderLeftWidthMixin('1px');
+              return '1px';
+            } else {
+              return this.currentActorBorderLeftWidthMixin;
+            }
+          } else if (this.selectedBorderType == 'right') {
+            if (!this.currentActorBorderRightWidthMixin) {
+              this.setCurrentSelectedActorBorderRightWidthMixin('1px');
+              return '1px';
+            } else {
+              return this.currentActorBorderRightWidthMixin;
+            }
+          } else {
+            return '0px';
+          }
+        },
+
+        set(value) {
+          if (this.selectedBorderType == 'top') {
+            this.setCurrentSelectedActorBorderTopWidthMixin(value);
+          } else if (this.selectedBorderType == 'bottom') {
+            this.setCurrentSelectedActorBorderBottomWidthMixin(value);
+          } else if (this.selectedBorderType == 'left') {
+            this.setCurrentSelectedActorBorderLeftWidthMixin(value);
+          } else if (this.selectedBorderType == 'right') {
+            this.setCurrentSelectedActorBorderRightWidthMixin(value);
+          }
+        }
+      },
+
+      currentBorderStyle: {
+        get() {
+          // 判断当前是哪个边框
+          if (this.selectedBorderType == 'top') {
+            if (!this.currentActorBorderTopWidthMixin) {
+              this.setCurrentSelectedActorBorderTopWidthMixin('solid');
+              return '1px';
+            } else {
+              return this.currentActorBorderTopWidthMixin;
+            }
+          } else {
+            return 'unset';
+          }
+        },
+
+        set(value) {
+
+        }
+      },
+
+      isBorderSelected() {
+        return ['top', 'bottom', 'right', 'left'].indexOf(this.selectedBorderType) != -1;
+      },
+
+      isBorderRadiusSelected() {
+        return ['top-left', 'bottom-left', 'top-right', 'bottom-right'].indexOf(this.selectedBorderType) != -1;
+      },
     },
 
     methods: {
@@ -357,6 +440,10 @@
       chooseBackgroundImage: function() {
         console.log('选取背景图片')
       },
+
+      onSelectedBorder(type) {
+        this.selectedBorderType = type;
+      }
     }
 
   }

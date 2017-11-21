@@ -25,7 +25,8 @@
     XXScalePropertyParser,
     XXRotationPropertyParser,
     XXAnchorPropertyParser,
-    XXBackgroundPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+    XXBackgroundPropertyParser,
+    XXBorderPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
   import xxvNotificationCenter from
     'XXVendor/Notification/NotificationCenter.js';
@@ -201,7 +202,12 @@
       },
 
       leftBorderWidth: function() {
-        return 1;
+        let border = XXNodeGraphParser.getBorderProperty(this.nodeGraph);
+        if (border) {
+          return XXBorderPropertyParser.getLeftBorderWidth(border);
+        } else {
+          return null;
+        }
       },
 
       leftBorderStyle: function() {
@@ -213,7 +219,12 @@
       },
 
       rightBorderWidth: function() {
-        return 1;
+        let border = XXNodeGraphParser.getBorderProperty(this.nodeGraph);
+        if (border) {
+          return XXBorderPropertyParser.getRightBorderWidth(border);
+        } else {
+          return null;
+        }
       },
 
       rightBorderStyle: function() {
@@ -225,7 +236,12 @@
       },
 
       topBorderWidth: function() {
-        return 1;
+        let border = XXNodeGraphParser.getBorderProperty(this.nodeGraph);
+        if (border) {
+          return XXBorderPropertyParser.getTopBorderWidth(border);
+        } else {
+          return null;
+        }
       },
 
       topBorderStyle: function() {
@@ -237,7 +253,12 @@
       },
 
       bottomBorderWidth: function() {
-        return 1;
+        let border = XXNodeGraphParser.getBorderProperty(this.nodeGraph);
+        if (border) {
+          return XXBorderPropertyParser.getBottomBorderWidth(border);
+        } else {
+          return null;
+        }
       },
 
       bottomBorderStyle: function() {

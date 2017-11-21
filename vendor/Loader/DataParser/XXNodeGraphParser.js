@@ -7,6 +7,7 @@ import {XXScalePropertyParser} from './XXScalePropertyParser.js';
 import {XXRotationPropertyParser} from './XXRotationPropertyParser.js';
 import {XXAnchorPropertyParser} from './XXAnchorPropertyParser.js';
 import {XXBackgroundPropertyParser} from './XXBackgroundPropertyParser.js';
+import {XXBorderPropertyParser} from './XXBorderPropertyParser.js';
 /**
  * 解析节点的帮助方法
  */
@@ -246,6 +247,22 @@ class XXNodeGraphParser {
     });
   }
 
+  /**
+   * 边框属性
+   * @param  {[type]} nodeGraph [description]
+   * @return {[type]}           [description]
+   */
+  static getBorderProperty(nodeGraph) {
+    return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
+      if (XXPropertyParser.getPropertyType(property) ==
+       XXPropertyTypeEnum.BorderType) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
   /** **************************
    * 修改部分
    ****************************/
@@ -371,6 +388,82 @@ class XXNodeGraphParser {
   }
 
   /**
+   * [setBorderTopWidth description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [width='1px'] [description]
+   */
+  static setBorderTopWidth(nodeGraph, width = '1px') {
+    let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+    if (borderProperty) {
+      XXBorderPropertyParser.setBorderTopWidth(borderProperty, width);
+    } else {
+      // 增加属性
+      let newBorderValue = XXBorderPropertyParser.createBorderValue();
+      XXNodeGraphParser.addBorderProperty(nodeGraph, newBorderValue);
+
+      let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+      XXBorderPropertyParser.setBorderTopWidth(newBorderProperty, width);
+    }
+  }
+
+  /**
+   * [setBorderBottomWidth description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [width='1px'] [description]
+   */
+  static setBorderBottomWidth(nodeGraph, width = '1px') {
+    let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+    if (borderProperty) {
+      XXBorderPropertyParser.setBorderBottomWidth(borderProperty, width);
+    } else {
+      // 增加属性
+      let newBorderValue = XXBorderPropertyParser.createBorderValue();
+      XXNodeGraphParser.addBorderProperty(nodeGraph, newBorderValue);
+
+      let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+      XXBorderPropertyParser.setBorderBottomWidth(newBorderProperty, width);
+    }
+  }
+
+  /**
+   * [setBorderLeftWidth description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [width='1px'] [description]
+   */
+  static setBorderLeftWidth(nodeGraph, width = '1px') {
+    let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+    if (borderProperty) {
+      XXBorderPropertyParser.setBorderLeftWidth(borderProperty, width);
+    } else {
+      // 增加属性
+      let newBorderValue = XXBorderPropertyParser.createBorderValue();
+      XXNodeGraphParser.addBorderProperty(nodeGraph, newBorderValue);
+
+      let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+      XXBorderPropertyParser.setBorderLeftWidth(newBorderProperty, width);
+    }
+  }
+
+  /**
+   * [setBorderRightWidth description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [width='1px'] [description]
+   */
+  static setBorderRightWidth(nodeGraph, width = '1px') {
+    let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+    if (borderProperty) {
+      XXBorderPropertyParser.setBorderRightWidth(borderProperty, width);
+    } else {
+      // 增加属性
+      let newBorderValue = XXBorderPropertyParser.createBorderValue();
+      XXNodeGraphParser.addBorderProperty(nodeGraph, newBorderValue);
+
+      let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+      XXBorderPropertyParser.setBorderRightWidth(newBorderProperty, width);
+    }
+  }
+
+  /**
    * [setBackgroundLineGradient description]
    * @param {[type]} nodeGraph         [description]
    * @param {String} [angle='0deg']    [description]
@@ -422,7 +515,7 @@ class XXNodeGraphParser {
     if (nodeGraph && property) {
       let properties = nodeGraph['properties'];
       if (properties) {
-        // 为了触发vue的更新事件, 直接push也可以，vue扩展了Array的方法，使得变成reactive
+        // 为了触发vue的更新事件, 直接push也可以，vue扩展了Array的方法，使得变成reactives
         // nodeGraph['properties'] = properties.concat([property]);
         properties.push(property);
       } else {
@@ -480,6 +573,25 @@ class XXNodeGraphParser {
 
     XXNodeGraphParser.__addProperty(nodeGraph, property);
   }
+
+  /**
+   * [addBorderProperty description]
+   * @param {[type]} nodeGraph                        [description]
+   * @param {[type]} value                            [description]
+   * @param {[type]} [name=XXPropertyNameEnum.Border] [description]
+   */
+  static addBorderProperty(nodeGraph, value, name = XXPropertyNameEnum.Border) {
+    let property =
+      XXPropertyParser.createNewProperty(
+        XXPropertyTypeEnum.BorderType,
+        name,
+        value
+      );
+
+    XXNodeGraphParser.__addProperty(nodeGraph, property);
+  }
+
+
   /** **************************
    * 删除部分
    ****************************/
