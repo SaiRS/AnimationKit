@@ -223,7 +223,6 @@
         ],
 
         selectedBorderType: 'none', // 当前选中的border
-        currentbordercolor: 'rgba(1, 1, 1, 1)',
 
         alpha: 100,
         show: "true",
@@ -448,6 +447,57 @@
             this.setCurrentSelectedActorBorderLeftStyleMixin(value);
           } else if (this.selectedBorderType == 'right') {
             this.setCurrentSelectedActorBorderRightStyleMixin(value);
+          } else {
+          }
+        }
+      },
+
+
+      currentbordercolor: {
+        get() {
+          // 判断当前是哪个边框
+          if (this.selectedBorderType == 'top') {
+            if (!this.currentActorBorderTopColorMixin) {
+              this.setCurrentSelectedActorBorderTopColorMixin('rgba(0, 0, 0, 1)');
+              return 'rgba(0, 0, 0, 1)';
+            } else {
+              return this.currentActorBorderTopColorMixin;
+            }
+          } else if(this.selectedBorderType == 'bottom'){
+            if (!this.currentActorBorderBottomColorMixin) {
+              this.setCurrentSelectedActorBorderBottomColorMixin('rgba(0, 0, 0, 1)');
+              return 'rgba(0, 0, 0, 1)';
+            } else {
+              return this.currentActorBorderBottomColorMixin;
+            }
+          } else if (this.selectedBorderType == 'left') {
+            if (!this.currentActorBorderLeftColorMixin) {
+              this.setCurrentSelectedActorBorderLeftColorMixin('rgba(0, 0, 0, 1)');
+              return 'rgba(0, 0, 0, 1)';
+            } else {
+              return this.currentActorBorderLeftColorMixin;
+            }
+          } else if (this.selectedBorderType == 'right') {
+            if (!this.currentActorBorderRightColorMixin) {
+              this.setCurrentSelectedActorBorderRightColorMixin('rgba(0, 0, 0, 1)');
+              return 'rgba(0, 0, 0, 1)';
+            } else {
+              return this.currentActorBorderRightColorMixin;
+            }
+          } else {
+            return 'rgba(0,0,0,0)';
+          }
+        },
+
+        set(value) {
+          if (this.selectedBorderType == 'top') {
+            this.setCurrentSelectedActorBorderTopColorMixin(value);
+          } else if(this.selectedBorderType == 'bottom'){
+            this.setCurrentSelectedActorBorderBottomColorMixin(value);
+          } else if (this.selectedBorderType == 'left') {
+            this.setCurrentSelectedActorBorderLeftColorMixin(value);
+          } else if (this.selectedBorderType == 'right') {
+            this.setCurrentSelectedActorBorderRightColorMixin(value);
           } else {
           }
         }

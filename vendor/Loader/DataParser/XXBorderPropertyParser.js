@@ -377,45 +377,75 @@ class XXBorderPropertyParser {
   }
 
   /**
+   * [setBorderTopStyle description]
+   * @param {[type]} property        [description]
+   * @param {String} [color='solid'] [description]
+   */
+  static setBorderTopColor(property, color = 'rgba(0, 0, 0, 1)') {
+    XXBorderPropertyParser._setBorderStyle(property, 'borderTopColor', color);
+  }
+
+  /**
+   * [setBorderBottomColor description]
+   * @param {[type]} property        [description]
+   * @param {String} [Color='solid'] [description]
+   */
+  static setBorderBottomColor(property, Color = 'rgba(0, 0, 0, 1)') {
+    XXBorderPropertyParser._setBorderColor(property, 'borderBottomColor', Color);
+  }
+
+  /**
+   * [setBorderLeftColor description]
+   * @param {[type]} property        [description]
+   * @param {String} [Color='solid'] [description]
+   */
+  static setBorderLeftColor(property, Color = 'rgba(0, 0, 0, 1)') {
+    XXBorderPropertyParser._setBorderColor(property, 'borderLeftColor', Color);
+  }
+
+  /**
+   * [setBorderRightColor description]
+   * @param {[type]} property        [description]
+   * @param {String} [Color='solid'] [description]
+   */
+  static setBorderRightColor(property, Color = 'rgba(0, 0, 0, 1)') {
+    XXBorderPropertyParser._setBorderColor(property, 'borderRightColor', Color);
+  }
+
+  /**
+   * [_setBorderColor description]
+   * @param {[type]} property        [description]
+   * @param {[type]} border          [description]
+   * @param {String} [color='rgba(0, 0,            0, 1)'] [description]
+   */
+  static _setBorderColor(property, border, color = 'rgba(0, 0, 0, 1)') {
+    if (XXPropertyParser.getPropertyType(property) == XXPropertyTypeEnum.BorderType) {
+      let value = XXPropertyParser.getPropertyValue(property);
+
+      value[border] = color;
+    }
+  }
+
+  /**
    * [createBorderValue description]
    * @return {[type]} [description]
    */
   static createBorderValue() {
     return {
       borderTopWidth: '1px', // 带单位
-      borderTopColor: {
-        red: 0,
-        green: 0,
-        blue: 0,
-        alpha: 1,
-      },
+      borderTopColor: 'rgba(0, 0, 0, 1)',
       borderTopStyle: 'solid',
 
       borderBottomWidth: '1px', // 带单位
-      borderBottomColor: {
-        red: 0,
-        green: 0,
-        blue: 0,
-        alpha: 1,
-      },
+      borderBottomColor: 'rgba(0, 0, 0, 1)',
       borderBottomStyle: 'solid',
 
       borderLeftWidth: '1px', // 带单位
-      borderLeftColor: {
-        red: 0,
-        green: 0,
-        blue: 0,
-        alpha: 1,
-      },
+      borderLeftColor: 'rgba(0, 0, 0, 1)',
       borderLeftStyle: 'solid',
 
       borderRightWidth: '1px', // 带单位
-      borderRightColor: {
-        red: 0,
-        green: 0,
-        blue: 0,
-        alpha: 1,
-      },
+      borderRightColor: 'rgba(0, 0, 0, 1)',
       borderRightStyle: 'solid',
 
       borderTopLeftRadius: '0px', // 带单位

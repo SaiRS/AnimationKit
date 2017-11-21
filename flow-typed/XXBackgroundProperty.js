@@ -2,7 +2,7 @@
 
 // 背景值结构
 declare type XXBackgroundValue = {
-  backgroundColor: XXColorValue,
+  backgroundColor: String,
   // 其他
   // backgroundImage: ''
 }

@@ -14,7 +14,7 @@ declare type XXBorderValue = {
   borderLeftStyle: String,
 
   borderRightWidth: String, // 带单位
-  borderRightColor: XXColorValue,
+  borderRightColor: String, // rgba(0, 0, 0, 1)
   borderRightStyle: String,
 
   borderTopLeftRadius: String, // 带单位

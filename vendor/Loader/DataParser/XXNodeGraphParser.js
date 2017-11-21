@@ -525,7 +525,7 @@ class XXNodeGraphParser {
    * @param {[type]} nodeGraph     [description]
    * @param {String} [Style='solid'] [description]
    */
-  static setBorderRightStyle(nodeGraph, Style = 'unset') {
+  static setBorderRightStyle(nodeGraph, Style = 'solid') {
     let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
     if (borderProperty) {
       XXBorderPropertyParser.setBorderRightStyle(borderProperty, Style);
@@ -536,6 +536,81 @@ class XXNodeGraphParser {
 
       let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
       XXBorderPropertyParser.setBorderRightStyle(newBorderProperty, Style);
+    }
+  }
+  /**
+   * [setBorderTopWidth description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [Color='solid'] [description]
+   */
+  static setBorderTopColor(nodeGraph, Color = 'rgba(0, 0, 0, 1)') {
+    let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+    if (borderProperty) {
+      XXBorderPropertyParser.setBorderTopColor(borderProperty, Color);
+    } else {
+      // 增加属性
+      let newBorderValue = XXBorderPropertyParser.createBorderValue();
+      XXNodeGraphParser.addBorderProperty(nodeGraph, newBorderValue);
+
+      let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+      XXBorderPropertyParser.setBorderTopColor(newBorderProperty, Color);
+    }
+  }
+
+  /**
+   * [setBorderBottomColor description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [Color='1px'] [description]
+   */
+  static setBorderBottomColor(nodeGraph, Color = 'rgba(0, 0, 0, 1)') {
+    let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+    if (borderProperty) {
+      XXBorderPropertyParser.setBorderBottomColor(borderProperty, Color);
+    } else {
+      // 增加属性
+      let newBorderValue = XXBorderPropertyParser.createBorderValue();
+      XXNodeGraphParser.addBorderProperty(nodeGraph, newBorderValue);
+
+      let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+      XXBorderPropertyParser.setBorderBottomColor(newBorderProperty, Color);
+    }
+  }
+
+  /**
+   * [setBorderLeftColor description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [Color='solid'] [description]
+   */
+  static setBorderLeftColor(nodeGraph, Color = 'rgba(0, 0, 0, 1)') {
+    let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+    if (borderProperty) {
+      XXBorderPropertyParser.setBorderLeftColor(borderProperty, Color);
+    } else {
+      // 增加属性
+      let newBorderValue = XXBorderPropertyParser.createBorderValue();
+      XXNodeGraphParser.addBorderProperty(nodeGraph, newBorderValue);
+
+      let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+      XXBorderPropertyParser.setBorderLeftColor(newBorderProperty, Color);
+    }
+  }
+
+  /**
+   * [setBorderRightColor description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [Color='solid'] [description]
+   */
+  static setBorderRightColor(nodeGraph, Color = 'rgba(0, 0, 0, 1)') {
+    let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+    if (borderProperty) {
+      XXBorderPropertyParser.setBorderRightColor(borderProperty, Color);
+    } else {
+      // 增加属性
+      let newBorderValue = XXBorderPropertyParser.createBorderValue();
+      XXNodeGraphParser.addBorderProperty(nodeGraph, newBorderValue);
+
+      let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+      XXBorderPropertyParser.setBorderRightColor(newBorderProperty, Color);
     }
   }
 

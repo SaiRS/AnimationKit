@@ -177,6 +177,26 @@ const getters = {
     let border = getters.currentSelectedActorBorder;
     return XXBorderPropertyParser.getRightBorderStyle(border);
   },
+
+  currentActorBorderTopColor(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getTopBorderColor(border);
+  },
+
+  currentActorBorderBottomColor(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getBottomBorderColor(border);
+  },
+
+  currentActorBorderLeftColor(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getLeftBorderColor(border);
+  },
+
+  currentActorBorderRightColor(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getRightBorderColor(border);
+  },
 };
 
 const mutations = {
@@ -337,6 +357,28 @@ const mutations = {
   setCurrentSelectedActorBorderRightStyle(state, Style = 'solid') {
     if (state.currentSelectedActor) {
       XXNodeGraphParser.setBorderRightStyle(state.currentSelectedActor, Style);
+    }
+  },
+
+  setCurrentSelectedActorBorderTopColor(state, Color = 'rgba(0, 0, 0, 1)') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderTopColor(state.currentSelectedActor, Color);
+    }
+  },
+
+  setCurrentSelectedActorBorderBottomColor(state, Color = 'rgba(0, 0, 0, 1)') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderBottomColor(state.currentSelectedActor, Color);
+    }
+  },
+  setCurrentSelectedActorBorderLeftColor(state, Color = 'rgba(0, 0, 0, 1)') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderLeftColor(state.currentSelectedActor, Color);
+    }
+  },
+  setCurrentSelectedActorBorderRightColor(state, Color = 'rgba(0, 0, 0, 1)') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderRightColor(state.currentSelectedActor, Color);
     }
   },
 };

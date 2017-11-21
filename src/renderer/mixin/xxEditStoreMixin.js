@@ -43,6 +43,11 @@ const XXEditStoreMixin = {
       'currentActorBorderBottomStyleMixin': 'currentActorBorderBottomStyle',
       'currentActorBorderLeftStyleMixin': 'currentActorBorderLeftStyle',
       'currentActorBorderRightStyleMixin': 'currentActorBorderRightStyle',
+
+      'currentActorBorderTopColorMixin': 'currentActorBorderTopColor',
+      'currentActorBorderBottomColorMixin': 'currentActorBorderBottomColor',
+      'currentActorBorderLeftColorMixin': 'currentActorBorderLeftColor',
+      'currentActorBorderRightColorMixin': 'currentActorBorderRightColor',
     }),
   },
 
@@ -74,6 +79,11 @@ const XXEditStoreMixin = {
       'setCurrentSelectedActorBorderBottomStyleMixin': 'setCurrentSelectedActorBorderBottomStyle',
       'setCurrentSelectedActorBorderLeftStyleMixin': 'setCurrentSelectedActorBorderLeftStyle',
       'setCurrentSelectedActorBorderRightStyleMixin': 'setCurrentSelectedActorBorderRightStyle',
+
+      'setCurrentSelectedActorBorderTopColorMixin': 'setCurrentSelectedActorBorderTopColor',
+      'setCurrentSelectedActorBorderBottomColorMixin': 'setCurrentSelectedActorBorderBottomColor',
+      'setCurrentSelectedActorBorderLeftColorMixin': 'setCurrentSelectedActorBorderLeftColor',
+      'setCurrentSelectedActorBorderRightColorMixin': 'setCurrentSelectedActorBorderRightColor',
     }),
   },
 };

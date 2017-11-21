@@ -220,7 +220,12 @@
       },
 
       leftBorderColor: function() {
-        return '#000'
+        let border = XXNodeGraphParser.getBorderProperty(this.nodeGraph);
+        if (border) {
+          return XXBorderPropertyParser.getLeftBorderColor(border);
+        } else {
+          return null;
+        }
       },
 
       rightBorderWidth: function() {
@@ -242,7 +247,12 @@
       },
 
       rightBorderColor: function() {
-        return '#000'
+        let border = XXNodeGraphParser.getBorderProperty(this.nodeGraph);
+        if (border) {
+          return XXBorderPropertyParser.getRightBorderColor(border);
+        } else {
+          return null;
+        }
       },
 
       topBorderWidth: function() {
@@ -264,7 +274,12 @@
       },
 
       topBorderColor: function() {
-        return '#000'
+        let border = XXNodeGraphParser.getBorderProperty(this.nodeGraph);
+        if (border) {
+          return XXBorderPropertyParser.getTopBorderColor(border);
+        } else {
+          return null;
+        }
       },
 
       bottomBorderWidth: function() {
@@ -286,7 +301,12 @@
       },
 
       bottomBorderColor: function() {
-        return '#000'
+        let border = XXNodeGraphParser.getBorderProperty(this.nodeGraph);
+        if (border) {
+          return XXBorderPropertyParser.getBottomBorderColor(border);
+        } else {
+          return null;
+        }
       },
 
       leftBottomBorderRadius: function() {
