@@ -48,6 +48,11 @@ const XXEditStoreMixin = {
       'currentActorBorderBottomColorMixin': 'currentActorBorderBottomColor',
       'currentActorBorderLeftColorMixin': 'currentActorBorderLeftColor',
       'currentActorBorderRightColorMixin': 'currentActorBorderRightColor',
+
+      'currentActorBorderTopLeftRadiusMixin': 'currentActorBorderTopLeftRadius',
+      'currentActorBorderTopRightRadiusMixin': 'currentActorBorderTopRightRadius',
+      'currentActorBorderBottomLeftRadiusMixin': 'currentActorBorderBottomLeftRadius',
+      'currentActorBorderBottomRightRadiusMixin': 'currentActorBorderBottomRightRadius',
     }),
   },
 
@@ -84,6 +89,11 @@ const XXEditStoreMixin = {
       'setCurrentSelectedActorBorderBottomColorMixin': 'setCurrentSelectedActorBorderBottomColor',
       'setCurrentSelectedActorBorderLeftColorMixin': 'setCurrentSelectedActorBorderLeftColor',
       'setCurrentSelectedActorBorderRightColorMixin': 'setCurrentSelectedActorBorderRightColor',
+
+      'setCurrentSelectedActorBorderTopLeftRadiusMixin': 'setCurrentSelectedActorBorderTopLeftRadius',
+      'setCurrentSelectedActorBorderTopRightRadiusMixin': 'setCurrentSelectedActorBorderTopRightRadius',
+      'setCurrentSelectedActorBorderBottomLeftRadiusMixin': 'setCurrentSelectedActorBorderBottomLeftRadius',
+      'setCurrentSelectedActorBorderBottomRightRadiusMixin': 'setCurrentSelectedActorBorderBottomRightRadius',
     }),
   },
 };

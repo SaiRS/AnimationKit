@@ -61,7 +61,7 @@
         </div>
         <div class="border-group-right-container">
           <div>半径</div>
-          <Input size="small" :disabled='!isBorderRadiusSelected' placeholder="半径"></Input>
+          <Input size="small" v-model='currentBorderRadius' :disabled='!isBorderRadiusSelected' placeholder="半径"></Input>
           <div>补白</div>
           <Input size="small" :disabled='!isBorderSelected' placeholder="补白"></Input>
         </div>
@@ -499,6 +499,55 @@
           } else if (this.selectedBorderType == 'right') {
             this.setCurrentSelectedActorBorderRightColorMixin(value);
           } else {
+          }
+        }
+      },
+
+
+      currentBorderRadius: {
+        get() {
+          if (this.selectedBorderType == 'top-left') {
+            if (!this.currentActorBorderTopLeftRadiusMixin) {
+              this.setCurrentSelectedActorBorderTopLeftRadiusMixin('0px');
+              return '0px';
+            } else {
+              return this.currentActorBorderTopLeftRadiusMixin;
+            }
+          } else if (this.selectedBorderType == 'top-right') {
+            if (!this.setCurrentSelectedActorBorderTopRightRadiusMixin) {
+              this.setCurrentSelectedActorBorderTopLeftRadiusMixin('0px');
+              return '0px';
+            } else {
+              return this.currentActorBorderTopRightRadiusMixin;
+            }
+          } else if (this.selectedBorderType == 'bottom-left') {
+            if (!this.currentActorBorderBottomLeftRadiusMixin) {
+              this.setCurrentSelectedActorBorderBottomLeftRadiusMixin('0px');
+              return '0px';
+            } else {
+              return this.currentActorBorderBottomLeftRadiusMixin;
+            }
+          } else if (this.selectedBorderType == 'bottom-right') {
+            if (!this.currentActorBorderBottomRightRadiusMixin) {
+              this.setCurrentSelectedActorBorderBottomRightRadiusMixin('0px');
+              return '0px';
+            } else {
+              return this.currentActorBorderBottomRightRadiusMixin;
+            }
+          } else {
+            return '0px';
+          }
+        },
+
+        set(value) {
+          if (this.selectedBorderType == 'top-left') {
+            this.setCurrentSelectedActorBorderTopLeftRadiusMixin(value);
+          } else if (this.selectedBorderType == 'top-right') {
+            this.setCurrentSelectedActorBorderTopRightRadiusMixin(value);
+          } else if (this.selectedBorderType == 'bottom-left') {
+            this.setCurrentSelectedActorBorderBottomLeftRadiusMixin(value);
+          } else if (this.selectedBorderType == 'bottom-right') {
+            this.setCurrentSelectedActorBorderBottomRightRadiusMixin(value);
           }
         }
       },

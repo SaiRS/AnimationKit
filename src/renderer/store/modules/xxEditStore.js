@@ -197,6 +197,26 @@ const getters = {
     let border = getters.currentSelectedActorBorder;
     return XXBorderPropertyParser.getRightBorderColor(border);
   },
+
+  currentActorBorderTopLeftRadius(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getTopLeftRadius(border);
+  },
+
+  currentActorBorderTopRightRadius(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getTopRightRadius(border);
+  },
+
+  currentActorBorderBottomLeftRadius(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getBottomLeftRadius(border);
+  },
+
+  currentActorBorderBottomRightRadius(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getBottomRightRadius(border);
+  },
 };
 
 const mutations = {
@@ -379,6 +399,30 @@ const mutations = {
   setCurrentSelectedActorBorderRightColor(state, Color = 'rgba(0, 0, 0, 1)') {
     if (state.currentSelectedActor) {
       XXNodeGraphParser.setBorderRightColor(state.currentSelectedActor, Color);
+    }
+  },
+
+
+  setCurrentSelectedActorBorderTopLeftRadius(state, Radius = '1px') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderTopLeftRadius(state.currentSelectedActor, Radius);
+    }
+  },
+
+  setCurrentSelectedActorBorderTopRightRadius(state, Radius = '1px') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderTopRightRadius(state.currentSelectedActor, Radius);
+    }
+  },
+  setCurrentSelectedActorBorderBottomLeftRadius(state, Radius = '1px') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderBottomLeftRadius(state.currentSelectedActor, Radius);
+    }
+  },
+
+  setCurrentSelectedActorBorderBottomRightRadius(state, Radius = '1px') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderBottomRightRadius(state.currentSelectedActor, Radius);
     }
   },
 };

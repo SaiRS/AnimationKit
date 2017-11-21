@@ -427,6 +427,56 @@ class XXBorderPropertyParser {
   }
 
   /**
+   * [setBorderTopStyle description]
+   * @param {[type]} property        [description]
+   * @param {String} [radius='solid'] [description]
+   */
+  static setBorderTopLeftRadius(property, radius = '1px') {
+    XXBorderPropertyParser._setBorderStyle(property, 'borderTopLeftRadius', radius);
+  }
+
+  /**
+   * [setBorderBottomRadius description]
+   * @param {[type]} property        [description]
+   * @param {String} [Radius='solid'] [description]
+   */
+  static setBorderTopRightRadius(property, Radius = '1px') {
+    XXBorderPropertyParser._setBorderRadius(property, 'borderTopRightRadius', Radius);
+  }
+
+  /**
+   * [setBorderLeftRadius description]
+   * @param {[type]} property        [description]
+   * @param {String} [Radius='solid'] [description]
+   */
+  static setBorderBottomLeftRadius(property, Radius = '1px') {
+    XXBorderPropertyParser._setBorderRadius(property, 'borderBottomLeftRadius', Radius);
+  }
+
+  /**
+   * [setBorderRightRadius description]
+   * @param {[type]} property        [description]
+   * @param {String} [Radius='solid'] [description]
+   */
+  static setBorderBottomRightRadius(property, Radius = '1px') {
+    XXBorderPropertyParser._setBorderRadius(property, 'borderBottomRightRadius', Radius);
+  }
+
+  /**
+   * [_setBorderRadius description]
+   * @param {[type]} property       [description]
+   * @param {[type]} border         [description]
+   * @param {String} [radius='1px'] [description]
+   */
+  static _setBorderRadius(property, border, radius = '1px') {
+    if (XXPropertyParser.getPropertyType(property) == XXPropertyTypeEnum.BorderType) {
+      let value = XXPropertyParser.getPropertyValue(property);
+
+      value[border] = radius;
+    }
+  }
+
+  /**
    * [createBorderValue description]
    * @return {[type]} [description]
    */

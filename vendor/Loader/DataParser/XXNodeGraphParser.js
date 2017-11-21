@@ -615,6 +615,82 @@ class XXNodeGraphParser {
   }
 
   /**
+   * [setBorderTopWidth description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [Radius='solid'] [description]
+   */
+  static setBorderTopLeftRadius(nodeGraph, Radius = '1px') {
+    let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+    if (borderProperty) {
+      XXBorderPropertyParser.setBorderTopLeftRadius(borderProperty, Radius);
+    } else {
+      // 增加属性
+      let newBorderValue = XXBorderPropertyParser.createBorderValue();
+      XXNodeGraphParser.addBorderProperty(nodeGraph, newBorderValue);
+
+      let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+      XXBorderPropertyParser.setBorderTopLeftRadius(newBorderProperty, Radius);
+    }
+  }
+
+  /**
+   * [setBorderBottomRadius description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [Radius='1px'] [description]
+   */
+  static setBorderTopRightRadius(nodeGraph, Radius = '1px') {
+    let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+    if (borderProperty) {
+      XXBorderPropertyParser.setBorderTopRightRadius(borderProperty, Radius);
+    } else {
+      // 增加属性
+      let newBorderValue = XXBorderPropertyParser.createBorderValue();
+      XXNodeGraphParser.addBorderProperty(nodeGraph, newBorderValue);
+
+      let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+      XXBorderPropertyParser.setBorderTopRightRadius(newBorderProperty, Radius);
+    }
+  }
+
+  /**
+   * [setBorderLeftRadius description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [Radius='solid'] [description]
+   */
+  static setBorderBottomLeftRadius(nodeGraph, Radius = '1px') {
+    let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+    if (borderProperty) {
+      XXBorderPropertyParser.setBorderBottomLeftRadius(borderProperty, Radius);
+    } else {
+      // 增加属性
+      let newBorderValue = XXBorderPropertyParser.createBorderValue();
+      XXNodeGraphParser.addBorderProperty(nodeGraph, newBorderValue);
+
+      let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+      XXBorderPropertyParser.setBorderBottomLeftRadius(newBorderProperty, Radius);
+    }
+  }
+
+  /**
+   * [setBorderRightRadius description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [Radius='solid'] [description]
+   */
+  static setBorderBottomRightRadius(nodeGraph, Radius = '1px') {
+    let borderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+    if (borderProperty) {
+      XXBorderPropertyParser.setBorderBottomRightRadius(borderProperty, Radius);
+    } else {
+      // 增加属性
+      let newBorderValue = XXBorderPropertyParser.createBorderValue();
+      XXNodeGraphParser.addBorderProperty(nodeGraph, newBorderValue);
+
+      let newBorderProperty = XXNodeGraphParser.getBorderProperty(nodeGraph);
+      XXBorderPropertyParser.setBorderBottomRightRadius(newBorderProperty, Radius);
+    }
+  }
+
+  /**
    * [setBackgroundLineGradient description]
    * @param {[type]} nodeGraph         [description]
    * @param {String} [angle='0deg']    [description]

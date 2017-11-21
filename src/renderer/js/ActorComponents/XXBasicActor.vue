@@ -310,16 +310,36 @@
       },
 
       leftBottomBorderRadius: function() {
-        return 0;
+        let border = XXNodeGraphParser.getBorderProperty(this.nodeGraph);
+        if (border) {
+          return XXBorderPropertyParser.getBottomLeftRadius(border);
+        } else {
+          return '0px';
+        }
       },
       rightBottomBorderRadius: function() {
-        return 0;
+        let border = XXNodeGraphParser.getBorderProperty(this.nodeGraph);
+        if (border) {
+          return XXBorderPropertyParser.getBottomRightRadius(border);
+        } else {
+          return '0px';
+        }
       },
       leftTopBorderRadius: function() {
-        return 0;
+        let border = XXNodeGraphParser.getBorderProperty(this.nodeGraph);
+        if (border) {
+          return XXBorderPropertyParser.getTopLeftRadius(border);
+        } else {
+          return '0px';
+        }
       },
       rightTopBorderRadius: function() {
-        return 0;
+        let border = XXNodeGraphParser.getBorderProperty(this.nodeGraph);
+        if (border) {
+          return XXBorderPropertyParser.getTopRightRadius(border);
+        } else {
+          return '0px';
+        }
       },
 
       leftPadding: function() {
@@ -389,10 +409,10 @@
             ${this.topBorderWidth}`,
           'border-bottom': `${this.bottomBorderColor} ${this.bottomBorderStyle}
             ${this.bottomBorderWidth}`,
-          'border-bottom-left-radius': `${this.leftBottomBorderRadius}px`,
-          'border-bottom-right-radius': `${this.rightBottomBorderRadius}px`,
-          'border-top-left-radius': `${this.leftTopBorderRadius}px`,
-          'border-top-right-radius': `${this.rightTopBorderRadius}px`,
+          'border-bottom-left-radius': `${this.leftBottomBorderRadius}`,
+          'border-bottom-right-radius': `${this.rightBottomBorderRadius}`,
+          'border-top-left-radius': `${this.leftTopBorderRadius}`,
+          'border-top-right-radius': `${this.rightTopBorderRadius}`,
           'padding-left': `${this.leftPadding}px`,
           'padding-right': `${this.rightPadding}px`,
           'padding-top': `${this.topPadding}px`,

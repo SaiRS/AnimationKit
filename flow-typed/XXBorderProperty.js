@@ -2,15 +2,15 @@
 
 declare type XXBorderValue = {
   borderTopWidth: String, // 带单位
-  borderTopColor: XXColorValue,
+  borderTopColor: String,
   borderTopStyle: String,
 
   borderBottomWidth: String, // 带单位
-  borderBottomColor: XXColorValue,
+  borderBottomColor: String,
   borderBottomStyle: String,
 
   borderLeftWidth: String, // 带单位
-  borderLeftColor: XXColorValue,
+  borderLeftColor: String,
   borderLeftStyle: String,
 
   borderRightWidth: String, // 带单位
