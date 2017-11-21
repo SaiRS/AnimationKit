@@ -156,6 +156,27 @@ const getters = {
     let border = getters.currentSelectedActorBorder;
     return XXBorderPropertyParser.getRightBorderWidth(border);
   },
+
+
+  currentActorBorderTopStyle(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getTopBorderStyle(border);
+  },
+
+  currentActorBorderBottomStyle(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getBottomBorderStyle(border);
+  },
+
+  currentActorBorderLeftStyle(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getLeftBorderStyle(border);
+  },
+
+  currentActorBorderRightStyle(state, getters) {
+    let border = getters.currentSelectedActorBorder;
+    return XXBorderPropertyParser.getRightBorderStyle(border);
+  },
 };
 
 const mutations = {
@@ -294,6 +315,28 @@ const mutations = {
   setCurrentSelectedActorBorderRightWidth(state, width = '1px') {
     if (state.currentSelectedActor) {
       XXNodeGraphParser.setBorderRightWidth(state.currentSelectedActor, width);
+    }
+  },
+
+  setCurrentSelectedActorBorderTopStyle(state, Style = 'solid') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderTopStyle(state.currentSelectedActor, Style);
+    }
+  },
+
+  setCurrentSelectedActorBorderBottomStyle(state, Style = 'solid') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderBottomStyle(state.currentSelectedActor, Style);
+    }
+  },
+  setCurrentSelectedActorBorderLeftStyle(state, Style = 'solid') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderLeftStyle(state.currentSelectedActor, Style);
+    }
+  },
+  setCurrentSelectedActorBorderRightStyle(state, Style = 'solid') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setBorderRightStyle(state.currentSelectedActor, Style);
     }
   },
 };

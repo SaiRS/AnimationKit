@@ -47,7 +47,7 @@
           <div>宽度</div>
           <Input size="small" v-model='currentBorderWidth' :disabled='!isBorderSelected' placeholder="宽度"></Input>
           <div>样式</div>
-          <Select v-model="currentborderstyle">
+          <Select v-model="currentBorderStyle">
               <Option v-for="item in borderstylelist" :value="item.value" :key="item.value">{{ item.label }}</Option>
           </Select>
         </div>
@@ -183,7 +183,6 @@
           },
         ],
 
-        currentborderstyle: 'unset',
         borderstylelist: [
           {
             value: 'unset',
@@ -404,20 +403,53 @@
       currentBorderStyle: {
         get() {
           // 判断当前是哪个边框
+          let value = '';
           if (this.selectedBorderType == 'top') {
-            if (!this.currentActorBorderTopWidthMixin) {
-              this.setCurrentSelectedActorBorderTopWidthMixin('solid');
-              return '1px';
+            if (!this.currentActorBorderTopStyleMixin) {
+              this.setCurrentSelectedActorBorderTopStyleMixin('none');
+              value =  'none';
             } else {
-              return this.currentActorBorderTopWidthMixin;
+              value =  this.currentActorBorderTopStyleMixin;
+            }
+          } else if (this.selectedBorderType == 'bottom') {
+            if (!this.currentActorBorderBottomStyleMixin) {
+              this.setCurrentSelectedActorBorderBottomStyleMixin('none');
+              value = 'none';
+            } else {
+              value = this.currentActorBorderBottomStyleMixin;
+            }
+          } else if (this.selectedBorderType == 'left') {
+            if (!this.currentActorBorderLeftStyleMixin) {
+              this.setCurrentSelectedActorBorderLeftStyleMixin('none');
+              value = 'none';
+            } else {
+              value = this.currentActorBorderLeftStyleMixin;
+            }
+          } else if (this.selectedBorderType == 'right') {
+            if (!this.currentActorBorderRightStyleMixin) {
+              this.setCurrentSelectedActorBorderRightStyleMixin('none');
+              value = 'none';
+            } else {
+              value = this.currentActorBorderRightStyleMixin;
             }
           } else {
-            return 'unset';
+            value = 'none';
           }
+
+          return value;
         },
 
         set(value) {
-
+          if (this.selectedBorderType == 'top') {
+            this.setCurrentSelectedActorBorderTopStyleMixin(value);
+          } else if (this.selectedBorderType == 'bottom') {
+            this.setCurrentSelectedActorBorderBottomStyleMixin(value);
+          } else if (this.selectedBorderType == 'left') {
+            this.setCurrentSelectedActorBorderLeftStyleMixin(value);
+          } else if (this.selectedBorderType == 'right') {
+            this.setCurrentSelectedActorBorderRightStyleMixin(value);
+          } else {
+          }
         }
       },
 

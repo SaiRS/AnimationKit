@@ -326,6 +326,57 @@ class XXBorderPropertyParser {
   }
 
   /**
+   * [setBorderTopStyle description]
+   * @param {[type]} property        [description]
+   * @param {String} [style='solid'] [description]
+   */
+  static setBorderTopStyle(property, style = 'unset') {
+    XXBorderPropertyParser._setBorderStyle(property, 'borderTopStyle', style);
+  }
+
+  /**
+   * [setBorderBottomStyle description]
+   * @param {[type]} property        [description]
+   * @param {String} [style='solid'] [description]
+   */
+  static setBorderBottomStyle(property, style = 'unset') {
+    XXBorderPropertyParser._setBorderStyle(property, 'borderBottomStyle', style);
+  }
+
+  /**
+   * [setBorderLeftStyle description]
+   * @param {[type]} property        [description]
+   * @param {String} [style='solid'] [description]
+   */
+  static setBorderLeftStyle(property, style = 'unset') {
+    XXBorderPropertyParser._setBorderStyle(property, 'borderLeftStyle', style);
+  }
+
+  /**
+   * [setBorderRightStyle description]
+   * @param {[type]} property        [description]
+   * @param {String} [style='solid'] [description]
+   */
+  static setBorderRightStyle(property, style = 'unset') {
+    XXBorderPropertyParser._setBorderStyle(property, 'borderRightStyle', style);
+  }
+
+
+  /**
+   * [_setBorderStyle description]
+   * @param {[type]} property        [description]
+   * @param {[type]} border          [description]
+   * @param {String} [style='solid'] [description]
+   */
+  static _setBorderStyle(property, border, style = 'unset') {
+    if (XXPropertyParser.getPropertyType(property) == XXPropertyTypeEnum.BorderType) {
+      let value = XXPropertyParser.getPropertyValue(property);
+
+      value[border] = style;
+    }
+  }
+
+  /**
    * [createBorderValue description]
    * @return {[type]} [description]
    */
@@ -338,7 +389,7 @@ class XXBorderPropertyParser {
         blue: 0,
         alpha: 1,
       },
-      borderTopStyle: String,
+      borderTopStyle: 'solid',
 
       borderBottomWidth: '1px', // 带单位
       borderBottomColor: {
