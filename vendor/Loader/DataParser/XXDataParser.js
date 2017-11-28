@@ -16,3 +16,4 @@ export {XXAnchorPropertyParser} from './XXAnchorPropertyParser.js';
 export {XXBackgroundPropertyParser} from './XXBackgroundPropertyParser.js';
 export {XXBorderPropertyParser} from './XXBorderPropertyParser.js';
 export {XXPaddingPropertyParser} from './XXPaddingPropertyParser.js';
+export {XXNumberPropertyParser} from './XXNumberPropertyParser.js';

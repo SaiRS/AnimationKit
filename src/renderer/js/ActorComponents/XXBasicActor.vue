@@ -27,7 +27,8 @@
     XXAnchorPropertyParser,
     XXBackgroundPropertyParser,
     XXBorderPropertyParser,
-    XXPaddingPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+    XXPaddingPropertyParser,
+    XXNumberPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
   import xxvNotificationCenter from
     'XXVendor/Notification/NotificationCenter.js';
@@ -381,7 +382,8 @@
       },
 
       alpha: function() {
-        return 1;
+        let opacity = XXNodeGraphParser.getOpacityProperty(this.nodeGraph);
+        return XXNumberPropertyParser.getNumber(opacity, 1);
       },
 
       shadowColor: function() {

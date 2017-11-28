@@ -74,7 +74,7 @@
         <div class='alpha-container'>
           <div>不透明度</div>
           <div class='alpha-input-container'>
-            <Slider style="width: 80%;" v-model="alpha" show-input :max=100 :min=0></Slider>
+            <Slider style="width: 80%;" v-model="opacity" show-input :max=100 :min=0></Slider>
           </div>
 
         </div>
@@ -223,8 +223,6 @@
         ],
 
         selectedBorderType: 'none', // 当前选中的border
-
-        alpha: 100,
         show: "true",
 
         shadowcolor: 'rgba(0, 0, 0, 1)'
@@ -603,6 +601,16 @@
           } else if (this.selectedBorderType == 'bottom') {
             this.setCurrentSelectedActorPaddingBottomWidthMixin(value);
           }
+        }
+      },
+
+      opacity: {
+        get: function opacityGet() {
+          return this.getCurrentSelectedActorOpacityMixin * 100
+        },
+
+        set: function opacitySet(value) {
+          this.setCurrentSelectedActorOpacityMixin(value/100)
         }
       }
     },

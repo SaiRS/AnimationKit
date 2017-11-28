@@ -7,7 +7,8 @@ import {XXNodeGraphParser,
   XXAnchorPropertyParser,
   XXBackgroundPropertyParser,
   XXBorderPropertyParser,
-  XXPaddingPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+  XXPaddingPropertyParser,
+  XXNumberPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
 const state = {
   currentSelectedActor: null,  // 数据对象
@@ -243,6 +244,11 @@ const getters = {
     let padding = getters.currentSelectedActorPadding;
     return XXPaddingPropertyParser.getRightPaddingWidth(padding);
   },
+
+  getCurrentSelectedActorOpacity(state) {
+    let opacity = XXNodeGraphParser.getOpacityProperty(state.currentSelectedActor);
+    return XXNumberPropertyParser.getNumber(opacity, 1);
+  },
 };
 
 const mutations = {
@@ -472,6 +478,12 @@ const mutations = {
   setCurrentSelectedActorPaddingRightWidth(state, width = '1px') {
     if (state.currentSelectedActor) {
       XXNodeGraphParser.setPaddingRightWidth(state.currentSelectedActor, width);
+    }
+  },
+
+  setCurrentSelectedActorOpacity(state, opacity) {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setOpacity(state.currentSelectedActor, opacity);
     }
   },
 };

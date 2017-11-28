@@ -58,6 +58,8 @@ const XXEditStoreMixin = {
       'currentActorPaddingBottomWidthMixin': 'currentActorPaddingBottomWidth',
       'currentActorPaddingLeftWidthMixin': 'currentActorPaddingLeftWidth',
       'currentActorPaddingRightWidthMixin': 'currentActorPaddingRightWidth',
+
+      'getCurrentSelectedActorOpacityMixin': 'getCurrentSelectedActorOpacity',
     }),
   },
 
@@ -104,6 +106,8 @@ const XXEditStoreMixin = {
       'setCurrentSelectedActorPaddingBottomWidthMixin': 'setCurrentSelectedActorPaddingBottomWidth',
       'setCurrentSelectedActorPaddingLeftWidthMixin': 'setCurrentSelectedActorPaddingLeftWidth',
       'setCurrentSelectedActorPaddingRightWidthMixin': 'setCurrentSelectedActorPaddingRightWidth',
+
+      'setCurrentSelectedActorOpacityMixin': 'setCurrentSelectedActorOpacity',
     }),
   },
 };

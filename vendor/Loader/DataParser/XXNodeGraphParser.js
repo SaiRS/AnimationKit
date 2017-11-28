@@ -9,6 +9,7 @@ import {XXAnchorPropertyParser} from './XXAnchorPropertyParser.js';
 import {XXBackgroundPropertyParser} from './XXBackgroundPropertyParser.js';
 import {XXBorderPropertyParser} from './XXBorderPropertyParser.js';
 import {XXPaddingPropertyParser} from './XXPaddingPropertyParser.js';
+import {XXNumberPropertyParser} from './XXNumberPropertyParser.js';
 /**
  * 解析节点的帮助方法
  */
@@ -273,6 +274,22 @@ class XXNodeGraphParser {
     return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
       if (XXPropertyParser.getPropertyType(property) ==
        XXPropertyTypeEnum.PaddingType) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  /**
+   * [getOpacityProperty description]
+   * @param  {[type]} nodeGraph [description]
+   * @return {[type]}           [description]
+   */
+  static getOpacityProperty(nodeGraph) {
+    return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
+      if (XXPropertyParser.getPropertyName(property) ==
+       XXPropertyNameEnum.Opacity) {
         return true;
       } else {
         return false;
@@ -822,6 +839,25 @@ class XXNodeGraphParser {
     });
   }
 
+  /**
+   * [setOpacity description]
+   * @param {[type]} nodeGraph   [description]
+   * @param {Number} [opacity=1] [description]
+   */
+  static setOpacity(nodeGraph, opacity = 1) {
+    let opacityProperty = XXNodeGraphParser.getOpacityProperty(nodeGraph);
+    if (opacityProperty) {
+      XXNumberPropertyParser.setNumber(opacityProperty, opacity);
+    } else {
+      // 增加属性
+      let newOpacityValue = XXNumberPropertyParser.createNewNumberValue();
+      XXNodeGraphParser.addOpacityProperty(nodeGraph, newOpacityValue);
+
+      let newBorderProperty = XXNodeGraphParser.getOpacityProperty(nodeGraph);
+      XXNumberPropertyParser.setNumber(newBorderProperty, opacity);
+    }
+  }
+
   /** **************************
    * 增加部分
    ****************************/
@@ -921,6 +957,23 @@ class XXNodeGraphParser {
     let property =
       XXPropertyParser.createNewProperty(
         XXPropertyTypeEnum.PaddingType,
+        name,
+        value
+      );
+
+    XXNodeGraphParser.__addProperty(nodeGraph, property);
+  }
+
+  /**
+   * [addOpacityProperty description]
+   * @param {[type]} nodeGraph                         [description]
+   * @param {[type]} value                             [description]
+   * @param {[type]} [name=XXPropertyNameEnum.Opacity] [description]
+   */
+  static addOpacityProperty(nodeGraph, value, name = XXPropertyNameEnum.Opacity) {
+    let property =
+      XXPropertyParser.createNewProperty(
+        XXPropertyTypeEnum.NumberType,
         name,
         value
       );
