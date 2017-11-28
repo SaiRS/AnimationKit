@@ -56,14 +56,14 @@
             <xx-border-selector :selectedBorderType='selectedBorderType' @selectedBorderChanged='onSelectedBorder'></xx-border-selector>
           </div>
           <div class='current-border-color-container'>
-            <ColorPicker v-model="currentbordercolor" alpha />
+            <ColorPicker :disabled='isBorderRadiusSelected' v-model="currentbordercolor" alpha />
           </div>
         </div>
         <div class="border-group-right-container">
           <div>半径</div>
-          <Input size="small" v-model='currentBorderRadius' :disabled='!isBorderRadiusSelected' placeholder="半径"></Input>
+          <Input size="small" v-model='currentBorderRadius' :disabled='isBorderRadiusSelected' placeholder="半径"></Input>
           <div>补白</div>
-          <Input size="small" :disabled='!isBorderSelected' placeholder="补白"></Input>
+          <Input size="small" v-model='currentPadding' :disabled='!isBorderSelected' placeholder="补白"></Input>
         </div>
       </div>
     </div>
@@ -559,6 +559,52 @@
       isBorderRadiusSelected() {
         return ['top-left', 'bottom-left', 'top-right', 'bottom-right'].indexOf(this.selectedBorderType) != -1;
       },
+
+      currentPadding: {
+        get: function currentPaddingGet() {
+          if (this.selectedBorderType == 'left') {
+            if (!this.currentActorPaddingLeftWidthMixin) {
+              this.setCurrentSelectedActorPaddingLeftWidthMixin('0px');
+              return '0px';
+            } else {
+              return this.currentActorPaddingLeftWidthMixin;
+            }
+          } else if (this.selectedBorderType == 'right') {
+            if (!this.currentActorPaddingRightWidthMixin) {
+              this.setCurrentSelectedActorPaddingRightWidthMixin('0px');
+              return '0px';
+            } else {
+              return this.currentActorPaddingRightWidthMixin;
+            }
+          } else if (this.selectedBorderType == 'bottom') {
+            if (!this.currentActorPaddingBottomWidthMixin) {
+              this.setCurrentSelectedActorPaddingBottomWidthMixin('0px');
+              return '0px';
+            } else {
+              return this.currentActorPaddingBottomWidthMixin;
+            }
+          } else if (this.selectedBorderType == 'top') {
+            if (!this.currentActorPaddingTopWidthMixin) {
+              this.setCurrentSelectedActorPaddingTopWidthMixin('0px');
+              return '0px';
+            } else {
+              return this.currentActorPaddingTopWidthMixin;
+            }
+          }
+        },
+
+        set: function currentPaddingSet(value) {
+          if (this.selectedBorderType == 'top') {
+            this.setCurrentSelectedActorPaddingTopWidthMixin(value);
+          } else if (this.selectedBorderType == 'right') {
+            this.setCurrentSelectedActorPaddingRightWidthMixin(value);
+          } else if (this.selectedBorderType == 'left') {
+            this.setCurrentSelectedActorPaddingLeftWidthMixin(value);
+          } else if (this.selectedBorderType == 'bottom') {
+            this.setCurrentSelectedActorPaddingBottomWidthMixin(value);
+          }
+        }
+      }
     },
 
     methods: {

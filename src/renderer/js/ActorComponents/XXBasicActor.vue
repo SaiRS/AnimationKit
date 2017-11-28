@@ -26,7 +26,8 @@
     XXRotationPropertyParser,
     XXAnchorPropertyParser,
     XXBackgroundPropertyParser,
-    XXBorderPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+    XXBorderPropertyParser,
+    XXPaddingPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
   import xxvNotificationCenter from
     'XXVendor/Notification/NotificationCenter.js';
@@ -343,16 +344,36 @@
       },
 
       leftPadding: function() {
-        return 0;
+        let padding = XXNodeGraphParser.getPaddingProperty(this.nodeGraph);
+        if (padding) {
+          return XXPaddingPropertyParser.getLeftPaddingWidth(padding);
+        } else {
+          return '0px';
+        }
       },
       rightPadding: function() {
-        return 0;
+        let padding = XXNodeGraphParser.getPaddingProperty(this.nodeGraph);
+        if (padding) {
+          return XXPaddingPropertyParser.getRightPaddingWidth(padding);
+        } else {
+          return '0px';
+        }
       },
       topPadding: function() {
-        return 0;
+        let padding = XXNodeGraphParser.getPaddingProperty(this.nodeGraph);
+        if (padding) {
+          return XXPaddingPropertyParser.getTopPaddingWidth(padding);
+        } else {
+          return '0px';
+        }
       },
       bottomPadding: function() {
-        return 0;
+        let padding = XXNodeGraphParser.getPaddingProperty(this.nodeGraph);
+        if (padding) {
+          return XXPaddingPropertyParser.getBottomPaddingWidth(padding);
+        } else {
+          return '0px';
+        }
       },
 
       visible: function() {
@@ -413,10 +434,10 @@
           'border-bottom-right-radius': `${this.rightBottomBorderRadius}`,
           'border-top-left-radius': `${this.leftTopBorderRadius}`,
           'border-top-right-radius': `${this.rightTopBorderRadius}`,
-          'padding-left': `${this.leftPadding}px`,
-          'padding-right': `${this.rightPadding}px`,
-          'padding-top': `${this.topPadding}px`,
-          'padding-bottom': `${this.bottomPadding}px`,
+          'padding-left': `${this.leftPadding}`,
+          'padding-right': `${this.rightPadding}`,
+          'padding-top': `${this.topPadding}`,
+          'padding-bottom': `${this.bottomPadding}`,
           'display': `${this.visible}`,
           'opacity': `${this.alpha}`,
           'box-shadow': `${this.shadowColor} ${this.shadowOffsetX}px

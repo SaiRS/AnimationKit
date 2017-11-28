@@ -53,6 +53,11 @@ const XXEditStoreMixin = {
       'currentActorBorderTopRightRadiusMixin': 'currentActorBorderTopRightRadius',
       'currentActorBorderBottomLeftRadiusMixin': 'currentActorBorderBottomLeftRadius',
       'currentActorBorderBottomRightRadiusMixin': 'currentActorBorderBottomRightRadius',
+
+      'currentActorPaddingTopWidthMixin': 'currentActorPaddingTopWidth',
+      'currentActorPaddingBottomWidthMixin': 'currentActorPaddingBottomWidth',
+      'currentActorPaddingLeftWidthMixin': 'currentActorPaddingLeftWidth',
+      'currentActorPaddingRightWidthMixin': 'currentActorPaddingRightWidth',
     }),
   },
 
@@ -94,6 +99,11 @@ const XXEditStoreMixin = {
       'setCurrentSelectedActorBorderTopRightRadiusMixin': 'setCurrentSelectedActorBorderTopRightRadius',
       'setCurrentSelectedActorBorderBottomLeftRadiusMixin': 'setCurrentSelectedActorBorderBottomLeftRadius',
       'setCurrentSelectedActorBorderBottomRightRadiusMixin': 'setCurrentSelectedActorBorderBottomRightRadius',
+
+      'setCurrentSelectedActorPaddingTopWidthMixin': 'setCurrentSelectedActorPaddingTopWidth',
+      'setCurrentSelectedActorPaddingBottomWidthMixin': 'setCurrentSelectedActorPaddingBottomWidth',
+      'setCurrentSelectedActorPaddingLeftWidthMixin': 'setCurrentSelectedActorPaddingLeftWidth',
+      'setCurrentSelectedActorPaddingRightWidthMixin': 'setCurrentSelectedActorPaddingRightWidth',
     }),
   },
 };

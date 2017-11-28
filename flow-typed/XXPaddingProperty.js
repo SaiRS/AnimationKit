@@ -1,6 +1,9 @@
 
 declare XXPaddingValue= {
-  paddingWidth: String, // 带单位
+  paddingTopWidth: String, // 带单位
+  paddingBottomWidth: String, // 带单位
+  paddingLeftWidth: String, // 带单位
+  paddingRightWidth: String, // 带单位
 }
 
 declare XXPaddingProperty = {

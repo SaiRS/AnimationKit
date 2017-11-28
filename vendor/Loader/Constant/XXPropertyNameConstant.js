@@ -12,6 +12,7 @@ const XXPropertyNameEnum = {
   Overflow: 'overflow', //
   Background: 'background', // 背景
   Border: 'border', // 边框
+  Padding: 'padding', // 内边框
 };
 
 export {

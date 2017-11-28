@@ -8,6 +8,7 @@ import {XXRotationPropertyParser} from './XXRotationPropertyParser.js';
 import {XXAnchorPropertyParser} from './XXAnchorPropertyParser.js';
 import {XXBackgroundPropertyParser} from './XXBackgroundPropertyParser.js';
 import {XXBorderPropertyParser} from './XXBorderPropertyParser.js';
+import {XXPaddingPropertyParser} from './XXPaddingPropertyParser.js';
 /**
  * 解析节点的帮助方法
  */
@@ -256,6 +257,22 @@ class XXNodeGraphParser {
     return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
       if (XXPropertyParser.getPropertyType(property) ==
        XXPropertyTypeEnum.BorderType) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  /**
+   * 内边框属性
+   * @param  {[type]} nodeGraph [description]
+   * @return {[type]}           [description]
+   */
+  static getPaddingProperty(nodeGraph) {
+    return XXNodeGraphParser.getSpecialProperty(nodeGraph, function(property) {
+      if (XXPropertyParser.getPropertyType(property) ==
+       XXPropertyTypeEnum.PaddingType) {
         return true;
       } else {
         return false;
@@ -691,6 +708,82 @@ class XXNodeGraphParser {
   }
 
   /**
+   * [setBorderTopWidth description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [width='1px'] [description]
+   */
+  static setPaddingTopWidth(nodeGraph, width = '1px') {
+    let paddingProperty = XXNodeGraphParser.getPaddingProperty(nodeGraph);
+    if (paddingProperty) {
+      XXPaddingPropertyParser.setTopPaddingWidth(paddingProperty, width);
+    } else {
+      // 增加属性
+      let newPaddingValue = XXPaddingPropertyParser.createPaddingValue();
+      XXNodeGraphParser.addPaddingProperty(nodeGraph, newPaddingValue);
+
+      let newBorderProperty = XXNodeGraphParser.getPaddingProperty(nodeGraph);
+      XXPaddingPropertyParser.setTopPaddingWidth(newBorderProperty, width);
+    }
+  }
+
+  /**
+   * [setPaddingBottomWidth description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [width='1px'] [description]
+   */
+  static setPaddingBottomWidth(nodeGraph, width = '1px') {
+    let paddingProperty = XXNodeGraphParser.getPaddingProperty(nodeGraph);
+    if (paddingProperty) {
+      XXPaddingPropertyParser.setBottomPaddingWidth(paddingProperty, width);
+    } else {
+      // 增加属性
+      let newPaddingValue = XXPaddingPropertyParser.createPaddingValue();
+      XXNodeGraphParser.addPaddingProperty(nodeGraph, newPaddingValue);
+
+      let newBorderProperty = XXNodeGraphParser.getPaddingProperty(nodeGraph);
+      XXPaddingPropertyParser.setBottomPaddingWidth(newBorderProperty, width);
+    }
+  }
+
+  /**
+   * [setPaddingLeftWidth description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [width='1px'] [description]
+   */
+  static setPaddingLeftWidth(nodeGraph, width = '1px') {
+    let paddingProperty = XXNodeGraphParser.getPaddingProperty(nodeGraph);
+    if (paddingProperty) {
+      XXPaddingPropertyParser.setLeftPaddingWidth(paddingProperty, width);
+    } else {
+      // 增加属性
+      let newPaddingValue = XXPaddingPropertyParser.createPaddingValue();
+      XXNodeGraphParser.addPaddingProperty(nodeGraph, newPaddingValue);
+
+      let newBorderProperty = XXNodeGraphParser.getPaddingProperty(nodeGraph);
+      XXPaddingPropertyParser.setLeftPaddingWidth(newBorderProperty, width);
+    }
+  }
+
+  /**
+   * [setPaddingRightWidth description]
+   * @param {[type]} nodeGraph     [description]
+   * @param {String} [width='1px'] [description]
+   */
+  static setPaddingRightWidth(nodeGraph, width = '1px') {
+    let paddingProperty = XXNodeGraphParser.getPaddingProperty(nodeGraph);
+    if (paddingProperty) {
+      XXPaddingPropertyParser.setRightPaddingWidth(paddingProperty, width);
+    } else {
+      // 增加属性
+      let newPaddingValue = XXPaddingPropertyParser.createPaddingValue();
+      XXNodeGraphParser.addPaddingProperty(nodeGraph, newPaddingValue);
+
+      let newBorderProperty = XXNodeGraphParser.getPaddingProperty(nodeGraph);
+      XXPaddingPropertyParser.setRightPaddingWidth(newBorderProperty, width);
+    }
+  }
+
+  /**
    * [setBackgroundLineGradient description]
    * @param {[type]} nodeGraph         [description]
    * @param {String} [angle='0deg']    [description]
@@ -811,6 +904,23 @@ class XXNodeGraphParser {
     let property =
       XXPropertyParser.createNewProperty(
         XXPropertyTypeEnum.BorderType,
+        name,
+        value
+      );
+
+    XXNodeGraphParser.__addProperty(nodeGraph, property);
+  }
+
+  /**
+   * [addPaddingProperty description]
+   * @param {[type]} nodeGraph                         [description]
+   * @param {[type]} value                             [description]
+   * @param {[type]} [name=XXPropertyNameEnum.Padding] [description]
+   */
+  static addPaddingProperty(nodeGraph, value, name = XXPropertyNameEnum.Padding) {
+    let property =
+      XXPropertyParser.createNewProperty(
+        XXPropertyTypeEnum.PaddingType,
         name,
         value
       );

@@ -6,7 +6,8 @@ import {XXNodeGraphParser,
   XXRotationPropertyParser,
   XXAnchorPropertyParser,
   XXBackgroundPropertyParser,
-  XXBorderPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
+  XXBorderPropertyParser,
+  XXPaddingPropertyParser} from 'XXLoader/DataParser/XXDataParser.js';
 
 const state = {
   currentSelectedActor: null,  // 数据对象
@@ -217,6 +218,31 @@ const getters = {
     let border = getters.currentSelectedActorBorder;
     return XXBorderPropertyParser.getBottomRightRadius(border);
   },
+
+  currentSelectedActorPadding(state) {
+    let padding = XXNodeGraphParser.getPaddingProperty(state.currentSelectedActor);
+    return padding;
+  },
+
+  currentActorPaddingTopWidth(state, getters) {
+    let padding = getters.currentSelectedActorPadding;
+    return XXPaddingPropertyParser.getTopPaddingWidth(padding);
+  },
+
+  currentActorPaddingBottomWidth(state, getters) {
+    let padding = getters.currentSelectedActorPadding;
+    return XXPaddingPropertyParser.getBottomPaddingWidth(padding);
+  },
+
+  currentActorPaddingLeftWidth(state, getters) {
+    let padding = getters.currentSelectedActorPadding;
+    return XXPaddingPropertyParser.getLeftPaddingWidth(padding);
+  },
+
+  currentActorPaddingRightWidth(state, getters) {
+    let padding = getters.currentSelectedActorPadding;
+    return XXPaddingPropertyParser.getRightPaddingWidth(padding);
+  },
 };
 
 const mutations = {
@@ -423,6 +449,29 @@ const mutations = {
   setCurrentSelectedActorBorderBottomRightRadius(state, Radius = '1px') {
     if (state.currentSelectedActor) {
       XXNodeGraphParser.setBorderBottomRightRadius(state.currentSelectedActor, Radius);
+    }
+  },
+
+  // padding
+  setCurrentSelectedActorPaddingTopWidth(state, width = '1px') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setPaddingTopWidth(state.currentSelectedActor, width);
+    }
+  },
+
+  setCurrentSelectedActorPaddingBottomWidth(state, width = '1px') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setPaddingBottomWidth(state.currentSelectedActor, width);
+    }
+  },
+  setCurrentSelectedActorPaddingLeftWidth(state, width = '1px') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setPaddingLeftWidth(state.currentSelectedActor, width);
+    }
+  },
+  setCurrentSelectedActorPaddingRightWidth(state, width = '1px') {
+    if (state.currentSelectedActor) {
+      XXNodeGraphParser.setPaddingRightWidth(state.currentSelectedActor, width);
     }
   },
 };

@@ -1,6 +1,5 @@
 // @flow
 
-
 export {XXAnimationKitParser} from './XXAnimationKitParser.js';
 
 export {XXNodeGraphParser} from './XXNodeGraphParser.js';
@@ -16,3 +15,4 @@ export {XXRotationPropertyParser} from './XXRotationPropertyParser.js';
 export {XXAnchorPropertyParser} from './XXAnchorPropertyParser.js';
 export {XXBackgroundPropertyParser} from './XXBackgroundPropertyParser.js';
 export {XXBorderPropertyParser} from './XXBorderPropertyParser.js';
+export {XXPaddingPropertyParser} from './XXPaddingPropertyParser.js';

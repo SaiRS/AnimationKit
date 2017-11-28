@@ -316,7 +316,7 @@ class XXBorderPropertyParser {
       let value = XXPropertyParser.getPropertyValue(property);
 
       // 值，单位
-      let widthunit = ValueTool.xxfExtractUnitFromStringValue(value['borderTopWidth']);
+      let widthunit = ValueTool.xxfExtractUnitFromStringValue(value[border]);
       if (!ValueTool.xxfIsValidUnitOfLength(widthunit)) {
         widthunit = ValueTool.xxfDefaultUnitOfLength();
       }
