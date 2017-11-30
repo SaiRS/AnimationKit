@@ -179,6 +179,7 @@
   background-color: #323236;
   padding: 8px;
   box-sizing: border-box;
+  border-left: solid 1px black;
 
   .propertyInspector-titleBar{
     widht: 100%;
