@@ -1,20 +1,21 @@
 {
   "initNodeGraph": {
+    "uuid": "",
     "name": "Actor",
     "className": "TODO: Actor",
-    "parentClassName": "TODO: Actor",
+    "parentClassName": "XXNodeDomActor",
     "properties": [
       {
-        "type": "Point",
+        "type": "point",
         "value": {
-          "x": "0.5",
-          "y": "0.5",
-          "z": "0.5"
+          "x": "50%",
+          "y": "50%",
+          "z": "50%"
         },
         "name": "anchorPoint"
       },
       {
-        "type": "Point",
+        "type": "point",
         "value": {
           "x": "0px",
           "y": "0px",
@@ -23,7 +24,7 @@
         "name": "position"
       },
       {
-        "type": "Size",
+        "type": "size",
         "value": {
           "width": "55px",
           "height": "55px"
@@ -31,12 +32,12 @@
         "name": "size"
       },
       {
-        "type": "String",
-        "value": "hidden",
+        "type": "string",
+        "value": "auto",
         "name": "overflow"
       },
       {
-        "type": "Scale",
+        "type": "scale",
         "value": {
           "scaleX": "1",
           "scaleY": "1",
@@ -45,7 +46,7 @@
         "name": "scale"
       },
       {
-        "type": "Rotation",
+        "type": "rotation",
         "value": {
           "rotationX": "0deg",
           "rotationY": "0deg",
@@ -54,9 +55,35 @@
         "name": "rotation"
       },
       {
-        "type": "Check",
+        "type": "boolean",
         "value": true,
         "name": "visible"
+      },
+      {
+        "type": "border",
+        "name": "border",
+        "value": {
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 1)",
+          "borderTopStyle": "solid",
+
+          "borderBottomWidth": "1px",
+          "borderBottomColor": "rgba(0, 0, 0, 1)",
+          "borderBottomStyle": "solid",
+
+          "borderLeftWidth": "1px",
+          "borderLeftColor": "rgba(0, 0, 0, 1)",
+          "borderLeftStyle": "solid",
+
+          "borderRightWidth": "1px",
+          "borderRightColor": "rgba(0, 0, 0, 1)",
+          "borderRightStyle": "solid",
+
+          "borderTopLeftRadius": "0px",
+          "borderTopRightRadius": "0px",
+          "borderBottomLeftRadius": "0px",
+          "borderBottomRightRadius": "0px"
+        }
       }
     ],
     "children": [],
