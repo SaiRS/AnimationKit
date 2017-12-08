@@ -296,6 +296,8 @@ module.exports = {
       'XXLoader': path.resolve(__dirname, '..', 'Vendor', 'Loader'),
 
       // 编辑器路径
+      'XXRenderer':
+        path.resolve(__dirname, '..', 'src', 'renderer'),
       'XXAppUI':
         path.resolve(__dirname, '..', 'src', 'renderer', 'js', 'AppUI'),
       'XXComponents':

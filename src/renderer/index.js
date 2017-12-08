@@ -77,8 +77,8 @@ import XXObjectLike from './plugins/dataStruct/XXObjectLike.js';
 Vue.use(XXObjectLike);
 
 // 数据解析插件
-import {XXNodeGraphParserPlugin} from './plugins/dataParser/XXNodeGraphParserPlugin.js';
-Vue.use(XXNodeGraphParserPlugin);
+import {XXDataParserPlugin} from './plugins/dataParser/XXDataParserPlugin.js';
+Vue.use(XXDataParserPlugin);
 
 // import imgSrc from './img/mountain-top.jpg';
 //

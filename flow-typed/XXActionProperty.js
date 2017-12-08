@@ -13,7 +13,7 @@ declare type XXKeyframeProperty = {
   timeFunction: XXTimeFunction,
 }
 
-declare type XXActionItemProperty{
+declare type XXActionItemProperty = {
   keyframes: Array<XXKeyframeProperty>
 }
 
@@ -23,8 +23,8 @@ declare type XXActionProperty = {
 }
 
 declare type XXActionsProperty {
-  actionName1: XXActionProperty,
-  actionName2: XXActionProperty,
+  actionId1: XXActionProperty,
+  actionId2: XXActionProperty,
 }
 
 

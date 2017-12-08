@@ -1,0 +1,15 @@
+{
+  "rootNode": {
+
+  },
+
+  "actionConfig": {
+    "actionId1": {
+      "actionId": "actionId1",
+      "actionName": "ActionName1",
+      "actionDuration": 600,
+      "actionIterationCount": 1,
+      "actionDelay": 0
+    },
+  }
+}

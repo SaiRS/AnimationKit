@@ -87,6 +87,158 @@
       }
     ],
     "children": [],
-    "actions": []
+    "actions": {
+      "actionId1": {
+        "position": {
+          "keyframes": [
+            {
+              "time": 0,
+              "propertyType": "point",
+              "propertyName": "position",
+              "propertyValue": {
+                "x": "0px",
+                "y": "0px",
+                "z": "0px"
+              }
+            },
+            {
+              "time": 100,
+              "propertyType": "point",
+              "propertyName": "position",
+              "propertyValue": {
+                "x": "100px",
+                "y": "100px",
+                "z": "0px"
+              }
+            },
+            {
+              "time": 300,
+              "propertyType": "point",
+              "propertyName": "position",
+              "propertyValue": {
+                "x": "600px",
+                "y": "600px",
+                "z": "0px"
+              }
+            },
+            {
+              "time": 600,
+              "propertyType": "point",
+              "propertyName": "position",
+              "propertyValue": {
+                "x": "500px",
+                "y": "100px",
+                "z": "0px"
+              }
+            }
+          ]
+        }
+      },
+      "actionId2": {
+        "scale": {
+          "keyframes": [
+            {
+              "time": 0,
+              "propertyType": "scale",
+              "propertyName": "scale",
+              "propertyValue": {
+                "scaleX": "1",
+                "scaleY": "1",
+                "scaleZ": "1"
+              }
+            },
+            {
+              "time": 100,
+              "propertyType": "scale",
+              "propertyName": "scale",
+              "propertyValue": {
+                "scaleX": "10",
+                "scaleY": "2",
+                "scaleZ": "1"
+              }
+            },
+            {
+              "time": 300,
+              "propertyType": "scale",
+              "propertyName": "scale",
+              "propertyValue": {
+                "scaleX": "1",
+                "scaleY": "20",
+                "scaleZ": "1"
+              }
+            }
+          ]
+        }
+      },
+      "actionId3": {
+        "rotation": {
+          "keyframes": [
+            {
+              "time": 0,
+              "propertyType": "rotation",
+              "propertyName": "rotation",
+              "propertyValue": {
+                "rotationX": "0deg",
+                "rotationY": "0deg",
+                "rotationZ": "0deg"
+              }
+            },
+            {
+              "time": 300,
+              "propertyType": "rotation",
+              "propertyName": "rotation",
+              "propertyValue": {
+                "rotationX": "0deg",
+                "rotationY": "0deg",
+                "rotationZ": "165deg"
+              }
+            },
+            {
+              "time": 900,
+              "propertyType": "rotation",
+              "propertyName": "rotation",
+              "propertyValue": {
+                "rotationX": "0deg",
+                "rotationY": "0deg",
+                "rotationZ": "-90deg"
+              }
+            },
+            {
+              "time": 1200,
+              "propertyType": "rotation",
+              "propertyName": "rotation",
+              "propertyValue": {
+                "rotationX": "0deg",
+                "rotationY": "0deg",
+                "rotationZ": "0deg"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "actionConfigs": {
+    "actionId1": {
+      "actionId": "actionId1",
+      "actionName": "ActionName1",
+      "actionDuration": 600,
+      "actionIterationCount": 1,
+      "actionDelay": 0
+    },
+    "actionId2": {
+      "actionId": "actionId2",
+      "actionName": "ActionName2",
+      "actionDuration": 300,
+      "actionIterationCount": 1,
+      "actionDelay": 0
+    },
+    "actionId3": {
+      "actionId": "actionId3",
+      "actionName": "ActionName3",
+      "actionDuration": 1200,
+      "actionIterationCount": 1,
+      "actionDelay": 0
+    }
   }
 }

@@ -1,0 +1,9 @@
+{
+  "uuid": "",
+  "name": "Actor",
+  "className": "TODO: Actor",
+  "parentClassName": "XXNodeDomActor",
+  "properties": [
+  ],
+  "children": []
+}

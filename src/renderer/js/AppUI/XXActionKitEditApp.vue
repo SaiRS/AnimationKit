@@ -11,7 +11,7 @@
         <XXElementEditPanelComponent class='xxCenterPart-topPart' :nodeGraph="nodeGraph">
         </XXElementEditPanelComponent>
 
-        <XXActionEditPanelComponent class='xxCenterPart-bottomPart'>
+        <XXActionEditPanelComponent class='xxCenterPart-bottomPart' :nodeGraph='nodeGraph'>
         </XXActionEditPanelComponent>
       </div>
 
@@ -45,13 +45,16 @@ import {XXInsertBasicActorNotification,
 
 
 import XXBaseActorBuilder from 'XXVendor/Builder/BaseActor/XXBaseActorBuilder.js';
+import {XXSceneManager} from 'XXRenderer/js/Scene/XXSceneManager.js';
+
+import {XXSceneInfoParser} from 'XXRenderer/js/Scene/XXSceneInfoParser.js';
 
 export default {
   name: 'XXActionKitEditApp',
 
   data: function() {
     return {
-      nodeGraph: {}, // 当前元素的结构图
+      scene: XXSceneManager.createNewScene(), // 场景
     };
   },
 
@@ -97,6 +100,12 @@ export default {
       'receivedInsertImageActorNotification',
       XXInsertImageActorNotification
     );
+  },
+
+  computed: {
+    nodeGraph: function() {
+      return XXSceneInfoParser.getSceneRootNode(this.scene)
+    }
   },
 
   methods: {
