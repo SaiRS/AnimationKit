@@ -4,17 +4,20 @@
       <Option v-for="timeline in timelinesForOptions" :value="timeline.value" :key="timeline.value">{{ timeline.label }}</Option>
     </Select>
     <xx-action-add-edit-cell>时间线操作</xx-action-add-edit-cell>
+    <xx-action-element-edit-cell></xx-action-element-edit-cell>
   </div>
 </template>
 
 
 <script>
   import XXActionAddEditCell from 'XXComponents/XXActionEditCell/XXActionAddEditCell.vue'
+  import XXActionElementEditCell from 'XXComponents/XXActionEditCell/XXActionElementEditCell.vue'
   export default {
     name: 'XXActionTimeLineControlBar',
 
     components: {
       'xx-action-add-edit-cell': XXActionAddEditCell,
+      'xx-action-element-edit-cell': XXActionElementEditCell
     },
 
     props: {

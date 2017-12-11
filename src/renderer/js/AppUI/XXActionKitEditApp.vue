@@ -8,10 +8,10 @@
       </XXResourceInspectorComponent>
 
       <div class='xxMiddlePart-centerPart'>
-        <XXElementEditPanelComponent class='xxCenterPart-topPart' :nodeGraph="nodeGraph">
+        <XXElementEditPanelComponent class='xxCenterPart-topPart' :nodeGraph="rootNodeGraph">
         </XXElementEditPanelComponent>
 
-        <XXActionEditPanelComponent class='xxCenterPart-bottomPart' :nodeGraph='nodeGraph'>
+        <XXActionEditPanelComponent class='xxCenterPart-bottomPart' :nodeGraph='rootNodeGraph'>
         </XXActionEditPanelComponent>
       </div>
 
@@ -103,7 +103,7 @@ export default {
   },
 
   computed: {
-    nodeGraph: function() {
+    rootNodeGraph: function() {
       return XXSceneInfoParser.getSceneRootNode(this.scene)
     }
   },

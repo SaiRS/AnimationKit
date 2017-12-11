@@ -1,13 +1,15 @@
 <template>
   <div class='xx-basic-actor'
     :style='styleObject'
-    draggable="true"
+    draggable="false"
     @click.self.exact='onClick'
     @click.alt.exact='onAltClick'
 
-    @dragstart.self='onDragStart'
-    @drag.self='onDrag'
-    @dragend.self='onDragEnd'>
+    @mousedown.self.stop='onMouseDown'
+    @mousemove.self.stop='onMouseMove'
+    @mouseup.self.stop='onMouseUp'
+    @mouseleave.self.stop='onMouseLeave'
+    >
     <template v-for='(child, index) in nodeGraph.children'>
       <XXBasicActor style='padding: 0px 0 0 8px' :nodeGraph="child" v-if='child.parentClassName == "XXNodeDomActor"'></XXBasicActor>
       <XXTextActor style='padding: 0px 0 0 8px' :nodeGraph="child" v-if='child.parentClassName == "XXNodeDomTextActor"'></XXTextActor>
@@ -44,6 +46,7 @@
       return {
         dragStartX: 0,
         dragStartY: 0,
+        canMove: false,
       }
     },
 
@@ -450,9 +453,9 @@
 
     methods: {
       onClick(event) {
-        console.log('选中了元素 ' + this.$getUUID(this.nodeGraph));
-        console.log(`isTheCurrentActorByUUID = ${this.isTheCurrentActorByUUIDMixin(this.$getUUID(this.nodeGraph))}`);
-        if (this.isTheCurrentActorByUUIDMixin(this.$getUUID(this.nodeGraph))) {
+        console.log('选中了元素 ' + this.$nodeGraphParser.getUUID(this.nodeGraph));
+        console.log(`isTheCurrentActorByUUID = ${this.isTheCurrentActorByUUIDMixin(this.$nodeGraphParser.getUUID(this.nodeGraph))}`);
+        if (this.isTheCurrentActorByUUIDMixin(this.$nodeGraphParser.getUUID(this.nodeGraph))) {
           // do nothing
         } else {
           // 设置
@@ -474,8 +477,8 @@
 
         console.log(event);
 
-        this.dragStartX = event.clientX;
-        this.dragStartY = event.clientY;
+        this.dragStartX = this.left;
+        this.dragStartY = this.top;
         if (this.isTheCurrentActorByUUIDMixin(this.nodeGraph)) {
           // 设置为当前node
           this.setCurrentSelectedActorMixin(this.nodeGraph);
@@ -490,9 +493,9 @@
           y: event.clientY - this.dragStartY,
         };
         this.moveCurrentActorByOffsetMixin(offset);
-        // 重新设置start
-        this.dragStartX = event.clientX;
-        this.dragStartY = event.clientY;
+        // // 重新设置start
+        // this.dragStartX = event.clientX;
+        // this.dragStartY = event.clientY;
       },
 
       onDragEnd(event) {
@@ -500,17 +503,44 @@
         event.preventDefault();
       },
 
-      onDragExit() {
-        console.log('onDragExit');
+      onMouseDown(event) {
+        this.canMove = true;
+        // 重新设置start
+        this.dragStartX = event.clientX;
+        this.dragStartY = event.clientY;
+
+        if (!this.isTheCurrentActorByUUIDMixin(this.nodeGraph)) {
+          // 设置为当前node
+          this.setCurrentSelectedActorMixin(this.nodeGraph);
+        }
+
+        console.log('on mouse down', event.clientX, event.clientY, event.screenX, event.screenY);
       },
 
-      onDragLeave() {
-        console.log('onDragLeave');
+      onMouseMove(event) {
+        if (!this.canMove) {
+          return;
+        }
+
+        let offset = {
+          x: event.clientX - this.dragStartX,
+          y: event.clientY - this.dragStartY,
+        };
+        this.moveCurrentActorByOffsetMixin(offset);
+
+        // 重新设置start
+        this.dragStartX = event.clientX;
+        this.dragStartY = event.clientY;
       },
 
-      onDragOver() {
-        // console.log('onDragOver');
+      onMouseUp(event) {
+        this.canMove = false;
       },
+
+      onMouseLeave() {
+        // console.log('on mouse leave')
+        this.canMove = false;
+      }
     },
   }
 </script>

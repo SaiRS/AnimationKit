@@ -1,10 +1,7 @@
 <template>
   <div class='xxElementEditPanel-rootVueContainer'>
     <div class='xx-elements-container'
-      @click.self.stop='onClick'
-
-      @dragenter='onDragEnter'
-      @dragover='onDragOver'>
+      @click.self.stop='onClick'>
       <!-- 唯一的节点 -->
       <XXBasicActor :nodeGraph='nodeGraph'></XXBasicActor>
     </div>
