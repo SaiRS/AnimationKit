@@ -1,4 +1,3 @@
-
 /**
  * [XXActionItemPropertyParser description]
  */
@@ -42,6 +41,8 @@ class XXActionItemPropertyParser {
   }
 
   // modify
+  //
+
 }
 
 export {
