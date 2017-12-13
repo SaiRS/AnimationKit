@@ -131,31 +131,42 @@
 
       group: function() {
         console.log('clicked group');
+        // TODO: 成组
+        this.$showInfoNoticeView('TODO: 成组');
       },
 
       unGroup: function() {
         console.log('clicked unGroup');
+        // TODO: 取消成组
+        this.$showInfoNoticeView('TODO: 取消成组');
       },
 
       foreward: function() {
         console.log('clicked foreward');
+        // TODO: 前方
+        this.$showInfoNoticeView('TODO: 前方');
       },
 
       backward: function() {
         console.log('clicked backward');
+        // TODO: 后方
+        this.$showInfoNoticeView('TODO: 后方');
       },
 
       left: function() {
         console.log('clicked left');
+        // TODO: 左边
+        this.$showInfoNoticeView('TODO: 左边');
       },
 
       bottom: function() {
         console.log('clicked bottom');
+        // TODO: 底部
+        this.$showInfoNoticeView('TODO: 底部');
       },
 
       right: function() {
         console.log('clicked right');
-
         this.rightShowed = !this.rightShowed;
         xxvNotificationCenter.postNotification(
           XXToolBarShowRightPanelNotification,

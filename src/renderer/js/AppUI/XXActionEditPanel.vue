@@ -10,7 +10,12 @@
     ></xx-action-control-bar>
     <div class='xxActionEditPanel-Timeline-Property-Frame-container'>
       <div class='xxActionEditPanel-Timeline-Property-container'>
-        <xx-action-timeline-control-bar class='timeline-control-bar-container' :nodeGraph='nodeGraph'></xx-action-timeline-control-bar>
+        <xx-action-timeline-control-bar class='timeline-control-bar-container'
+          :nodeGraph='nodeGraph'
+          :actionConfigs='actionConfigs'
+          :currentTimeLineId='currentTimeLineId'
+          @currentTimeLineChanged='onCurrentTimeLineChanged'
+          ></xx-action-timeline-control-bar>
         <xx-action-property-control-bar class='property-control-bar-container'></xx-action-property-control-bar>
       </div>
       <xx-action-frame-control-bar class='xxActionEditPanel-Frame-container'></xx-action-frame-control-bar>
@@ -24,6 +29,8 @@
   import XXActionPropertyControlBar from 'XXComponents/XXActionPropertyControlBar/XXActionPropertyControlBar.vue'
   import XXActionTimeLineControlBar from 'XXComponents/XXActionTimeLineControlBar/XXActionTimeLineControlBar.vue'
 
+
+  import XXVueActor from 'XXVendor/Action/Actor/XXVueActor.js'
   export default {
     name: 'XXActionEditPanel',
 
@@ -37,8 +44,19 @@
     },
 
     props: {
+      // 场景的根结点
       nodeGraph: {
         type: Object,
+      },
+
+      // 场景的action配置
+      actionConfigs: {
+        type: Object,
+      },
+
+      // 当前的时间线id
+      currentTimeLineId: {
+        type: String,
       }
     },
 
@@ -61,11 +79,26 @@
       },
 
       onClickBackwardFrame() {
-        this.currentFrame = Math.max(0, --this.currentFrame)
+        this.currentFrame = Math.max(0, --this.currentFrame);
       },
 
       onClickPlay() {
         this.isPlaying = !this.isPlaying
+
+        // 播放当前选择的actor的当前时间线action
+        // TODO: 由配置生成action
+        let actions = this.$nodeGraphParser.getActions(this.currentSelectedActorMixin);
+        let actionData = this.$actionsInfoParser.getActionProperty(actions, this.currentTimeLineId);
+        let action = this.$actionInfoParser.createActionObject(actionData);
+        // 生成引擎驱动的Actor
+        if (this.currentSelectedActorMixin) {
+          // TODO: 先取消选择当前的actor，不然会触发vue-store 不能在mutation之外修改state的错误
+          let currentActor = this.currentSelectedActorMixin;
+          this.resetCurrentSelectedActorMixin();
+          console.log(action)
+          let vueActor = new XXVueActor(this.$nodeGraphParser.getUUID(currentActor), currentActor)
+          vueActor.runAction(action)
+        }
       },
 
       onClickForwardFrame() {
@@ -79,6 +112,10 @@
 
       onClickRecord() {
         this.isRecording = !this.isRecording
+      },
+
+      onCurrentTimeLineChanged(value) {
+        this.$emit('currentTimeLineChanged', value);
       }
     }
   }

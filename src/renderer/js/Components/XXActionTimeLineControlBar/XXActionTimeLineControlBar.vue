@@ -1,6 +1,6 @@
 <template>
   <div class='xx-action-timeline-control-bar-self-container'>
-    <Select v-model="currentTimeline" size="small" style="width:100px">
+    <Select :value="currentTimeLineId" size="small" style="width:100px" @on-change='currentTimeLineChanged'>
       <Option v-for="timeline in timelinesForOptions" :value="timeline.value" :key="timeline.value">{{ timeline.label }}</Option>
     </Select>
     <xx-action-add-edit-cell>时间线操作</xx-action-add-edit-cell>
@@ -35,7 +35,7 @@
       },
 
       // 当前时间线
-      currentTimeline: {
+      currentTimeLineId: {
 
       }
     },
@@ -46,16 +46,23 @@
         if (this.actionConfigs) {
           let keys = Object.keys(this.actionConfigs)
           for (let i = 0; i < keys.length; i++) {
-            value = keys[i] // action id
+            let value = keys[i] // action id
             results.push({
               value: value,
-              label: this.$actionConfigParser.getActionName(this.actions[value])
+              label: this.$actionConfigParser.getActionName(this.actionConfigs[value])
             })
           }
         }
 
         return results
       },
+    },
+
+    methods: {
+      currentTimeLineChanged(value) {
+        console.log('currentTimeLineChanged', value)
+        this.$emit('currentTimeLineChanged', value)
+      }
     }
   }
 </script>

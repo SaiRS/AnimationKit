@@ -23,6 +23,33 @@ class XXKeyframePropertyParser {
   }
 
   /**
+   * [getKeyframeType description]
+   * @param  {[type]} keyframeProperty [description]
+   * @return {[type]}                  [description]
+   */
+  static getKeyframeType(keyframeProperty) {
+    return keyframeProperty && keyframeProperty['propertyType'] || '';
+  }
+
+  /**
+   * [getKeyframeName description]
+   * @param  {[type]} keyframeProperty [description]
+   * @return {[type]}                  [description]
+   */
+  static getKeyframeName(keyframeProperty) {
+    return keyframeProperty && keyframeProperty['propertyName'] || '';
+  }
+
+  /**
+   * [getKeyframeValue description]
+   * @param  {[type]} keyframeProperty [description]
+   * @return {[type]}                  [description]
+   */
+  static getKeyframeValue(keyframeProperty) {
+    return keyframeProperty && keyframeProperty['propertyValue'];
+  }
+
+  /**
    * [getProperty description]
    * @param  {[type]} keyframeProperty [description]
    * @return {[type]}                  [description]

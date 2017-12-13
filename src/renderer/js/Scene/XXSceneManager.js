@@ -3,6 +3,9 @@ import XXRootNodeActorJson from './XXRootNodeActor.json';
 import XXActionConfigJson from './XXActionConfig.json';
 
 import {xxfGeneratorUUID} from 'XXTool/GeneratorTool.js';
+
+import XXRectangleTestNodeActorJson from './XXRectangleTestNodeActor.json';
+import XXActionTestConfigJson from './XXActionTestConfig.json';
 /**
  * 场景管理
  */
@@ -30,9 +33,10 @@ class XXSceneManager {
    * @return {[type]} [description]
    */
   static createNewActionConfig() {
-    let defaultActionId = xxfGeneratorUUID();
-    return Object.assign(XXActionConfigJson, {
-      'actionId': defaultActionId,
+    // FIXME: 暂时不覆盖actionId
+    // let defaultActionId = xxfGeneratorUUID();
+    return Object.assign(JSON.parse(JSON.stringify(XXActionConfigJson)), {
+      // 'actionId': defaultActionId,
     });
   }
 
@@ -41,7 +45,7 @@ class XXSceneManager {
    * @return {[type]} [description]
    */
   static createNewNode() {
-    return Object.assign(XXRootNodeActorJson,
+    return Object.assign(JSON.parse(JSON.stringify(XXRootNodeActorJson)),
       {
         uuid: xxfGeneratorUUID(),
       });
@@ -52,10 +56,38 @@ class XXSceneManager {
    * @return {[type]} [description]
    */
   static createNewRectangleNode() {
-    return Object.assign(XXRectangleNodeActorJson,
+    return Object.assign(JSON.parse(JSON.stringify(XXRectangleNodeActorJson)),
       {
         uuid: xxfGeneratorUUID(),
       });
+  }
+
+
+  /**
+   * 测试
+   */
+
+  /**
+   * 测试动画运行的rectangle
+   * @return {[type]} [description]
+   */
+  static createTestNewRectangleNode() {
+    return Object.assign(JSON.parse(JSON.stringify(XXRectangleTestNodeActorJson)),
+      {
+        uuid: xxfGeneratorUUID(),
+      });
+  }
+
+  /**
+   * 测试动画的配置
+   * @return {[type]} [description]
+   */
+  static createNewActionTestConfig() {
+    // 不覆盖actionId
+    // let defaultActionId = xxfGeneratorUUID();
+    return Object.assign(JSON.parse(JSON.stringify(XXActionTestConfigJson)), {
+      // 'actionId': defaultActionId,
+    });
   }
 }
 

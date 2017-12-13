@@ -11,7 +11,9 @@
         <XXElementEditPanelComponent class='xxCenterPart-topPart' :nodeGraph="rootNodeGraph">
         </XXElementEditPanelComponent>
 
-        <XXActionEditPanelComponent class='xxCenterPart-bottomPart' :nodeGraph='rootNodeGraph'>
+        <XXActionEditPanelComponent class='xxCenterPart-bottomPart' :nodeGraph='rootNodeGraph' :actionConfigs='actionConfigs'
+          :currentTimeLineId='currentTimeLineId'
+          @currentTimeLineChanged='onCurrentTimeLineChanged'>
         </XXActionEditPanelComponent>
       </div>
 
@@ -47,14 +49,13 @@ import {XXInsertBasicActorNotification,
 import XXBaseActorBuilder from 'XXVendor/Builder/BaseActor/XXBaseActorBuilder.js';
 import {XXSceneManager} from 'XXRenderer/js/Scene/XXSceneManager.js';
 
-import {XXSceneInfoParser} from 'XXRenderer/js/Scene/XXSceneInfoParser.js';
-
 export default {
   name: 'XXActionKitEditApp',
 
   data: function() {
     return {
       scene: XXSceneManager.createNewScene(), // 场景
+      currentTimeLineId: '', // 当前时间线的id
     };
   },
 
@@ -65,6 +66,15 @@ export default {
     XXResourceInspectorComponent: XXResourceInspector,
     XXStatusBarComponent: XXStatusBar,
     XXToolBarComponent: XXToolBar
+  },
+
+  created: function() {
+    let actionConfigs = this.$sceneInfoParser.getActionConfigs(this.scene)
+    this.currentTimeLineId = Object.keys(actionConfigs)[0];
+
+    // FIXME: 测试的action config数据
+    let testActionConfig = XXSceneManager.createNewActionTestConfig()
+    this.$sceneInfoParser.addActionConfig(this.scene, testActionConfig)
   },
 
   /****************************
@@ -90,6 +100,7 @@ export default {
 
     // 插入文字元素
     xxvNotificationCenter.addObserver(
+      this,
       'receivedInsertTextActorNotification',
       XXInsertTextActorNotification
     );
@@ -104,7 +115,11 @@ export default {
 
   computed: {
     rootNodeGraph: function() {
-      return XXSceneInfoParser.getSceneRootNode(this.scene)
+      return this.$sceneInfoParser.getSceneRootNode(this.scene)
+    },
+
+    actionConfigs: function() {
+      return this.$sceneInfoParser.getActionConfigs(this.scene)
     }
   },
 
@@ -115,6 +130,8 @@ export default {
     receivedToolBarRightPanelVisibleChangedNotification(info) {
       console.log('收到tool bar right panel 改变的消息');
       console.dir(info)
+      // TODO: 修改可见性
+      this.$showInfoNoticeView('TODO: 修改右边可见性');
     },
 
     receivedInsertBasicActorNotification(info) {
@@ -124,13 +141,17 @@ export default {
       // 先取消当前选择的actor, 否则this.nodeGraph有可能是当前的actor，再
       // 执行this.nodeGraph['children'].push会因为再store之外修改state的值
       // 而出错。
+
+      // 记录当前actor
+      let currentActor = this.currentSelectedActorMixin
       this.resetCurrentSelectedActorMixin();
 
-      let newNode = XXBaseActorBuilder.buildInitActor();
-      if (!Object.keys(this.nodeGraph).length) {
-        this.nodeGraph = newNode;
+      // FIXME: 创建新的node(为了测试，先使用测试node)
+      let newNode = XXSceneManager.createTestNewRectangleNode();
+      if (!currentActor) { // 没有选中，则添加在根结点之下
+        this.$nodeGraphParser.addChild(this.rootNodeGraph, newNode)
       } else {
-        this.nodeGraph['children'].push(newNode);
+        this.$nodeGraphParser.addChild(currentActor, newNode)
       }
 
       // 选中新增的元素
@@ -140,11 +161,24 @@ export default {
     receivedInsertTextActorNotification(info) {
       console.log('收到插入文字元素的通知');
       console.dir(info);
+      // TODO: 插入文字
+      this.$showInfoNoticeView('TODO: 插入文字');
     },
 
     receivedInsertImageActorNotification(info) {
       console.log('收到插入图片元素的通知');
       console.dir(info);
+      // TODO: 插入图片
+      this.$showInfoNoticeView('TODO: 插入图片');
+    },
+
+    /**
+     * 时间线改变事件
+     * @param  {[type]} value [description]
+     * @return {[type]}       [description]
+     */
+    onCurrentTimeLineChanged(value) {
+      this.currentTimeLineId = value;
     }
   }
 }

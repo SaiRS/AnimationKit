@@ -1,0 +1,219 @@
+{
+  "uuid": "",
+  "name": "Actor",
+  "className": "TODO: Actor",
+  "parentClassName": "XXNodeDomActor",
+  "properties": [
+    {
+      "type": "point",
+      "value": {
+        "x": "50%",
+        "y": "50%",
+        "z": "50%"
+      },
+      "name": "anchorPoint"
+    },
+    {
+      "type": "point",
+      "value": {
+        "x": "0px",
+        "y": "0px",
+        "z": "0px"
+      },
+      "name": "position"
+    },
+    {
+      "type": "size",
+      "value": {
+        "width": "55px",
+        "height": "55px"
+      },
+      "name": "size"
+    },
+    {
+      "type": "string",
+      "value": "visible",
+      "name": "overflow"
+    },
+    {
+      "type": "scale",
+      "value": {
+        "scaleX": "1",
+        "scaleY": "1",
+        "lock": false
+      },
+      "name": "scale"
+    },
+    {
+      "type": "rotation",
+      "value": {
+        "rotationX": "0deg",
+        "rotationY": "0deg",
+        "rotationZ": "0deg"
+      },
+      "name": "rotation"
+    },
+    {
+      "type": "boolean",
+      "value": true,
+      "name": "visible"
+    },
+    {
+      "type": "border",
+      "name": "border",
+      "value": {
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgba(0, 0, 0, 1)",
+        "borderTopStyle": "solid",
+
+        "borderBottomWidth": "1px",
+        "borderBottomColor": "rgba(0, 0, 0, 1)",
+        "borderBottomStyle": "solid",
+
+        "borderLeftWidth": "1px",
+        "borderLeftColor": "rgba(0, 0, 0, 1)",
+        "borderLeftStyle": "solid",
+
+        "borderRightWidth": "1px",
+        "borderRightColor": "rgba(0, 0, 0, 1)",
+        "borderRightStyle": "solid",
+
+        "borderTopLeftRadius": "0px",
+        "borderTopRightRadius": "0px",
+        "borderBottomLeftRadius": "0px",
+        "borderBottomRightRadius": "0px"
+      }
+    }
+  ],
+  "children": [],
+  "actions": {
+    "actionId1": {
+      "position": {
+        "keyframes": [
+          {
+            "time": 0,
+            "propertyType": "point",
+            "propertyName": "position",
+            "propertyValue": {
+              "x": "0px",
+              "y": "0px",
+              "z": "0px"
+            }
+          },
+          {
+            "time": 1000,
+            "propertyType": "point",
+            "propertyName": "position",
+            "propertyValue": {
+              "x": "100px",
+              "y": "100px",
+              "z": "0px"
+            }
+          },
+          {
+            "time": 3000,
+            "propertyType": "point",
+            "propertyName": "position",
+            "propertyValue": {
+              "x": "600px",
+              "y": "600px",
+              "z": "0px"
+            }
+          },
+          {
+            "time": 6000,
+            "propertyType": "point",
+            "propertyName": "position",
+            "propertyValue": {
+              "x": "500px",
+              "y": "100px",
+              "z": "0px"
+            }
+          }
+        ]
+      }
+    },
+    "actionId2": {
+      "scale": {
+        "keyframes": [
+          {
+            "time": 0,
+            "propertyType": "scale",
+            "propertyName": "scale",
+            "propertyValue": {
+              "scaleX": "1",
+              "scaleY": "1",
+              "scaleZ": "1"
+            }
+          },
+          {
+            "time": 100,
+            "propertyType": "scale",
+            "propertyName": "scale",
+            "propertyValue": {
+              "scaleX": "10",
+              "scaleY": "2",
+              "scaleZ": "1"
+            }
+          },
+          {
+            "time": 300,
+            "propertyType": "scale",
+            "propertyName": "scale",
+            "propertyValue": {
+              "scaleX": "1",
+              "scaleY": "20",
+              "scaleZ": "1"
+            }
+          }
+        ]
+      }
+    },
+    "actionId3": {
+      "rotation": {
+        "keyframes": [
+          {
+            "time": 0,
+            "propertyType": "rotation",
+            "propertyName": "rotation",
+            "propertyValue": {
+              "rotationX": "0deg",
+              "rotationY": "0deg",
+              "rotationZ": "0deg"
+            }
+          },
+          {
+            "time": 300,
+            "propertyType": "rotation",
+            "propertyName": "rotation",
+            "propertyValue": {
+              "rotationX": "0deg",
+              "rotationY": "0deg",
+              "rotationZ": "165deg"
+            }
+          },
+          {
+            "time": 900,
+            "propertyType": "rotation",
+            "propertyName": "rotation",
+            "propertyValue": {
+              "rotationX": "0deg",
+              "rotationY": "0deg",
+              "rotationZ": "-90deg"
+            }
+          },
+          {
+            "time": 1200,
+            "propertyType": "rotation",
+            "propertyName": "rotation",
+            "propertyValue": {
+              "rotationX": "0deg",
+              "rotationY": "0deg",
+              "rotationZ": "0deg"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

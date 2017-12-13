@@ -1,0 +1,7 @@
+{
+  "actionId": "actionId2",
+  "actionName": "ActionName2",
+  "actionDuration": 300,
+  "actionIterationCount": 1,
+  "actionDelay": 0
+}

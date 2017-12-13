@@ -176,6 +176,16 @@ class XXPropertyParser {
       property['value'] = newValue;
     }
   }
+
+  /**
+   * @inherit
+   * 所有子类实现，用于从keyframe中生成对应的keyframe，keyframe对应为对应的关键帧
+   * @param  {[type]} keyframe [description]
+   * @return {[type]}       [description]
+   */
+  static createNewActionFrom(keyframe) {
+    return undefined;
+  }
 }
 
 

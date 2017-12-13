@@ -83,6 +83,32 @@ class XXNodeGraphParser {
     return nodeGraph && nodeGraph['children'] || [];
   }
 
+  /**
+   * 新增一个子节点
+   * @param {[type]} nodeGraph      [description]
+   * @param {[type]} childNodeGraph [description]
+   */
+  static addChild(nodeGraph, childNodeGraph) {
+    if (nodeGraph && childNodeGraph) {
+      nodeGraph['children'].push(childNodeGraph);
+    }
+  }
+
+  /**
+   * 删除子节点
+   * @param  {[type]} nodeGraph      [description]
+   * @param  {[type]} childNodeGraph [description]
+   */
+  static removeChild(nodeGraph, childNodeGraph) {
+    if (nodeGraph && childNodeGraph) {
+      for (let i = 0; i < nodeGraph['children'].length; i++) {
+        let child = nodeGraph['children'][i];
+        if (this.getUUID(child) === this.getUUID(childNodeGraph)) {
+          nodeGraph['children'].splice(i, 1);
+        }
+      }
+    }
+  }
 
   /**
    * 获得某一指定的属性
