@@ -85,7 +85,8 @@ class XXActionSequence extends XXActionInterval {
       this._actions[0].startWithTarget(actionTarget);
     } else {
       this._actions[0].startWithTarget(actionTarget);
-      this._actions[1].startWithTarget(actionTarget);
+      // 在运行时再执行这句话，否则的话比如说两个moveTo就会出现第一个完成之后，又从起点开始再执行第二个moveTo动画
+      // this._actions[1].startWithTarget(actionTarget);
     }
   }
 
@@ -95,6 +96,7 @@ class XXActionSequence extends XXActionInterval {
   step(deltaTime: number) {
     this._elapsed += deltaTime;
 
+    let preExecutedIndex = this._currentExecuteActionIndex;
     let firstActionDuration = this._actions[0].getDuration();
     if (this._elapsed > firstActionDuration) {
       // 转换到下一个action时，执行上一个action的完成回调
@@ -115,6 +117,11 @@ class XXActionSequence extends XXActionInterval {
     }
 
     let executedAction = this._actions[this._currentExecuteActionIndex];
+
+    // 表明切换了动画
+    if (preExecutedIndex != this._currentExecuteActionIndex) {
+      executedAction.startWithTarget(this.getTarget());
+    }
     if (executedAction && !executedAction.isDone()) {
       executedAction.step(deltaTime);
     }
