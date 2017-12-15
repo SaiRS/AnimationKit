@@ -1,7 +1,17 @@
 {
-  "actionId": "actionId2",
-  "actionName": "ActionName2",
-  "actionDuration": 300,
-  "actionIterationCount": 1,
-  "actionDelay": 0
+  "actionId2": {
+    "actionId": "actionId2",
+    "actionName": "scaleActionTest",
+    "actionDuration": 300,
+    "actionIterationCount": 1,
+    "actionDelay": 0
+  },
+  "actionId3": {
+    "actionId": "actionId3",
+    "actionName": "RotationActionTest",
+    "actionDuration": 300,
+    "actionIterationCount": 1,
+    "actionDelay": 0
+  }
+
 }

@@ -9,6 +9,7 @@ import XXRotation from 'XXFoundation/Type/XXRotation.js';
 import {XXNodeGraphParser} from 'XXVendor/Loader/DataParser/XXNodeGraphParser.js';
 import {XXPositionPropertyParser} from 'XXVendor/Loader/DataParser/XXPositionPropertyParser.js';
 import {XXScalePropertyParser} from 'XXVendor/Loader/DataParser/XXScalePropertyParser.js';
+import {XXRotationPropertyParser} from 'XXVendor/Loader/DataParser/XXRotationPropertyParser.js';
 
 import * as ValueTool from 'XXTool/ValueTool.js';
 /**
@@ -54,6 +55,17 @@ class XXVueActor extends XXNodeActor {
 
   /**
    * 继承的方法
+   * @return {[type]} [description]
+   */
+  rotation() {
+    let rotationProperty = XXNodeGraphParser.getRotationProperty(this._nodeGraph);
+    let rotation = XXRotationPropertyParser.getRotation(rotationProperty);
+    // TODO: rotation的构造函数
+    return new XXRotation(ValueTool.xxfExtractNumberValueFromStringValue(rotation['rotationZ']));
+  }
+
+  /**
+   * 继承的方法
    * @param  {[type]} position           [description]
    * @param  {[type]} updateModeProperty [description]
    */
@@ -82,7 +94,10 @@ class XXVueActor extends XXNodeActor {
    */
   rotateTo(rotation, updateModeProperty) {
     if (rotation && xxvTypeVerify.isType(rotation, XXRotation)) {
-      // XXNodeGraphParser.setRotation(this._nodeGraph, rotation.getRo)
+      let rotationProperty = XXNodeGraphParser.getRotationProperty(this._nodeGraph);
+      let rotationValue = XXRotationPropertyParser.getRotation(rotationProperty);
+
+      XXNodeGraphParser.setRotation(this._nodeGraph, rotation.getRotateAngle(), rotationValue['rotationX'], rotationValue['rotationY']);
     }
   }
 }

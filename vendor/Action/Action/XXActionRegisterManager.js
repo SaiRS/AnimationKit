@@ -5,9 +5,10 @@ import {XXPropertyNameEnum} from 'XXLoader/Constant/XXPropertyNameConstant.js';
 
 import {XXPositionPropertyParser} from 'XXLoader/DataParser/XXPositionPropertyParser.js';
 import {XXScalePropertyParser} from 'XXLoader/DataParser/XXScalePropertyParser.js';
+import {XXRotationPropertyParser} from 'XXLoader/DataParser/XXRotationPropertyParser.js';
 
 // import XXActionMoveTo from 'XXActionAlias/Action/BaseAction/XXActionMoveTo.js';
-// import XXActionRotateTo from 'XXActionAlias/Action/BaseAction/XXActionRotateTo.js';
+
 // import XXActionScaleTo from 'XXActionAlias/Action/BaseAction/XXActionScaleTo.js';
 //
 // import XXActionSpeed from 'XXActionAlias/Action/XXActionSpeed.js';
@@ -72,7 +73,7 @@ function xxfGetRegistedActionConstructor(type, name) {
 // 初始化
 xxfRegistAction(XXPropertyTypeEnum.PointType, XXPropertyNameEnum.Position, XXPositionPropertyParser);
 xxfRegistAction(XXPropertyTypeEnum.ScaleType, XXPropertyNameEnum.Scale, XXScalePropertyParser);
-// xxfRegistAction(XXPropertyTypeEnum.RotationType, XXPropertyNameEnum.Rotate, XXActionRotateTo);
+xxfRegistAction(XXPropertyTypeEnum.RotationType, XXPropertyNameEnum.Rotate, XXRotationPropertyParser);
 
 export {
   xxfRegistAction,

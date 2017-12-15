@@ -74,7 +74,10 @@ export default {
 
     // FIXME: 测试的action config数据
     let testActionConfig = XXSceneManager.createNewActionTestConfig()
-    this.$sceneInfoParser.addActionConfig(this.scene, testActionConfig)
+    let keys = Object.keys(testActionConfig)
+    for (let i = 0; i < keys.length; i++) {
+      this.$sceneInfoParser.addActionConfig(this.scene, testActionConfig[keys[i]])
+    }
   },
 
   /****************************

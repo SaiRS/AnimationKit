@@ -131,6 +131,50 @@
             }
           }
         ]
+      },
+      "scale": {
+        "keyframes": [
+          {
+            "time": 0,
+            "propertyType": "scale",
+            "propertyName": "scale",
+            "propertyValue": {
+              "scaleX": "1",
+              "scaleY": "1",
+              "scaleZ": "1"
+            }
+          },
+          {
+            "time": 1000,
+            "propertyType": "scale",
+            "propertyName": "scale",
+            "propertyValue": {
+              "scaleX": "3",
+              "scaleY": "2",
+              "scaleZ": "1"
+            }
+          },
+          {
+            "time": 3000,
+            "propertyType": "scale",
+            "propertyName": "scale",
+            "propertyValue": {
+              "scaleX": "1",
+              "scaleY": "3",
+              "scaleZ": "1"
+            }
+          },
+          {
+            "time": 7000,
+            "propertyType": "scale",
+            "propertyName": "scale",
+            "propertyValue": {
+              "scaleX": "1",
+              "scaleY": "1",
+              "scaleZ": "1"
+            }
+          }
+        ]
       }
     },
     "actionId2": {
@@ -193,7 +237,7 @@
             }
           },
           {
-            "time": 300,
+            "time": 3000,
             "propertyType": "rotation",
             "propertyName": "rotation",
             "propertyValue": {
@@ -203,7 +247,7 @@
             }
           },
           {
-            "time": 900,
+            "time": 6000,
             "propertyType": "rotation",
             "propertyName": "rotation",
             "propertyValue": {
@@ -213,7 +257,7 @@
             }
           },
           {
-            "time": 1200,
+            "time": 12000,
             "propertyType": "rotation",
             "propertyName": "rotation",
             "propertyValue": {

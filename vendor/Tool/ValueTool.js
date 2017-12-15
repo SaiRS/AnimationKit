@@ -22,7 +22,7 @@ function xxfExtractNumberValueFromStringValue(stringValue: string, defaultValue:
  */
 function xxfExtractUnitFromStringValue(stringValue: string) {
   let reg = /^-?\d*\.?\d*(.*)$/;
-  let result = stringValue.match(reg);
+  let result = (stringValue+'').match(reg);
   if (result) {
     return result[1];
   } else {

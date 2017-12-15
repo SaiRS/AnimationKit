@@ -20,7 +20,6 @@ class XXActionSetScale extends XXActionInstant {
   update(process) {
     let target = this.getTarget();
     if (target) {
-      console.log(this._scale.scaleX(), this._scale.scaleY(), this._scale.scaleZ());
       target.scaleTo(this._scale, false);
     }
   }

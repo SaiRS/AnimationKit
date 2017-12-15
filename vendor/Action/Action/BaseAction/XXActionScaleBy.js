@@ -44,11 +44,6 @@ class XXActionScaleBy extends XXActionInterval {
 
       if (this._startScale) {
         let startScaleFlow = this._startScale;
-
-        console.log(startScaleFlow.scaleX() + deltaScaleX,
-          startScaleFlow.scaleY() + deltaScaleY,
-          startScaleFlow.scaleZ() + deltaScaleZ);
-
         // 不更新模型树
         this._target && this._target.scaleTo(
             new XXScale(startScaleFlow.scaleX() + deltaScaleX,
