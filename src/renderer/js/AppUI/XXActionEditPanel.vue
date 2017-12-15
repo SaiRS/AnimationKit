@@ -85,20 +85,10 @@
       onClickPlay() {
         this.isPlaying = !this.isPlaying
 
-        // 播放当前选择的actor的当前时间线action
-        // TODO: 由配置生成action
-        let actions = this.$nodeGraphParser.getActions(this.currentSelectedActorMixin);
-        let actionData = this.$actionsInfoParser.getActionProperty(actions, this.currentTimeLineId);
-        let action = this.$actionInfoParser.createActionObject(actionData);
-        // 生成引擎驱动的Actor
-        if (this.currentSelectedActorMixin) {
-          // TODO: 先取消选择当前的actor，不然会触发vue-store 不能在mutation之外修改state的错误
-          let currentActor = this.currentSelectedActorMixin;
-          this.resetCurrentSelectedActorMixin();
-          console.log(action)
-          let vueActor = new XXVueActor(this.$nodeGraphParser.getUUID(currentActor), currentActor)
-          vueActor.runAction(action)
-        }
+        // TODO: 先取消选择当前的actor，不然会触发vue-store 不能在mutation之外修改state的错误
+        let currentActor = this.currentSelectedActorMixin;
+        this.resetCurrentSelectedActorMixin();
+        this.runTimelineAction(this.currentTimeLineId);
       },
 
       onClickForwardFrame() {
@@ -116,6 +106,45 @@
 
       onCurrentTimeLineChanged(value) {
         this.$emit('currentTimeLineChanged', value);
+      },
+
+      /**
+       * 执行整个场景的actionId的动画
+       * @param  {[type]} actionId [description]
+       * @return {[type]}            [description]
+       */
+      runTimelineAction(actionId) {
+        // 根结点的action
+        // this.runAction(this.nodeGraph, actionId);
+
+        // 子节点
+        let children = this.$nodeGraphParser.getChildren(this.nodeGraph);
+        for (let i = 0; i < children.length; i++) {
+          this.runAction(children[i], actionId);
+        }
+      },
+
+      /**
+       * node执行actionId对应动画
+       * @param  {[type]} actor       node的数据结构
+       * @param  {[type]} actionId [description]
+       * @return {[type]}            [description]
+       */
+      runAction(actor, actionId) {
+        // 播放当前选择的actor的当前时间线action
+        let actions = this.$nodeGraphParser.getActions(actor);
+        // 当前时间线对应的action配置
+        let actionData = this.$actionsInfoParser.getActionProperty(actions, actionId);
+
+        let action = this.$actionInfoParser.createActionObject(actionData);
+        let vueActor = new XXVueActor(this.$nodeGraphParser.getUUID(actor), actor)
+        vueActor.runAction(action)
+
+        // 子节点
+        let children = this.$nodeGraphParser.getChildren(actor);
+        for (let i = 0; i < children.length; i++) {
+          this.runAction(children[i], actionId);
+        }
       }
     }
   }

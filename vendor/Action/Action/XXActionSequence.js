@@ -88,6 +88,8 @@ class XXActionSequence extends XXActionInterval {
       // 在运行时再执行这句话，否则的话比如说两个moveTo就会出现第一个完成之后，又从起点开始再执行第二个moveTo动画
       // this._actions[1].startWithTarget(actionTarget);
     }
+
+    this._currentExecuteActionIndex = 0;
   }
 
   /**

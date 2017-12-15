@@ -86,7 +86,7 @@ class XXActionPropertyParser {
             }
 
             // 所有constructor都需要实现createNewActionFrom方法
-            let action = constructor.createNewActionFrom(keyframes[indexKeyframe], duration);
+            let action = constructor.createNewActionFrom(keyframes[indexKeyframe], duration, indexKeyframe == 0);
 
             propertyActions.push(action);
           }
