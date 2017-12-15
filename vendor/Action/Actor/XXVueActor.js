@@ -8,6 +8,9 @@ import XXRotation from 'XXFoundation/Type/XXRotation.js';
 
 import {XXNodeGraphParser} from 'XXVendor/Loader/DataParser/XXNodeGraphParser.js';
 import {XXPositionPropertyParser} from 'XXVendor/Loader/DataParser/XXPositionPropertyParser.js';
+import {XXScalePropertyParser} from 'XXVendor/Loader/DataParser/XXScalePropertyParser.js';
+
+import * as ValueTool from 'XXTool/ValueTool.js';
 /**
  * vue类型的actor，只驱动数据，由vue去更新页面
  * @extends XXNodeActor
@@ -34,6 +37,19 @@ class XXVueActor extends XXNodeActor {
     let positionProperty = XXNodeGraphParser.getPositionProperty(this._nodeGraph);
     let position = XXPositionPropertyParser.getPosition(positionProperty, false);
     return new XXPosition(position['x'], position['y']);
+  }
+
+  /**
+   * 继承的方法
+   * @return {[type]} [description]
+   */
+  scale() {
+    let scaleProperty = XXNodeGraphParser.getScaleProperty(this._nodeGraph);
+    let scale = XXScalePropertyParser.getScaleValue(scaleProperty);
+    return new XXScale(
+      ValueTool.xxfExtractNumberValueFromStringValue(scale['scaleX']),
+      ValueTool.xxfExtractNumberValueFromStringValue(scale['scaleY']),
+      ValueTool.xxfExtractNumberValueFromStringValue(scale['scaleZ']));
   }
 
   /**

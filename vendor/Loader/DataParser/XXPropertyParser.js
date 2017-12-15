@@ -180,10 +180,12 @@ class XXPropertyParser {
   /**
    * @inherit
    * 所有子类实现，用于从keyframe中生成对应的keyframe，keyframe对应为对应的关键帧
-   * @param  {[type]} keyframe [description]
+   * @param  {[type]} keyframe 关键帧
+   * @param {Number} duration 持续时间
+   * @param {Boolean} isInstantAction 是否为instant action(只有一帧，直接切换的那种)
    * @return {[type]}       [description]
    */
-  static createNewActionFrom(keyframe) {
+  static createNewActionFrom(keyframe, duration, isInstantAction) {
     return undefined;
   }
 }

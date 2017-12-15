@@ -147,22 +147,32 @@
             }
           },
           {
-            "time": 100,
+            "time": 1000,
             "propertyType": "scale",
             "propertyName": "scale",
             "propertyValue": {
-              "scaleX": "10",
+              "scaleX": "3",
               "scaleY": "2",
               "scaleZ": "1"
             }
           },
           {
-            "time": 300,
+            "time": 3000,
             "propertyType": "scale",
             "propertyName": "scale",
             "propertyValue": {
               "scaleX": "1",
-              "scaleY": "20",
+              "scaleY": "3",
+              "scaleZ": "1"
+            }
+          },
+          {
+            "time": 7000,
+            "propertyType": "scale",
+            "propertyName": "scale",
+            "propertyValue": {
+              "scaleX": "1",
+              "scaleY": "1",
               "scaleZ": "1"
             }
           }

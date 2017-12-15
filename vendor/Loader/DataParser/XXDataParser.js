@@ -1,5 +1,3 @@
-// @flow
-
 export {XXAnimationKitParser} from './XXAnimationKitParser.js';
 
 export {XXNodeGraphParser} from './XXNodeGraphParser.js';
