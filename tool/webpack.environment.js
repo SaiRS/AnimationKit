@@ -14,17 +14,8 @@ function isProductionMode() {
   return !isDevelopMode();
 }
 
-/**
- * 将nodejs设置为production模式
- * 注意：这句话需要在所有其他任务执行前调用
- */
-function setProductionMode() {
-  // process.env.NODE_ENV = 'production';
-}
 
 module.exports = {
   isDevelopMode,
   isProductionMode,
-
-  setProductionMode,
 };
