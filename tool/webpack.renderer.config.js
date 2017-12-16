@@ -185,13 +185,18 @@ let rendererConfig = {
       // 插件路径
       'XXTool': path.resolve(__dirname, '..', 'Vendor', 'Tool'),
       'XXFoundation':
-        path.resolve(__dirname, '..', 'Vendor', 'Foundation'),
+        path.resolve(__dirname, '..', 'vendor', 'Foundation'),
       'XXActionAlias': path.resolve(__dirname, '..', 'Vendor', 'Action'),
       'XXVendor': path.resolve(__dirname, '..', 'Vendor'),
+      'XXLoader': path.resolve(__dirname, '..', 'Vendor', 'Loader'),
 
       // 编辑器路径
+      'XXRenderer':
+        path.resolve(__dirname, '..', 'src', 'renderer'),
       'XXAppUI':
         path.resolve(__dirname, '..', 'src', 'renderer', 'js', 'AppUI'),
+      'XXComponents':
+        path.resolve(__dirname, '..', 'src', 'renderer', 'js', 'Components'),
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node'],
   },
